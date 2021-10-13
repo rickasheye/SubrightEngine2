@@ -1,4 +1,5 @@
 ﻿using System;
+using SubrightEngine2.EngineStuff;
 
 namespace Game
 {
@@ -6,7 +7,8 @@ namespace Game
     {
         static void Main(string[] args)
         {
-            SCPBreakdown.Program.Initialise(args);
+            SubrightEngine2.Program.SetExtension(new Reference());
+            SubrightEngine2.Program.Initialise(args);
         }
     }
 }

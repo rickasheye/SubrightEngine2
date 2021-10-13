@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Raylib_cs;
-using SCPBreakdown.EngineStuff;
-using Color = SCPBreakdown.EngineStuff.Color;
+using SubrightEngine2.EngineStuff;
+using Color = SubrightEngine2.EngineStuff.Color;
 
 namespace SubrightEngine2.UI
 {
@@ -82,7 +82,7 @@ namespace SubrightEngine2.UI
         {
             if (itemExists(item.name))
             {
-                if (SCPBreakdown.Program.debug) Debug.Log("This context item already exists!");
+                if (SubrightEngine2.Program.debug) Debug.Log("This context item already exists!");
             }
             else
             {
@@ -98,7 +98,7 @@ namespace SubrightEngine2.UI
             }
             else
             {
-                if (SCPBreakdown.Program.debug) Debug.Log("This item doesnt exist!");
+                if (SubrightEngine2.Program.debug) Debug.Log("This item doesnt exist!");
             }
         }
     }

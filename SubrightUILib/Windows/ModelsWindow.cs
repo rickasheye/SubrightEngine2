@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using Raylib_cs;
-using SCPBreakdown.EngineStuff;
-using SCPBreakdown.EngineStuff.BaseComponents;
-using Color = SCPBreakdown.EngineStuff.Color;
+using SubrightEngine2.EngineStuff;
+using SubrightEngine2.EngineStuff.BaseComponents;
+using Color = SubrightEngine2.EngineStuff.Color;
 
 namespace SubrightEngine2.UI.Windows
 {
@@ -34,10 +34,10 @@ namespace SubrightEngine2.UI.Windows
                 if (!Directory.Exists(modelsPath)) Directory.CreateDirectory(modelsPath);
                 var directoryFiles = Directory.GetFiles(modelsPath, "*.obj", SearchOption.AllDirectories);
 
-                if (SCPBreakdown.EngineStuff.Input.Input.GetMouseWheel(isFocused()) > 0.1f)
+                if (SubrightEngine2.EngineStuff.Input.Input.GetMouseWheel(isFocused()) > 0.1f)
                     //mouse is moving up
                     indexEnd++;
-                else if (SCPBreakdown.EngineStuff.Input.Input.GetMouseWheel(isFocused()) < -0.1f) indexEnd--;
+                else if (SubrightEngine2.EngineStuff.Input.Input.GetMouseWheel(isFocused()) < -0.1f) indexEnd--;
                 if (indexEnd >= directoryFiles.Length)
                     indexEnd = directoryFiles.Length;
                 else if (indexEnd <= 8) indexEnd = 8;
@@ -57,7 +57,7 @@ namespace SubrightEngine2.UI.Windows
                         {
                             DrawRectangleLines(position.X + 2, position.Y + 10 + i * 15, position.X + size.X, 10,
                                 Color.LIGHTGRAY);
-                            if (SCPBreakdown.EngineStuff.Input.Input.GetMouseButtonPressed(MouseButton.MOUSE_LEFT_BUTTON, isFocused()))
+                            if (SubrightEngine2.EngineStuff.Input.Input.GetMouseButtonPressed(MouseButton.MOUSE_LEFT_BUTTON, isFocused()))
                             {
                                 bool exists = gameObjectExists("Asset: " + titles[i]);
 
@@ -67,7 +67,7 @@ namespace SubrightEngine2.UI.Windows
                                     returnSimmilaritiesModify(nameThis));
                                 var render = new ModelRender(titles[i]);
                                 gameObject.AddComponent(render);
-                                SCPBreakdown.Program.objects.Add(gameObject);
+                                SubrightEngine2.Program.objects.Add(gameObject);
                             }
                         }
                 }
@@ -81,8 +81,8 @@ namespace SubrightEngine2.UI.Windows
 
         public bool gameObjectExists(string name)
         {
-            for (var i = 0; i < SCPBreakdown.Program.objects.Count; i++)
-                if (SCPBreakdown.Program.objects[i].name == name)
+            for (var i = 0; i < SubrightEngine2.Program.objects.Count; i++)
+                if (SubrightEngine2.Program.objects[i].name == name)
                     return true;
             return false;
         }
@@ -91,9 +91,9 @@ namespace SubrightEngine2.UI.Windows
         {
             int count = 0;
             string thisname = "";
-            for (int i = 0; i < SCPBreakdown.Program.objects.Count; i++)
+            for (int i = 0; i < SubrightEngine2.Program.objects.Count; i++)
             {
-                GameObject gameObject = SCPBreakdown.Program.objects[i];
+                GameObject gameObject = SubrightEngine2.Program.objects[i];
                 if (gameObject.name.Contains(name))
                 {
                     count++;

@@ -1,10 +1,10 @@
 ﻿using System;
 using Raylib_cs;
-using SCPBreakdown;
-using SCPBreakdown.EngineStuff;
-using SCPBreakdown.EngineStuff.Input;
+using SubrightEngine2;
+using SubrightEngine2.EngineStuff;
+using SubrightEngine2.EngineStuff.Input;
 using SubrightEngine2.UI.Tips;
-using Color = SCPBreakdown.EngineStuff.Color;
+using Color = SubrightEngine2.EngineStuff.Color;
 
 namespace SubrightEngine2.UI.Windows
 {
@@ -29,9 +29,9 @@ namespace SubrightEngine2.UI.Windows
         {
             base.Draw2D(ref cam);
             if (hideRender == false)
-                for (var i = 0; i < SCPBreakdown.Program.objects.Count; i++)
+                for (var i = 0; i < SubrightEngine2.Program.objects.Count; i++)
                 {
-                    var newObject = SCPBreakdown.Program.objects[i];
+                    var newObject = SubrightEngine2.Program.objects[i];
                     DrawText(newObject.name + " - " + newObject.position.ToString + " - " + newObject.size.ToString,
                         position.X + 2, position.Y + 10 + i * 15, 8, Color.WHITE);
                     var positionX = (int) position.X + 2;
@@ -44,10 +44,10 @@ namespace SubrightEngine2.UI.Windows
                         {
                             TipManager.RenderTip(4);
                             DrawRectangleLines(positionX, positionY, sizeX, sizeY, Color.LIGHTGRAY);
-                            if (SCPBreakdown.EngineStuff.Input.Input.GetMouseButtonPressed(MouseButton.MOUSE_LEFT_BUTTON, isFocused()))
-                                SCPBreakdown.Program.selectedObject = newObject;
-                            else if (SCPBreakdown.EngineStuff.Input.Input.GetMouseButtonPressed(MouseButton.MOUSE_RIGHT_BUTTON, isFocused()))
-                                SCPBreakdown.Program.objects.RemoveAt(i);
+                            if (SubrightEngine2.EngineStuff.Input.Input.GetMouseButtonPressed(MouseButton.MOUSE_LEFT_BUTTON, isFocused()))
+                                SubrightEngine2.Program.selectedObject = newObject;
+                            else if (SubrightEngine2.EngineStuff.Input.Input.GetMouseButtonPressed(MouseButton.MOUSE_RIGHT_BUTTON, isFocused()))
+                                SubrightEngine2.Program.objects.RemoveAt(i);
                         }
 
                     for (var m = 0; m < newObject.childrenObjects.Count; m++)

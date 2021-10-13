@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
 using Raylib_cs;
-using SCPBreakdown.EngineStuff;
+using SubrightEngine2.EngineStuff;
 
 namespace SubrightEngine2.UI.Windows
 {
@@ -37,11 +37,14 @@ namespace SubrightEngine2.UI.Windows
                 var output = File.ReadAllText(loadText);
                 var positions = JsonConvert.DeserializeObject<Dictionary<string, Vector3>>(output);
 
-                for (var i = 0; i < positions.Count; i++)
+                if (positions != null && positions.Count == windows.Count)
                 {
-                    if (positions.Keys.ToList()[i] == windows[i].name)
+                    for (var i = 0; i < positions.Count; i++)
                     {
-                        windows[i].position = positions[windows[i].name];
+                        if (positions.Keys.ToList()[i] == windows[i].name)
+                        {
+                            windows[i].position = positions[windows[i].name];
+                        }
                     }
                 }
             }

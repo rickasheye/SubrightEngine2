@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using Raylib_cs;
-using Debug = SCPBreakdown.EngineStuff.Debug;
+using Debug = SubrightEngine2.EngineStuff.Debug;
 
 namespace SubrightEngine2.UI
 {

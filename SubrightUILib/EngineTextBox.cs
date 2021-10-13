@@ -16,7 +16,7 @@ namespace SubrightEngine2.UI
         {
             base.Draw2D(ref cam);
             //Draw a text box somewhere
-            DrawRectangleLines(connectedObject.position.X, connectedObject.position.Y, connectedObject.size.X, connectedObject.size.Y, SCPBreakdown.EngineStuff.Color.LIGHTGRAY);
+            DrawRectangleLines(connectedObject.position.X, connectedObject.position.Y, connectedObject.size.X, connectedObject.size.Y, SubrightEngine2.EngineStuff.Color.LIGHTGRAY);
             Raylib.DrawLine((int) connectedObject.position.X + text.Length, (int) connectedObject.position.Y, (int) connectedObject.position.X + text.Length,
                 (int) connectedObject.position.Y + (int) connectedObject.size.Y, Raylib_cs.Color.BLACK);
             var key = Raylib.GetKeyPressed();
@@ -110,7 +110,7 @@ namespace SubrightEngine2.UI
                     break;
             }
 
-            DrawText(text, connectedObject.position.X, connectedObject.position.Y, connectedObject.size.Y, SCPBreakdown.EngineStuff.Color.WHITE);
+            DrawText(text, connectedObject.position.X, connectedObject.position.Y, connectedObject.size.Y, SubrightEngine2.EngineStuff.Color.WHITE);
         }
 
         public override void Update(ref Camera2D cam2, ref Camera3D cam3)

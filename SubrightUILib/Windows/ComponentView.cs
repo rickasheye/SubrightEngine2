@@ -1,7 +1,7 @@
 ﻿using System;
 using Raylib_cs;
-using SCPBreakdown.EngineStuff;
-using Color = SCPBreakdown.EngineStuff.Color;
+using SubrightEngine2.EngineStuff;
+using Color = SubrightEngine2.EngineStuff.Color;
 
 namespace SubrightEngine2.UI.Windows
 {
@@ -23,14 +23,14 @@ namespace SubrightEngine2.UI.Windows
         {
             base.Draw2D(ref cam);
             if (hideRender == false)
-                if (SCPBreakdown.Program.selectedObject != null)
+                if (SubrightEngine2.Program.selectedObject != null)
                 {
-                    if (SCPBreakdown.Program.selectedObject.components.Count <= 0)
+                    if (SubrightEngine2.Program.selectedObject.components.Count <= 0)
                         DrawText("This gameObject doesnt contain any components", position.X, position.Y + 10, 10,
                             Color.WHITE);
                     else
-                        for (var i = 0; i < SCPBreakdown.Program.selectedObject.components.Count; i++)
-                            DrawText(SCPBreakdown.Program.selectedObject.components[i].name, position.X, position.Y + 10 + i * 10,
+                        for (var i = 0; i < SubrightEngine2.Program.selectedObject.components.Count; i++)
+                            DrawText(SubrightEngine2.Program.selectedObject.components[i].name, position.X, position.Y + 10 + i * 10,
                                 10, Color.WHITE);
                 }
         }

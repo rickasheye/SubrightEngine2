@@ -1,10 +1,10 @@
 ﻿using System;
 using Raylib_cs;
-using SCPBreakdown.EngineStuff;
-using SCPBreakdown.EngineStuff.Input;
+using SubrightEngine2.EngineStuff;
+using SubrightEngine2.EngineStuff.Input;
 using SubrightEngine2.UI.Tips;
 using SubrightEngine2.UI.Windows;
-using Color = SCPBreakdown.EngineStuff.Color;
+using Color = SubrightEngine2.EngineStuff.Color;
 
 namespace SubrightEngine2.UI
 {
@@ -74,7 +74,7 @@ namespace SubrightEngine2.UI
                 if (Raylib.GetMouseX() > (int) position.X && Raylib.GetMouseX() < (int) position.X + (int) size.X &&
                     Raylib.GetMouseY() > (int) position.Y && Raylib.GetMouseY() < (int) position.Y + (int) size.Y)
                 {
-                    if (SCPBreakdown.EngineStuff.Input.Input.GetMouseButtonDown(MouseButton.MOUSE_LEFT_BUTTON))
+                    if (SubrightEngine2.EngineStuff.Input.Input.GetMouseButtonDown(MouseButton.MOUSE_LEFT_BUTTON))
                         if (SubContextMenuManager.lockedWindows == false)
                             if (SubContextMenuManager.focusedWindow != this)
                             {
@@ -88,7 +88,7 @@ namespace SubrightEngine2.UI
                 if (SubContextMenuManager.focusedWindow == this)
                     if (Raylib.GetMouseX() > (int) position.X && Raylib.GetMouseX() < position.X + size.X &&
                         Raylib.GetMouseY() > position.Y && Raylib.GetMouseY() < position.Y + 8)
-                        if (SCPBreakdown.EngineStuff.Input.Input.GetMouseButtonDown(MouseButton.MOUSE_LEFT_BUTTON))
+                        if (SubrightEngine2.EngineStuff.Input.Input.GetMouseButtonDown(MouseButton.MOUSE_LEFT_BUTTON))
                         {
                             lockedWindow = true;
                             SubContextMenuManager.lockedWindows = true;
@@ -108,7 +108,7 @@ namespace SubrightEngine2.UI
                     {
                         position.X = Raylib.GetMouseX();
                         position.Y = Raylib.GetMouseY();
-                        if (SCPBreakdown.EngineStuff.Input.Input.GetMouseButtonUp(MouseButton.MOUSE_LEFT_BUTTON))
+                        if (SubrightEngine2.EngineStuff.Input.Input.GetMouseButtonUp(MouseButton.MOUSE_LEFT_BUTTON))
                         {
                             lockedWindow = false;
                             SubContextMenuManager.lockedWindows = false;
@@ -124,7 +124,7 @@ namespace SubrightEngine2.UI
                             Raylib.GetMouseY() > position.Y && Raylib.GetMouseY() < position.Y + 8)
                         {
                             TipManager.RenderTip(1);
-                            if (SCPBreakdown.EngineStuff.Input.Input.GetMouseButtonPressed(MouseButton.MOUSE_LEFT_BUTTON))
+                            if (SubrightEngine2.EngineStuff.Input.Input.GetMouseButtonPressed(MouseButton.MOUSE_LEFT_BUTTON))
                             {
                                 ownHide = true;
                                 hideRender = true;
@@ -144,7 +144,7 @@ namespace SubrightEngine2.UI
                             Raylib.GetMouseX() < (int) position.X + (int) size.X)
                             //Drag side ways
                             if (size.X >= 45 && size.Y >= 45)
-                                if (SCPBreakdown.EngineStuff.Input.Input.GetMouseButtonDown(MouseButton.MOUSE_LEFT_BUTTON, isFocused()))
+                                if (SubrightEngine2.EngineStuff.Input.Input.GetMouseButtonDown(MouseButton.MOUSE_LEFT_BUTTON, isFocused()))
                                 {
                                     size.X = position.X - Raylib.GetMouseX();
                                     size.Y = position.Y - Raylib.GetMouseY();

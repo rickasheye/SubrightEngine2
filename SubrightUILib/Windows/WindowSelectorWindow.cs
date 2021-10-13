@@ -1,7 +1,7 @@
 using System;
 using Raylib_cs;
-using SCPBreakdown.EngineStuff;
-using Color = SCPBreakdown.EngineStuff.Color;
+using SubrightEngine2.EngineStuff;
+using Color = SubrightEngine2.EngineStuff.Color;
 
 namespace SubrightEngine2.UI.Windows
 {
@@ -40,7 +40,7 @@ namespace SubrightEngine2.UI.Windows
                             Raylib.GetMouseY() < posY + sizeY)
                         {
                             //trigger
-                            if (SCPBreakdown.EngineStuff.Input.Input.GetMouseButtonPressed(MouseButton.MOUSE_LEFT_BUTTON, isFocused()))
+                            if (SubrightEngine2.EngineStuff.Input.Input.GetMouseButtonPressed(MouseButton.MOUSE_LEFT_BUTTON, isFocused()))
                             {
                                 if (m.hideRender)
                                 {

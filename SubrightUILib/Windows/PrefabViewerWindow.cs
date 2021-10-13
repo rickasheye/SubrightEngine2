@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using Raylib_cs;
-using SCPBreakdown.EngineStuff;
-using SCPBreakdown.EngineStuff.BaseComponents;
-using SCPBreakdown.EngineStuff.LevelLoading;
-using SCPBreakdown.GameStuff;
-using Color = SCPBreakdown.EngineStuff.Color;
+using SubrightEngine2.EngineStuff;
+using SubrightEngine2.EngineStuff.BaseComponents;
+using SubrightEngine2.EngineStuff.LevelLoading;
+using SubrightEngine2.GameStuff;
+using Color = SubrightEngine2.EngineStuff.Color;
 
 namespace SubrightEngine2.UI.Windows
 {
@@ -96,7 +96,7 @@ namespace SubrightEngine2.UI.Windows
                             if (SubContextMenuManager.focusedWindow == this)
                             {
                                 DrawRectangleLines(positionX, positionY, sizeX, sizeY, Color.LIGHTGRAY);
-                                if (SCPBreakdown.EngineStuff.Input.Input.GetMouseButtonPressed(MouseButton.MOUSE_LEFT_BUTTON, isFocused())) prefToSpawn = pref;
+                                if (SubrightEngine2.EngineStuff.Input.Input.GetMouseButtonPressed(MouseButton.MOUSE_LEFT_BUTTON, isFocused())) prefToSpawn = pref;
                             }
                     }
 
@@ -104,7 +104,7 @@ namespace SubrightEngine2.UI.Windows
                     {
                         if (!doesGameObjectExist(prefToSpawn.name))
                         {
-                            SCPBreakdown.Program.objects.AddRange(prefToSpawn.gameObjects);
+                            SubrightEngine2.Program.objects.AddRange(prefToSpawn.gameObjects);
                         }
                     }
                 }
@@ -118,8 +118,8 @@ namespace SubrightEngine2.UI.Windows
 
         public bool doesGameObjectExist(string name)
         {
-            for (var i = 0; i < SCPBreakdown.Program.objects.Count; i++)
-                if (SCPBreakdown.Program.objects[i].name == name)
+            for (var i = 0; i < SubrightEngine2.Program.objects.Count; i++)
+                if (SubrightEngine2.Program.objects[i].name == name)
                     return true;
             return false;
         }

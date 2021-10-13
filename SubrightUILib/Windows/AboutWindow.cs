@@ -1,7 +1,7 @@
 ﻿using System;
 using Raylib_cs;
-using SCPBreakdown.EngineStuff;
-using Color = SCPBreakdown.EngineStuff.Color;
+using SubrightEngine2.EngineStuff;
+using Color = SubrightEngine2.EngineStuff.Color;
 
 namespace SubrightEngine2.UI.Windows
 {

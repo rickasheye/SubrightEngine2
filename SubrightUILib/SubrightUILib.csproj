@@ -5,7 +5,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\SCPBreakdown\SCPBreakdown.csproj" />
+      <ProjectReference Include="..\SubrightEngine2\SubrightEngine2.csproj" />
     </ItemGroup>
 
 </Project>

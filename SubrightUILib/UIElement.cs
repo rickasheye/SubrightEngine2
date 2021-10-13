@@ -1,7 +1,7 @@
 ﻿using System;
-using SCPBreakdown.EngineStuff;
-using SCPBreakdown.EngineStuff.BaseComponents;
-using Vector3 = SCPBreakdown.EngineStuff.Vector3;
+using SubrightEngine2.EngineStuff;
+using SubrightEngine2.EngineStuff.BaseComponents;
+using Vector3 = SubrightEngine2.EngineStuff.Vector3;
 
 namespace SubrightEngine2.UI
 {

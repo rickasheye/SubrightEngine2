@@ -28,7 +28,7 @@ namespace SubrightEngine2.UI.Tips
         public static void RenderTip(int id)
         {
             if (tips.Count <= 0) SetupTips();
-            TipRender.RenderTip(tips[id].nameTip, new SCPBreakdown.EngineStuff.Vector2(Raylib.GetMouseX(), Raylib.GetMouseY()));
+            TipRender.RenderTip(tips[id].nameTip, new SubrightEngine2.EngineStuff.Vector2(Raylib.GetMouseX(), Raylib.GetMouseY()));
         }
     }
 }

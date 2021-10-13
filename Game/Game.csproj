@@ -6,7 +6,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\SCPBreakdown\SCPBreakdown.csproj" />
       <ProjectReference Include="..\SubrightUILib\SubrightUILib.csproj" />
     </ItemGroup>
 

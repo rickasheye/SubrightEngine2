@@ -1,7 +1,7 @@
 using System;
 using Raylib_cs;
-using SCPBreakdown.EngineStuff;
-using Color = SCPBreakdown.EngineStuff.Color;
+using SubrightEngine2.EngineStuff;
+using Color = SubrightEngine2.EngineStuff.Color;
 
 namespace SubrightEngine2.UI
 {
@@ -44,10 +44,10 @@ namespace SubrightEngine2.UI
                 if (Raylib.GetMouseX() > position.X + size.X - 10 && Raylib.GetMouseX() < position.X + size.X &&
                     Raylib.GetMouseY() > position.Y && Raylib.GetMouseY() < position.Y + 10)
                 {
-                    if (SCPBreakdown.EngineStuff.Input.Input.GetMouseButtonPressed(MouseButton.MOUSE_LEFT_BUTTON))
+                    if (SubrightEngine2.EngineStuff.Input.Input.GetMouseButtonPressed(MouseButton.MOUSE_LEFT_BUTTON))
                     {
                         hideRender = true;
-                        SCPBreakdown.Program.objects.Remove(this);
+                        SubrightEngine2.Program.objects.Remove(this);
                     }
                 }
             }

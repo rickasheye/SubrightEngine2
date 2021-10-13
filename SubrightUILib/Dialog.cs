@@ -1,9 +1,9 @@
 using System;
 using Raylib_cs;
-using SCPBreakdown.EngineStuff;
-using Color = SCPBreakdown.EngineStuff.Color;
-using Vector2 = SCPBreakdown.EngineStuff.Vector2;
-using Vector3 = SCPBreakdown.EngineStuff.Vector3;
+using SubrightEngine2.EngineStuff;
+using Color = SubrightEngine2.EngineStuff.Color;
+using Vector2 = SubrightEngine2.EngineStuff.Vector2;
+using Vector3 = SubrightEngine2.EngineStuff.Vector3;
 
 namespace SubrightEngine2.UI
 {

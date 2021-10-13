@@ -1,11 +1,11 @@
 using System;
-using SCPBreakdown;
+using SubrightEngine2;
 using SubrightEngine2.UI.Notifications;
 using SubrightEngine2.UI.Windows;
 using System.IO;
 using Raylib_cs;
-using SCPBreakdown.EngineStuff.Input;
-using Debug = SCPBreakdown.EngineStuff.Debug;
+using SubrightEngine2.EngineStuff.Input;
+using Debug = SubrightEngine2.EngineStuff.Debug;
 
 namespace SubrightEngine2.UI
 {
@@ -59,6 +59,7 @@ namespace SubrightEngine2.UI
             }
             RallyDialog.RollDialogs(ref cam2, ref cam3);
             
+            cxtMan.Update(ref cam2, ref cam3);
             bar.Draw2D(ref cam2);
             handler.Update(ref cam2, ref cam3);
             
