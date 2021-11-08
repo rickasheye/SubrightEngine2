@@ -29,24 +29,27 @@ namespace SubrightEngine2.UI.Notifications
             //check if the draw2d is valid ?
             if (notifications != null)
             {
-                if (notifications[index].shown == false)
+                if (index < notifications.Count && index > 0)
                 {
-                    notifications[index].RenderNotification();
-                }
-                else
-                {
-                    if (index + 1 < notifications.Count)
+                    if (notifications[index].shown == false)
                     {
-                        lastindex = index + 1;
-                        index++;
+                        notifications[index].RenderNotification();
                     }
                     else
                     {
-                        if (notifications.Count - 1 > lastindex)
+                        if (index + 1 < notifications.Count)
                         {
+                            lastindex = index + 1;
                             index++;
                         }
-                    }
+                        else
+                        {
+                            if (notifications.Count - 1 > lastindex)
+                            {
+                                index++;
+                            }
+                        }
+                    } 
                 }
             }
         }

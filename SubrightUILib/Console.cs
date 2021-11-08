@@ -8,10 +8,6 @@ namespace SubrightEngine2.UI
         public void DrawConsole()
         {
             //get the console and draw it!
-            for (int i = 0; i < Debug.logFile.Count; i++)
-            {
-                
-            }
         }
     }
 }

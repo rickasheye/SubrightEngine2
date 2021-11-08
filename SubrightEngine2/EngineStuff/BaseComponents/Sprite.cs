@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using Raylib_cs;
 using SubrightEngine2.EngineStuff.BaseComponents;
@@ -6,17 +7,34 @@ namespace SubrightEngine2.EngineStuff
 {
     public class Sprite : Component
     {
-        public Texture2D containedSprite;
+        [NonSerialized] public Texture2D containedSprite;
+
+        public string path = "";
 
         public void LoadSprite(string loadPath)
         {
-            if (File.Exists(loadPath))
+            this.path = loadPath;
+            StartRender(path);
+        }
+
+        public void StartRender(string path)
+        {
+            if (File.Exists(path))
             {
-                containedSprite = Raylib.LoadTexture(loadPath);
+                Debug.Log(path);
+                Image image = Raylib.LoadImage(path);
+                if(image.width != 16 && image.height != 16)
+                {
+                    Raylib.ImageResize(ref image, 16, 16);
+                }
+                Texture2D storedSprite = Raylib.LoadTextureFromImage(image);
+                Raylib.UnloadImage(image);
+                containedSprite = storedSprite;
             }
             else
             {
-                Debug.Log("This path doesnt exist!");
+                //Unfortunately this doesnt work
+                Debug.Log("Unfortunately this doesnt work as the file: " + path + " cannot be found!", LogType.MESSAGE);
             }
         }
 
@@ -38,8 +56,11 @@ namespace SubrightEngine2.EngineStuff
             //Draw image
             if (containedSprite.width != 0 && containedSprite.height != 0)
             {
-                Raylib.DrawTexture(containedSprite, (int) connectedObject.position.X, (int) connectedObject.position.Y,
-                    Raylib_cs.Color.WHITE);
+                Raylib.DrawTexture(containedSprite, (int) connectedObject.position.X, (int) connectedObject.position.Y,Raylib_cs.Color.WHITE);
+            }
+            else
+            {
+                StartRender(path);
             }
         }
     }

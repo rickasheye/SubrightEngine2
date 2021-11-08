@@ -18,8 +18,8 @@ namespace SubrightEngine2.UI
         public override void Draw2D(ref Camera2D cam)
         {
             base.Draw2D(ref cam);
-            DrawRectangle(Vector2.zero, new Vector2(Raylib.GetScreenWidth(), 12), SubrightEngine2.EngineStuff.Color.GRAY);
-            DrawText("Toolbar", new Vector2(2, 2), 8, SubrightEngine2.EngineStuff.Color.WHITE);
+            DrawRectangle(Vector2.zero, new Vector2(Raylib.GetScreenWidth(), 12), Program.backgroundColor);
+            DrawText("Toolbar", new Vector2(2, 2), 8, Program.textColor);
         }
     }
 }

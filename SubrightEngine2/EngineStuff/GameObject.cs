@@ -39,6 +39,15 @@ namespace SubrightEngine2.EngineStuff
             Start();
         }
 
+        public GameObject()
+        {
+            this.name = "";
+            this.position = Vector3.zero;
+            this.size = Vector3.zero;
+            this.voidStart = false;
+            Start();
+        }
+
         public virtual void Start()
         {
             //start or connect all of the components
@@ -84,6 +93,14 @@ namespace SubrightEngine2.EngineStuff
                     }
                 }
             }
+        }
+
+        public static GameObject AssembleObject(Component com)
+        {
+            GameObject m = new GameObject();
+            m.name = com.name;
+            m.AddComponent(com);
+            return m;
         }
 
         public virtual void Draw2D(ref Camera2D cam)

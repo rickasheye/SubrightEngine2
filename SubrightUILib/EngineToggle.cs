@@ -16,10 +16,10 @@ namespace SubrightEngine2.UI
         public override void Draw2D(ref Camera2D cam)
         {
             base.Draw2D(ref cam);
-            Raylib.DrawCircle((int)connectedObject.position.X, (int)connectedObject.position.Y, connectedObject.size.X, Raylib_cs.Color.WHITE);
+            Raylib.DrawCircle((int)connectedObject.position.X, (int)connectedObject.position.Y, connectedObject.size.X, Program.backgroundColor.ToRaylibColor);
             if (triggered)
             {
-                Raylib.DrawCircle((int) connectedObject.position.X, (int) connectedObject.position.Y, connectedObject.size.X - 2, Raylib_cs.Color.BLACK);
+                Raylib.DrawCircle((int) connectedObject.position.X, (int) connectedObject.position.Y, connectedObject.size.X - 2, Program.foregroundColor.ToRaylibColor);
             }
 
             if (Raylib.GetMouseX() > connectedObject.position.X - connectedObject.size.X && Raylib.GetMouseX() > connectedObject.position.X + connectedObject.size.X &&

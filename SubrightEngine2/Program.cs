@@ -40,8 +40,14 @@ namespace SubrightEngine2
         public static Extension extension;
 
         private static bool initExtension = false;
-        public static void Initialise(string[] args)
+
+        public static SubrightEngine2.EngineStuff.Color foregroundColor = EngineStuff.Color.LIGHTGRAY;
+        public static SubrightEngine2.EngineStuff.Color backgroundColor = EngineStuff.Color.GRAY;
+        public static SubrightEngine2.EngineStuff.Color textColor = EngineStuff.Color.White;
+
+        public static void Initialise(string[] args, bool saveFile, bool overrideStart)
         {
+            gameStart = overrideStart;
             //init cycle
             Debug.Log("Start init cycle", LogType.MESSAGE);
             string arguments = string.Join(" ", args);
@@ -51,10 +57,13 @@ namespace SubrightEngine2
                 debug = true;
             }
             //make sure the level exists first of all
-            if (!LevelLoader.savedFileByte(levelSaveBlankOpen))
+            if (saveFile == true)
             {
-                LevelLoader.WriteLevelByte(levelSaveBlankOpen, ref objects);
-                firstRun = true;
+                if (!LevelLoader.savedFileByte(levelSaveBlankOpen))
+                {
+                    LevelLoader.WriteLevelByte(levelSaveBlankOpen, ref objects);
+                    firstRun = true;
+                } 
             }
 
             Debug.Log("Loading extensions");
@@ -68,6 +77,7 @@ namespace SubrightEngine2
             Raylib.InitWindow(1280, 720, "Subright Engine 2");
             Raylib.SetTargetFPS(30);
 
+            if (extension != null) { extension.Start(); }
             var cam2 = new Camera2D();
 
             var cam3 = new Camera3D();
@@ -87,7 +97,7 @@ namespace SubrightEngine2
             Ray ray;
 
             //load the level
-            if (!firstRun) LevelLoader.LoadLevelByte(levelSaveBlankOpen, ref objects);
+            if (saveFile == true) { if (!firstRun) LevelLoader.LoadLevelByte(levelSaveBlankOpen, ref objects); }
             
             for (var i = 0; i < objects.Count; i++)
                 //objects
@@ -95,7 +105,6 @@ namespace SubrightEngine2
             
             bool test = false;
             
-            if(extension != null && initExtension == false){extension.Start();}
             while (!Raylib.WindowShouldClose())
             {
                 ray = Raylib.GetMouseRay(Raylib.GetMousePosition(), cam3);
@@ -213,15 +222,15 @@ namespace SubrightEngine2
                 Raylib.DrawFPS(10, 10);
                 //Draw icon
 
-                if (bootcount <= 250)
+                if (bootcount <= 100)
                 {
-                    Raylib.DrawRectangle(0, 0, Raylib.GetScreenWidth(), Raylib.GetScreenHeight(), Color.GRAY);
+                    Raylib.DrawRectangle(0, 0, Raylib.GetScreenWidth(), Raylib.GetScreenHeight(), backgroundColor.ToRaylibColor);
                     Raylib.DrawTexture(image, Raylib.GetScreenWidth() / 2 - image.width / 2,
                         Raylib.GetScreenHeight() / 2 - image.height / 2, Color.WHITE);
                     //Raylib.DrawRectangle((Raylib.GetScreenWidth() / 2) - (image.width / 2), (Raylib.GetScreenHeight() / 2) - (image.height / 2) + image.height + 10, Raylib_cs.Color.WHITE);
                     if (debug)
                     {
-                        Raylib.DrawText("Bootcount: " + bootcount, 10, 10, 8, Color.WHITE);
+                        Raylib.DrawText("Bootcount: " + bootcount, 10, 10, 8, textColor.ToRaylibColor);
                         if (Raylib.IsKeyDown(KeyboardKey.KEY_B)) /*skip*/ bootcount = 250;
                     }
 
@@ -233,8 +242,8 @@ namespace SubrightEngine2
             }
             
             if(extension != null){extension.Dispose();}
-            
-            LevelLoader.WriteLevelByte(levelSaveBlankOpen, ref objects);
+
+            if (saveFile == false) { LevelLoader.WriteLevelByte(levelSaveBlankOpen, ref objects); }
             Raylib.CloseWindow();
         }
 
@@ -243,12 +252,11 @@ namespace SubrightEngine2
             Raylib.SetWindowTitle(name);
         }
 
-        public static void SetExtension(Extension ext)
+        public static void SetExtension(Extension ext, bool start)
         {
             extension = ext;
-            ext.Start();
+            if (start) { ext.Start(); }
             Debug.Log("Swapped extension to another! and executed the start method!");
-            initExtension = true;
         }
 
         public static object pointerToObject(IntPtr pMapping, Type type)

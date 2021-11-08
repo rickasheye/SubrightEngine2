@@ -39,7 +39,7 @@ namespace SubrightEngine2.UI
             {
                 DrawText(text,
                     new Vector2(position.X + (size.X / 2) - ((text.Length * 5.25f) / 4), position.Y + (size.Y / 2.25f)), 8,
-                    Color.WHITE);
+                    Program.textColor);
                 DrawText("X", new Vector2(position.X + size.X - 10, position.Y), 10, Color.RED);
                 if (Raylib.GetMouseX() > position.X + size.X - 10 && Raylib.GetMouseX() < position.X + size.X &&
                     Raylib.GetMouseY() > position.Y && Raylib.GetMouseY() < position.Y + 10)

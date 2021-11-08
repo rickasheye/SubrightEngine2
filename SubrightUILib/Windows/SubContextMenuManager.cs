@@ -22,13 +22,6 @@ namespace SubrightEngine2.UI.Windows
             //organise
 
             //add all of the windows
-            AddWindow(new HireachyWindow(new Vector3(90, 90, 0), new Vector3(100, 100, 0)));
-            AddWindow(new ModelsWindow(new Vector3(30, 30, 0), new Vector3(100, 100, 0)));
-            AddWindow(new AboutWindow(new Vector3(120, 120, 0), new Vector3(100, 100, 0)));
-            AddWindow(new PrefabViewerWindow(new Vector3(140, 140, 0), new Vector3(100, 100, 0)));
-            AddWindow(new InspectorWindow(new Vector3(60, 60, 0), new Vector3(100, 100, 0)));
-            AddWindow(new ComponentView(new Vector3(40, 40, 0), new Vector3(100, 100, 0)));
-            AddWindow(new GamePropertiesWindow(new Vector3(78, 90, 0), new Vector3(100, 100, 0)));
             AddWindow(new WindowSelectorWindow());
 
             var loadText = Path.Combine(Environment.CurrentDirectory, "windowconfig.json");
@@ -66,7 +59,7 @@ namespace SubrightEngine2.UI.Windows
             windows.Clear();
         }
 
-        public void AddWindow(Window window)
+        public static void AddWindow(Window window)
         {
             if (checkWindowExists(window.name))
             {
@@ -80,7 +73,7 @@ namespace SubrightEngine2.UI.Windows
             }
         }
 
-        public bool checkWindowExists(string name)
+        public static bool checkWindowExists(string name)
         {
             for (var i = 0; i < windows.Count; i++)
                 if (windows[i].name == name)

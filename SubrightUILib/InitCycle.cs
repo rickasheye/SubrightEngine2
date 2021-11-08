@@ -83,7 +83,7 @@ namespace SubrightEngine2.UI
             if (Program.debug)
                 Raylib.DrawText(
                     "Game Object instances: " + Program.objects.Count + " Window instances: " +
-                    SubContextMenuManager.windows.Count, 10, 10, 10, Color.WHITE);
+                    SubContextMenuManager.windows.Count, 10, 10, 10, Program.textColor.ToRaylibColor);
         }
 
         public void Dispose()

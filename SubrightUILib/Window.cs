@@ -67,9 +67,9 @@ namespace SubrightEngine2.UI
             {
                 //Update this Window
                 //if(framebuffer.width != 0 && framebuffer.height != 0){Raylib.DrawTexture(Raylib.LoadTextureFromImage(framebuffer), (int)position.X, (int)position.Y, Raylib_cs.Color.WHITE);}
-                DrawRectangle((int) position.X, (int) position.Y, (int) size.X, (int) size.Y, Color.BLACK);
-                DrawRectangle((int) position.X, (int) position.Y, (int) size.X, 8, Color.GRAY);
-                DrawText(name, (int) position.X, (int) position.Y, 8, Color.WHITE);
+                DrawRectangle((int) position.X, (int) position.Y, (int) size.X, (int) size.Y, Program.backgroundColor);
+                DrawRectangle((int) position.X, (int) position.Y, (int) size.X, 8, Program.foregroundColor);
+                DrawText(name, (int) position.X, (int) position.Y, 8, Program.textColor);
 
                 if (Raylib.GetMouseX() > (int) position.X && Raylib.GetMouseX() < (int) position.X + (int) size.X &&
                     Raylib.GetMouseY() > (int) position.Y && Raylib.GetMouseY() < (int) position.Y + (int) size.Y)
@@ -137,7 +137,7 @@ namespace SubrightEngine2.UI
                     if (SubContextMenuManager.focusedWindow == this)
                     {
                         DrawRectangle((int) position.X + (int) size.X - 8, (int) position.Y + (int) size.Y - 8, 8, 8,
-                            Color.LIGHTGRAY);
+                            Program.foregroundColor);
                         if (Raylib.GetMouseX() > (int) position.X + (int) size.X - 8 &&
                             Raylib.GetMouseY() > (int) position.Y + (int) size.Y - 8 &&
                             Raylib.GetMouseY() <= (int) position.Y + size.Y &&

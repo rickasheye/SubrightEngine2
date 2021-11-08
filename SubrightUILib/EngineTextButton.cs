@@ -20,7 +20,7 @@ namespace SubrightEngine2.UI
         public override void Draw2D(ref Camera2D cam)
         {
             base.Draw2D(ref cam);
-            DrawText(textContent, connectedObject.position.X - (textContent.Length * 10) - 8, connectedObject.position.Y, 10, SubrightEngine2.EngineStuff.Color.WHITE);
+            DrawText(textContent, connectedObject.position.X - (textContent.Length * 10) - 8, connectedObject.position.Y, 10, Program.textColor);
         }
     }
 }
