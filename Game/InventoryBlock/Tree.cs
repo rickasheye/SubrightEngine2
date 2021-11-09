@@ -1,4 +1,5 @@
 ﻿using Raylib_cs;
+using SubrightEngine2.EngineStuff;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -14,11 +15,11 @@ namespace RPGConsole.InventoryBlock
             if(textureTreeBush.width != 0)
             {
                 //?? huh its supposed to be 0
-                Program.unit.AddConsoleItem("Huh? this tree bush texture has data in it?");
+                Debug.Log("Huh? this tree bush texture has data in it?");
             }
             else
             {
-                Program.unit.AddConsoleItem("Loading treebush texture");
+                Debug.Log("Loading treebush texture");
                 
             }
         }
@@ -40,7 +41,7 @@ namespace RPGConsole.InventoryBlock
         {
             base.UpdateBlock();
             //draw the tree texture on top
-            if(Vector2.Distance(Program.player.position, position) < 8)
+            if(Vector2.Distance(Reference.player.position, position) < 8)
             {
                 //make the tree opaque
             }

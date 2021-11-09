@@ -1,5 +1,5 @@
-﻿using DSharpPlus.Entities;
-using RPGConsole.InventoryBlock;
+﻿using RPGConsole.InventoryBlock;
+using SubrightEngine2.EngineStuff;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,34 +8,34 @@ namespace RPGConsole.Commands.General
 {
     public class mineblock : EmptyCommand
     {
-        public mineblock():base("Mine the block under the player", "mb/break/breakblock/mineblock", CommandType.DISCORDHYBRID) { }
+        public mineblock():base("Mine the block under the player", "mb/break/breakblock/mineblock", CommandType.NORMAL) { }
 
-        public override void RunCommand(string[] args, DiscordMessage message)
+        public override void RunCommand(string[] args)
         {
-            base.RunCommand(args, message);
+            base.RunCommand(args);
             //mine the block under the player!
-            Block mineableBlock = Program.gen.returnBlock(Program.player.position.x, Program.player.position.y);
+            Block mineableBlock = Reference.gen.returnBlock(Reference.player.position.X, Reference.player.position.Y);
             if (mineableBlock != null)
             {
                 if (mineableBlock.strength != -1)
                 {
                     if (mineableBlock.broken == false)
                     {
-                        mineableBlock.MineBlock(Program.player);
+                        mineableBlock.MineBlock(Reference.player);
                     }
                     else
                     {
-                        Program.unit.AddConsoleItem("the block under you is already been broken!", message);
+                        Debug.Log("the block under you is already been broken!");
                     }
                 }
                 else
                 {
-                    Program.unit.AddConsoleItem("this block cannot be mined!", message);
+                    Debug.Log("this block cannot be mined!");
                 }
             }
             else
             {
-                Program.unit.AddConsoleItem("for some reason that didnt work as the block doesnt exist!", message);
+                Debug.Log("for some reason that didnt work as the block doesnt exist!");
             }
         }
     }

@@ -1,8 +1,4 @@
-﻿using DSharpPlus;
-using DSharpPlus.Entities;
-using DSharpPlus.EventArgs;
-using Game;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Raylib_cs;
 using RPGConsole.Commands;
 using RPGConsole.Graphical;

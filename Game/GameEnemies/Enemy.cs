@@ -1,10 +1,12 @@
 ﻿using Raylib_cs;
-using RPGConsole.EngineStuff;
 using RPGConsole.Graphical.MenuItems;
 using RPGConsole.Graphical.MenuItems.KeyboardOnlyItems;
 using RPGConsole.InventoryItems;
+using SubrightEngine2.EngineStuff;
 using System;
 using System.Threading;
+using Color = SubrightEngine2.EngineStuff.Color;
+using Random = SubrightEngine2.EngineStuff.Random;
 
 namespace RPGConsole.GameEnemies
 {
@@ -13,9 +15,9 @@ namespace RPGConsole.GameEnemies
         public int health = 20;
         public bool playerStuck;
 
-        public Enemy(string name, Vector2 position, Player player) : base(name, position)
+        public Enemy(string name, Vector2 position, Player player) : base(new Vector3(position.X, position.Y, 0), Vector3.zero, name)
         {
-            if (Program.cmdMode) { StartSequence(player); } else
+            if (Reference.cmdMode) { StartSequence(player); } else
             {
                 StartGUISequence();
             }
@@ -25,7 +27,7 @@ namespace RPGConsole.GameEnemies
         {
             //Sequence start
             bool playerReady = true;
-            Program.unit.AddConsoleItem(new Graphical.ConsoleItem(3, name + " has decided to attack!"));
+            Debug.Log(name + " has decided to attack!");
             while (playerReady == true)
             {
                 //stop the player
@@ -42,12 +44,12 @@ namespace RPGConsole.GameEnemies
                             bool itemEquipped = player.equipInventoryItem(args[1]);
                             if (itemEquipped == false)
                             {
-                                Program.unit.AddConsoleItem(new Graphical.ConsoleItem(3, "Item was not equipped continuing"));
+                                Debug.Log("Item was not equipped continuing");
                             }
                         }
                         else
                         {
-                            Program.unit.AddConsoleItem(new Graphical.ConsoleItem(3, "args are incorrect please try again"));
+                            Debug.Log("args are incorrect please try again");
                         }
                         break;
                     case "fight":
@@ -58,57 +60,54 @@ namespace RPGConsole.GameEnemies
                             InventoryItemWeapon weapon = (InventoryItemWeapon)player.equipItem;
                             if (weapon == null)
                             {
-                                Program.unit.AddConsoleItem(new Graphical.ConsoleItem(3, "program error: unable to convert to weapon!!!"));
+                                Debug.Log("Reference error: unable to convert to weapon!!!");
                             }
                             else
                             {
-                                Random randLevel = new Random();
-                                int randdmg = randLevel.Next(weapon.damageLevel);
+                                int randdmg = Random.Range(weapon.damageLevel);
                                 health -= randdmg;
-                                Program.unit.AddConsoleItem(new Graphical.ConsoleItem(3, "Your weapon called " + weapon.name + " has delt " + randdmg + " to the enemy!"));
+                                Debug.Log("Your weapon called " + weapon.name + " has delt " + randdmg + " to the enemy!");
                                 weapon.UpgradeWeapon(player);
                             }
                         }
                         break;
                     case "run":
-                        Random randNew = new Random();
-                        int randomValue = randNew.Next(10);
+                        int randomValue = Random.Range(10);
                         if (randomValue == 5)
                         {
                             //run
-                            Program.unit.AddConsoleItem("you have sucessfully ran from the enemy", 3);
+                            Debug.Log("you have sucessfully ran from the enemy");
                             Thread.Sleep(300);
                             if (playerReady == true)
                             {
                                 playerReady = false;
-                                Program.loader.currentScene.guiOptions.Clear();
+                                Reference.loader.currentScene.guiOptions.Clear();
                             }
                             else
                             {
-                                Program.unit.AddConsoleItem("thats unfortunate? the player is stuck but the boolean has been set to false!", 3);
+                                Debug.Log("thats unfortunate? the player is stuck but the boolean has been set to false!");
                             }
                         }
                         else
                         {
                             //unfortunately you have not escaped!
-                            Program.unit.AddConsoleItem("unfortunately you have not escaped!", 3);
+                            Debug.Log("unfortunately you have not escaped!");
                         }
                         break;
                     case "help":
-                        Program.unit.AddConsoleItem(new Graphical.ConsoleItem(3, "HELP COMMANDS!"));
-                        Program.unit.AddConsoleItem(new Graphical.ConsoleItem(3, "( equipment/equip/e <itemname> ) to equip an item during battle! watch out as soon as you execute a command fully the enemy has a stab at you!"));
-                        Program.unit.AddConsoleItem(new Graphical.ConsoleItem(3, "( fight/engage ) to fight or engage on the enemy!"));
+                        Debug.Log("HELP COMMANDS!");
+                        Debug.Log("( equipment/equip/e <itemname> ) to equip an item during battle! watch out as soon as you execute a command fully the enemy has a stab at you!");
+                        Debug.Log("( fight/engage ) to fight or engage on the enemy!");
                         break;
                     default:
-                        Program.unit.AddConsoleItem(new Graphical.ConsoleItem(3, "that is not a valid command! please execute 'help' for more information!"));
+                        Debug.Log("that is not a valid command! please execute 'help' for more information!");
                         break;
                 }
                 //take a break and let the enemy fight the player
-                Random rand = new Random();
-                int randValue = rand.Next(player.level * 2);
+                int randValue = Random.Range(player.level * 2);
                 player.health -= randValue;
-                Program.unit.AddConsoleItem(new Graphical.ConsoleItem(3, "enemy has delt " + randValue + " damage"));
-                Program.unit.AddConsoleItem(new Graphical.ConsoleItem(3, "your health is now at " + player.health));
+                Debug.Log("enemy has delt " + randValue + " damage");
+                Debug.Log("your health is now at " + player.health);
 
                 //break the process if player health is too low!
                 if (player.health <= 0)
@@ -120,13 +119,13 @@ namespace RPGConsole.GameEnemies
 
         public void StartGUISequence()
         {
-            Program.loader.currentScene.guiOptions.Clear();
-            Program.loader.currentScene.guiOptions.Add(new Text("An enemy has decided to attack you!", new Vector2(10, 10), 20, Color.BLACK));
-            Program.loader.currentScene.guiOptions.Add(new EnemyGUIButton(this, "Attack the " + name, new Vector2(20, 20), new Vector2(10, 40)));
-            Program.loader.currentScene.guiOptions.Add(new EnemyRunGUIButton(this, "Run from the " + name, new Vector2(20, 20), new Vector2(10, 70)));
+            Reference.loader.currentScene.guiOptions.Clear();
+            Reference.loader.currentScene.guiOptions.Add(new Text("An enemy has decided to attack you!", new Vector2(10, 10), 20, Color.BLACK));
+            Reference.loader.currentScene.guiOptions.Add(new EnemyGUIButton(this, "Attack the " + name, new Vector2(20, 20), new Vector2(10, 40)));
+            Reference.loader.currentScene.guiOptions.Add(new EnemyRunGUIButton(this, "Run from the " + name, new Vector2(20, 20), new Vector2(10, 70)));
             EmptyContainer container = new EmptyContainer(new Vector2(10, 10), new Vector2(10, 10));
-            container.children.AddRange(Program.loader.currentScene.guiOptions);
-            Program.loader.currentScene.guiOptions.Add(container);
+            container.children.AddRange(Reference.loader.currentScene.guiOptions);
+            Reference.loader.currentScene.guiOptions.Add(container);
         }
     }
 
@@ -142,21 +141,20 @@ namespace RPGConsole.GameEnemies
         public override void Triggerable()
         {
             base.Triggerable();
-            if (Program.player.equipItem.type == itemTYPE.WEAPON)
+            if (Reference.player.equipItem.type == itemTYPE.WEAPON)
             {
                 //add this onto the pressure.
-                InventoryItemWeapon weapon = (InventoryItemWeapon)Program.player.equipItem;
+                InventoryItemWeapon weapon = (InventoryItemWeapon)Reference.player.equipItem;
                 if (weapon == null)
                 {
-                    Program.unit.AddConsoleItem(new Graphical.ConsoleItem(3, "program error: unable to convert to weapon!!!"));
+                    Debug.Log("Reference error: unable to convert to weapon!!!");
                 }
                 else
                 {
-                    Random randLevel = new Random();
-                    int randdmg = randLevel.Next(weapon.damageLevel);
+                    int randdmg = Random.Range(weapon.damageLevel);
                     enemyConcern.health -= randdmg;
-                    Program.unit.AddConsoleItem(new Graphical.ConsoleItem(3, "Your weapon called " + weapon.name + " has delt " + randdmg + " to the enemy!"));
-                    weapon.UpgradeWeapon(Program.player);
+                    Debug.Log("Your weapon called " + weapon.name + " has delt " + randdmg + " to the enemy!");
+                    weapon.UpgradeWeapon(Reference.player);
                 }
             }
         }
@@ -171,30 +169,29 @@ namespace RPGConsole.GameEnemies
         public override void Triggerable()
         {
             base.Triggerable();
-            Random rand = new Random();
-            int randomValue = rand.Next(10);
+            int randomValue = Random.Range(10);
             if(randomValue == 5)
             {
                 //run
-                Program.unit.AddConsoleItem("you have sucessfully ran from the enemy", 3);
-                Program.loader.currentScene.guiOptions.Add(new Text("You have sucessfully escaped from the enemy!", new Vector2(10, 10), 20, Color.BLACK));
+                Debug.Log("you have sucessfully ran from the enemy");
+                Reference.loader.currentScene.guiOptions.Add(new Text("You have sucessfully escaped from the enemy!", new Vector2(10, 10), 20, Color.BLACK));
                 Thread.Sleep(300);
                 if (enemyConcern.playerStuck == true)
                 {
                     enemyConcern.playerStuck = false;
-                    Program.loader.currentScene.guiOptions.Clear();
+                    Reference.loader.currentScene.guiOptions.Clear();
                 }
                 else
                 {
-                    Program.unit.AddConsoleItem("thats unfortunate? the player is stuck but the boolean has been set to false!", 3);
+                    Debug.Log("thats unfortunate? the player is stuck but the boolean has been set to false!");
                 }
             }
             else
             {
                 //unfortunately you have not escaped!
-                Program.unit.AddConsoleItem("The player has unfortunately not escaped!", 3);
-                Program.loader.currentScene.guiOptions.Clear();
-                Program.loader.currentScene.guiOptions.Add(new Text("Unfortunately you have not escaped from the monster!", new Vector2(10, 10), 20, Color.BLACK));
+                Debug.Log("The player has unfortunately not escaped!");
+                Reference.loader.currentScene.guiOptions.Clear();
+                Reference.loader.currentScene.guiOptions.Add(new Text("Unfortunately you have not escaped from the monster!", new Vector2(10, 10), 20, Color.BLACK));
                 Thread.Sleep(300);
                 enemyConcern.StartGUISequence();
             }

@@ -1,5 +1,6 @@
 ﻿using Raylib_cs;
 using RPGConsole.Graphical.MenuItems;
+using SubrightEngine2.EngineStuff;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -49,7 +50,7 @@ namespace RPGConsole.Graphical
                     Raylib.ImageResizeNN(ref image, 64, 64);
                     Texture2D texture = Raylib.LoadTextureFromImage(image);
                     Raylib.UnloadImage(image);
-                    Raylib.SetTextureFilter(texture, TextureFilterMode.FILTER_POINT);
+                    //Raylib.SetTextureFilter(texture, TextureFilterMode.FILTER_POINT);
                     TextureCreate(Path.GetFileName(path), path, texture);
                     return textureLoad(path);
                 }
@@ -71,12 +72,12 @@ namespace RPGConsole.Graphical
             {
                 storedTexture newTexure = new storedTexture(name, path, texture);
                 texturesCached.Add(newTexure);
-                Program.unit.AddConsoleItem("Created a new texture by the name of: " + name, 3);
+                Debug.Log("Created a new texture by the name of: " + name);
                 return newTexure;
             }
             else
             {
-                Program.unit.AddConsoleItem("Texture already exists by the name of: " + name + "so unable to create a new storedTexture!", 3);
+                Debug.Log("Texture already exists by the name of: " + name + "so unable to create a new storedTexture!");
                 return null;
             }
         }
@@ -107,7 +108,7 @@ namespace RPGConsole.Graphical
             }
             else
             {
-                Program.unit.AddConsoleItem("Texture doesnt exist to be removed by this protocol?", 3);
+                Debug.Log("Texture doesnt exist to be removed by this protocol?");
             }
         }
 

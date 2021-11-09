@@ -1,5 +1,5 @@
-﻿using DSharpPlus.Entities;
-using RPGConsole.InventoryBlock;
+﻿using RPGConsole.InventoryBlock;
+using SubrightEngine2.EngineStuff;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,19 +8,19 @@ namespace RPGConsole.Commands.General
 {
     public class ontop : EmptyCommand
     {
-        public ontop():base("What block the player is ontop?", "ontop/ot", CommandType.DISCORDHYBRID) { }
+        public ontop():base("What block the player is ontop?", "ontop/ot", CommandType.NORMAL) { }
 
-        public override void RunCommand(string[] args, DiscordMessage message)
+        public override void RunCommand(string[] args)
         {
-            base.RunCommand(args, message);
-            Block useableblock = Program.gen.returnBlock(Program.player.position.x, Program.player.position.y);
+            base.RunCommand(args);
+            Block useableblock = Reference.gen.returnBlock(Reference.player.position.X, Reference.player.position.Y);
             if (useableblock != null)
             {
-                Program.unit.AddConsoleItem("the player is currently sitting on block " + useableblock.name, message);
+                Debug.Log("the player is currently sitting on block " + useableblock.name);
             }
             else
             {
-                Program.unit.AddConsoleItem("somehow the player isnt sitting on anyblock!", message);
+                Debug.Log("somehow the player isnt sitting on anyblock!");
             }
         }
     }

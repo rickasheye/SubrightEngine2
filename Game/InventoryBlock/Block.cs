@@ -1,5 +1,6 @@
 ﻿using Raylib_cs;
 using RPGConsole.InventoryItems;
+using SubrightEngine2.EngineStuff;
 using System;
 
 namespace RPGConsole.InventoryBlock
@@ -84,20 +85,20 @@ namespace RPGConsole.InventoryBlock
         public Block()
         {
             //unfortunately block is emptyt
-            //if (Program.debugMode == true) { Program.unit.AddConsoleItem("BLOCK IS EMPTY!!! but is called " + name); }
+            //if (Reference.debugMode == true) { Reference.unit.AddConsoleItem("BLOCK IS EMPTY!!! but is called " + name); }
 
             if (texture == "Textures/blocks/air.png")
             {
-                Program.gen.blockMap.Remove(this);
+                Reference.gen.blockMap.Remove(this);
             }
 
             if(perlinvalue == 0)
             {
-                for(int i = 0; i < Program.gen.blockMap.Count -1; i++)
+                for(int i = 0; i < Reference.gen.blockMap.Count -1; i++)
                 {
-                    if(Program.gen.blockMap[i].name == name)
+                    if(Reference.gen.blockMap[i].name == name)
                     {
-                        Program.gen.blockMap.RemoveAt(i);
+                        Reference.gen.blockMap.RemoveAt(i);
                     }
                 }
             }
@@ -155,7 +156,7 @@ namespace RPGConsole.InventoryBlock
                 {
                     if (!usingTool)
                     {
-                        Program.unit.AddConsoleItem(new Graphical.ConsoleItem(3, "you need to use a tool for this block!"));
+                        Debug.Log("you need to use a tool for this block!");
                         return;
                     }
                 }
@@ -176,7 +177,7 @@ namespace RPGConsole.InventoryBlock
                     }
                     else
                     {
-                        Program.unit.AddConsoleItem(new Graphical.ConsoleItem(3, "You do not have a pickaxe equipped to be used on this block!"));
+                        Debug.Log( "You do not have a pickaxe equipped to be used on this block!");
                     }
                 }
 
@@ -185,7 +186,7 @@ namespace RPGConsole.InventoryBlock
             }
             else
             {
-                Program.unit.AddConsoleItem(new Graphical.ConsoleItem(3, "This block seems to be already broken"));
+                Debug.Log("This block seems to be already broken");
             }
         }
     }

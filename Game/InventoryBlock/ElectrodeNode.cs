@@ -1,6 +1,7 @@
 ﻿using Raylib_cs;
 using RPGConsole.Graphical.MenuItems.KeyboardOnlyItems;
 using RPGConsole.InventoryItems;
+using SubrightEngine2.EngineStuff;
 using System.Collections;
 
 namespace RPGConsole.InventoryBlock
@@ -30,15 +31,15 @@ namespace RPGConsole.InventoryBlock
         {
             base.PlayerOnTop(player);
             EmptyContainer container = new EmptyContainer(new Vector2(50, 50), new Vector2(10, 10));
-            Program.loader.currentScene.guiOptions.Add(new collectElectrodesButton(player, this, new Vector2(50, 50), new Vector2(10, 10)));
-            container.children.AddRange(Program.loader.currentScene.guiOptions);
-            Program.loader.currentScene.guiOptions.Add(container);
+            Reference.loader.currentScene.guiOptions.Add(new collectElectrodesButton(player, this, new Vector2(50, 50), new Vector2(10, 10)));
+            container.children.AddRange(Reference.loader.currentScene.guiOptions);
+            Reference.loader.currentScene.guiOptions.Add(container);
         }
 
         public override void PlayerOffBlock(Player player)
         {
             base.PlayerOffBlock(player);
-            Program.loader.currentScene.guiOptions.Clear();
+            Reference.loader.currentScene.guiOptions.Clear();
         }
     }
 

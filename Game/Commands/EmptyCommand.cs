@@ -1,5 +1,4 @@
-﻿using DSharpPlus.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -22,11 +21,6 @@ namespace RPGConsole.Commands
         public virtual void RunCommand(string[] args)
         {
 
-        }
-
-        public virtual void RunCommand(string[] args, DiscordMessage message)
-        {
-            //if (Program.debugMode) { message.RespondAsync("Command included: " + string.Join(' ', args)); }
         }
     }
 }

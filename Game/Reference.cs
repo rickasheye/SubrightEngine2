@@ -26,11 +26,39 @@ namespace RPGConsole
         public override void Update(ref Camera2D cam2, ref Camera3D cam3)
         {
             base.Update(ref cam2, ref cam3);
+            Raylib.BeginDrawing();
+            Raylib.ClearBackground(Raylib_cs.Color.SKYBLUE);
+
+            if (loader.currentScene != null)
+            {
+                loader.currentScene.UpdateScene(cam2);
+                if (debugMode == true) { Raylib.SetWindowTitle("RPGConsole - " + loader.currentScene.name); }
+            }
+            else
+            {
+                if (debugMode == true) { Raylib.SetWindowTitle("RPGConsole - No Scene Loaded!"); }
+            }
+            //draw hud etc
+            if (debugMode == true) { Raylib.DrawFPS(Raylib.GetMouseX() + 10, Raylib.GetMouseY() + 10); }
+            if (Raylib.IsKeyPressed(KeyboardKey.KEY_N))
+            {
+                if (debugMode == true)
+                {
+                    debugMode = false;
+                }
+                else if (debugMode == false)
+                {
+                    debugMode = true;
+                }
+            }
+            Raylib.EndDrawing();
         }
 
         public override void Dispose()
         {
-            base.Dispose(); 
+            base.Dispose();
+            loader.currentScene.loaderAsset.UnloadAll();
+            if (debugMode == true) { Debug.Log("unloaded all textures!"); }
         }
 
         public static ProfileSupport supportProfiles;
@@ -212,7 +240,7 @@ namespace RPGConsole
                 loader = new SceneLoader();
                 const int screenWidth = 800;
                 const int screenHeight = 600;
-                Raylib.InitWindow(screenWidth, screenHeight, "RPGConsole");
+                //Raylib.InitWindow(screenWidth, screenHeight, "RPGConsole");
 
                 Camera2D camera = new Camera2D();
                 camera.offset = new System.Numerics.Vector2(screenWidth / 2, screenHeight / 2);
@@ -228,39 +256,6 @@ namespace RPGConsole
                 loader.LoadScene(mainScene);
 
                 Raylib.SetTargetFPS(30);
-                while (!Raylib.WindowShouldClose())
-                {
-                    Raylib.BeginDrawing();
-                    Raylib.ClearBackground(Raylib_cs.Color.SKYBLUE);
-
-                    if (loader.currentScene != null)
-                    {
-                        loader.currentScene.UpdateScene(camera);
-                        if (debugMode == true) { Raylib.SetWindowTitle("RPGConsole - " + loader.currentScene.name); }
-                    }
-                    else
-                    {
-                        if (debugMode == true) { Raylib.SetWindowTitle("RPGConsole - No Scene Loaded!"); }
-                    }
-                    //draw hud etc
-                    if (debugMode == true) { Raylib.DrawFPS(Raylib.GetMouseX() + 10, Raylib.GetMouseY() + 10); }
-                    if (Raylib.IsKeyPressed(KeyboardKey.KEY_N))
-                    {
-                        if (debugMode == true)
-                        {
-                            debugMode = false;
-                        }
-                        else if (debugMode == false)
-                        {
-                            debugMode = true;
-                        }
-                    }
-                    Raylib.EndDrawing();
-                }
-                mainScene.loaderAsset.UnloadAll();
-                if (debugMode == true) { Debug.Log("unloaded all textures!"); }
-
-                Raylib.CloseWindow();
             }
 
             supportProfiles.ExitProfile();

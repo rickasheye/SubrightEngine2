@@ -1,12 +1,10 @@
 ﻿using Raylib_cs;
 using RPGConsole.Graphical.MenuItems;
 using RPGConsole.Graphical.MenuItems.KeyboardOnlyItems;
+using SubrightEngine2.EngineStuff;
 using System;
 using System.Collections.Generic;
-using System.Numerics;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
+using Color = SubrightEngine2.EngineStuff.Color;
 
 namespace RPGConsole.Graphical.ScenesAvaliable
 {
@@ -27,7 +25,7 @@ namespace RPGConsole.Graphical.ScenesAvaliable
         public override void LoadScene()
         {
             base.LoadScene();
-            text = new Text("RPGConsole", new Vector2(10, 10), 40, Raylib_cs.Color.BLACK);
+            text = new Text("RPGConsole", new Vector2(10, 10), 40, Color.BLACK);
             playbutton = new ButtonPlay();
             newSave = new ButtonCreateNewSave();
             quitbutton = new ButtonQuit();
@@ -38,9 +36,9 @@ namespace RPGConsole.Graphical.ScenesAvaliable
             guiOptions.Add(quitbutton);
             container.children.AddRange(guiOptions);
             guiOptions.Add(container);
-            ThreeDCam.position = new Vector3(14, 14, 16);
-            ThreeDCam.target = new Vector3(0, 0, 0);
-            ThreeDCam.up = new Vector3(0, 1, 0);
+            ThreeDCam.position = new Vector3(14, 14, 16).ToNumericsVector;
+            ThreeDCam.target = new Vector3(0, 0, 0).ToNumericsVector;
+            ThreeDCam.up = new Vector3(0, 1, 0).ToNumericsVector;
             ThreeDCam.fovy = 45;
             Raylib.SetCameraMode(ThreeDCam, CameraMode.CAMERA_ORBITAL);
 
@@ -49,7 +47,8 @@ namespace RPGConsole.Graphical.ScenesAvaliable
             {
                 Material* materials = (Material*)startingModel.materials.ToPointer();
                 MaterialMap* maps = (MaterialMap*)materials[0].maps.ToPointer();
-                maps[(int)MaterialMapType.MAP_ALBEDO].texture = Raylib.LoadTexture("Textures/models/menuitem.png");
+                Raylib.SetMaterialTexture(ref materials[0], 0, Raylib.LoadTexture("Textures/models/menuitem.png"));
+                //maps[(int)Convert.GetTypeCode(MaterialMapType.MAP_ALBEDO)].texture = Raylib.LoadTexture("Textures/models/menuitem.png");
             }
         }
 
@@ -58,7 +57,7 @@ namespace RPGConsole.Graphical.ScenesAvaliable
             base.UpdateScene(cam);
             Raylib.BeginMode3D(ThreeDCam);
             //Raylib.DrawCube(new Vector3(0, 0, 0), 3, 3, 3, Color.WHITE);
-            Raylib.DrawModel(startingModel, new Vector3(0, 0, 0), 0.1f, Color.WHITE);
+            Raylib.DrawModel(startingModel, new Vector3(0, 0, 0).ToNumericsVector, 0.1f, Color.WHITE.ToRaylibColor);
             Raylib.EndMode3D();
             Raylib.UpdateCamera(ref ThreeDCam);
         }
@@ -68,7 +67,7 @@ namespace RPGConsole.Graphical.ScenesAvaliable
     {
         //Continue on the last save!!!
         public ButtonPlay():base("Continue", new Vector2(40, 80), new Vector2(10, 60)) {
-            if(Program.manager.savefiles.Count <= 0)
+            if(Reference.manager.savefiles.Count <= 0)
             {
                 name = "Load new save file!";
             }
@@ -77,40 +76,40 @@ namespace RPGConsole.Graphical.ScenesAvaliable
         public override void Triggerable()
         {
             base.Triggerable();
-            if (Program.manager.savefiles.Count > 0)
+            if (Reference.manager.savefiles.Count > 0)
             {
-                if (Program.manager.LoadFile(Program.manager.getTopmostFile(), ref Program.gen, ref Program.player))
+                if (Reference.manager.LoadFile(Reference.manager.getTopmostFile(), ref Reference.gen, ref Reference.player))
                 {
-                    Program.unit.AddConsoleItem("Sucessfully loaded the save file!");
+                    Debug.Log("Sucessfully loaded the save file!");
                 }
                 else
                 {
-                    Program.unit.AddConsoleItem("Unfortunately unable to load save file!");
-                    if (Program.manager.SaveFile())
+                    Debug.Log("Unfortunately unable to load save file!");
+                    if (Reference.manager.SaveFile())
                     {
-                        Program.unit.AddConsoleItem("Successfully saved your file!");
-                        if (Program.manager.LoadFile(Program.manager.savefiles[Program.manager.savefiles.Count - 1], ref Program.gen, ref Program.player))
+                        Debug.Log("Successfully saved your file!");
+                        if (Reference.manager.LoadFile(Reference.manager.savefiles[Reference.manager.savefiles.Count - 1], ref Reference.gen, ref Reference.player))
                         {
-                            Program.unit.AddConsoleItem("Sucessfully loaded your file!");
+                            Debug.Log("Sucessfully loaded your file!");
                         }
                         else
                         {
-                            Program.unit.AddConsoleItem("Unfortunately your file was unable to be loaded!");
+                            Debug.Log("Unfortunately your file was unable to be loaded!");
                         }
                     }
                     else
                     {
-                        Program.unit.AddConsoleItem("Unfortunately your file has not saved correctly!");
+                        Debug.Log("Unfortunately your file has not saved correctly!");
                     }
                 }
             }
             else
             {
                 //create a new file!@
-                Program.manager.SaveFile();
+                Reference.manager.SaveFile();
                 Triggerable();
             }
-            Program.loader.LoadScene(Program.loader.getScene("Main Game Scene"));
+            Reference.loader.LoadScene(Reference.loader.getScene("Main Game Scene"));
         }
     }
 
@@ -118,7 +117,7 @@ namespace RPGConsole.Graphical.ScenesAvaliable
     {
         //Create a new save and play that!
         public ButtonCreateNewSave() : base("Create new save! and play!", new Vector2(40, 80), new Vector2(10, 120)) {
-            if (Program.manager.savefiles.Count <= 0)
+            if (Reference.manager.savefiles.Count <= 0)
             {
                 disabled = true;
             }
@@ -127,21 +126,21 @@ namespace RPGConsole.Graphical.ScenesAvaliable
         public override void Triggerable()
         {
             base.Triggerable();
-            if (Program.manager.SaveFile())
+            if (Reference.manager.SaveFile())
             {
-                Program.unit.AddConsoleItem("Successfully saved your file!");
-                if(Program.manager.LoadFile(Program.manager.savefiles[Program.manager.savefiles.Count - 1], ref Program.gen, ref Program.player))
+                Debug.Log("Successfully saved your file!");
+                if(Reference.manager.LoadFile(Reference.manager.savefiles[Reference.manager.savefiles.Count - 1], ref Reference.gen, ref Reference.player))
                 {
-                    Program.unit.AddConsoleItem("Sucessfully loaded your file!");
+                    Debug.Log("Sucessfully loaded your file!");
                 }
                 else
                 {
-                    Program.unit.AddConsoleItem("Unfortunately your file was unable to be loaded!");
+                    Debug.Log("Unfortunately your file was unable to be loaded!");
                 }
             }
             else
             {
-                Program.unit.AddConsoleItem("Unfortunately your file has not saved correctly!");
+                Debug.Log("Unfortunately your file has not saved correctly!");
             }
         }
     }

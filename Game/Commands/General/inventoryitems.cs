@@ -1,5 +1,5 @@
-﻿using DSharpPlus.Entities;
-using RPGConsole.InventoryItems;
+﻿using RPGConsole.InventoryItems;
+using SubrightEngine2.EngineStuff;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,18 +8,18 @@ namespace RPGConsole.Commands.General
 {
     public class inventoryitems : EmptyCommand
     {
-        public inventoryitems():base("Check your inventory items avaliable", "ii/inventory/checkinventory/ci/inventoryitems", CommandType.DISCORDHYBRID) { }
+        public inventoryitems():base("Check your inventory items avaliable", "ii/inventory/checkinventory/ci/inventoryitems", CommandType.NORMAL) { }
 
-        public override void RunCommand(string[] args, DiscordMessage message)
+        public override void RunCommand(string[] args)
         {
-            base.RunCommand(args, message);
-            Program.unit.AddConsoleItem("inventory items!", message);
-            for (int i = 0; i < Program.player.inv.items.Count; i++)
+            base.RunCommand(args);
+            Debug.Log("inventory items!");
+            for (int i = 0; i < Reference.player.inv.items.Count; i++)
             {
-                InventoryItem item = Program.player.inv.items[i];
+                InventoryItem item = Reference.player.inv.items[i];
                 if (item != null)
                 {
-                    Program.unit.AddConsoleItem("<" + item.itemCount + "> " + item.name, message);
+                    Debug.Log("<" + item.itemCount + "> " + item.name);
                 }
             }
         }

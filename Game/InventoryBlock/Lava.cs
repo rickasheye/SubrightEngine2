@@ -1,10 +1,8 @@
-﻿using Raylib_cs;
-using RPGConsole.Graphical;
-using RPGConsole.InventoryItems;
+﻿using RPGConsole.InventoryItems;
+using SubrightEngine2.EngineStuff;
 using System;
-using System.IO;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading;
+using Random = SubrightEngine2.EngineStuff.Random;
 
 namespace RPGConsole.InventoryBlock
 {
@@ -17,23 +15,22 @@ namespace RPGConsole.InventoryBlock
             base.PlayerOnTop(player);
             //Take stuff from the player!
             int tempTimer = 0;
-            while (player.position.x == position.x && player.position.y == position.y)
+            while (player.position.X == position.X && player.position.Y == position.Y)
             {
                 //take health from the player!
                 player.health -= toxicity;
-                Program.unit.AddConsoleItem(new ConsoleItem(3, "you are sitting on lava it has depleted your health by " + toxicity));
+                Debug.Log("you are sitting on lava it has depleted your health by " + toxicity);
 
                 if (player.health <= 0)
                 {
                     break;
                 }
-                if (Program.cmdMode) { Thread.Sleep(800); }
-                Random randChance = new Random();
-                int randomChance = randChance.Next(2);
+                if (Reference.cmdMode) { Thread.Sleep(800); }
+                int randomChance = Random.Range(2);
                 if (randomChance == 1)
                 {
-                    player.MovePlayer((int)player.position.x + 1, (int)player.position.y);
-                    Program.unit.AddConsoleItem(new ConsoleItem(3, "luckily you have survived and made it out of the lava!"));
+                    player.MovePlayer((int)player.position.X + 1, (int)player.position.Y);
+                    Debug.Log("luckily you have survived and made it out of the lava!");
                 }
             }
         }
@@ -51,31 +48,31 @@ namespace RPGConsole.InventoryBlock
         {
             base.UpdateBlockThroughMiningandPlacing();
             //producing obsidian or modifying blocks on there
-            Generator generator = Program.gen;
+            Generator generator = Reference.gen;
             bool connectedToWater = false;
             Vector2 newPosition = new Vector2(0, 0);
-            if(generator.returnBlock(position.x + 1, position.y) == generator.getBlock("Water"))
+            if(generator.returnBlock(position.X + 1, position.Y) == generator.getBlock("Water"))
             {
-                newPosition = new Vector2((int)position.x + 1, position.y);
+                newPosition = new Vector2((int)position.X + 1, position.Y);
                 connectedToWater = true;
-            }else if(generator.returnBlock(position.x, position.y + 1) == generator.getBlock("Water"))
+            }else if(generator.returnBlock(position.X, position.Y + 1) == generator.getBlock("Water"))
             {
-                newPosition = new Vector2(position.x, position.y + 1);
+                newPosition = new Vector2(position.X, position.Y + 1);
                 connectedToWater = true;
-            }else if(generator.returnBlock(position.x - 1, position.y) == generator.getBlock("Water"))
+            }else if(generator.returnBlock(position.X - 1, position.Y) == generator.getBlock("Water"))
             {
-                newPosition = new Vector2(position.x - 1, position.y);
+                newPosition = new Vector2(position.X - 1, position.Y);
                 connectedToWater = true;
-            }else if(generator.returnBlock(position.x, position.y-1) == generator.getBlock("Water"))
+            }else if(generator.returnBlock(position.X, position.Y-1) == generator.getBlock("Water"))
             {
-                newPosition = new Vector2(position.x, position.y - 1);
+                newPosition = new Vector2(position.X, position.Y - 1);
                 connectedToWater = true;
             }
 
             if(connectedToWater == true)
             {
-                generator.setBlock((int)newPosition.x, (int)newPosition.y, new Obsidian());
-                generator.setBlock((int)position.x, (int)position.y, new Rock());
+                generator.setBlock((int)newPosition.X, (int)newPosition.Y, new Obsidian());
+                generator.setBlock((int)position.X, (int)position.Y, new Rock());
             }
         }
     }

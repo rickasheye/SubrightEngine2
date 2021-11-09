@@ -39,6 +39,23 @@ namespace SubrightEngine2.EngineStuff
             Start();
         }
 
+        public GameObject(Vector3 position, string name)
+        {
+            this.name = name;
+            this.position = position;
+            this.size = Vector3.zero;
+            this.voidStart = false;
+            Start();
+        }
+
+        public GameObject(string name)
+        {
+            this.name = name;
+            this.position = Vector3.zero;
+            this.size = Vector3.zero;
+            this.voidStart = false;
+        }
+
         public GameObject()
         {
             this.name = "";

@@ -1,4 +1,5 @@
 ﻿using RPGConsole.InventoryItems;
+using SubrightEngine2.EngineStuff;
 using System;
 using System.Collections.Generic;
 
@@ -37,12 +38,12 @@ namespace RPGConsole
             if (itemExists(item))
             {
                 itemFind(item).itemCount++;
-                Program.unit.AddConsoleItem(new Graphical.ConsoleItem(3, "Item " + item.name + " has been increased in count in your inventory!"));
+                Debug.Log("Item " + item.name + " has been increased in count in your inventory!");
             }
             else
             {
                 items.Add(item);
-                Program.unit.AddConsoleItem(new Graphical.ConsoleItem(3, "Item " + item.name + " has been added to your inventory!"));
+                Debug.Log("Item " + item.name + " has been added to your inventory!");
             }
         }
 
@@ -53,7 +54,7 @@ namespace RPGConsole
                 if (itemFind(item).itemCount > 0)
                 {
                     itemFind(item).itemCount--;
-                    Program.unit.AddConsoleItem(new Graphical.ConsoleItem(3, "one of " + item.name + " has been deducted from your inventory!"));
+                    Debug.Log("one of " + item.name + " has been deducted from your inventory!");
                 }
                 else
                 {
@@ -65,12 +66,12 @@ namespace RPGConsole
                         }
                     }
 
-                    Program.unit.AddConsoleItem(new Graphical.ConsoleItem(3, "Item " + item.name + " has been removed from your inventory!"));
+                    Debug.Log("Item " + item.name + " has been removed from your inventory!");
                 }
             }
             else
             {
-                Program.unit.AddConsoleItem(new Graphical.ConsoleItem(3, "Item doesnt exist!"));
+                Debug.Log("Item doesnt exist!");
             }
         }
     }

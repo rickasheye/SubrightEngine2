@@ -1,4 +1,4 @@
-﻿using DSharpPlus.Entities;
+﻿using SubrightEngine2.EngineStuff;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,12 +7,12 @@ namespace RPGConsole.Commands.General
 {
     public class equip : EmptyCommand
     {
-        public equip():base("What item to equip", "equip", CommandType.DISCORDHYBRID) { }
+        public equip():base("What item to equip", "equip", CommandType.NORMAL) { }
 
-        public override void RunCommand(string[] args, DiscordMessage message)
+        public override void RunCommand(string[] args)
         {
-            base.RunCommand(args, message);
-            if (args.Length > 1) { Program.player.equipInventoryItem(args[1]); } else { Program.unit.AddConsoleItem("you didnt specify a item name!", message); }
+            base.RunCommand(args);
+            if (args.Length > 1) { Reference.player.equipInventoryItem(args[1]); } else { Debug.Log("you didnt specify a item name!"); }
         }
     }
 }

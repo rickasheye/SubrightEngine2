@@ -34,7 +34,7 @@ namespace RPGConsole.InventoryBlock
         public override void UpdateBlock()
         {
             base.UpdateBlock();
-            Raylib.DrawTexture(loaderAsset.textureLoad("Textures/overlays/lightningbolt.png"), (int)position.x, (int)position.y, Raylib_cs.Color.WHITE);
+            Raylib.DrawTexture(loaderAsset.textureLoad("Textures/overlays/lightningbolt.png"), (int)position.X, (int)position.Y, Raylib_cs.Color.WHITE);
         }
     }
 }

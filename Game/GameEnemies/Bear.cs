@@ -1,4 +1,6 @@
-﻿namespace RPGConsole.GameEnemies
+﻿using SubrightEngine2.EngineStuff;
+
+namespace RPGConsole.GameEnemies
 {
 
     public class Bear : Enemy

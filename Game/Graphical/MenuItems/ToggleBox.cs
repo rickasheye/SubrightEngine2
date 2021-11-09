@@ -1,8 +1,9 @@
 ﻿using Raylib_cs;
+using SubrightEngine2.EngineStuff;
 using System;
 using System.Collections.Generic;
-using System.Numerics;
 using System.Text;
+using Color = SubrightEngine2.EngineStuff.Color;
 
 namespace RPGConsole.Graphical.MenuItems
 {
@@ -16,11 +17,11 @@ namespace RPGConsole.Graphical.MenuItems
         public override void DrawObject()
         {
             base.DrawObject();
-            Raylib.DrawRectangle((int)position.x, (int)position.y, (int)size.x, (int)size.y, Raylib_cs.Color.WHITE);
-            Raylib.DrawRectangleLines((int)position.x, (int)position.y, (int)size.x, (int)size.y, Raylib_cs.Color.BLACK);
-            if (toggled == false) { Raylib.DrawRectangle((int)position.x + 2, (int)position.y + 2, (int)size.x - 4, (int)size.y - 4, Color.RED); } else
+            Raylib.DrawRectangle((int)position.X, (int)position.Y, (int)size.X, (int)size.Y, Raylib_cs.Color.WHITE);
+            Raylib.DrawRectangleLines((int)position.X, (int)position.Y, (int)size.X, (int)size.Y, Raylib_cs.Color.BLACK);
+            if (toggled == false) { Raylib.DrawRectangle((int)position.X + 2, (int)position.Y + 2, (int)size.X - 4, (int)size.Y - 4, Color.RED.ToRaylibColor); } else
             {
-                Raylib.DrawRectangle((int)position.x + 2, (int)position.y + 2, (int)size.x - 4, (int)size.y - 4, Color.GREEN);
+                Raylib.DrawRectangle((int)position.X + 2, (int)position.Y + 2, (int)size.X - 4, (int)size.Y - 4, Color.GREEN.ToRaylibColor);
             }
             if (focused)
             {
@@ -35,7 +36,7 @@ namespace RPGConsole.Graphical.MenuItems
                     }
                 }
             }
-            Raylib.DrawText(text, (int)position.x + (int)size.x + 5, (int)position.y, (int)position.x - (int)position.y, Raylib_cs.Color.BLACK);
+            Raylib.DrawText(text, (int)position.X + (int)size.X + 5, (int)position.Y, (int)position.X - (int)position.Y, Raylib_cs.Color.BLACK);
         }
     }
 }

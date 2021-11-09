@@ -1,8 +1,6 @@
-﻿using DSharpPlus.Entities;
-using RPGConsole.Commands.Discord.Debug;
-using RPGConsole.Commands.Discord.Debug.GameTings;
-using RPGConsole.Commands.General;
+﻿using RPGConsole.Commands.General;
 using RPGConsole.Commands.General.ConsoleExclusive;
+using SubrightEngine2.EngineStuff;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,7 +9,7 @@ namespace RPGConsole.Commands
 {
     public enum CommandType
     {
-        DEBUG, NORMAL, DISCORD, DISCORDHYBRID
+        DEBUG, NORMAL
     }
 
     public class CommandRunManager
@@ -22,18 +20,6 @@ namespace RPGConsole.Commands
         public CommandRunManager()
         {
             //load up the commands
-
-            //init debug commands
-            emptyCommands.Add(new TimeCommand());
-            emptyCommands.Add(new ManualSaveServerCommand());
-            emptyCommands.Add(new OperateSilentCommand());
-            emptyCommands.Add(new PingCommand());
-            emptyCommands.Add(new PlayerSaveCommand());
-            emptyCommands.Add(new ServerSavedCommand());
-            emptyCommands.Add(new TemporaryDisabledCommand());
-
-            //debug game commands
-            emptyCommands.Add(new moveplayeremotely());
 
             //Normal commands
             emptyCommands.Add(new ClearConsole());
@@ -62,7 +48,7 @@ namespace RPGConsole.Commands
             if (!args[0].Contains("help")){
                 //Check if the command exists first
                 bool commandExist = false;
-                //if (Program.debugMode) { message.RespondAsync("Message commands " + args[0]); }
+                //if (Reference.debugMode) { message.RespondAsync("Message commands " + args[0]); }
                 int chosenCommand = 0;
                 for(int m = 0; m < emptyCommands.Count - 1; m++)
                 {
@@ -70,7 +56,7 @@ namespace RPGConsole.Commands
                     if(equalSplitCommand(commandEmpty.syntax, args[0].ToLower()) || args[0] == "debug")
                     {
                         commandExist = true;
-                        //if (Program.debugMode) { message.RespondAsync(commandEmpty.syntax); }
+                        //if (Reference.debugMode) { message.RespondAsync(commandEmpty.syntax); }
                         chosenCommand = m;
                         break;
                     }
@@ -82,26 +68,26 @@ namespace RPGConsole.Commands
                 {
                     for (int i = 0; i < emptyCommands.Count - 1; i++)
                     {
-                        //Program.unit.AddConsoleItem("Found command");
+                        //Reference.unit.AddConsoleItem("Found command");
                         EmptyCommand commandEmpty = emptyCommands[i];
                         if (commandEmpty.typeCommand == CommandType.DEBUG)
                         {
-                            if (Reference.debugMode) { Reference.unit.AddConsoleItem("Command is debug enabled"); }
+                            if (Reference.debugMode) { Debug.Log("Command is debug enabled"); }
                             if (args[0] == "debug")
                             {
-                                if (Reference.debugMode) { Reference.unit.AddConsoleItem("Command contains debug inside"); }
+                                if (Reference.debugMode) { Debug.Log("Command contains debug inside"); }
                                 if (Reference.debugMode)
                                 {
-                                    Reference.unit.AddConsoleItem("is Debug mode enabled!");
+                                    Debug.Log("is Debug mode enabled!");
                                     if (args[1] == commandEmpty.syntax)
                                     {
-                                        Reference.unit.AddConsoleItem("Command contains the syntax");
+                                        Debug.Log("Command contains the syntax");
                                         commandEmpty.RunCommand(args);
                                     }
                                 }
                                 else
                                 {
-                                    Reference.unit.AddConsoleItem("Unfortunately these commands are only avaliable in debug mode...");
+                                    Debug.Log("Unfortunately these commands are only avaliable in debug mode...");
                                 }
                             }
                         }
@@ -110,60 +96,28 @@ namespace RPGConsole.Commands
                             if (i == chosenCommand)
                             {
                                 //then its a non debug command
-                                if (commandEmpty.typeCommand == CommandType.NORMAL || commandEmpty.typeCommand == CommandType.DISCORDHYBRID)
-                                {
-                                    if (Program.discordBot && commandEmpty.typeCommand == CommandType.DISCORDHYBRID)
-                                    {
-                                        if (message == null)
-                                        {
-                                            commandEmpty.RunCommand(args);
-                                        }
-                                        else
-                                        {
-                                            commandEmpty.RunCommand(args, message);
-                                        }
-                                    }
-                                    else
-                                    {
-                                        commandEmpty.RunCommand(args, null);
-                                    }
-                                }
-                                else if (commandEmpty.typeCommand == CommandType.DISCORD)
-                                {
-                                    if (Program.discordBot)
-                                    {
-                                        if (message == null) { commandEmpty.RunCommand(args); }
-                                        else
-                                        {
-                                            commandEmpty.RunCommand(args, message);
-                                        }
-                                    }
-                                    else
-                                    {
-                                        Program.unit.AddConsoleItem("Unfortunately you are not engaged into discord mode...");
-                                    }
-                                } 
+                                commandEmpty.RunCommand(args);
                             }
                         }
                     }
                 }
                 else
                 {
-                    Program.unit.AddConsoleItem("That command doesnt exist it seems!");
+                    Debug.Log("That command doesnt exist it seems!");
                 }
             }
             else
             {
-                if (Program.discordBot)
+                /*if (Reference.discordBot)
                 {
                     HelpCommand(args[1], message);
-                }
+                }*/
             }
         }
 
         public bool equalSplitCommand(string split, string compare)
         {
-            //if (Program.debugMode) { Program.unit.AddConsoleItem("User has entered: " + split); }
+            //if (Reference.debugMode) { Reference.unit.AddConsoleItem("User has entered: " + split); }
             string[] splitComamnd = split.Split('/');
             for(int i = 0; i < splitComamnd.Length; i++)
             {
@@ -178,71 +132,42 @@ namespace RPGConsole.Commands
             return false;
         }
 
-        public void HelpCommand(string type, DiscordMessage message)
+        public void HelpCommand(string type)
         {
             //parse the type
             CommandType cmdtype = CommandType.NORMAL;
-            if (Program.discordBot) { cmdtype = CommandType.DISCORDHYBRID; }
             if(type.ToLower() == null || type.ToLower() == "")
             {
                 string application = "";
-                if (Program.debugMode)
+                if (Reference.debugMode)
                 {
                     application += "DEBUG/";
                 }
 
-                if (Program.discordBot)
-                {
-                    application += "DISCORDHYBRID/DISCORD";
-                }
-                else
-                {
-                    application += "NORMAL/DISCORDHYBRID";
-                }
-                Program.unit.AddConsoleItem("Unfortunately you did not select any one of the modes " + application, message);
+                application += "NORMAL";
+                Debug.Log("Unfortunately you did not select any one of the modes " + application);
             }
             switch (type.ToLower())
             {
                 case "normal":
-                    if (!Program.discordBot)
-                    {
-                        cmdtype = CommandType.NORMAL;
-                    }
-                    else
-                    {
-                        Program.unit.AddConsoleItem("Unfortunately you cannot use these commands as they're not supported in this mode of play...", message);
-                    }
+                    cmdtype = CommandType.NORMAL;
                     break;
                 case "debug":
-                    if (Program.debugMode) { if (Program.discordBot) { cmdtype = CommandType.DEBUG; }
-                        else
-                        {
-                            Program.unit.AddConsoleItem("Unfortunately most of these commands are only avalible in Discord mode");
-                        }
-                    } else
+                    if (Reference.debugMode)
                     {
-                        if (Program.discordBot)
-                        {
-                            Program.unit.AddConsoleItem("Debug mode is disabled, so these commands are not allowed!", message);
-                        }
+                        cmdtype = CommandType.DEBUG;
                     }
                     break;
-                case "discord":
-                    cmdtype = CommandType.DISCORD;
-                    break;
-                case "discordhybrid":
-                    cmdtype = CommandType.DISCORDHYBRID;
-                    break;
                 default:
-                    if (Program.debugMode) { Program.unit.AddConsoleItem("Unfortunately this user didnt add a mode select"); }
+                    if (Reference.debugMode) { Debug.Log("Unfortunately this user didnt add a mode select"); }
                     break;
             }
             List<EmptyCommand> foundCommands = emptyCommands.FindAll(t => t.typeCommand == cmdtype);
-            Program.unit.AddConsoleItem("Command Type: " + cmdtype.ToString(), message);
-            if(foundCommands.ToArray().Length <= 0) { Program.unit.AddConsoleItem("Unfortunately no commands were found..."); }
+            Debug.Log("Command Type: " + cmdtype.ToString());
+            if(foundCommands.ToArray().Length <= 0) { Debug.Log("Unfortunately no commands were found..."); }
             for(int i = 0; i < foundCommands.ToArray().Length; i++)
             {
-                Program.unit.AddConsoleItem(foundCommands[i].commandName + " - (" + foundCommands[i].syntax + ")", message);
+                Debug.Log (foundCommands[i].commandName + " - (" + foundCommands[i].syntax + ")");
             }
         }
     }

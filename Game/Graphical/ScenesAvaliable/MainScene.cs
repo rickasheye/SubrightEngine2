@@ -1,25 +1,21 @@
 ﻿using Raylib_cs;
 using RPGConsole.InventoryBlock;
+using SubrightEngine2.EngineStuff;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
+using Color = SubrightEngine2.EngineStuff.Color;
 
 namespace RPGConsole.Graphical.ScenesAvaliable
 {
     public class MainScene : Scene
     {
         public Texture2D overlay;
-        public AssetLoader loaderAsset;
 
         public MainScene() : base("Main Game Scene")
         {
-            if(loaderAsset == null)
-            {
-                //setup the asset loader!
-                loaderAsset = new AssetLoader();
-            }
             //LoadTextures(true);
         }
 
@@ -34,19 +30,19 @@ namespace RPGConsole.Graphical.ScenesAvaliable
             Raylib.SetExitKey(KeyboardKey.KEY_Q);
             if (Raylib.IsKeyPressed(KeyboardKey.KEY_ESCAPE))
             {
-                Program.loader.LoadScene(Program.loader.getScene("Main Menu"));
+                Reference.loader.LoadScene(Reference.loader.getScene("Main Menu"));
             }
-            if (Program.player != null) { cam.target = new System.Numerics.Vector2(Program.player.position.x * 64, Program.player.position.y * 64); }
+            if (Reference.player != null) { cam.target = new System.Numerics.Vector2(Reference.player.position.X * 64, Reference.player.position.Y * 64); }
             Raylib.BeginMode2D(cam);
             //draw the map!
             System.Numerics.Vector2 screen = new System.Numerics.Vector2(Raylib.GetScreenData().width, Raylib.GetScreenData().height);
             System.Numerics.Vector2 translation = Raylib.GetScreenToWorld2D(screen, cam);
             System.Numerics.Vector2 oppTrans = Raylib.GetScreenToWorld2D(System.Numerics.Vector2.Zero, cam);
-            foreach (Block block in Program.gen.blockMap)
+            foreach (Block block in Reference.gen.blockMap)
             {
                 if (block != null)
                 {
-                    if ((block.position.x * 64) <= translation.X && (block.position.y * 64) <= translation.Y && (block.position.x * 64) >= oppTrans.X - 50 && (block.position.y * 64) >= oppTrans.Y - 20)
+                    if ((block.position.X * 64) <= translation.X && (block.position.Y * 64) <= translation.Y && (block.position.X * 64) >= oppTrans.X - 50 && (block.position.Y * 64) >= oppTrans.Y - 20)
                     {
                         if (block.texture == string.Empty)
                         {
@@ -104,20 +100,20 @@ namespace RPGConsole.Graphical.ScenesAvaliable
                                     break;
                                 default:
                                     //if a color gets added down the track we want to add one here
-                                    if (Program.debugMode) { Console.WriteLine("Color is invalid!"); }
+                                    if (Reference.debugMode) { Console.WriteLine("Color is invalid!"); }
                                     break;
                             }
-                            Raylib.DrawRectangle(((int)block.position.x * 64), ((int)block.position.y * 64), 64, 64, color);
+                            Raylib.DrawRectangle(((int)block.position.X * 64), ((int)block.position.Y * 64), 64, 64, color.ToRaylibColor);
                             //Raylib.DrawText(block.name + block.perlinvalue, (int)block.position.x * 64, (int)block.position.y * 64, 10, Color.BLACK);
                         }
                         else
                         {
                             //draw the texture attached!
-                            Raylib.DrawTexture(block.textureInit(loaderAsset), (int)block.position.x * 64, (int)block.position.y * 64, Color.WHITE);
+                            Raylib.DrawTexture(block.textureInit(loaderAsset), (int)block.position.X * 64, (int)block.position.Y * 64, Color.WHITE.ToRaylibColor);
                         }
                         if(block.broken == true)
                         {
-                            Raylib.DrawTexture(loaderAsset.textureLoad("Textures/overlays/brokenoverlay.png"), (int)block.position.x * 64, (int)block.position.y * 64, Color.WHITE);
+                            Raylib.DrawTexture(loaderAsset.textureLoad("Textures/overlays/brokenoverlay.png"), (int)block.position.X * 64, (int)block.position.Y * 64, Color.WHITE.ToRaylibColor);
                         }
                         block.UpdateBlock();
                     } 
@@ -126,26 +122,26 @@ namespace RPGConsole.Graphical.ScenesAvaliable
             //Console.WriteLine("there are " + blocks + " in view!");
             //draw the players ontop
             //draw the individual player
-            if (Program.player != null)
+            if (Reference.player != null)
             {
-                Vector2 newPosition = new Vector2(Program.player.position.x, Program.player.position.y);
+                Vector2 newPosition = new Vector2(Reference.player.position.X, Reference.player.position.Y);
                 if (!freezePlayer)
                 {
                     if (Raylib.IsKeyPressed(KeyboardKey.KEY_W))
                     {
-                        newPosition.y--;
+                        newPosition.Y--;
                     }
                     else if (Raylib.IsKeyPressed(KeyboardKey.KEY_S))
                     {
-                        newPosition.y++;
+                        newPosition.Y++;
                     }
                     else if (Raylib.IsKeyPressed(KeyboardKey.KEY_A))
                     {
-                        newPosition.x--;
+                        newPosition.X--;
                     }
                     else if (Raylib.IsKeyPressed(KeyboardKey.KEY_D))
                     {
-                        newPosition.x++;
+                        newPosition.X++;
                     } 
                 }
 
@@ -153,14 +149,14 @@ namespace RPGConsole.Graphical.ScenesAvaliable
                 {
                     if (craftingMode == false)
                     {
-                        Program.player.InitiateCrafting();
+                        Reference.player.InitiateCrafting();
                         freezePlayer = true;
                         craftingMode = true;
                         furnacingMode = false;
                     }
                     else
                     {
-                        Program.loader.currentScene.guiOptions.Clear();
+                        Reference.loader.currentScene.guiOptions.Clear();
                         freezePlayer = false;
                         craftingMode = false;
                     }
@@ -170,7 +166,7 @@ namespace RPGConsole.Graphical.ScenesAvaliable
                 {
                     if (furnacingMode == false)
                     {
-                        Program.player.InitiateFurnacing();
+                        Reference.player.InitiateFurnacing();
                         freezePlayer = true;
                         furnacingMode = true;
                         craftingMode = false;
@@ -178,7 +174,7 @@ namespace RPGConsole.Graphical.ScenesAvaliable
                     }
                     else
                     {
-                        Program.loader.currentScene.guiOptions.Clear();
+                        Reference.loader.currentScene.guiOptions.Clear();
                         freezePlayer = false;
                         furnacingMode = false;
                     }
@@ -188,7 +184,7 @@ namespace RPGConsole.Graphical.ScenesAvaliable
                 {
                     if (inventoryMode == false)
                     {
-                        Program.player.InitiateInventoryGUI();
+                        Reference.player.InitiateInventoryGUI();
                         freezePlayer = true;
                         inventoryMode = true;
                         craftingMode = false;
@@ -196,7 +192,7 @@ namespace RPGConsole.Graphical.ScenesAvaliable
                     }
                     else
                     {
-                        Program.loader.currentScene.guiOptions.Clear();
+                        Reference.loader.currentScene.guiOptions.Clear();
                         freezePlayer = false;
                         inventoryMode = false;
                     }
@@ -209,103 +205,103 @@ namespace RPGConsole.Graphical.ScenesAvaliable
                         if (inventoryMode == false && furnacingMode == false && craftingMode == false)
                         {
                             //place item into the slot where the player is!
-                            if (Program.gen.returnBlock(Program.player.position.x, Program.player.position.y).broken)
+                            if (Reference.gen.returnBlock(Reference.player.position.X, Reference.player.position.Y).broken)
                             {
-                                if (Program.player.equipItem as Air == null)
+                                if (Reference.player.equipItem as Air == null)
                                 {
-                                    if (Program.player.equipItem.typeMaterial == InventoryItems.entityType.BLOCK)
+                                    if (Reference.player.equipItem.typeMaterial == InventoryItems.entityType.BLOCK)
                                     {
-                                        Program.gen.setBlock((int)Program.player.position.x, (int)Program.player.position.y, Program.player.equipItem as Block);
-                                        Program.player.inv.removeItem(Program.player.equipItem);
-                                        if (Program.player.equipItem.itemCount <= 0 || Program.player.equipItem == null)
+                                        Reference.gen.setBlock((int)Reference.player.position.X, (int)Reference.player.position.Y, Reference.player.equipItem as Block);
+                                        Reference.player.inv.removeItem(Reference.player.equipItem);
+                                        if (Reference.player.equipItem.itemCount <= 0 || Reference.player.equipItem == null)
                                         {
-                                            Program.player.equipItem = new Air(); 
+                                            Reference.player.equipItem = new Air(); 
                                         }
                                     }
                                     else
                                     {
-                                        if (Program.debugMode == true) { Console.WriteLine("Not a block to place!"); }
+                                        if (Reference.debugMode == true) { Console.WriteLine("Not a block to place!"); }
                                     } 
                                 }
                             }
                             else
                             {
-                                if (Program.debugMode == true) { Console.WriteLine("This block is not broken so unable to place!"); }
+                                if (Reference.debugMode == true) { Console.WriteLine("This block is not broken so unable to place!"); }
                             }
                             //LoadTextures(false);
-                            //Program.gen.manualUpdate();
+                            //Reference.gen.manualUpdate();
                         }
                     }
 
                     if (Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE))
                     {
                         //mine the block
-                        Block mineableBlock = Program.gen.returnBlock(Program.player.position.x, Program.player.position.y);
+                        Block mineableBlock = Reference.gen.returnBlock(Reference.player.position.X, Reference.player.position.Y);
                         if (mineableBlock != null)
                         {
                             if (mineableBlock.strength != -1)
                             {
                                 if (mineableBlock.broken == false)
                                 {
-                                    mineableBlock.MineBlock(Program.player);
+                                    mineableBlock.MineBlock(Reference.player);
                                 }
                                 else
                                 {
-                                    if (Program.debugMode == true) { Console.WriteLine("the block under you is already been broken!"); }
+                                    if (Reference.debugMode == true) { Console.WriteLine("the block under you is already been broken!"); }
                                 }
                             }
                             else
                             {
-                                if (Program.debugMode == true) { Console.WriteLine("this block cannot be mined!"); }
+                                if (Reference.debugMode == true) { Console.WriteLine("this block cannot be mined!"); }
                             }
                         }
                         else
                         {
-                            if (Program.debugMode == true) { Console.WriteLine("for some reason that didnt work as the block doesnt exist!"); }
+                            if (Reference.debugMode == true) { Console.WriteLine("for some reason that didnt work as the block doesnt exist!"); }
                         }
-                        //Program.gen.manualUpdate();
+                        //Reference.gen.manualUpdate();
                     }
-                    Program.player.MovePlayer((int)newPosition.x, (int)newPosition.y); 
+                    Reference.player.MovePlayer((int)newPosition.X, (int)newPosition.Y); 
                 }
-                Raylib.DrawRectangle(((int)Program.player.position.x * 64) + 9, ((int)Program.player.position.y * 64) + 9, 45, 45, Color.WHITE);
+                Raylib.DrawRectangle(((int)Reference.player.position.X * 64) + 9, ((int)Reference.player.position.Y * 64) + 9, 45, 45, Color.WHITE.ToRaylibColor);
             }
             Raylib.EndMode2D();
             if (gameActive)
             {
-                for (int i = 0; i < Program.player.health; i++)
+                for (int i = 0; i < Reference.player.health; i++)
                 {
-                    Raylib.DrawRectangle((10 * i) + 10, 10, 10, 10, Color.RED);
-                    if (i >= Program.player.health - 1)
+                    Raylib.DrawRectangle((10 * i) + 10, 10, 10, 10, Color.RED.ToRaylibColor);
+                    if (i >= Reference.player.health - 1)
                     {
-                        Raylib.DrawText("Health " + Program.player.health, (10 * i) + 25, 10, 10, Color.RED);
+                        Raylib.DrawText("Health " + Reference.player.health, (10 * i) + 25, 10, 10, Color.RED.ToRaylibColor);
                     }
                 }
 
-                if (Program.player.equipItem.name != "Air")
+                if (Reference.player.equipItem.name != "Air")
                 {
-                    if (Program.player.equipItem.textureInit(loaderAsset).width == 0)
+                    if (Reference.player.equipItem.textureInit(loaderAsset).width == 0)
                     {
-                        Program.player.equipItem.textureInit(loaderAsset);
-                        Console.WriteLine(Program.player.equipItem.texture);
+                        Reference.player.equipItem.textureInit(loaderAsset);
+                        Console.WriteLine(Reference.player.equipItem.texture);
                     }
-                    Raylib.DrawTexture(Program.player.equipItem.textureInit(loaderAsset), (10 * Program.player.health) + 85, 10, Color.WHITE);
-                    Raylib.DrawText(Program.player.equipItem.name, (10 * Program.player.health) + 90 + 64, 10, 10, Color.WHITE);
+                    Raylib.DrawTexture(Reference.player.equipItem.textureInit(loaderAsset), (10 * Reference.player.health) + 85, 10, Color.WHITE.ToRaylibColor);
+                    Raylib.DrawText(Reference.player.equipItem.name, (10 * Reference.player.health) + 90 + 64, 10, 10, Color.WHITE.ToRaylibColor);
                 }
 
-                if (Program.player.health <= 0)
+                if (Reference.player.health <= 0)
                 {
                     gameActive = false;
                 }
             }
             else
             {
-                Program.player = null;
+                Reference.player = null;
                 Raylib.DrawText("Game Over", Raylib.GetScreenWidth() / 2, Raylib.GetScreenHeight() / 2, 30, Raylib_cs.Color.BLACK);
                 Thread.Sleep(300);
                 Console.WriteLine("game over!");
-                Program.loader.LoadScene(Program.loader.getScene("Main Menu"));
+                Reference.loader.LoadScene(Reference.loader.getScene("Main Menu"));
             }
-            Raylib.DrawRectangle(10, 5, 1 + loaderAsset.texturesCached.Count, 5, Color.BLACK);
+            Raylib.DrawRectangle(10, 5, 1 + loaderAsset.texturesCached.Count, 5, Color.BLACK.ToRaylibColor);
             base.UpdateScene(cam);
         }
     }

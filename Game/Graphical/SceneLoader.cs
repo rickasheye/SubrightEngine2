@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SubrightEngine2.EngineStuff;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -17,7 +18,7 @@ namespace RPGConsole.Graphical
             }
             else
             {
-                Program.unit.AddConsoleItem(new ConsoleItem(3, "Incorrect scene!"));
+                Debug.Log("Incorrect scene!");
             }
         }
 
@@ -26,7 +27,7 @@ namespace RPGConsole.Graphical
             if (sceneExists(scene.name))
             {
                 //scene exists so dont add the scene
-                Program.unit.AddConsoleItem(new ConsoleItem(3, "scene exists so cancelling!"));
+                Debug.Log("scene exists so cancelling!");
             }
             else
             {
@@ -42,7 +43,7 @@ namespace RPGConsole.Graphical
             }
             else
             {
-                Program.unit.AddConsoleItem(new ConsoleItem(3, "scene doesnt exist so cancelling!"));
+                Debug.Log("scene doesnt exist so cancelling!");
             }
         }
 

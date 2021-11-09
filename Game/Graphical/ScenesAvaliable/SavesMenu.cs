@@ -2,10 +2,11 @@
 using RPGConsole.Graphical.MenuItems;
 using RPGConsole.Graphical.MenuItems.KeyboardOnlyItems;
 using RPGConsole.Saving;
+using SubrightEngine2.EngineStuff;
 using System;
 using System.Collections.Generic;
-using System.Numerics;
 using System.Text;
+using Color = SubrightEngine2.EngineStuff.Color;
 
 namespace RPGConsole.Graphical.ScenesAvaliable
 {
@@ -22,15 +23,15 @@ namespace RPGConsole.Graphical.ScenesAvaliable
         public override void LoadScene()
         {
             base.LoadScene();
-            text = new Text("Saves Menu", new Vector2(10, 10), 40, Raylib_cs.Color.BLACK);
+            text = new Text("Saves Menu", new Vector2(10, 10), 40, Color.BLACK);
             container = new EmptyContainer(new Vector2(10, 10), new Vector2(10, 10));
             guiOptions.Add(text);
-            int saveFilesCount = Program.manager.savefiles.Count;
+            int saveFilesCount = Reference.manager.savefiles.Count;
             if (saveFilesCount > 0)
             {
                 for (int i = 0; i <saveFilesCount; i++)
                 {
-                    SaveButton button = new SaveButton(Program.manager.savefiles[i].fileName, new Vector2(10, (10 * i) + 60), new Vector2(50, 50), Program.manager.savefiles[i]);
+                    SaveButton button = new SaveButton(Reference.manager.savefiles[i].fileName, new Vector2(10, (10 * i) + 60), new Vector2(50, 50), Reference.manager.savefiles[i]);
                     guiOptions.Add(button);
                 }
             }
@@ -60,7 +61,7 @@ namespace RPGConsole.Graphical.ScenesAvaliable
             base.Triggerable();
             if (saveFileSaved != null)
             {
-                Program.manager.LoadFile(saveFileSaved, ref Program.gen, ref Program.player);
+                Reference.manager.LoadFile(saveFileSaved, ref Reference.gen, ref Reference.player);
             }
         }
 
@@ -70,7 +71,7 @@ namespace RPGConsole.Graphical.ScenesAvaliable
             if(saveFileSaved == null)
             {
                 //we want to draw that it is disabled!
-                Raylib.DrawText("Disabled!", (int)position.x - 5, (int)position.y - 5, ((int)size.x / (int)size.y) * 2, Color.RED);
+                Raylib.DrawText("Disabled!", (int)position.X - 5, (int)position.Y - 5, ((int)size.X / (int)size.Y) * 2, Color.RED.ToRaylibColor);
             }
         }
     }

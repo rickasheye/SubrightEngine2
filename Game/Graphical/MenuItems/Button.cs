@@ -1,7 +1,9 @@
 ﻿using Raylib_cs;
+using SubrightEngine2.EngineStuff;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Color = SubrightEngine2.EngineStuff.Color;
 
 namespace RPGConsole.Graphical.MenuItems
 {
@@ -24,13 +26,13 @@ namespace RPGConsole.Graphical.MenuItems
         public override void DrawObject()
         {
             base.DrawObject();
-            int posX = (int)position.x;
-            int posY = (int)position.y;
-            int sizeX = (int)size.x;
-            int sizeY = (int)size.y;
+            int posX = (int)position.X;
+            int posY = (int)position.Y;
+            int sizeX = (int)size.X;
+            int sizeY = (int)size.Y;
             if (focused)
             {
-                Raylib.DrawRectangle(posX, posY, sizeX, sizeY, backColorPressed);
+                Raylib.DrawRectangle(posX, posY, sizeX, sizeY, backColorPressed.ToRaylibColor);
                 if (!Raylib.IsMouseButtonPressed(MouseButton.MOUSE_LEFT_BUTTON) || !Raylib.IsKeyPressed(KeyboardKey.KEY_ENTER))
                 {
                     MouseOverObject();
@@ -42,10 +44,10 @@ namespace RPGConsole.Graphical.MenuItems
             }
             else
             {
-                Raylib.DrawRectangle(posX, posY, sizeX, sizeY, backColor);
+                Raylib.DrawRectangle(posX, posY, sizeX, sizeY, backColor.ToRaylibColor);
             }
-            Raylib.DrawText(text, posX, posY, sizeX - sizeY, foregroundColor);
-            Raylib.DrawRectangleLines(posX, posY, sizeX, sizeY, foregroundColor);
+            Raylib.DrawText(text, posX, posY, sizeX - sizeY, foregroundColor.ToRaylibColor);
+            Raylib.DrawRectangleLines(posX, posY, sizeX, sizeY, foregroundColor.ToRaylibColor);
         }
 
         public virtual void MouseOverObject()

@@ -1,4 +1,5 @@
 ﻿using RPGConsole.Graphical;
+using SubrightEngine2.EngineStuff;
 using System;
 using System.IO;
 
@@ -18,7 +19,7 @@ namespace RPGConsole.InventoryBlock
             base.PlayerOnTop(player);
             //automatically ask the player
             player.furnace = true;
-            Program.unit.AddConsoleItem(new ConsoleItem(3, "It appears you have stepped on a furnace. use the command 'furnace' to activate it!"));
+            Debug.Log("It appears you have stepped on a furnace. use the command 'furnace' to activate it!");
         }
 
         public override void PlayerOffBlock(Player player)

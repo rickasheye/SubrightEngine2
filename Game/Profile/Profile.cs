@@ -1,4 +1,6 @@
-﻿namespace RPGConsole.Profile
+﻿using SubrightEngine2.EngineStuff;
+
+namespace RPGConsole.Profile
 {
     public class Profile
     {

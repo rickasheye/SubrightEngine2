@@ -1,4 +1,5 @@
 ﻿using Raylib_cs;
+using SubrightEngine2.EngineStuff;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -80,7 +81,7 @@ namespace RPGConsole.Graphical.MenuItems.KeyboardOnlyItems
             {
                 if (focused)
                 {
-                    Program.unit.AddConsoleItem("Triggered!",3);
+                    Debug.Log("Triggered!");
                     buttonAdjustSelected.Triggerable();
                 } 
             }

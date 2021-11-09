@@ -1,4 +1,5 @@
 ﻿using Raylib_cs;
+using SubrightEngine2.EngineStuff;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -36,7 +37,7 @@ namespace RPGConsole.Graphical.MenuItems.KeyboardOnlyItems
         {
             base.DrawObject();
             //Raylib.DrawRectangle((int)position.x, (int)position.y, (int)size.x, (int)size.y, Color.WHITE);
-            Raylib.DrawRectangleLines((int)position.x, (int)position.y, (int)size.x, (int)size.y, Raylib_cs.Color.BLACK);
+            Raylib.DrawRectangleLines((int)position.X, (int)position.Y, (int)size.X, (int)size.Y, Raylib_cs.Color.BLACK);
             
             if (children.Count > 0)
             {
@@ -78,7 +79,7 @@ namespace RPGConsole.Graphical.MenuItems.KeyboardOnlyItems
                     for(int i = 0; i <= children.Count - 1; i++)
                     {
                         GUIOption blankOption = children[i];
-                        if (Raylib.GetMouseX() > blankOption.position.x && Raylib.GetMouseX() < blankOption.position.x + blankOption.size.x && Raylib.GetMouseY() > blankOption.position.y && Raylib.GetMouseY() < blankOption.position.y + blankOption.size.y)
+                        if (Raylib.GetMouseX() > blankOption.position.X && Raylib.GetMouseX() < blankOption.position.X + blankOption.size.X && Raylib.GetMouseY() > blankOption.position.Y && Raylib.GetMouseY() < blankOption.position.Y + blankOption.size.Y)
                         {
                             //select this option then!
                             indexSelect = i;
@@ -93,7 +94,7 @@ namespace RPGConsole.Graphical.MenuItems.KeyboardOnlyItems
             }
             else
             {
-                Raylib.DrawText("No children found!", (int) position.x, (int) position.y, (int)size.x - (int)size.y, Color.BLACK);
+                Raylib.DrawText("No children found!", (int) position.X, (int) position.Y, (int)size.X - (int)size.Y, Raylib_cs.Color.BLACK);
                 if (warning == false)
                 {
                     Console.WriteLine("No children found!");
@@ -111,9 +112,9 @@ namespace RPGConsole.Graphical.MenuItems.KeyboardOnlyItems
 
                     Vector2 childEndPosition = children[children.Count - 1].position;
                     Vector2 childEndSize = children[children.Count - 1].size;
-                    Vector2 end = new Vector2(childEndPosition.x + childEndSize.x, childEndPosition.y + childEndSize.y);
-                    position = new Vector2(start.x - 10, start.y - 10);
-                    size = new Vector2(end.x + 10, end.y + 10);
+                    Vector2 end = new Vector2(childEndPosition.X + childEndSize.X, childEndPosition.Y + childEndSize.Y);
+                    position = new Vector2(start.X - 10, start.Y - 10);
+                    size = new Vector2(end.X + 10, end.Y + 10);
                     resize = true;
                 }
             }

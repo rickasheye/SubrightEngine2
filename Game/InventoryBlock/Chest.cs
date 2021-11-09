@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Text;
 using RPGConsole.InventoryItems;
+using SubrightEngine2.EngineStuff;
 
 namespace RPGConsole.InventoryBlock
 {
@@ -25,7 +25,7 @@ namespace RPGConsole.InventoryBlock
         {
             base.PlayerOffBlock(player);
             player.chest = null;
-            Program.loader.currentScene.guiOptions.Clear();
+            Reference.loader.currentScene.guiOptions.Clear();
         }
 
         public virtual void AddChestItem(InventoryItem item)
@@ -36,7 +36,7 @@ namespace RPGConsole.InventoryBlock
             }
             else
             {
-                Program.unit.AddConsoleItem("Unable to add item to chest! as it already exists!", 3);
+                Debug.Log("Unable to add item to chest! as it already exists!");
             }
         }
 
@@ -48,7 +48,7 @@ namespace RPGConsole.InventoryBlock
             }
             else
             {
-                Program.unit.AddConsoleItem("This item does not exist!", 3);
+                Debug.Log("This item does not exist!");
             }
         }
 

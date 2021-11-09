@@ -1,5 +1,4 @@
-﻿using DSharpPlus.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -9,10 +8,10 @@ namespace RPGConsole.Commands.General.ConsoleExclusive
     {
         public ClearConsole():base("Clear console information", "clear/clearconsole/cc/clearboard", CommandType.NORMAL) { }
 
-        public override void RunCommand(string[] args, DiscordMessage message)
+        public override void RunCommand(string[] args)
         {
-            base.RunCommand(args, message);
-            if (!Program.discordBot) { Console.Clear(); }
+            base.RunCommand(args);
+            Console.Clear();
         }
     }
 }

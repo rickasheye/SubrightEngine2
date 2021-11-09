@@ -1,9 +1,8 @@
 ﻿using Raylib_cs;
 using RPGConsole.Graphical.MenuItems;
 using RPGConsole.Graphical.MenuItems.KeyboardOnlyItems;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using SubrightEngine2.EngineStuff;
+using Color = SubrightEngine2.EngineStuff.Color;
 
 namespace RPGConsole.Graphical.ScenesAvaliable
 {
@@ -20,8 +19,8 @@ namespace RPGConsole.Graphical.ScenesAvaliable
         public override void LoadScene()
         {
             base.LoadScene();
-            text = new Text("Menu Test", new Vector2(10, 10), 40, Raylib_cs.Color.BLACK);
-            buttonTest = new Button("Menu Test", new Vector2(10, 60), new Vector2(40, 40), 30, Raylib_cs.Color.GRAY, Raylib_cs.Color.DARKGRAY, Raylib_cs.Color.BLACK);
+            text = new Text("Menu Test", new Vector2(10, 10), 40, Color.BLACK);
+            buttonTest = new Button("Menu Test", new Vector2(10, 60), new Vector2(40, 40), 30, Color.GRAY, Color.DARKGRAY, Color.BLACK);
             textBoxTest = new TextBox("", new Vector2(10, 110), new Vector2(40, 40), 30, Color.GRAY, Color.BLACK);
             toggle = new ToggleBox("yes", new Vector2(10, 160), new Vector2(20, 20));
             container = new EmptyContainer(new Vector2(10, 10), new Vector2(Raylib.GetScreenWidth() - 10, Raylib.GetScreenHeight() - 10));

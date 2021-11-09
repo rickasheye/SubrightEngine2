@@ -1,5 +1,4 @@
-﻿using DSharpPlus.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -7,12 +6,12 @@ namespace RPGConsole.Commands.General
 {
     public class crafting : EmptyCommand
     {
-        public crafting():base("Engage crafting mode", "crafting/cc", CommandType.DISCORDHYBRID) { }
+        public crafting():base("Engage crafting mode", "crafting/cc", CommandType.NORMAL) { }
 
-        public override void RunCommand(string[] args, DiscordMessage message)
+        public override void RunCommand(string[] args)
         {
-            base.RunCommand(args, message);
-            Program.player.InitiateCrafting();
+            base.RunCommand(args);
+            Reference.player.InitiateCrafting();
         }
     }
 }

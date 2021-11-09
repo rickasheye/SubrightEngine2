@@ -1,7 +1,9 @@
 ﻿using Raylib_cs;
+using SubrightEngine2.EngineStuff;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Color = SubrightEngine2.EngineStuff.Color;
 
 namespace RPGConsole.Graphical.MenuItems
 {
@@ -23,10 +25,10 @@ namespace RPGConsole.Graphical.MenuItems
         public override void DrawObject()
         {
             base.DrawObject();
-            Raylib.DrawRectangleLines((int)position.x, (int)position.y, (int)size.x, (int)size.y, foregroundColor);
+            Raylib.DrawRectangleLines((int)position.X, (int)position.Y, (int)size.X, (int)size.Y, foregroundColor.ToRaylibColor);
             if (focused)
             {
-                Raylib.DrawLine((int)position.x * text.Length, (int)position.y, (int)position.x, (int)position.y + (int)size.x - (int)size.y, textColor);
+                Raylib.DrawLine((int)position.X * text.Length, (int)position.Y, (int)position.X, (int)position.Y + (int)size.X - (int)size.Y, textColor.ToRaylibColor);
                 int key = Raylib.GetKeyPressed();
                 switch (key)
                 {
@@ -121,7 +123,7 @@ namespace RPGConsole.Graphical.MenuItems
                         break;
                 }
             }
-            Raylib.DrawText(text, (int)position.x, (int)position.y, (int)size.x - (int)size.y, textColor);
+            Raylib.DrawText(text, (int)position.X, (int)position.Y, (int)size.X - (int)size.Y, textColor.ToRaylibColor);
         }
     }
 }

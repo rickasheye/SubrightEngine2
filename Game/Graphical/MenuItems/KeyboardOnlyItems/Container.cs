@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SubrightEngine2.EngineStuff;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -32,19 +33,19 @@ namespace RPGConsole.Graphical.MenuItems.KeyboardOnlyItems
                     switch (alignment)
                     {
                         case Alignment.DOWN:
-                            option.position = new Vector2(position.x + (size.x / 2), position.y + size.y);
+                            option.position = new Vector2(position.X + (size.X / 2), position.Y + size.Y);
                             break;
                         case Alignment.LEFT:
-                            option.position = new Vector2(position.x, position.y + (size.y / 2)) ;
+                            option.position = new Vector2(position.X, position.Y + (size.Y / 2)) ;
                             break;
                         case Alignment.MIDDLE:
-                            option.position = new Vector2(position.x + (size.x / 2), position.y + (size.y / 2));
+                            option.position = new Vector2(position.X + (size.X / 2), position.Y + (size.Y / 2));
                             break;
                         case Alignment.RIGHT:
-                            option.position = new Vector2(position.x + size.x, position.y + (size.y / 2));
+                            option.position = new Vector2(position.X + size.X, position.Y + (size.Y / 2));
                             break;
                         case Alignment.UP:
-                            option.position = new Vector2(position.x + (size.x / 2), position.y);
+                            option.position = new Vector2(position.X + (size.X / 2), position.Y);
                             break;
                     }
                 }

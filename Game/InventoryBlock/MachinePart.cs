@@ -46,7 +46,7 @@ namespace RPGConsole.InventoryBlock
         {
             if (loaderAsset == null)
             {
-                MainScene sceneMain = Program.loader.currentScene as MainScene;
+                MainScene sceneMain = Reference.loader.currentScene as MainScene;
                 if (sceneMain != null)
                 {
                     loaderAsset = sceneMain.loaderAsset;
@@ -58,29 +58,29 @@ namespace RPGConsole.InventoryBlock
         public void UpdateMachineBlock()
         {
             others = "";
-            if (Program.gen.returnBlock(position.x + 1, position.y) is BlankMachinePart)
+            if (Reference.gen.returnBlock(position.X + 1, position.Y) is BlankMachinePart)
             {
-                //we want to actually modify this!
+                //we want to actuallY modifY this!
                 others += " right";
-                BlankMachinePart part = Program.gen.returnBlock(position.x + 1, position.y) as BlankMachinePart;
+                BlankMachinePart part = Reference.gen.returnBlock(position.X + 1, position.Y) as BlankMachinePart;
                 DemeritPowerLevel(part);
             }
-            else if (Program.gen.returnBlock(position.x - 1, position.y) is BlankMachinePart)
+            else if (Reference.gen.returnBlock(position.X - 1, position.Y) is BlankMachinePart)
             {
                 others += " left";
-                BlankMachinePart part = Program.gen.returnBlock(position.x - 1, position.y) as BlankMachinePart;
+                BlankMachinePart part = Reference.gen.returnBlock(position.X - 1, position.Y) as BlankMachinePart;
                 DemeritPowerLevel(part);
             }
-            else if (Program.gen.returnBlock(position.x, position.y + 1) is BlankMachinePart)
+            else if (Reference.gen.returnBlock(position.X, position.Y + 1) is BlankMachinePart)
             {
                 others += " down";
-                BlankMachinePart part = Program.gen.returnBlock(position.x, position.y + 1) as BlankMachinePart;
+                BlankMachinePart part = Reference.gen.returnBlock(position.X, position.Y + 1) as BlankMachinePart;
                 DemeritPowerLevel(part);
             }
-            else if (Program.gen.returnBlock(position.x, position.y - 1) is BlankMachinePart)
+            else if (Reference.gen.returnBlock(position.X, position.Y - 1) is BlankMachinePart)
             {
                 others += " up";
-                BlankMachinePart part = Program.gen.returnBlock(position.x, position.y - 1) as BlankMachinePart;
+                BlankMachinePart part = Reference.gen.returnBlock(position.X, position.Y - 1) as BlankMachinePart;
                 DemeritPowerLevel(part);
             }
         }
@@ -106,23 +106,23 @@ namespace RPGConsole.InventoryBlock
                 switch (splitStringChosen.ToLower())
                 {
                     case "right":
-                        Raylib.DrawTexture(loaderAsset.textureLoad(rightMachinePart), (int)position.x, (int)position.y, Raylib_cs.Color.WHITE);
+                        Raylib.DrawTexture(loaderAsset.textureLoad(rightMachinePart), (int)position.X, (int)position.Y, Raylib_cs.Color.WHITE);
                         break;
                     case "left":
-                        Raylib.DrawTexture(loaderAsset.textureLoad(leftMachinePart), (int)position.x, (int)position.y, Raylib_cs.Color.WHITE);
+                        Raylib.DrawTexture(loaderAsset.textureLoad(leftMachinePart), (int)position.X, (int)position.Y, Raylib_cs.Color.WHITE);
                         break;
                     case "down":
-                        Raylib.DrawTexture(loaderAsset.textureLoad(downMachinePart), (int)position.x, (int)position.y, Raylib_cs.Color.WHITE);
+                        Raylib.DrawTexture(loaderAsset.textureLoad(downMachinePart), (int)position.X, (int)position.Y, Raylib_cs.Color.WHITE);
                         break;
                     case "up":
-                        Raylib.DrawTexture(loaderAsset.textureLoad(upMachinePart), (int)position.x, (int)position.y, Raylib_cs.Color.WHITE);
+                        Raylib.DrawTexture(loaderAsset.textureLoad(upMachinePart), (int)position.X, (int)position.Y, Raylib_cs.Color.WHITE);
                         break;
                 }
             }
 
             if(disabled == true)
             {
-                Raylib.DrawTexture(loaderAsset.textureLoad("Textures/overlays/cross.png"), (int)position.x, (int)position.y, Raylib_cs.Color.WHITE);
+                Raylib.DrawTexture(loaderAsset.textureLoad("TeXtures/overlays/cross.png"), (int)position.X, (int)position.Y, Raylib_cs.Color.WHITE);
             }
         }
     }

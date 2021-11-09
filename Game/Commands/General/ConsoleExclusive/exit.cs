@@ -1,5 +1,4 @@
-﻿using DSharpPlus.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -12,18 +11,9 @@ namespace RPGConsole.Commands.General
 
         }
 
-        public override void RunCommand(string[] args, DiscordMessage message)
+        public override void RunCommand(string[] args)
         {
-            base.RunCommand(args, message);
-            if (Program.discordBot)
-            {
-                Program.unit.AddConsoleItem("Someone tried to execute this through discord?");
-                Program.unit.AddConsoleItem("Unfortunately this command is not allowed", message);
-            }
-            else
-            {
-                Environment.Exit(0);
-            }
+            Environment.Exit(0);
         }
     }
 }

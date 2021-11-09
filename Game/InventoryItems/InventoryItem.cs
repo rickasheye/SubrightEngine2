@@ -1,6 +1,6 @@
 ﻿using Raylib_cs;
-using RPGConsole.EngineStuff;
 using RPGConsole.Graphical;
+using SubrightEngine2.EngineStuff;
 
 namespace RPGConsole.InventoryItems
 {
@@ -75,7 +75,7 @@ namespace RPGConsole.InventoryItems
 
         public InventoryItem()
         {
-            if (Program.debugMode == true) { Program.unit.AddConsoleItem("ITEM IS EMPTY and but called: " + name); }
+            if (Reference.debugMode == true) { Debug.Log("ITEM IS EMPTY and but called: " + name); }
         }
     }
 }

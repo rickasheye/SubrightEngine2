@@ -1,5 +1,5 @@
-﻿using DSharpPlus.Entities;
-using RPGConsole.InventoryBlock;
+﻿using RPGConsole.InventoryBlock;
+using SubrightEngine2.EngineStuff;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,23 +8,23 @@ namespace RPGConsole.Commands.General
 {
     public class placeblock : EmptyCommand
     {
-        public placeblock():base("Place the block equipped in place in where the player is", "pb/placeblock/place", CommandType.DISCORDHYBRID) { }
+        public placeblock():base("Place the block equipped in place in where the player is", "pb/placeblock/place", CommandType.NORMAL) { }
 
-        public override void RunCommand(string[] args, DiscordMessage message)
+        public override void RunCommand(string[] args)
         {
-            base.RunCommand(args, message);
-            Block blockPlaced = Program.player.equipItem as Block;
+            base.RunCommand(args);
+            Block blockPlaced = Reference.player.equipItem as Block;
             if (blockPlaced != null)
             {
                 blockPlaced.broken = false;
                 blockPlaced.strength = blockPlaced.originalStrength;
-                Program.gen.setBlock((int)Program.player.position.x, (int)Program.player.position.y, blockPlaced);
-                Program.player.inv.removeItem(blockPlaced);
-                Program.unit.AddConsoleItem("The block " + blockPlaced.name + " was placed at " + Program.player.position.ToString(), message);
+                Reference.gen.setBlock((int)Reference.player.position.X, (int)Reference.player.position.Y, blockPlaced);
+                Reference.player.inv.removeItem(blockPlaced);
+                Debug.Log("The block " + blockPlaced.name + " was placed at " + Reference.player.position.ToString());
             }
             else
             {
-                Program.unit.AddConsoleItem("the item equipped is not able to be placed!", message);
+                Debug.Log("the item equipped is not able to be placed!");
             }
         }
     }

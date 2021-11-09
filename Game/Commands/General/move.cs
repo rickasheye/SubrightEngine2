@@ -1,4 +1,4 @@
-﻿using DSharpPlus.Entities;
+﻿using SubrightEngine2.EngineStuff;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,14 +7,14 @@ namespace RPGConsole.Commands.General
 {
     public class move : EmptyCommand
     {
-        public move():base("Where to move the player?", "right/left/up/down/move", CommandType.DISCORDHYBRID)
+        public move():base("Where to move the player?", "right/left/up/down/move", CommandType.NORMAL)
         {
 
         }
 
-        public override void RunCommand(string[] args, DiscordMessage message)
+        public override void RunCommand(string[] args)
         {
-            base.RunCommand(args, message);
+            base.RunCommand(args);
             string direction = args[0].ToLower();
             if (args != null && args.Length > 1)
             {
@@ -24,24 +24,24 @@ namespace RPGConsole.Commands.General
                 }
             }
 
-            Vector2 newPos = new Vector2(Program.player.position.x, Program.player.position.y);
+            Vector2 newPos = new Vector2(Reference.player.position.X, Reference.player.position.Y);
             switch (direction.ToLower())
             {
                 case "up":
-                    newPos.y++;
+                    newPos.Y++;
                     break;
                 case "down":
-                    newPos.y--;
+                    newPos.Y--;
                     break;
                 case "left":
-                    newPos.x--;
+                    newPos.X--;
                     break;
                 case "right":
-                    newPos.x++;
+                    newPos.X++;
                     break;
             }
 
-            Program.player.MovePlayer((int)newPos.x, (int)newPos.y, message);
+            Reference.player.MovePlayer((int)newPos.X, (int)newPos.Y);
         }
     }
 }

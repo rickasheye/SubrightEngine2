@@ -1,9 +1,9 @@
 ﻿using Raylib_cs;
 using RPGConsole.Graphical.MenuItems;
 using RPGConsole.Graphical.MenuItems.KeyboardOnlyItems;
+using SubrightEngine2.EngineStuff;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Text;
 
 namespace RPGConsole.Graphical
@@ -14,17 +14,29 @@ namespace RPGConsole.Graphical
         public int id;
         public List<GUIOption> guiOptions = new List<GUIOption>();
 
+        public AssetLoader loaderAsset;
+
         bool loadedScene = false;
 
         public Scene(int id)
         {
             this.id = id;
+            if (loaderAsset == null)
+            {
+                //setup the asset loader!
+                loaderAsset = new AssetLoader();
+            }
         }
 
         public Scene(string name)
         {
             this.name = name;
-            this.id = Program.loader.currentScenes.Count + 1;
+            this.id = Reference.loader.currentScenes.Count + 1;
+            if (loaderAsset == null)
+            {
+                //setup the asset loader!
+                loaderAsset = new AssetLoader();
+            }
         }
 
         public virtual void LoadScene()
@@ -43,11 +55,11 @@ namespace RPGConsole.Graphical
             {
                 if(debugGUI == false)
                 {
-                    Program.unit.AddConsoleItem(new ConsoleItem(3, "Debug GUI mode set to true!"));
+                    Debug.Log("Debug GUI mode set to true!");
                     debugGUI = true;
                 }else if (debugGUI)
                 {
-                    Program.unit.AddConsoleItem(new ConsoleItem(3, "Debug GUI mode set to false!"));
+                    Debug.Log( "Debug GUI mode set to false!");
                     debugGUI = false;
                 }
             }
@@ -76,7 +88,7 @@ namespace RPGConsole.Graphical
                 option.DrawObject();
                 if (!keyboardOnly)
                 {
-                    if (Raylib.GetMouseX() > option.position.x && Raylib.GetMouseY() > option.position.y && Raylib.GetMouseX() < option.position.x + option.size.x && Raylib.GetMouseY() < option.position.y + option.size.y)
+                    if (Raylib.GetMouseX() > option.position.X && Raylib.GetMouseY() > option.position.Y && Raylib.GetMouseX() < option.position.X + option.size.X && Raylib.GetMouseY() < option.position.Y + option.size.Y)
                     {
                         option.focused = true;
                     }
@@ -88,14 +100,14 @@ namespace RPGConsole.Graphical
 
                 if (debugGUI)
                 {
-                    Raylib.DrawRectangleLines((int)option.position.x, (int)option.position.y, (int)option.size.x, (int)option.size.y, Color.GRAY);
+                    Raylib.DrawRectangleLines((int)option.position.X, (int)option.position.Y, (int)option.size.X, (int)option.size.Y, Raylib_cs.Color.GRAY);
                     if (option.focused)
                     {
-                        Raylib.DrawRectangle((int)option.position.x, (int)option.position.y, (int)option.size.x, (int)option.size.y, Color.GREEN);
+                        Raylib.DrawRectangle((int)option.position.X, (int)option.position.Y, (int)option.size.X, (int)option.size.Y, Raylib_cs.Color.GREEN);
                     }
                     else
                     {
-                        Raylib.DrawRectangle((int)option.position.x, (int)option.position.y, (int)option.size.x, (int)option.size.y, Color.RED);
+                        Raylib.DrawRectangle((int)option.position.X, (int)option.position.Y, (int)option.size.X, (int)option.size.Y, Raylib_cs.Color.RED);
                     }
                 }
                 i++;

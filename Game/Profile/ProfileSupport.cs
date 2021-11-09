@@ -11,7 +11,7 @@ namespace RPGConsole.Profile
 
         public void ExitProfile()
         {
-            //save and quit the program
+            //save and quit the Reference
             foreach (Profile p in profiles)
             {
                 if (p != null)

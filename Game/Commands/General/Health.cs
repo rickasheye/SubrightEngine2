@@ -1,4 +1,4 @@
-﻿using DSharpPlus.Entities;
+﻿using SubrightEngine2.EngineStuff;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,12 +7,12 @@ namespace RPGConsole.Commands.General
 {
     public class Health : EmptyCommand
     {
-        public Health():base("Checks the player health", "health/h/checkhealth/playerhealth", CommandType.DISCORDHYBRID) { }
+        public Health():base("Checks the player health", "health/h/checkhealth/playerhealth", CommandType.NORMAL) { }
 
-        public override void RunCommand(string[] args, DiscordMessage message)
+        public override void RunCommand(string[] args)
         {
-            base.RunCommand(args, message);
-            Program.unit.AddConsoleItem("Health: " + Program.player.health, message);
+            base.RunCommand(args);
+            Debug.Log("Health: " + Reference.player.health);
         }
     }
 }

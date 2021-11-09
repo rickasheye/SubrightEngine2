@@ -1,6 +1,6 @@
-﻿using DSharpPlus.Entities;
-using RPGConsole.InventoryBlock;
+﻿using RPGConsole.InventoryBlock;
 using RPGConsole.Saving;
+using SubrightEngine2.EngineStuff;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,91 +9,42 @@ namespace RPGConsole.Commands.General
 {
     public class blocksaround : EmptyCommand
     {
-        public blocksaround() : base("Checking the blocks around the player...", "blocksaround/fa/ba/findblocks/blockaround/findblock", CommandType.DISCORDHYBRID)
+        public blocksaround() : base("Checking the blocks around the plaYer...", "blocksaround/fa/ba/findblocks/blockaround/findblock", CommandType.NORMAL)
         {
 
         }
 
-        public override void RunCommand(string[] args, DiscordMessage message)
+        public override void RunCommand(string[] args)
         {
-            base.RunCommand(args, message);
-            //get the blocks around the player
-            if (Program.player != null)
+            base.RunCommand(args);
+            //get the blocks around the plaYer
+            if (Reference.player != null)
             {
-                Program.unit.AddConsoleItem("Getting blocks in a 2 block radius", message);
+                Debug.Log("Getting blocks in a 2 block radius");
                 string positionValues = "";
-                for (int y = ((int)Program.player.position.y - 2); y < Program.player.position.y + 2; y++)
+                for (int Y = ((int)Reference.player.position.Y - 2); Y < Reference.player.position.Y + 2; Y++)
                 {
-                    for (int x = ((int)Program.player.position.x - 2); x < Program.player.position.x + 2; x++)
+                    for (int X = ((int)Reference.player.position.X - 2); X < Reference.player.position.X + 2; X++)
                     {
-                        Block block = Program.gen.returnBlock(x, y);
+                        Block block = Reference.gen.returnBlock(X, Y);
                         if (block != null)
                         {
-                            if (!Program.discordBot)
+                            if ((int)Reference.player.position.X == X && (int)Reference.player.position.Y == Y)
                             {
-                                if ((int)Program.player.position.x == x && (int)Program.player.position.y == y)
-                                {
-                                    string alternateplayername = "";
-                                    if (Program.discordBot)
-                                    {
-                                        //convert player name to actual discord name
-                                        ulong playerid = ulong.Parse(Program.player.name.Replace("Player: ", ""));
-                                        string playerName = message.Channel.Guild.GetMemberAsync(playerid).Result.DisplayName;
-                                        alternateplayername = "" + playerName;
-                                    }
-                                    else
-                                    {
-                                        alternateplayername = Program.player.name;
-                                    }
-                                    positionValues = positionValues + " " + Program.player.name;
-                                }
-                                else
-                                {
-                                    if (block.broken == false)
-                                    {
-                                        positionValues = positionValues + " " + block.name;
-                                    }
-                                    else
-                                    {
-                                        positionValues = positionValues + " <" + block.name + ">";
-                                    }
-                                }
+                                string alternateplayername = "";
+                                alternateplayername = Reference.player.name;
+                                positionValues = positionValues + " " + Reference.player.name;
                             }
                             else
                             {
-                                DiscordServerFile file = Program.manager.returnSaveFile(message.Channel.Guild.Id);
-                                int playerPosX = -1;
-                                int playerPosY = -1;
-                                List<Player> playersOnTop = new List<Player>();
-                                for(int i = 0; i < file.playerSaves.Count; i++)
+                                if (block.broken == false)
                                 {
-                                    Player player = file.playerSaves[i];
-                                    if ((int)player.position.x == x && (int)player.position.y == y)
-                                    {
-                                        if (player.name == Program.player.name)
-                                        {
-                                            positionValues = positionValues + " YOU";
-                                            playerPosX = (int)player.position.x;
-                                            playerPosY = (int)player.position.y;
-                                        }
-                                        else
-                                        {
-                                            if (x != playerPosX && y != playerPosY)
-                                            {
-                                                ulong playerid = ulong.Parse(Program.player.name.Replace("Player: ", ""));
-                                                string playerName = message.Channel.Guild.GetMemberAsync(playerid).Result.DisplayName;
-                                                positionValues = positionValues + " " + playerName;
-                                            }
-                                            else
-                                            {
-                                                playersOnTop.Add(player);
-                                            }
-                                        } 
-                                    }
+                                    positionValues = positionValues + " " + block.name;
                                 }
-
-                                //recite the players on top
-                                Program.unit.AddConsoleItem("There are " + playersOnTop.Count + " players in your position", message);
+                                else
+                                {
+                                    positionValues = positionValues + " <" + block.name + ">";
+                                }
                             }
                         }
                         else
@@ -103,7 +54,7 @@ namespace RPGConsole.Commands.General
                     }
                     positionValues = positionValues + "\n";
                 }
-                Program.unit.AddConsoleItem(positionValues, message);
+                Debug.Log(positionValues);
             }
         }
     }

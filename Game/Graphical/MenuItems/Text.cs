@@ -1,7 +1,9 @@
 ﻿using Raylib_cs;
+using SubrightEngine2.EngineStuff;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Color = SubrightEngine2.EngineStuff.Color;
 
 namespace RPGConsole.Graphical.MenuItems
 {
@@ -21,7 +23,7 @@ namespace RPGConsole.Graphical.MenuItems
         public override void DrawObject()
         {
             base.DrawObject();
-            Raylib.DrawText(text, (int)position.x, (int)position.y, textSize, textColor);
+            Raylib.DrawText(text, (int)position.X, (int)position.Y, textSize, textColor.ToRaylibColor);
         }
     }
 }

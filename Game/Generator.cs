@@ -1,7 +1,9 @@
 ﻿using Raylib_cs;
 using RPGConsole.InventoryBlock;
+using SubrightEngine2.EngineStuff;
 using System;
 using System.Collections.Generic;
+using Random = SubrightEngine2.EngineStuff.Random;
 
 namespace RPGConsole
 {
@@ -25,21 +27,21 @@ namespace RPGConsole
             int maxY = 0;
             for(int i = 0; i < genBlocks.Count - 1; i++)
             {
-                if(genBlocks[i].position.x > maxX)
+                if(genBlocks[i].position.X > maxX)
                 {
-                    maxX = (int)genBlocks[i].position.x;
+                    maxX = (int)genBlocks[i].position.X;
                 }
 
-                if(genBlocks[i].position.y > maxY)
+                if(genBlocks[i].position.Y > maxY)
                 {
-                    maxY = (int)genBlocks[i].position.y;
+                    maxY = (int)genBlocks[i].position.Y;
                 }
             }
 
             //just to make it even from 127 to 128
             maxX++;
             maxY++;
-            if (Program.debugMode) { Program.unit.AddConsoleItem("Size of generation is from imported file: " + maxX + ": " + maxY); }
+            if (Reference.debugMode) { Debug.Log("Size of generation is from imported file: " + maxX + ": " + maxY); }
             blockMap = genBlocks;
         }
 
@@ -53,7 +55,7 @@ namespace RPGConsole
 
         public Block returnBlock(float x, float y)
         {
-            return blockMap.Find(t => t.position.x == x && t.position.y == y);
+            return blockMap.Find(t => t.position.X == x && t.position.Y == y);
         }
 
         public Block getBlock(string name)
@@ -72,7 +74,7 @@ namespace RPGConsole
         {
             for (int i = 0; i < blockMap.Count; i++)
             {
-                if (blockMap[i].position.x == x && blockMap[i].position.y == y)
+                if (blockMap[i].position.X == x && blockMap[i].position.Y == y)
                 {
                     blockMap[i] = block;
                     blockMap[i].position = new Vector2(x, y);
@@ -110,8 +112,7 @@ namespace RPGConsole
                         }
                         else if (noiseValue > 0.10)
                         {
-                            Random range = new Random();
-                            int randomRange = range.Next(10);
+                            int randomRange = Random.Range(10);
                             switch (randomRange)
                             {
                                 default:
@@ -124,8 +125,7 @@ namespace RPGConsole
                         }
                         else
                         {
-                            Random range = new Random();
-                            int randomRange = range.Next(40);
+                            int randomRange = Random.Range(40);
                             switch (randomRange)
                             {
                                 case 25:
@@ -146,18 +146,17 @@ namespace RPGConsole
                     }
                 }
 
-                Program.unit.AddConsoleItem(new Graphical.ConsoleItem(3, "finished generating map!"));
-                Program.unit.AddConsoleItem(new Graphical.ConsoleItem(3, "creating image out of created map"));
+                Debug.Log("finished generating map!");
+                Debug.Log("creating image out of created map");
             }
             else
             {
-                Program.unit.AddConsoleItem(new Graphical.ConsoleItem(3, "selected randomize mode"));
+                Debug.Log("selected randomize mode");
                 for (int x = 0; x < sizeMapX; x++)
                 {
                     for (int y = 0; y < sizeMapY; y++)
                     {
-                        Random random = new Random();
-                        int rand = random.Next(9);
+                        int rand = Random.Range(9);
                         Block block = null;
                         switch (rand)
                         {
