@@ -1,13 +1,12 @@
 using Raylib_cs;
 using SubrightEngine2.EngineStuff;
-using Color = Raylib_cs.Color;
 
 namespace SubrightEngine2.UI
 {
     public class Toolbar : GameObject
     {
         //stores all the tools at the top of the engine....
-        public Toolbar():base(new Vector3(0, 0, 0), new Vector3(Raylib.GetScreenWidth(), 12, 0), "Toolbar"){}
+        public Toolbar() : base(new Vector3(0, 0, 0), new Vector3(Raylib.GetScreenWidth(), 12, 0), "Toolbar") { }
 
         public override void Update(ref Camera2D cam2, ref Camera3D cam3)
         {

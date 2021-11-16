@@ -15,7 +15,7 @@ namespace SubrightEngine2.EngineStuff
         public static readonly Vector2 positiveInfinitY = new Vector2(int.MaxValue, int.MaxValue);
         public static readonly Vector2 right = new Vector2(1, 0);
         public static readonly Vector2 up = new Vector2(0, 1);
-        
+
         //public Vector3 ToVector3 => new Vector3((int) Math.Round(X, 0), (int) Math.Round(Y, 0), 0);
 
         public Vector2(float _X, float _Y)
@@ -26,7 +26,7 @@ namespace SubrightEngine2.EngineStuff
 
         public static Vector2 Zero { get; } = new Vector2(0, 0);
 
-        public Point ToPoint => new Point((int) Math.Round(X, 0), (int) Math.Round(Y, 0));
+        public Point ToPoint => new Point((int)Math.Round(X, 0), (int)Math.Round(Y, 0));
 
         public static Vector2 operator +(Vector2 a, Vector2 b)
         {
@@ -76,13 +76,13 @@ namespace SubrightEngine2.EngineStuff
 
         public static Vector2 GetFromAngleDegrees(float angle)
         {
-            return new Vector2((float) Math.Cos(angle * Mathf.Deg2Rad), (float) Math.Sin(angle * Mathf.Deg2Rad));
+            return new Vector2((float)Math.Cos(angle * Mathf.Deg2Rad), (float)Math.Sin(angle * Mathf.Deg2Rad));
         }
 
         public static float Distance(Vector2 a, Vector2 b)
         {
             var vector = new Vector2(a.X - b.X, a.Y - b.Y);
-            return (float) Math.Sqrt(vector.X * vector.X + vector.Y * vector.Y);
+            return (float)Math.Sqrt(vector.X * vector.X + vector.Y * vector.Y);
         }
 
         public static Vector2 Lerp(Vector2 a, Vector2 b, float p)
@@ -98,13 +98,13 @@ namespace SubrightEngine2.EngineStuff
         public static Vector2 Normalize(Vector2 a)
         {
             if (a.X == 0 && a.Y == 0) return zero;
-            var distance = (float) Math.Sqrt(a.X * a.X + a.Y * a.Y);
+            var distance = (float)Math.Sqrt(a.X * a.X + a.Y * a.Y);
             return new Vector2(a.X / distance, a.Y / distance);
         }
 
         public static float Magnitude(Vector2 a)
         {
-            return (float) Math.Sqrt(a.X * a.X + a.Y * a.Y);
+            return (float)Math.Sqrt(a.X * a.X + a.Y * a.Y);
         }
 
         public static float sqrMagnitude(Vector2 a)

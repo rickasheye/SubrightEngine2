@@ -1,10 +1,9 @@
-using System;
-using SubrightEngine2;
-using SubrightEngine2.UI.Notifications;
-using SubrightEngine2.UI.Windows;
-using System.IO;
 using Raylib_cs;
 using SubrightEngine2.EngineStuff.Input;
+using SubrightEngine2.UI.Notifications;
+using SubrightEngine2.UI.Windows;
+using System;
+using System.IO;
 using Debug = SubrightEngine2.EngineStuff.Debug;
 
 namespace SubrightEngine2.UI
@@ -31,14 +30,14 @@ namespace SubrightEngine2.UI
             Program.objects.Add(cxtMan);
 
             bar = new Toolbar();
-            
+
             if (!File.Exists(Path.Combine(Environment.CurrentDirectory, "lock")))
             {
                 //MessageBox.CreateMessageBox("Welcome to Subright Engine 2, if its your first time \n then read the Tips when hovering over items.");
                 Notification.addNotification("Welcome!",
                     "Welcome to Subright Engine 2 to get started hover over anything to get a tip");
-                if(!Program.debug){Debug.Log("File wasnt present showing welcome box!");}
-                if(!Program.debug){File.Create(Path.Combine(Environment.CurrentDirectory, "lock"));}
+                if (!Program.debug) { Debug.Log("File wasnt present showing welcome box!"); }
+                if (!Program.debug) { File.Create(Path.Combine(Environment.CurrentDirectory, "lock")); }
             }
 
             handler = new NotificationHandler();
@@ -58,11 +57,11 @@ namespace SubrightEngine2.UI
                 }
             }
             RallyDialog.RollDialogs(ref cam2, ref cam3);
-            
+
             cxtMan.Update(ref cam2, ref cam3);
             bar.Draw2D(ref cam2);
             handler.Update(ref cam2, ref cam3);
-            
+
             if (Input.GetButtonPressed(KeyboardKey.KEY_C, !windowFocused()))
             {
                 if (console)
@@ -74,12 +73,12 @@ namespace SubrightEngine2.UI
                     console = true;
                 }
             }
-            
+
             for (var i = 0; i < SubContextMenuManager.windows.Count; i++)
                 if (SubContextMenuManager.windows[i].ownHide == false)
                     if (SubContextMenuManager.windows[i].hideRender == !hideWindows)
                         SubContextMenuManager.windows[i].hideRender = hideWindows;
-            
+
             if (Program.debug)
                 Raylib.DrawText(
                     "Game Object instances: " + Program.objects.Count + " Window instances: " +

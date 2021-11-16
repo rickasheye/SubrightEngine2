@@ -1,11 +1,8 @@
 ﻿using Newtonsoft.Json;
 using RPGConsole.InventoryBlock;
-using RPGConsole.InventoryItems;
 using SubrightEngine2.EngineStuff;
-using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
 
 namespace RPGConsole.Saving
 {
@@ -25,7 +22,7 @@ namespace RPGConsole.Saving
         public CombinedSaveFile()
         {
             //nothing here...
-            if (Reference.debugMode) { Debug.Log("There is nothing here on this save file just yet..."); }
+            if (SubrightEngine2.Program.debug) { Debug.Log("There is nothing here on this save file just yet..."); }
         }
 
         public void SaveFile(string path, Player playSave, Generator genSave)
@@ -33,9 +30,10 @@ namespace RPGConsole.Saving
             //save in a path simmilar to "/saves"
             if (File.Exists(path))
             {
-                if (playSave != null) { this.playerFile = playSave; } else
+                if (playSave != null) { this.playerFile = playSave; }
+                else
                 {
-                    if (Reference.debugMode) { Debug.Log("Unfortunately the player save option for this 'combinedsavefile' is disabled!"); }
+                    if (SubrightEngine2.Program.debug) { Debug.Log("Unfortunately the player save option for this 'combinedsavefile' is disabled!"); }
                 }
                 foreach (Block moo in genSave.blockMap)
                 {
@@ -75,7 +73,7 @@ namespace RPGConsole.Saving
                 CombinedSaveFile json = JsonConvert.DeserializeObject<CombinedSaveFile>(jsonCode);
                 generator = json.generator;
                 if (json.playerFile != null) { playerFile = json.playerFile; }
-                else { if (Reference.debugMode) { Debug.Log("Unfortunately this savefile mode for the player is disabled!"); } }
+                else { if (SubrightEngine2.Program.debug) { Debug.Log("Unfortunately this savefile mode for the player is disabled!"); } }
                 Debug.Log("Sucessfully read raw file!");
             }
             else

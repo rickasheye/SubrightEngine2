@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using Raylib_cs;
+﻿using Raylib_cs;
 using SubrightEngine2.EngineStuff;
 using SubrightEngine2.EngineStuff.BaseComponents;
 using SubrightEngine2.EngineStuff.LevelLoading;
 using SubrightEngine2.GameStuff;
 using SubrightEngine2.UI;
 using SubrightEngine2.UI.Windows;
+using System;
+using System.Collections.Generic;
 using Color = SubrightEngine2.EngineStuff.Color;
 
 namespace SubrightEngineEditor.Windows
@@ -89,9 +89,9 @@ namespace SubrightEngineEditor.Windows
                     {
                         var pref = prefabs[i];
                         DrawText(pref.name, position.X + 2, position.Y + 10 + i * 15, 8, Color.WHITE);
-                        var positionX = (int) position.X + 2;
-                        var positionY = (int) position.Y + 10 + i * 15;
-                        var sizeX = (int) size.X;
+                        var positionX = (int)position.X + 2;
+                        var positionY = (int)position.Y + 10 + i * 15;
+                        var sizeX = (int)size.X;
                         var sizeY = 10;
                         if (Raylib.GetMouseX() > positionX && Raylib.GetMouseY() > positionY &&
                             Raylib.GetMouseX() < positionX + sizeX && Raylib.GetMouseY() < positionY + sizeY)

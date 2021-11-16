@@ -1,5 +1,4 @@
-﻿using Raylib_cs;
-using RPGConsole.Graphical.MenuItems;
+﻿using RPGConsole.Graphical.MenuItems;
 using RPGConsole.Graphical.MenuItems.KeyboardOnlyItems;
 using RPGConsole.InventoryItems;
 using SubrightEngine2.EngineStuff;
@@ -17,7 +16,8 @@ namespace RPGConsole.GameEnemies
 
         public Enemy(string name, Vector2 position, Player player) : base(new Vector3(position.X, position.Y, 0), Vector3.zero, name)
         {
-            if (Reference.cmdMode) { StartSequence(player); } else
+            if (Reference.cmdMode) { StartSequence(player); }
+            else
             {
                 StartGUISequence();
             }
@@ -133,7 +133,7 @@ namespace RPGConsole.GameEnemies
     {
         public Enemy enemyConcern;
 
-        public EnemyGUIButton(Enemy enemyConcern, string name, Vector2 size, Vector2 position):base(name, size, position)
+        public EnemyGUIButton(Enemy enemyConcern, string name, Vector2 size, Vector2 position) : base(name, size, position)
         {
             this.enemyConcern = enemyConcern;
         }
@@ -164,13 +164,13 @@ namespace RPGConsole.GameEnemies
     {
         public Enemy enemyConcern;
 
-        public EnemyRunGUIButton(Enemy enemyConcern, string name, Vector2 size, Vector2 position):base(name, size, position) { this.enemyConcern = enemyConcern; }
+        public EnemyRunGUIButton(Enemy enemyConcern, string name, Vector2 size, Vector2 position) : base(name, size, position) { this.enemyConcern = enemyConcern; }
 
         public override void Triggerable()
         {
             base.Triggerable();
             int randomValue = Random.Range(10);
-            if(randomValue == 5)
+            if (randomValue == 5)
             {
                 //run
                 Debug.Log("you have sucessfully ran from the enemy");

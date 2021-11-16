@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using RPGConsole.InventoryItems;
+﻿using RPGConsole.InventoryItems;
 using SubrightEngine2.EngineStuff;
+using System.Collections.Generic;
 
 namespace RPGConsole.InventoryBlock
 {
@@ -11,7 +9,7 @@ namespace RPGConsole.InventoryBlock
 
         public List<RPGConsole.InventoryItems.InventoryItem> storeInventoryItems = new List<RPGConsole.InventoryItems.InventoryItem>();
 
-        public Chest():base("Chest", 0, 0, 2, Color.BROWN, "Textures/blocks/chest.png", 1) { }
+        public Chest() : base("Chest", 0, 0, 2, Color.BROWN, "Textures/blocks/chest.png", 1) { }
 
         public override void PlayerOnTop(Player player)
         {
@@ -30,7 +28,7 @@ namespace RPGConsole.InventoryBlock
 
         public virtual void AddChestItem(InventoryItem item)
         {
-            if(ChestItemExists(item) == false)
+            if (ChestItemExists(item) == false)
             {
                 storeInventoryItems.Add(item);
             }
@@ -42,7 +40,7 @@ namespace RPGConsole.InventoryBlock
 
         public virtual void RemoveChestItem(InventoryItem item)
         {
-            if(ChestItemExists(item) == true)
+            if (ChestItemExists(item) == true)
             {
                 storeInventoryItems.Remove(item);
             }
@@ -54,9 +52,9 @@ namespace RPGConsole.InventoryBlock
 
         public virtual bool ChestItemExists(InventoryItem item)
         {
-            foreach(InventoryItem items in storeInventoryItems)
+            foreach (InventoryItem items in storeInventoryItems)
             {
-                if(items.name == item.name)
+                if (items.name == item.name)
                 {
                     return true;
                 }

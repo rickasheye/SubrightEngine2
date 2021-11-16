@@ -1,14 +1,11 @@
-﻿using RPGConsole.Graphical;
-using System;
-using System.IO;
-
-namespace RPGConsole.InventoryBlock
+﻿namespace RPGConsole.InventoryBlock
 {
     public class CraftingTable : Block
     {
-        public CraftingTable() : base("CT", 0, 0, 1, Color.BROWN, "Textures/blocks/crafting.png", 1) { 
+        public CraftingTable() : base("CT", 0, 0, 1, Color.BROWN, "Textures/blocks/crafting.png", 1)
+        {
 
-            giveBlock = true; 
+            giveBlock = true;
         }
 
         public override void PlayerOnTop(Player player)

@@ -1,13 +1,10 @@
 ﻿using SubrightEngine2.EngineStuff;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace RPGConsole.Commands.General
 {
     public class Health : EmptyCommand
     {
-        public Health():base("Checks the player health", "health/h/checkhealth/playerhealth", CommandType.NORMAL) { }
+        public Health() : base("Checks the player health", "health/h/checkhealth/playerhealth", CommandType.NORMAL) { }
 
         public override void RunCommand(string[] args)
         {

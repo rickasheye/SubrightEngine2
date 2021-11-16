@@ -1,13 +1,10 @@
 ﻿using SubrightEngine2.EngineStuff;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace RPGConsole.Commands.General
 {
     public class move : EmptyCommand
     {
-        public move():base("Where to move the player?", "right/left/up/down/move", CommandType.NORMAL)
+        public move() : base("Where to move the player?", "right/left/up/down/move", CommandType.NORMAL)
         {
 
         }

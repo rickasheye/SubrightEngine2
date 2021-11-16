@@ -1,8 +1,5 @@
-﻿using SubrightEditor.Nodes.Variables;
-using SubrightEngine2.EngineStuff.BaseComponents;
-using System;
+﻿using SubrightEngine2.EngineStuff.BaseComponents;
 using System.Collections.Generic;
-using System.Text;
 
 namespace SubrightEditor.Nodes
 {

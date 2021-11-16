@@ -1,6 +1,6 @@
-using System;
 using Raylib_cs;
 using SubrightEngine2.EngineStuff;
+using System;
 using Color = SubrightEngine2.EngineStuff.Color;
 
 namespace SubrightEngine2.UI
@@ -11,13 +11,13 @@ namespace SubrightEngine2.UI
         private static bool boxActive = false;
 
         public string text = "Untitled MessageBox";
-        
+
         public MessageBox(string message) : base(new Vector2(Raylib.GetScreenWidth() / 2, Raylib.GetScreenHeight() / 2),
             new Vector2(Raylib.GetScreenWidth() / 4, Raylib.GetScreenHeight() / 4), "Dialog Box")
         {
             text = message;
             //CreateMessageBox(message);
-            position = new Vector3(Raylib.GetScreenWidth() / 2 - (size.X/2), Raylib.GetScreenHeight() / 2 - (size.Y/2), 0);
+            position = new Vector3(Raylib.GetScreenWidth() / 2 - (size.X / 2), Raylib.GetScreenHeight() / 2 - (size.Y / 2), 0);
         }
 
         public static void CreateMessageBox(string message)

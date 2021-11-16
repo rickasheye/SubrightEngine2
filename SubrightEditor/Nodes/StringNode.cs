@@ -1,7 +1,4 @@
 ﻿using SubrightEditor.Nodes.Variables;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SubrightEditor.Nodes
 {
@@ -11,7 +8,7 @@ namespace SubrightEditor.Nodes
 
         public IntegerNode(string name) : base(name)
         {
-            if(name == string.Empty)
+            if (name == string.Empty)
             {
                 name = "Untitled Integer";
             }

@@ -6,7 +6,7 @@ namespace SubrightEngine2.UI
     {
         public EngineToggleText(string name) : base(name)
         {
-            
+
         }
 
         public override void Update(ref Camera2D cam2, ref Camera3D cam3)

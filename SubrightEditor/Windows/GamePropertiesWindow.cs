@@ -16,13 +16,13 @@ namespace SubrightEngineEditor.Windows
         {
             base.Update(ref cam2, ref cam3);
             Draw2D(ref cam2);
-            
+
         }
 
         public override void Draw2D(ref Camera2D cam)
         {
             base.Draw2D(ref cam);
-            
+
         }
     }
 }

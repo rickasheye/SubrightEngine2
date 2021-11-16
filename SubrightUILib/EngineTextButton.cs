@@ -5,7 +5,7 @@ namespace SubrightEngine2.UI
     public class EngineTextButton : EngineTextBox
     {
         public string textContent;
-        
+
         public EngineTextButton(string name, string textContent) : base(name)
         {
             this.textContent = textContent;

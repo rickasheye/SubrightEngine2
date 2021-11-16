@@ -1,14 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.IO;
-using Newtonsoft.Json;
 
-namespace SubrightEngine2.EngineStuff.LevelLoading
+namespace SubrightEngine2.EngineStuff.Scenes
 {
     public class PrefabLoader
     {
         public static void LoadPrefab(Prefab pref)
         {
-            pref.loadPrefab(ref Program.objects);
+            pref.loadPrefab(ref Program.loader.currentScene.GameObjects);
         }
 
         //load all of the text prefabs!

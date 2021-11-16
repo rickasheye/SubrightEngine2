@@ -1,14 +1,11 @@
 ﻿using RPGConsole.InventoryBlock;
 using SubrightEngine2.EngineStuff;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace RPGConsole.Commands.General
 {
     public class placeblock : EmptyCommand
     {
-        public placeblock():base("Place the block equipped in place in where the player is", "pb/placeblock/place", CommandType.NORMAL) { }
+        public placeblock() : base("Place the block equipped in place in where the player is", "pb/placeblock/place", CommandType.NORMAL) { }
 
         public override void RunCommand(string[] args)
         {

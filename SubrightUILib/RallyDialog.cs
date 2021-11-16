@@ -1,6 +1,5 @@
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using Raylib_cs;
+using System.Collections.Generic;
 using Debug = SubrightEngine2.EngineStuff.Debug;
 
 namespace SubrightEngine2.UI
@@ -13,7 +12,7 @@ namespace SubrightEngine2.UI
         public static List<Dialog> dialogs = new List<Dialog>();
 
         public static int index = 0;
-        
+
         /// <summary>
         /// Usually put in a update method...
         /// </summary>
@@ -29,7 +28,7 @@ namespace SubrightEngine2.UI
                 dialogs[index].Update(ref cam, ref cam3);
             }
         }
-        
+
         public static void CreateDialog(Dialog log)
         {
             if (dialogExists(log))

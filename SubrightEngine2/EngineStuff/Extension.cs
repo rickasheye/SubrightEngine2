@@ -20,7 +20,7 @@ namespace SubrightEngine2.EngineStuff
 
         public virtual void Dispose()
         {
-            
+
         }
     }
 }

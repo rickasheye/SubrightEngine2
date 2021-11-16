@@ -1,7 +1,5 @@
-﻿using Raylib_cs;
-using RPGConsole.InventoryBlock;
+﻿using RPGConsole.InventoryBlock;
 using SubrightEngine2.EngineStuff;
-using System;
 using System.Collections.Generic;
 using Random = SubrightEngine2.EngineStuff.Random;
 
@@ -25,14 +23,14 @@ namespace RPGConsole
             //input blocks
             int maxX = 0;
             int maxY = 0;
-            for(int i = 0; i < genBlocks.Count - 1; i++)
+            for (int i = 0; i < genBlocks.Count - 1; i++)
             {
-                if(genBlocks[i].position.X > maxX)
+                if (genBlocks[i].position.X > maxX)
                 {
                     maxX = (int)genBlocks[i].position.X;
                 }
 
-                if(genBlocks[i].position.Y > maxY)
+                if (genBlocks[i].position.Y > maxY)
                 {
                     maxY = (int)genBlocks[i].position.Y;
                 }
@@ -41,13 +39,13 @@ namespace RPGConsole
             //just to make it even from 127 to 128
             maxX++;
             maxY++;
-            if (Reference.debugMode) { Debug.Log("Size of generation is from imported file: " + maxX + ": " + maxY); }
+            if (SubrightEngine2.Program.debug) { Debug.Log("Size of generation is from imported file: " + maxX + ": " + maxY); }
             blockMap = genBlocks;
         }
 
         public void manualUpdate()
         {
-            foreach(Block m in blockMap)
+            foreach (Block m in blockMap)
             {
                 m.UpdateBlockThroughMiningandPlacing();
             }
@@ -60,9 +58,9 @@ namespace RPGConsole
 
         public Block getBlock(string name)
         {
-            foreach(Block blockm in blockMap)
+            foreach (Block blockm in blockMap)
             {
-                if(blockm.name == name)
+                if (blockm.name == name)
                 {
                     return blockm;
                 }
@@ -106,7 +104,8 @@ namespace RPGConsole
                         if (noiseValue <= 0)
                         {
                             block = new Dirt();
-                        }else if(noiseValue < 0.10f)
+                        }
+                        else if (noiseValue < 0.10f)
                         {
                             block = new Mud();
                         }

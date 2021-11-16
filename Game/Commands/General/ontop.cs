@@ -1,14 +1,11 @@
 ﻿using RPGConsole.InventoryBlock;
 using SubrightEngine2.EngineStuff;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace RPGConsole.Commands.General
 {
     public class ontop : EmptyCommand
     {
-        public ontop():base("What block the player is ontop?", "ontop/ot", CommandType.NORMAL) { }
+        public ontop() : base("What block the player is ontop?", "ontop/ot", CommandType.NORMAL) { }
 
         public override void RunCommand(string[] args)
         {

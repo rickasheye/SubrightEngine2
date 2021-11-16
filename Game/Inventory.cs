@@ -1,6 +1,5 @@
 ﻿using RPGConsole.InventoryItems;
 using SubrightEngine2.EngineStuff;
-using System;
 using System.Collections.Generic;
 
 namespace RPGConsole
@@ -11,9 +10,9 @@ namespace RPGConsole
 
         public bool itemExists(InventoryItem item)
         {
-            for(int i = 0; i < items.Count; i++)
+            for (int i = 0; i < items.Count; i++)
             {
-                if(items[i].name == item.name)
+                if (items[i].name == item.name)
                 {
                     return true;
                 }
@@ -23,9 +22,9 @@ namespace RPGConsole
 
         public InventoryItem itemFind(InventoryItem item)
         {
-            for(int i = 0; i < items.Count; i++)
+            for (int i = 0; i < items.Count; i++)
             {
-                if(items[i].name == item.name)
+                if (items[i].name == item.name)
                 {
                     return items[i];
                 }
@@ -58,9 +57,9 @@ namespace RPGConsole
                 }
                 else
                 {
-                    for(int i = 0; i < items.Count; i++)
+                    for (int i = 0; i < items.Count; i++)
                     {
-                        if(items[i].name == item.name)
+                        if (items[i].name == item.name)
                         {
                             items.RemoveAt(i);
                         }

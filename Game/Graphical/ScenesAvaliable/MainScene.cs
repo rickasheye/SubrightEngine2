@@ -2,9 +2,6 @@
 using RPGConsole.InventoryBlock;
 using SubrightEngine2.EngineStuff;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using Color = SubrightEngine2.EngineStuff.Color;
 
@@ -27,6 +24,7 @@ namespace RPGConsole.Graphical.ScenesAvaliable
 
         public override void UpdateScene(Camera2D cam)
         {
+            //Debug.Log("eh");
             Raylib.SetExitKey(KeyboardKey.KEY_Q);
             if (Raylib.IsKeyPressed(KeyboardKey.KEY_ESCAPE))
             {
@@ -100,7 +98,7 @@ namespace RPGConsole.Graphical.ScenesAvaliable
                                     break;
                                 default:
                                     //if a color gets added down the track we want to add one here
-                                    if (Reference.debugMode) { Console.WriteLine("Color is invalid!"); }
+                                    if (SubrightEngine2.Program.debug) { Console.WriteLine("Color is invalid!"); }
                                     break;
                             }
                             Raylib.DrawRectangle(((int)block.position.X * 64), ((int)block.position.Y * 64), 64, 64, color.ToRaylibColor);
@@ -111,12 +109,12 @@ namespace RPGConsole.Graphical.ScenesAvaliable
                             //draw the texture attached!
                             Raylib.DrawTexture(block.textureInit(loaderAsset), (int)block.position.X * 64, (int)block.position.Y * 64, Color.WHITE.ToRaylibColor);
                         }
-                        if(block.broken == true)
+                        if (block.broken == true)
                         {
                             Raylib.DrawTexture(loaderAsset.textureLoad("Textures/overlays/brokenoverlay.png"), (int)block.position.X * 64, (int)block.position.Y * 64, Color.WHITE.ToRaylibColor);
                         }
                         block.UpdateBlock();
-                    } 
+                    }
                 }
             }
             //Console.WriteLine("there are " + blocks + " in view!");
@@ -142,7 +140,7 @@ namespace RPGConsole.Graphical.ScenesAvaliable
                     else if (Raylib.IsKeyPressed(KeyboardKey.KEY_D))
                     {
                         newPosition.X++;
-                    } 
+                    }
                 }
 
                 if (Raylib.IsKeyPressed(KeyboardKey.KEY_C))
@@ -156,7 +154,8 @@ namespace RPGConsole.Graphical.ScenesAvaliable
                     }
                     else
                     {
-                        Reference.loader.currentScene.guiOptions.Clear();
+                        //Clear out menu items.
+                        //SubrightEngine2.Program.loader.currentScene.GameObjects.Clear();
                         freezePlayer = false;
                         craftingMode = false;
                     }
@@ -174,6 +173,7 @@ namespace RPGConsole.Graphical.ScenesAvaliable
                     }
                     else
                     {
+                        //Remove or empty out menu items!
                         Reference.loader.currentScene.guiOptions.Clear();
                         freezePlayer = false;
                         furnacingMode = false;
@@ -192,6 +192,7 @@ namespace RPGConsole.Graphical.ScenesAvaliable
                     }
                     else
                     {
+                        //Remove or empty out menu items!
                         Reference.loader.currentScene.guiOptions.Clear();
                         freezePlayer = false;
                         inventoryMode = false;
@@ -215,18 +216,18 @@ namespace RPGConsole.Graphical.ScenesAvaliable
                                         Reference.player.inv.removeItem(Reference.player.equipItem);
                                         if (Reference.player.equipItem.itemCount <= 0 || Reference.player.equipItem == null)
                                         {
-                                            Reference.player.equipItem = new Air(); 
+                                            Reference.player.equipItem = new Air();
                                         }
                                     }
                                     else
                                     {
-                                        if (Reference.debugMode == true) { Console.WriteLine("Not a block to place!"); }
-                                    } 
+                                        if (SubrightEngine2.Program.debug) { Debug.Log("Not a block to place!"); }
+                                    }
                                 }
                             }
                             else
                             {
-                                if (Reference.debugMode == true) { Console.WriteLine("This block is not broken so unable to place!"); }
+                                if (SubrightEngine2.Program.debug) { Debug.Log("This block is not broken so unable to place!"); }
                             }
                             //LoadTextures(false);
                             //Reference.gen.manualUpdate();
@@ -247,21 +248,21 @@ namespace RPGConsole.Graphical.ScenesAvaliable
                                 }
                                 else
                                 {
-                                    if (Reference.debugMode == true) { Console.WriteLine("the block under you is already been broken!"); }
+                                    if (SubrightEngine2.Program.debug) { Debug.Log("the block under you is already been broken!"); }
                                 }
                             }
                             else
                             {
-                                if (Reference.debugMode == true) { Console.WriteLine("this block cannot be mined!"); }
+                                if (SubrightEngine2.Program.debug) { Debug.Log("this block cannot be mined!"); }
                             }
                         }
                         else
                         {
-                            if (Reference.debugMode == true) { Console.WriteLine("for some reason that didnt work as the block doesnt exist!"); }
+                            if (SubrightEngine2.Program.debug) { Debug.Log("for some reason that didnt work as the block doesnt exist!"); }
                         }
                         //Reference.gen.manualUpdate();
                     }
-                    Reference.player.MovePlayer((int)newPosition.X, (int)newPosition.Y); 
+                    Reference.player.MovePlayer((int)newPosition.X, (int)newPosition.Y);
                 }
                 Raylib.DrawRectangle(((int)Reference.player.position.X * 64) + 9, ((int)Reference.player.position.Y * 64) + 9, 45, 45, Color.WHITE.ToRaylibColor);
             }
@@ -279,7 +280,7 @@ namespace RPGConsole.Graphical.ScenesAvaliable
 
                 if (Reference.player.equipItem.name != "Air")
                 {
-                    if (Reference.player.equipItem.textureInit(loaderAsset).width == 0)
+                    if (Reference.player.equipItem.textureInit(SubrightEngine2.Program.loader.currentScene.loaderAsset).width == 0)
                     {
                         Reference.player.equipItem.textureInit(loaderAsset);
                         Console.WriteLine(Reference.player.equipItem.texture);
@@ -303,6 +304,7 @@ namespace RPGConsole.Graphical.ScenesAvaliable
             }
             Raylib.DrawRectangle(10, 5, 1 + loaderAsset.texturesCached.Count, 5, Color.BLACK.ToRaylibColor);
             base.UpdateScene(cam);
+            //Debug.Log("ah");
         }
     }
 }

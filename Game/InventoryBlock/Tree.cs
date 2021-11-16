@@ -1,8 +1,5 @@
 ﻿using Raylib_cs;
 using SubrightEngine2.EngineStuff;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace RPGConsole.InventoryBlock
 {
@@ -10,9 +7,10 @@ namespace RPGConsole.InventoryBlock
     {
         public Texture2D textureTreeBush;
 
-        public Tree() : base("Tree", 0, 0, 1, Color.LIGHTGREEN, "Textures/blocks/sapling.png", 1) { 
+        public Tree() : base("Tree", 0, 0, 1, Color.LIGHTGREEN, "Textures/blocks/sapling.png", 1)
+        {
             giveBlock = false;
-            if(textureTreeBush.width != 0)
+            if (textureTreeBush.width != 0)
             {
                 //?? huh its supposed to be 0
                 Debug.Log("Huh? this tree bush texture has data in it?");
@@ -20,7 +18,7 @@ namespace RPGConsole.InventoryBlock
             else
             {
                 Debug.Log("Loading treebush texture");
-                
+
             }
         }
 
@@ -41,7 +39,7 @@ namespace RPGConsole.InventoryBlock
         {
             base.UpdateBlock();
             //draw the tree texture on top
-            if(Vector2.Distance(Reference.player.position, position) < 8)
+            if (Vector2.Distance(Reference.player.position, position) < 8)
             {
                 //make the tree opaque
             }

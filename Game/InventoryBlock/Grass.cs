@@ -1,9 +1,6 @@
 ﻿using Raylib_cs;
 using RPGConsole.GameEnemies;
-using RPGConsole.Graphical;
 using System;
-using System.Drawing;
-using System.IO;
 
 namespace RPGConsole.InventoryBlock
 {
@@ -11,7 +8,8 @@ namespace RPGConsole.InventoryBlock
     {
         int randomINT = 0;
 
-        public Grass() : base("Grass", 0, 0, 2, Color.GREEN, "Textures/blocks/grass.png", 1) {
+        public Grass() : base("Grass", 0, 0, 2, Color.GREEN, "Textures/blocks/grass.png", 1)
+        {
 
             Random random = new Random();
             int randNext = random.Next(10);
@@ -34,13 +32,13 @@ namespace RPGConsole.InventoryBlock
                     int rnadRects = randRectal.Next(5);
                     for (int i = 0; i < rnadRects; i++)
                     {
-                        int rnadX = SubrightEngine2.EngineStuff.Random.Range((int)position.X, (int)position.Y + 64);
+                        int rnadX = SubrightEngine2.EngineStuff.Random.Range((int)position.X, (int)position.X + 64);
                         int rnadY = SubrightEngine2.EngineStuff.Random.Range((int)position.Y, (int)position.Y + 64);
                         Random rndXSize = new Random();
                         Random rndYSize = new Random();
                         int rnadXSize = rndXSize.Next(2, 5);
                         int rnadYSize = rndYSize.Next(2, 5);
-                        Raylib.DrawRectangle(rnadX, rnadY, rnadXSize, rnadYSize, Raylib_cs.Color.BLACK); 
+                        Raylib.DrawRectangle(rnadX, rnadY, rnadXSize, rnadYSize, Raylib_cs.Color.BLACK);
                     }
                     break;
                 case 4:

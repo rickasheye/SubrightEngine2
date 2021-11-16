@@ -1,9 +1,7 @@
 ﻿using RPGConsole.Commands.General;
 using RPGConsole.Commands.General.ConsoleExclusive;
 using SubrightEngine2.EngineStuff;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace RPGConsole.Commands
 {
@@ -45,15 +43,16 @@ namespace RPGConsole.Commands
             {
                 args[0] = args[0].Replace("!", "");
             }
-            if (!args[0].Contains("help")){
+            if (!args[0].Contains("help"))
+            {
                 //Check if the command exists first
                 bool commandExist = false;
                 //if (Reference.debugMode) { message.RespondAsync("Message commands " + args[0]); }
                 int chosenCommand = 0;
-                for(int m = 0; m < emptyCommands.Count - 1; m++)
+                for (int m = 0; m < emptyCommands.Count - 1; m++)
                 {
                     EmptyCommand commandEmpty = emptyCommands[m];
-                    if(equalSplitCommand(commandEmpty.syntax, args[0].ToLower()) || args[0] == "debug")
+                    if (equalSplitCommand(commandEmpty.syntax, args[0].ToLower()) || args[0] == "debug")
                     {
                         commandExist = true;
                         //if (Reference.debugMode) { message.RespondAsync(commandEmpty.syntax); }
@@ -72,12 +71,12 @@ namespace RPGConsole.Commands
                         EmptyCommand commandEmpty = emptyCommands[i];
                         if (commandEmpty.typeCommand == CommandType.DEBUG)
                         {
-                            if (Reference.debugMode) { Debug.Log("Command is debug enabled"); }
+                            if (SubrightEngine2.Program.debug) { Debug.Log("Command is debug enabled"); }
                             if (args[0] == "debug")
                             {
-                                if (Reference.debugMode) { Debug.Log("Command contains debug inside"); }
-                                if (Reference.debugMode)
+                                if (SubrightEngine2.Program.debug)
                                 {
+                                    Debug.Log("Command contains debug inside");
                                     Debug.Log("is Debug mode enabled!");
                                     if (args[1] == commandEmpty.syntax)
                                     {
@@ -119,9 +118,9 @@ namespace RPGConsole.Commands
         {
             //if (Reference.debugMode) { Reference.unit.AddConsoleItem("User has entered: " + split); }
             string[] splitComamnd = split.Split('/');
-            for(int i = 0; i < splitComamnd.Length; i++)
+            for (int i = 0; i < splitComamnd.Length; i++)
             {
-                if(splitComamnd[i].ToLower() == compare.ToLower())
+                if (splitComamnd[i].ToLower() == compare.ToLower())
                 {
                     //Console.ForegroundColor = ConsoleColor.Blue;
                     //Console.WriteLine("true");
@@ -136,10 +135,10 @@ namespace RPGConsole.Commands
         {
             //parse the type
             CommandType cmdtype = CommandType.NORMAL;
-            if(type.ToLower() == null || type.ToLower() == "")
+            if (type.ToLower() == null || type.ToLower() == "")
             {
                 string application = "";
-                if (Reference.debugMode)
+                if (SubrightEngine2.Program.debug)
                 {
                     application += "DEBUG/";
                 }
@@ -153,21 +152,21 @@ namespace RPGConsole.Commands
                     cmdtype = CommandType.NORMAL;
                     break;
                 case "debug":
-                    if (Reference.debugMode)
+                    if (SubrightEngine2.Program.debug)
                     {
                         cmdtype = CommandType.DEBUG;
                     }
                     break;
                 default:
-                    if (Reference.debugMode) { Debug.Log("Unfortunately this user didnt add a mode select"); }
+                    if (SubrightEngine2.Program.debug) { Debug.Log("Unfortunately this user didnt add a mode select"); }
                     break;
             }
             List<EmptyCommand> foundCommands = emptyCommands.FindAll(t => t.typeCommand == cmdtype);
             Debug.Log("Command Type: " + cmdtype.ToString());
-            if(foundCommands.ToArray().Length <= 0) { Debug.Log("Unfortunately no commands were found..."); }
-            for(int i = 0; i < foundCommands.ToArray().Length; i++)
+            if (foundCommands.ToArray().Length <= 0) { Debug.Log("Unfortunately no commands were found..."); }
+            for (int i = 0; i < foundCommands.ToArray().Length; i++)
             {
-                Debug.Log (foundCommands[i].commandName + " - (" + foundCommands[i].syntax + ")");
+                Debug.Log(foundCommands[i].commandName + " - (" + foundCommands[i].syntax + ")");
             }
         }
     }

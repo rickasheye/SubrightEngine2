@@ -1,6 +1,6 @@
-﻿using System;
-using SubrightEngine2.EngineStuff;
+﻿using SubrightEngine2.EngineStuff;
 using SubrightEngine2.EngineStuff.BaseComponents;
+using System;
 using Vector3 = SubrightEngine2.EngineStuff.Vector3;
 
 namespace SubrightEngine2.UI
@@ -10,7 +10,7 @@ namespace SubrightEngine2.UI
     {
         public string name;
 
-        public UIElement(string name):base(name)
+        public UIElement(string name) : base(name)
         {
             this.connectedObject.position = connectedObject.position;
             this.connectedObject.size = connectedObject.size;

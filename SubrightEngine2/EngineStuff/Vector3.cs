@@ -20,7 +20,7 @@ namespace SubrightEngine2.EngineStuff
 
         public static Vector3 One { get; private set; } = new Vector3(1, 1, 1);
 
-        public Vector2 ToVector2 => new Vector2((int) Math.Round(X, 0), (int) Math.Round(Y, 0));
+        public Vector2 ToVector2 => new Vector2((int)Math.Round(X, 0), (int)Math.Round(Y, 0));
 
         public System.Numerics.Vector3 ToNumericsVector => new System.Numerics.Vector3(X, Y, Z);
 
@@ -69,14 +69,14 @@ namespace SubrightEngine2.EngineStuff
 
         public static Vector3 GetFromAngleDegrees(float angle)
         {
-            return new Vector3((float) Math.Cos(angle * Mathf.Deg2Rad), (float) Math.Sin(angle * Mathf.Deg2Rad),
-                (float) Math.Sin(angle * Mathf.Deg2Rad));
+            return new Vector3((float)Math.Cos(angle * Mathf.Deg2Rad), (float)Math.Sin(angle * Mathf.Deg2Rad),
+                (float)Math.Sin(angle * Mathf.Deg2Rad));
         }
 
         public static float Distance(Vector3 a, Vector3 b)
         {
             var vector = new Vector3(a.X - b.X, a.Y - b.Y, a.Z - b.Z);
-            return (float) Math.Sqrt(vector.X * vector.X + vector.Y * vector.Y);
+            return (float)Math.Sqrt(vector.X * vector.X + vector.Y * vector.Y);
         }
 
         public static Vector3 Lerp(Vector3 a, Vector3 b, float p)
@@ -92,13 +92,13 @@ namespace SubrightEngine2.EngineStuff
         public static Vector3 Normalize(Vector3 a)
         {
             if (a.X == 0 && a.Y == 0) return Zero;
-            var distance = (float) Math.Sqrt(a.X * a.X + a.Y * a.Y);
+            var distance = (float)Math.Sqrt(a.X * a.X + a.Y * a.Y);
             return new Vector3(a.X / distance, a.Y / distance, a.Z / distance);
         }
 
         public static float Magnitude(Vector3 a)
         {
-            return (float) Math.Sqrt(a.X * a.X + a.Y * a.Y);
+            return (float)Math.Sqrt(a.X * a.X + a.Y * a.Y);
         }
 
         public static Vector3 ClampMagnitude(Vector3 a, float l)

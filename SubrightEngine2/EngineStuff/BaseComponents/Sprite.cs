@@ -1,7 +1,7 @@
-using System;
-using System.IO;
 using Raylib_cs;
 using SubrightEngine2.EngineStuff.BaseComponents;
+using System;
+using System.IO;
 
 namespace SubrightEngine2.EngineStuff
 {
@@ -23,7 +23,7 @@ namespace SubrightEngine2.EngineStuff
             {
                 Debug.Log(path);
                 Image image = Raylib.LoadImage(path);
-                if(image.width != 16 && image.height != 16)
+                if (image.width != 16 && image.height != 16)
                 {
                     Raylib.ImageResize(ref image, 16, 16);
                 }
@@ -56,7 +56,7 @@ namespace SubrightEngine2.EngineStuff
             //Draw image
             if (containedSprite.width != 0 && containedSprite.height != 0)
             {
-                Raylib.DrawTexture(containedSprite, (int) connectedObject.position.X, (int) connectedObject.position.Y,Raylib_cs.Color.WHITE);
+                Raylib.DrawTexture(containedSprite, (int)connectedObject.position.X, (int)connectedObject.position.Y, Raylib_cs.Color.WHITE);
             }
             else
             {

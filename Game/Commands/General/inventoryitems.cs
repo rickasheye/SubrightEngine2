@@ -1,14 +1,11 @@
 ﻿using RPGConsole.InventoryItems;
 using SubrightEngine2.EngineStuff;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace RPGConsole.Commands.General
 {
     public class inventoryitems : EmptyCommand
     {
-        public inventoryitems():base("Check your inventory items avaliable", "ii/inventory/checkinventory/ci/inventoryitems", CommandType.NORMAL) { }
+        public inventoryitems() : base("Check your inventory items avaliable", "ii/inventory/checkinventory/ci/inventoryitems", CommandType.NORMAL) { }
 
         public override void RunCommand(string[] args)
         {

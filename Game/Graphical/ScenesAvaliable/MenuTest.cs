@@ -8,7 +8,7 @@ namespace RPGConsole.Graphical.ScenesAvaliable
 {
     public class MenuTest : Scene
     {
-        public MenuTest():base("Menu Test") { }
+        public MenuTest() : base("Menu Test") { }
         Text text;
         Button buttonTest;
         TextBox textBoxTest;

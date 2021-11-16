@@ -3,9 +3,6 @@ using RPGConsole.Graphical.MenuItems;
 using RPGConsole.Graphical.MenuItems.KeyboardOnlyItems;
 using RPGConsole.Saving;
 using SubrightEngine2.EngineStuff;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Color = SubrightEngine2.EngineStuff.Color;
 
 namespace RPGConsole.Graphical.ScenesAvaliable
@@ -15,7 +12,7 @@ namespace RPGConsole.Graphical.ScenesAvaliable
         Text text;
         EmptyContainer container;
 
-        public SavesMenu():base("Saves Menu")
+        public SavesMenu() : base("Saves Menu")
         {
 
         }
@@ -29,7 +26,7 @@ namespace RPGConsole.Graphical.ScenesAvaliable
             int saveFilesCount = Reference.manager.savefiles.Count;
             if (saveFilesCount > 0)
             {
-                for (int i = 0; i <saveFilesCount; i++)
+                for (int i = 0; i < saveFilesCount; i++)
                 {
                     SaveButton button = new SaveButton(Reference.manager.savefiles[i].fileName, new Vector2(10, (10 * i) + 60), new Vector2(50, 50), Reference.manager.savefiles[i]);
                     guiOptions.Add(button);
@@ -54,7 +51,7 @@ namespace RPGConsole.Graphical.ScenesAvaliable
     {
         public CombinedSaveFile saveFileSaved;
 
-        public SaveButton(string text, Vector2 position, Vector2 size, CombinedSaveFile saveFile):base(text, size, position) { this.saveFileSaved = saveFile; }
+        public SaveButton(string text, Vector2 position, Vector2 size, CombinedSaveFile saveFile) : base(text, size, position) { this.saveFileSaved = saveFile; }
 
         public override void Triggerable()
         {
@@ -68,7 +65,7 @@ namespace RPGConsole.Graphical.ScenesAvaliable
         public override void DrawObject()
         {
             base.DrawObject();
-            if(saveFileSaved == null)
+            if (saveFileSaved == null)
             {
                 //we want to draw that it is disabled!
                 Raylib.DrawText("Disabled!", (int)position.X - 5, (int)position.Y - 5, ((int)size.X / (int)size.Y) * 2, Color.RED.ToRaylibColor);

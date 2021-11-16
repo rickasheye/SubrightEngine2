@@ -1,14 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-using Newtonsoft.Json;
 
-namespace SubrightEngine2.EngineStuff.LevelLoading
+namespace SubrightEngine2.EngineStuff.Scenes
 {
     public class LevelLoader
     {
         //load all sorts of stuff!.
-        public static void LoadLevel(string path, ref List<GameObject> objects)
+        public static void LoadLevel(string path)
         {
             //use this to load a level
             if (File.Exists(path))
@@ -28,9 +29,9 @@ namespace SubrightEngine2.EngineStuff.LevelLoading
                         if (comModel.connectedObject == null) comModel.connectedObject = m;
                     }
 
-                    for (var p = 0; p < Program.objects.Count; p++)
+                    for (var p = 0; p < Program.loader.currentScene.GameObjects.Count; p++)
                     {
-                        var l = Program.objects[p];
+                        var l = Program.loader.currentScene.GameObjects[p];
                         if (m.name == l.name)
                         {
                             //remove
@@ -40,20 +41,21 @@ namespace SubrightEngine2.EngineStuff.LevelLoading
                     }
                 }
 
-                if (corrupted) Debug.Log("Save file seems to be corrupted, but readable.", LogType.ERROR);
+                if (corrupted) Debug.LogError("Save file seems to be corrupted, but readable.");
 
-                objects.AddRange(allObjects);
-                Debug.Log("Sucessfully loaded all content", LogType.MESSAGE);
+                Program.loader.currentScene.GameObjects.AddRange(allObjects);
+                Debug.Log("Sucessfully loaded all content");
             }
             else
             {
-                Debug.Log("Unfortunately that level doesnt exist!", LogType.ERROR);
+                Debug.LogError("Unfortunately that level doesnt exist!");
             }
         }
 
-        public static void WriteLevelByte(string path, ref List<GameObject> elements)
+        public static void WriteLevelByte()
         {
             //run or create a byte array out of the elements
+            string path = Path.Combine(Environment.CurrentDirectory, "scenes/", Program.loader.currentScene.name + ".sbrs");
             var directory = path.Replace(Path.GetFileName(path), "");
             if (!Directory.Exists(directory)) Directory.CreateDirectory(directory);
 
@@ -62,23 +64,24 @@ namespace SubrightEngine2.EngineStuff.LevelLoading
                 var binary = new BinaryFormatter();
                 using (var fs = File.Create(path))
                 {
-                    binary.Serialize(fs, elements);
+                    binary.Serialize(fs, Program.loader.currentScene.GameObjects);
                 }
                 Debug.Log("Sucessfully saved file in " + path);
             }
             else
             {
                 File.Create(path);
-                Debug.Log("Created a file to make sure that it exists!", LogType.WARNING);
+                Debug.LogWarning("Created a file to make sure that it exists!");
             }
         }
 
-        public static void LoadLevelByte(string path, ref List<GameObject> objects)
+        public static void LoadLevelByte()
         {
+            string path = Path.Combine(Environment.CurrentDirectory, "scenes/", Program.loader.currentScene.name + ".sbrs");
             var directory = path.Replace(Path.GetFileName(path), "");
             if (!Directory.Exists(directory))
                 //need to write the original first
-                Debug.Log("Need to write the file and directory first", LogType.ERROR);
+                Debug.LogError("Need to write the file and directory first");
 
             if (File.Exists(path))
             {
@@ -87,48 +90,50 @@ namespace SubrightEngine2.EngineStuff.LevelLoading
                     var binary = new BinaryFormatter();
                     using (var fs = File.OpenRead(path))
                     {
-                        if (Program.debug) Debug.Log(fs.ToString(), LogType.MESSAGE);
-                        var gameObjects = (List<GameObject>) binary.Deserialize(fs);
-                        objects.Clear();
-                        objects.AddRange(gameObjects);
+                        Debug.Log(fs.ToString(), false);
+                        var gameObjects = (List<GameObject>)binary.Deserialize(fs);
+                        Program.loader.currentScene.GameObjects.Clear();
+                        Program.loader.currentScene.GameObjects.AddRange(gameObjects);
                         fs.Dispose();
                     }
                 }
                 else
                 {
-                    if(Program.debug){Debug.Log("File seems to be empty! on load!");}
+                    if (Program.debug) { Debug.Log("File seems to be empty! on load!"); }
                 }
             }
             else
             {
-                WriteLevelByte(path, ref objects);
+                WriteLevelByte();
             }
         }
 
-        public static void WriteLevel(string path, ref List<GameObject> objects)
+        public static void WriteLevel()
         {
+            string path = Path.Combine(Environment.CurrentDirectory, "scenes/", Program.loader.currentScene.name + ".sbrs");
             var directory = path.Replace(Path.GetFileName(path), "");
             if (!Directory.Exists(directory)) Directory.CreateDirectory(directory);
 
-            for (var i = 0; i < objects.Count; i++)
-            for (var m = 0; m < objects[i].components.Count; m++)
-                objects[i].components[m].connectedObject = null;
+            for (var i = 0; i < Program.loader.currentScene.GameObjects.Count; i++)
+                for (var m = 0; m < Program.loader.currentScene.GameObjects[i].components.Count; m++)
+                    Program.loader.currentScene.GameObjects[i].components[m].connectedObject = null;
 
             if (File.Exists(path))
             {
-                var jsonScript = JsonConvert.SerializeObject(objects);
+                var jsonScript = JsonConvert.SerializeObject(Program.loader.currentScene.GameObjects);
                 File.WriteAllText(path, jsonScript);
-                Debug.Log("Sucessfully written scene to disk!", LogType.MESSAGE);
+                Debug.Log("Sucessfully written scene to disk!");
             }
             else
             {
                 File.Create(path);
-                Debug.Log("Created a file to make sure that it exists!", LogType.WARNING);
+                Debug.LogWarning("Created a file to make sure that it exists!");
             }
         }
 
-        public static bool savedFile(string path)
+        public static bool savedFile()
         {
+            string path = Path.Combine(Environment.CurrentDirectory, "scenes/", Program.loader.currentScene.name + ".sbrs");
             if (File.Exists(path))
             {
                 //check if its a proper save?
@@ -144,7 +149,7 @@ namespace SubrightEngine2.EngineStuff.LevelLoading
                 if (jsonScript == "[]")
                 {
                     //then json file is not empty but empty on objects
-                    Debug.Log("Save file is empty, but saved", LogType.WARNING);
+                    Debug.LogWarning("Save file is empty, but saved");
                     return true;
                 }
             }
@@ -152,8 +157,9 @@ namespace SubrightEngine2.EngineStuff.LevelLoading
             return false;
         }
 
-        public static bool savedFileByte(string path)
+        public static bool savedFileByte()
         {
+            string path = Path.Combine(Environment.CurrentDirectory, "scenes/", Program.loader.currentScene.name + ".sbrs");
             return File.Exists(path);
         }
     }

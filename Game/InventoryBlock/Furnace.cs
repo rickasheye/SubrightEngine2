@@ -1,7 +1,4 @@
-﻿using RPGConsole.Graphical;
-using SubrightEngine2.EngineStuff;
-using System;
-using System.IO;
+﻿using SubrightEngine2.EngineStuff;
 
 namespace RPGConsole.InventoryBlock
 {

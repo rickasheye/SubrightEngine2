@@ -1,9 +1,8 @@
-﻿using System;
-using Raylib_cs;
+﻿using Raylib_cs;
 using SubrightEngine2.EngineStuff;
-using SubrightEngine2.EngineStuff.Input;
 using SubrightEngine2.UI.Tips;
 using SubrightEngine2.UI.Windows;
+using System;
 using Color = SubrightEngine2.EngineStuff.Color;
 
 namespace SubrightEngine2.UI
@@ -67,12 +66,12 @@ namespace SubrightEngine2.UI
             {
                 //Update this Window
                 //if(framebuffer.width != 0 && framebuffer.height != 0){Raylib.DrawTexture(Raylib.LoadTextureFromImage(framebuffer), (int)position.X, (int)position.Y, Raylib_cs.Color.WHITE);}
-                DrawRectangle((int) position.X, (int) position.Y, (int) size.X, (int) size.Y, Program.backgroundColor);
-                DrawRectangle((int) position.X, (int) position.Y, (int) size.X, 8, Program.foregroundColor);
-                DrawText(name, (int) position.X, (int) position.Y, 8, Program.textColor);
+                DrawRectangle((int)position.X, (int)position.Y, (int)size.X, (int)size.Y, Program.backgroundColor);
+                DrawRectangle((int)position.X, (int)position.Y, (int)size.X, 8, Program.foregroundColor);
+                DrawText(name, (int)position.X, (int)position.Y, 8, Program.textColor);
 
-                if (Raylib.GetMouseX() > (int) position.X && Raylib.GetMouseX() < (int) position.X + (int) size.X &&
-                    Raylib.GetMouseY() > (int) position.Y && Raylib.GetMouseY() < (int) position.Y + (int) size.Y)
+                if (Raylib.GetMouseX() > (int)position.X && Raylib.GetMouseX() < (int)position.X + (int)size.X &&
+                    Raylib.GetMouseY() > (int)position.Y && Raylib.GetMouseY() < (int)position.Y + (int)size.Y)
                 {
                     if (SubrightEngine2.EngineStuff.Input.Input.GetMouseButtonDown(MouseButton.MOUSE_LEFT_BUTTON))
                         if (SubContextMenuManager.lockedWindows == false)
@@ -86,7 +85,7 @@ namespace SubrightEngine2.UI
                 }
 
                 if (SubContextMenuManager.focusedWindow == this)
-                    if (Raylib.GetMouseX() > (int) position.X && Raylib.GetMouseX() < position.X + size.X &&
+                    if (Raylib.GetMouseX() > (int)position.X && Raylib.GetMouseX() < position.X + size.X &&
                         Raylib.GetMouseY() > position.Y && Raylib.GetMouseY() < position.Y + 8)
                         if (SubrightEngine2.EngineStuff.Input.Input.GetMouseButtonDown(MouseButton.MOUSE_LEFT_BUTTON))
                         {
@@ -119,8 +118,8 @@ namespace SubrightEngine2.UI
                 {
                     if (closeable == true)
                     {
-                        Raylib.DrawText("X", (int) position.X - 10, (int) position.Y, 8, Raylib_cs.Color.RED);
-                        if (Raylib.GetMouseX() > (int) position.X - 10 && Raylib.GetMouseX() < (int) position.X - 2 &&
+                        Raylib.DrawText("X", (int)position.X - 10, (int)position.Y, 8, Raylib_cs.Color.RED);
+                        if (Raylib.GetMouseX() > (int)position.X - 10 && Raylib.GetMouseX() < (int)position.X - 2 &&
                             Raylib.GetMouseY() > position.Y && Raylib.GetMouseY() < position.Y + 8)
                         {
                             TipManager.RenderTip(1);
@@ -136,12 +135,12 @@ namespace SubrightEngine2.UI
                 if (resizeable)
                     if (SubContextMenuManager.focusedWindow == this)
                     {
-                        DrawRectangle((int) position.X + (int) size.X - 8, (int) position.Y + (int) size.Y - 8, 8, 8,
+                        DrawRectangle((int)position.X + (int)size.X - 8, (int)position.Y + (int)size.Y - 8, 8, 8,
                             Program.foregroundColor);
-                        if (Raylib.GetMouseX() > (int) position.X + (int) size.X - 8 &&
-                            Raylib.GetMouseY() > (int) position.Y + (int) size.Y - 8 &&
-                            Raylib.GetMouseY() <= (int) position.Y + size.Y &&
-                            Raylib.GetMouseX() < (int) position.X + (int) size.X)
+                        if (Raylib.GetMouseX() > (int)position.X + (int)size.X - 8 &&
+                            Raylib.GetMouseY() > (int)position.Y + (int)size.Y - 8 &&
+                            Raylib.GetMouseY() <= (int)position.Y + size.Y &&
+                            Raylib.GetMouseX() < (int)position.X + (int)size.X)
                             //Drag side ways
                             if (size.X >= 45 && size.Y >= 45)
                                 if (SubrightEngine2.EngineStuff.Input.Input.GetMouseButtonDown(MouseButton.MOUSE_LEFT_BUTTON, isFocused()))
@@ -150,7 +149,7 @@ namespace SubrightEngine2.UI
                                     size.Y = position.Y - Raylib.GetMouseY();
                                 }
                     }
-                
+
                 DrawRectangleLines(position.X, position.Y, size.X, size.Y, Color.LIGHTGRAY);
             }
             else

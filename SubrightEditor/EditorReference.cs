@@ -1,9 +1,6 @@
 ﻿using Raylib_cs;
 using SubrightEngine2.EngineStuff;
 using SubrightEngine2.UI;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SubrightEditor
 {

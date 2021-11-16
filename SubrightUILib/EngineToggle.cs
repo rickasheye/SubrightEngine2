@@ -5,7 +5,7 @@ namespace SubrightEngine2.UI
     public class EngineToggle : UIElement
     {
         public bool triggered = false;
-        public EngineToggle(string name):base(name){}
+        public EngineToggle(string name) : base(name) { }
 
         public override void Update(ref Camera2D cam2, ref Camera3D cam3)
         {
@@ -19,7 +19,7 @@ namespace SubrightEngine2.UI
             Raylib.DrawCircle((int)connectedObject.position.X, (int)connectedObject.position.Y, connectedObject.size.X, Program.backgroundColor.ToRaylibColor);
             if (triggered)
             {
-                Raylib.DrawCircle((int) connectedObject.position.X, (int) connectedObject.position.Y, connectedObject.size.X - 2, Program.foregroundColor.ToRaylibColor);
+                Raylib.DrawCircle((int)connectedObject.position.X, (int)connectedObject.position.Y, connectedObject.size.X - 2, Program.foregroundColor.ToRaylibColor);
             }
 
             if (Raylib.GetMouseX() > connectedObject.position.X - connectedObject.size.X && Raylib.GetMouseX() > connectedObject.position.X + connectedObject.size.X &&
@@ -28,7 +28,8 @@ namespace SubrightEngine2.UI
                 if (triggered)
                 {
                     triggered = false;
-                }else if (!triggered)
+                }
+                else if (!triggered)
                 {
                     triggered = true;
                 }

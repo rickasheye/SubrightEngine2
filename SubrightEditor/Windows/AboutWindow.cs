@@ -1,7 +1,7 @@
-﻿using System;
-using Raylib_cs;
+﻿using Raylib_cs;
 using SubrightEngine2.EngineStuff;
 using SubrightEngine2.UI;
+using System;
 using Color = SubrightEngine2.EngineStuff.Color;
 
 namespace SubrightEngineEditor.Windows
@@ -25,8 +25,8 @@ namespace SubrightEngineEditor.Windows
             base.Draw2D(ref cam);
             if (hideRender == false)
             {
-                DrawRectangle((int) (position.X + size.X) / 4, (int) position.Y + 12,
-                    (int) (size.X - (position.X + size.X / 4)), 40, Color.WHITE);
+                DrawRectangle((int)(position.X + size.X) / 4, (int)position.Y + 12,
+                    (int)(size.X - (position.X + size.X / 4)), 40, Color.WHITE);
                 DrawText("Subright Engine 2", position.X, position.Y + 55, 8, Color.WHITE);
             }
         }

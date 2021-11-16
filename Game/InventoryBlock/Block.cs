@@ -1,7 +1,6 @@
 ﻿using Raylib_cs;
 using RPGConsole.InventoryItems;
 using SubrightEngine2.EngineStuff;
-using System;
 
 namespace RPGConsole.InventoryBlock
 {
@@ -34,7 +33,7 @@ namespace RPGConsole.InventoryBlock
             originalStrength = strength;
         }
 
-        public Block(string name, int toxic, int stuck, int strength, Color color, int itemCount, Model model):base(name, itemTYPE.GENERAL, itemCount, entityType.BLOCK)
+        public Block(string name, int toxic, int stuck, int strength, Color color, int itemCount, Model model) : base(name, itemTYPE.GENERAL, itemCount, entityType.BLOCK)
         {
             this.color = color;
             this.toxicity = toxic;
@@ -44,7 +43,7 @@ namespace RPGConsole.InventoryBlock
             storedModel = model;
         }
 
-        public Block(string name, int toxic, int stuck, int strength, Color color, int itemCount, string texturePath):base(name, itemTYPE.GENERAL, itemCount, entityType.BLOCK, texturePath)
+        public Block(string name, int toxic, int stuck, int strength, Color color, int itemCount, string texturePath) : base(name, itemTYPE.GENERAL, itemCount, entityType.BLOCK, texturePath)
         {
             this.color = color;
             this.toxicity = toxic;
@@ -53,7 +52,7 @@ namespace RPGConsole.InventoryBlock
             originalStrength = strength;
         }
 
-        public Block(string name, int toxic, int stuck, int strength, Color color, int itemCount, string texturePath, Model model):base(name, itemTYPE.GENERAL, itemCount, entityType.BLOCK, texturePath)
+        public Block(string name, int toxic, int stuck, int strength, Color color, int itemCount, string texturePath, Model model) : base(name, itemTYPE.GENERAL, itemCount, entityType.BLOCK, texturePath)
         {
             this.color = color;
             this.toxicity = toxic;
@@ -63,7 +62,7 @@ namespace RPGConsole.InventoryBlock
             storedModel = model;
         }
 
-        public Block(string name, int toxic, int stuck, int strength, Color color, string texture, int itemCount):base(name, itemTYPE.GENERAL, itemCount, entityType.BLOCK, texture)
+        public Block(string name, int toxic, int stuck, int strength, Color color, string texture, int itemCount) : base(name, itemTYPE.GENERAL, itemCount, entityType.BLOCK, texture)
         {
             this.color = color;
             this.toxicity = toxic;
@@ -72,7 +71,7 @@ namespace RPGConsole.InventoryBlock
             originalStrength = strength;
         }
 
-        public Block(string name, int toxic, int stuck, int strength, Color color, string texture, int itemCount, Model model):base(name, itemTYPE.GENERAL, itemCount, entityType.BLOCK, texture)
+        public Block(string name, int toxic, int stuck, int strength, Color color, string texture, int itemCount, Model model) : base(name, itemTYPE.GENERAL, itemCount, entityType.BLOCK, texture)
         {
             this.color = color;
             this.toxicity = toxic;
@@ -92,11 +91,11 @@ namespace RPGConsole.InventoryBlock
                 Reference.gen.blockMap.Remove(this);
             }
 
-            if(perlinvalue == 0)
+            if (perlinvalue == 0)
             {
-                for(int i = 0; i < Reference.gen.blockMap.Count -1; i++)
+                for (int i = 0; i < Reference.gen.blockMap.Count - 1; i++)
                 {
-                    if(Reference.gen.blockMap[i].name == name)
+                    if (Reference.gen.blockMap[i].name == name)
                     {
                         Reference.gen.blockMap.RemoveAt(i);
                     }
@@ -111,7 +110,7 @@ namespace RPGConsole.InventoryBlock
 
         public virtual void PlayerOnTop(Player player)
         {
-            if(stuckiness > 0)
+            if (stuckiness > 0)
             {
 
             }
@@ -177,7 +176,7 @@ namespace RPGConsole.InventoryBlock
                     }
                     else
                     {
-                        Debug.Log( "You do not have a pickaxe equipped to be used on this block!");
+                        Debug.Log("You do not have a pickaxe equipped to be used on this block!");
                     }
                 }
 

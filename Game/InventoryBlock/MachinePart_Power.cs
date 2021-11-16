@@ -6,7 +6,8 @@ namespace RPGConsole.InventoryBlock
     {
         public int maxPower = 5;
 
-        public MachinePart_Power() : base("Power Machine") {
+        public MachinePart_Power() : base("Power Machine")
+        {
             powerLevel = maxPower;
         }
 
@@ -19,7 +20,7 @@ namespace RPGConsole.InventoryBlock
         public override void UpdateBlockThroughMiningandPlacing()
         {
             base.UpdateBlockThroughMiningandPlacing();
-            if(powerLevel < 5)
+            if (powerLevel < 5)
             {
                 //disable the block?
                 disabled = true;

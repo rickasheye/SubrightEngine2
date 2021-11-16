@@ -1,7 +1,4 @@
-﻿using RPGConsole.Graphical;
-using RPGConsole.InventoryItems;
-using System;
-using System.IO;
+﻿using RPGConsole.InventoryItems;
 
 namespace RPGConsole.InventoryBlock
 {
@@ -17,7 +14,7 @@ namespace RPGConsole.InventoryBlock
                 if (!giveBlock)
                 {
                     player.inv.addItem(new InventoryItemIronClump());
-                } 
+                }
             }
         }
     }

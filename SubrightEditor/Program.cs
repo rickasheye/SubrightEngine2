@@ -2,7 +2,6 @@
 using SubrightEngine2.EngineStuff;
 using SubrightEngine2.UI.Windows;
 using SubrightEngineEditor.Windows;
-using System;
 
 namespace SubrightEditor
 {

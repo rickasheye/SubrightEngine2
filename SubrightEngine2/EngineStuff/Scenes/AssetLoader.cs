@@ -1,35 +1,44 @@
 ﻿using Raylib_cs;
-using RPGConsole.Graphical.MenuItems;
 using SubrightEngine2.EngineStuff;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
 
-namespace RPGConsole.Graphical
+namespace SubrightEngine2.EngineStuff.Scenes
 {
-    public class storedTexture
+    [Serializable]
+    public class Asset
     {
         public string name;
         public string path;
+        [NonSerialized]
         public Texture2D texture;
 
-        public storedTexture(string name, string path, Texture2D text)
+        public Asset(string name, string path)
         {
             this.name = name;
             this.path = path;
-            this.texture = text;
+            ReloadTexture();
+        }
+
+        public void ReloadTexture()
+        {
+            Image image = Raylib.LoadImage(path);
+            Raylib.ImageResizeNN(ref image, 64, 64);
+            Texture2D texture = Raylib.LoadTextureFromImage(image);
+            Raylib.UnloadImage(image);
+            this.texture = texture;
         }
     }
 
-
+    [Serializable]
     public class AssetLoader
     {
-        public List<storedTexture> texturesCached = new List<storedTexture>();
+        public List<Asset> texturesCached = new List<Asset>();
 
         public void UnloadAll()
         {
-            foreach (storedTexture texture in texturesCached)
+            foreach (Asset texture in texturesCached)
             {
                 if (texture.name != string.Empty)
                 {
@@ -46,12 +55,7 @@ namespace RPGConsole.Graphical
             {
                 if (!TextureExist(path))
                 {
-                    Image image = Raylib.LoadImage(path);
-                    Raylib.ImageResizeNN(ref image, 64, 64);
-                    Texture2D texture = Raylib.LoadTextureFromImage(image);
-                    Raylib.UnloadImage(image);
-                    //Raylib.SetTextureFilter(texture, TextureFilterMode.FILTER_POINT);
-                    TextureCreate(Path.GetFileName(path), path, texture);
+                    TextureCreate(Path.GetFileName(path), path);
                     return textureLoad(path);
                 }
                 else
@@ -66,11 +70,11 @@ namespace RPGConsole.Graphical
             }
         }
 
-        public storedTexture TextureCreate(string name, string path, Texture2D texture)
+        public Asset TextureCreate(string name, string path)
         {
             if (!TextureExist(path))
             {
-                storedTexture newTexure = new storedTexture(name, path, texture);
+                Asset newTexure = new Asset(name, path);
                 texturesCached.Add(newTexure);
                 Debug.Log("Created a new texture by the name of: " + name);
                 return newTexure;
@@ -84,9 +88,9 @@ namespace RPGConsole.Graphical
 
         public Texture2D getTexture(string path)
         {
-            foreach(storedTexture texturem in texturesCached)
+            foreach (Asset texturem in texturesCached)
             {
-                if(texturem.path == path)
+                if (texturem.path == path)
                 {
                     return texturem.texture;
                 }
@@ -98,9 +102,9 @@ namespace RPGConsole.Graphical
         {
             if (TextureExist(path))
             {
-                for(int i = 0; i < texturesCached.Count; i++)
+                for (int i = 0; i < texturesCached.Count; i++)
                 {
-                    if(path == texturesCached[i].path)
+                    if (path == texturesCached[i].path)
                     {
                         texturesCached.RemoveAt(i);
                     }
@@ -114,9 +118,9 @@ namespace RPGConsole.Graphical
 
         public bool TextureExist(string path)
         {
-            foreach(storedTexture text in texturesCached)
+            foreach (Asset text in texturesCached)
             {
-                if(text.path == path)
+                if (text.path == path)
                 {
                     return true;
                 }

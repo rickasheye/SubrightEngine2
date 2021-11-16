@@ -20,7 +20,7 @@ namespace SubrightEngine2.EngineStuff
             this.width = width;
             this.height = height;
         }
-        
+
         public Rectangle(float x, float y, int width, int height)
         {
             this.x = x;
@@ -34,7 +34,7 @@ namespace SubrightEngine2.EngineStuff
             this.x = x;
             this.y = y;
         }
-        
+
         public Rectangle(int x, int y, int width, int height)
         {
             this.x = x;
@@ -42,7 +42,7 @@ namespace SubrightEngine2.EngineStuff
             this.width = width;
             this.height = height;
         }
-        
+
         public Rectangle(int x, int y)
         {
             this.x = x;

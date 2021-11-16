@@ -5,7 +5,6 @@ using RPGConsole.Graphical.ScenesAvaliable;
 using RPGConsole.Profile;
 using RPGConsole.Saving;
 using SubrightEngine2.EngineStuff;
-using SubrightEngine2.UI;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -26,39 +25,23 @@ namespace RPGConsole
         public override void Update(ref Camera2D cam2, ref Camera3D cam3)
         {
             base.Update(ref cam2, ref cam3);
-            Raylib.BeginDrawing();
-            Raylib.ClearBackground(Raylib_cs.Color.SKYBLUE);
+        }
 
-            if (loader.currentScene != null)
-            {
-                loader.currentScene.UpdateScene(cam2);
-                if (debugMode == true) { Raylib.SetWindowTitle("RPGConsole - " + loader.currentScene.name); }
-            }
-            else
-            {
-                if (debugMode == true) { Raylib.SetWindowTitle("RPGConsole - No Scene Loaded!"); }
-            }
-            //draw hud etc
-            if (debugMode == true) { Raylib.DrawFPS(Raylib.GetMouseX() + 10, Raylib.GetMouseY() + 10); }
-            if (Raylib.IsKeyPressed(KeyboardKey.KEY_N))
-            {
-                if (debugMode == true)
-                {
-                    debugMode = false;
-                }
-                else if (debugMode == false)
-                {
-                    debugMode = true;
-                }
-            }
-            Raylib.EndDrawing();
+        public static void Draw2D(ref Camera2D cam2)
+        {
+            Raylib.BeginMode2D(cam2);
+            Raylib.ClearBackground(Raylib_cs.Color.SKYBLUE);
+            Raylib.EndMode2D();
         }
 
         public override void Dispose()
         {
             base.Dispose();
-            loader.currentScene.loaderAsset.UnloadAll();
-            if (debugMode == true) { Debug.Log("unloaded all textures!"); }
+            if (SubrightEngine2.Program.debug == true) { Debug.Log("unloaded all textures!"); }
+
+            supportProfiles.ExitProfile();
+            string settingsPath = Path.Combine(Environment.CurrentDirectory, "system.json");
+            settings.SaveSettings(settingsPath);
         }
 
         public static ProfileSupport supportProfiles;
@@ -67,14 +50,11 @@ namespace RPGConsole
         public static bool cmdMode = false;
 
         public static Player player;
-        public static SceneLoader loader;
         public static SystemSettings settings;
 
         public static ulong masteriddiscord = 745584917253193790;
         public static bool answermaster = false;
         //public static List<storedTexture> storedTextures = new List<storedTexture>();
-
-        public static bool debugMode = true;
 
         public static SaveFileManager manager = new SaveFileManager();
 
@@ -94,7 +74,7 @@ namespace RPGConsole
                 Directory.CreateDirectory(dirpath);
             }
 
-            if (debugMode == true)
+            if (SubrightEngine2.Program.debug == true)
             {
                 Debug.Log("Hello World... debug mode enabled!");
             }
@@ -105,7 +85,7 @@ namespace RPGConsole
             }
 
             //cmdMode = settings.cmdMode;
-            if (debugMode == true) { Debug.Log("cmd mode is " + cmdMode + " but the config is read as " + settings.cmdMode); }
+            if (SubrightEngine2.Program.debug == true) { Debug.Log("cmd mode is " + cmdMode + " but the config is read as " + settings.cmdMode); }
             supportProfiles.InstallProfiles();
 
             player = new Player();
@@ -133,7 +113,7 @@ namespace RPGConsole
                     Debug.Log("(continue/old/play) see if there is a file to continue!");
                     Debug.Log("(opensaves/viewsaves/saves) see what files have been loaded!");
                     Debug.Log("or say what file you want to load by file name!");
-                    if (debugMode == true) { Debug.Log("(skip) usually found from enabling debug mode"); }
+                    if (SubrightEngine2.Program.debug == true) { Debug.Log("(skip) usually found from enabling debug mode"); }
                     for (int i = 0; i < manager.savefiles.Count; i++)
                     {
                         Debug.Log("(" + i + ") " + manager.savefiles[i].fileName);
@@ -183,7 +163,7 @@ namespace RPGConsole
                             System.Console.Clear();
                             break;
                         case "skip":
-                            if (debugMode == true)
+                            if (SubrightEngine2.Program.debug == true)
                             {
                                 continueSave = true;
                             }
@@ -237,7 +217,6 @@ namespace RPGConsole
             {
                 //Player is offset!
                 //launch raylib mode
-                loader = new SceneLoader();
                 const int screenWidth = 800;
                 const int screenHeight = 600;
                 //Raylib.InitWindow(screenWidth, screenHeight, "RPGConsole");
@@ -246,21 +225,26 @@ namespace RPGConsole
                 camera.offset = new System.Numerics.Vector2(screenWidth / 2, screenHeight / 2);
                 camera.zoom = 1.0f;
                 MainScene mainScene = new MainScene();
-                MainMenu mainmenu = new MainMenu();
                 MenuTest testmenu = new MenuTest();
-                SavesMenu savesMeu = new SavesMenu();
-                loader.AddScene(mainScene);
-                loader.AddScene(mainmenu);
-                loader.AddScene(testmenu);
-                loader.AddScene(savesMeu);
-                loader.LoadScene(mainScene);
+                SavesMenu savesMenu = new SavesMenu();
+                SubrightEngine2.Program.loader.AddScene(mainScene);
+                SubrightEngine2.Program.loader.AddScene(testmenu);
+                SubrightEngine2.Program.loader.AddScene(savesMenu);
+                SubrightEngine2.Program.loader.LoadScene(mainScene);
 
                 Raylib.SetTargetFPS(30);
-            }
 
-            supportProfiles.ExitProfile();
-            settings.SaveSettings(settingsPath);
-            Environment.Exit(0);
+                while (!Raylib.WindowShouldClose())
+                {
+                    Raylib.BeginDrawing();
+                    //draw hud etc
+                    //Debug.Log("eh");
+                    Draw2D(ref camera);
+                    if (SubrightEngine2.Program.debug == true) { Raylib.DrawFPS(Raylib.GetMouseX() + 10, Raylib.GetMouseY() + 10); }
+                    Raylib.EndDrawing(); 
+                }
+            }
+            //Environment.Exit(0);
         }
 
         public static CommandRunManager managerRunCommand = new CommandRunManager();

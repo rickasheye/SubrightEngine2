@@ -1,11 +1,8 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Bson;
-using RPGConsole.InventoryBlock;
+﻿using RPGConsole.InventoryBlock;
 using SubrightEngine2.EngineStuff;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using Random = SubrightEngine2.EngineStuff.Random;
 
 namespace RPGConsole.Saving
@@ -17,8 +14,8 @@ namespace RPGConsole.Saving
         public SaveFileManager()
         {
             //save the files
-            if (Reference.debugMode == true) { Debug.Log("Save File Manager loaded!"); }
-            if(!Directory.Exists(Path.Combine(Environment.CurrentDirectory, "saves/")))
+            if (SubrightEngine2.Program.debug) { Debug.Log("Save File Manager loaded!"); }
+            if (!Directory.Exists(Path.Combine(Environment.CurrentDirectory, "saves/")))
             {
                 Directory.CreateDirectory(Path.Combine(Environment.CurrentDirectory, "saves/"));
             }
@@ -43,12 +40,12 @@ namespace RPGConsole.Saving
 
         public bool SaveFiles(CombinedSaveFile saveFile)
         {
-            if (Reference.debugMode)
+            if (SubrightEngine2.Program.debug)
             {
                 Debug.Log("Saving file...");
+                Debug.Log("Saving individual player profile...");
             }
 
-            if (Reference.debugMode) { Debug.Log("Saving individual player profile..."); }
             if (FileExists(saveFile))
             {
                 return LoadFile(saveFile, ref Reference.gen, ref Reference.player);
@@ -69,7 +66,7 @@ namespace RPGConsole.Saving
 
         public CombinedSaveFile getTopmostFile()
         {
-            return savefiles[0]; 
+            return savefiles[0];
         }
 
         public void DeleteFile(CombinedSaveFile saveFile)
@@ -91,9 +88,9 @@ namespace RPGConsole.Saving
                     Debug.Log("This file doesnt exist great! " + path);
                 }
                 //actually do it my way which is taxing on cpu cycles but just do it
-                for(int i = 0; i < savefiles.Count; i++)
+                for (int i = 0; i < savefiles.Count; i++)
                 {
-                    if(savefiles[i] == saveFile)
+                    if (savefiles[i] == saveFile)
                     {
                         savefiles.RemoveAt(i);
                     }

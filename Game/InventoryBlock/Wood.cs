@@ -1,8 +1,4 @@
-﻿using RPGConsole.Graphical;
-using System;
-using System.IO;
-
-namespace RPGConsole.InventoryBlock
+﻿namespace RPGConsole.InventoryBlock
 {
     public class Wood : Block
     {

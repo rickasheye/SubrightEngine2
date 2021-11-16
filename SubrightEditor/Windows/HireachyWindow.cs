@@ -1,11 +1,9 @@
-﻿using System;
-using Raylib_cs;
-using SubrightEngine2;
+﻿using Raylib_cs;
 using SubrightEngine2.EngineStuff;
-using SubrightEngine2.EngineStuff.Input;
 using SubrightEngine2.UI;
 using SubrightEngine2.UI.Tips;
 using SubrightEngine2.UI.Windows;
+using System;
 using Color = SubrightEngine2.EngineStuff.Color;
 
 namespace SubrightEngineEditor.Windows
@@ -26,7 +24,7 @@ namespace SubrightEngineEditor.Windows
         /*public List<GameObject> multipleSelected = new List<GameObject>();
         bool multisel = false;*/
         private int lastY = 0;
-        
+
         public override void Draw2D(ref Camera2D cam)
         {
             base.Draw2D(ref cam);
@@ -36,9 +34,9 @@ namespace SubrightEngineEditor.Windows
                     var newObject = SubrightEngine2.Program.objects[i];
                     DrawText(newObject.name + " - " + newObject.position.ToString + " - " + newObject.size.ToString,
                         position.X + 2, position.Y + 10 + i * 15, 8, Color.WHITE);
-                    var positionX = (int) position.X + 2;
-                    var positionY = lastY + (int) position.Y + 10 + i * 15;
-                    var sizeX = (int) size.X;
+                    var positionX = (int)position.X + 2;
+                    var positionY = lastY + (int)position.Y + 10 + i * 15;
+                    var sizeX = (int)size.X;
                     var sizeY = 10;
                     if (Raylib.GetMouseX() > positionX && Raylib.GetMouseY() > positionY &&
                         Raylib.GetMouseX() < positionX + sizeX && Raylib.GetMouseY() < positionY + sizeY)
@@ -57,7 +55,7 @@ namespace SubrightEngineEditor.Windows
                         var childObject = newObject.childrenObjects[m];
                         if (childObject != null)
                         {
-                            var positionYM = positionY + (int) position.Y + 10 + m * 15;
+                            var positionYM = positionY + (int)position.Y + 10 + m * 15;
                             DrawText(childObject.name, positionX, positionYM, 8, Color.WHITE);
                         }
                     }

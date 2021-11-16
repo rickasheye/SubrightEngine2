@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace SubrightTilemapCreator
+﻿namespace SubrightTilemapCreator
 {
     class Program
     {

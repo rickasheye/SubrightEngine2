@@ -1,10 +1,10 @@
 ﻿using SubrightEngine2.EngineStuff;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace RPGConsole.Graphical
+namespace SubrightEngine2.EngineStuff.Scenes
 {
+    [Serializable]
     public class SceneLoader
     {
         public Scene currentScene;
@@ -15,10 +15,31 @@ namespace RPGConsole.Graphical
             if (sceneExists(scene.name))
             {
                 currentScene = scene;
+                Debug.Log("Loading scene " + scene.name);
             }
             else
             {
                 Debug.Log("Incorrect scene!");
+            }
+        }
+
+        public void LoadScene(string name)
+        {
+            bool defined = false;
+            for(int i = 0; i < currentScenes.Count; i++)
+            {
+                if(currentScenes[i].name == name)
+                {
+                    LoadScene(currentScenes[i]);
+                    Debug.Log("Loading scene " + name);
+                    defined = true;
+                }
+            }
+
+            if(defined == false)
+            {
+                //if defined please explain
+                Debug.Log("Unfortunately your scene you described doesnt exist!");
             }
         }
 
@@ -66,9 +87,9 @@ namespace RPGConsole.Graphical
 
         public bool sceneExists(string sceneName)
         {
-            foreach(Scene currentScene in this.currentScenes)
+            foreach (Scene currentScene in this.currentScenes)
             {
-                if(currentScene.name == sceneName)
+                if (currentScene.name == sceneName)
                 {
                     return true;
                 }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SubrightEditor.Nodes.Variables
+﻿namespace SubrightEditor.Nodes.Variables
 {
     public class Integer : BaseObject
     {

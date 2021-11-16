@@ -1,16 +1,13 @@
 ﻿using Raylib_cs;
 using SubrightEngine2.EngineStuff.BaseComponents;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SubrightEditor.Nodes
 {
     public class NodeObject : Component
     {
-        public NodeObject(string name):base("Blank Node")
+        public NodeObject(string name) : base("Blank Node")
         {
-            if(connectedObject.size.X < 80 || connectedObject.size.Y < 40)
+            if (connectedObject.size.X < 80 || connectedObject.size.Y < 40)
             {
                 connectedObject.size = new SubrightEngine2.EngineStuff.Vector3(80, 40, 0);
             }

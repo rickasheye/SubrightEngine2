@@ -1,10 +1,6 @@
 ﻿using Raylib_cs;
 using RPGConsole.Graphical;
 using RPGConsole.Graphical.ScenesAvaliable;
-using RPGConsole.InventoryItems;
-using System;
-using System.IO;
-using System.Reflection.PortableExecutable;
 
 namespace RPGConsole.InventoryBlock
 {
@@ -23,7 +19,8 @@ namespace RPGConsole.InventoryBlock
 
         public int powerLevel = 0;
 
-        public BlankMachinePart(string MachineBlockName, string middleMachinePart, string rightMachinePart, string leftMachinePart, string downMachinePart) : base(MachineBlockName, 0, 0, 5, Color.GRAY, "Textures/blocks/machine_parts/blank_machine_part.png", 1) {
+        public BlankMachinePart(string MachineBlockName, string middleMachinePart, string rightMachinePart, string leftMachinePart, string downMachinePart) : base(MachineBlockName, 0, 0, 5, Color.GRAY, "Textures/blocks/machine_parts/blank_machine_part.png", 1)
+        {
             name = MachineBlockName;
             this.middleMachinePart = middleMachinePart;
             this.rightMachinePart = rightMachinePart;
@@ -32,7 +29,7 @@ namespace RPGConsole.InventoryBlock
             GeneralStartup();
         }
 
-        public BlankMachinePart(string MachineBlockName):base(MachineBlockName, 0, 0, 5, Color.GRAY, 1)
+        public BlankMachinePart(string MachineBlockName) : base(MachineBlockName, 0, 0, 5, Color.GRAY, 1)
         {
             name = MachineBlockName;
         }
@@ -87,9 +84,9 @@ namespace RPGConsole.InventoryBlock
 
         public void DemeritPowerLevel(BlankMachinePart machinePart)
         {
-            if(machinePart != null)
+            if (machinePart != null)
             {
-                if(machinePart.powerLevel > 0)
+                if (machinePart.powerLevel > 0)
                 {
                     machinePart.powerLevel = powerLevel - 1;
                 }
@@ -100,7 +97,7 @@ namespace RPGConsole.InventoryBlock
         {
             base.UpdateBlock();
             string[] splitString = others.Split(' ');
-            for(int i = 0; i < splitString.Length; i++)
+            for (int i = 0; i < splitString.Length; i++)
             {
                 string splitStringChosen = splitString[i];
                 switch (splitStringChosen.ToLower())
@@ -120,7 +117,7 @@ namespace RPGConsole.InventoryBlock
                 }
             }
 
-            if(disabled == true)
+            if (disabled == true)
             {
                 Raylib.DrawTexture(loaderAsset.textureLoad("TeXtures/overlays/cross.png"), (int)position.X, (int)position.Y, Raylib_cs.Color.WHITE);
             }

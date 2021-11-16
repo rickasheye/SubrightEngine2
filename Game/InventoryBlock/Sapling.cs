@@ -1,13 +1,11 @@
-﻿using RPGConsole.Graphical;
-using RPGConsole.InventoryItems;
+﻿using RPGConsole.InventoryItems;
 using System;
-using System.IO;
 
 namespace RPGConsole.InventoryBlock
 {
     public class Sapling : Block
     {
-        int section = 0; 
+        int section = 0;
         public Sapling() : base("Sapling", 0, 0, 1, Color.LIGHTGREEN, "Textures/blocks/sapling.png", 1) { giveBlock = false; }
 
         public override void MineBlock(Player player)
@@ -28,7 +26,7 @@ namespace RPGConsole.InventoryBlock
                     for (int i = 0; i < randomAmountLeaves; i++)
                     {
                         player.inv.addItem(new InventoryItemLeaf());
-                    }  
+                    }
                 }
             }
         }
@@ -38,7 +36,7 @@ namespace RPGConsole.InventoryBlock
         {
             base.UpdateBlock();
             timer++;
-            if(timer > 400)
+            if (timer > 400)
             {
                 section++;
                 timer = 0;

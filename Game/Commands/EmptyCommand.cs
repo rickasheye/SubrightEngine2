@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace RPGConsole.Commands
+﻿namespace RPGConsole.Commands
 {
     public class EmptyCommand
     {
@@ -17,7 +13,7 @@ namespace RPGConsole.Commands
             this.syntax = syntax;
             typeCommand = type;
         }
-        
+
         public virtual void RunCommand(string[] args)
         {
 

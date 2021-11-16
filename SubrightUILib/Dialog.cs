@@ -1,6 +1,6 @@
-using System;
 using Raylib_cs;
 using SubrightEngine2.EngineStuff;
+using System;
 using Color = SubrightEngine2.EngineStuff.Color;
 using Vector2 = SubrightEngine2.EngineStuff.Vector2;
 using Vector3 = SubrightEngine2.EngineStuff.Vector3;
@@ -11,7 +11,7 @@ namespace SubrightEngine2.UI
     public class Dialog : GameObject
     {
         public bool hideRender;
-        public Dialog(Vector2 position, Vector2 size, string name):base(new Vector3(position.X, position.Y, 0), new Vector3(size.X, size.Y, 0), name){}
+        public Dialog(Vector2 position, Vector2 size, string name) : base(new Vector3(position.X, position.Y, 0), new Vector3(size.X, size.Y, 0), name) { }
 
         public override void Update(ref Camera2D cam2, ref Camera3D cam3)
         {

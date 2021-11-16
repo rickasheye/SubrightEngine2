@@ -1,6 +1,5 @@
 ﻿using RPGConsole.InventoryItems;
 using SubrightEngine2.EngineStuff;
-using System;
 using System.Threading;
 using Random = SubrightEngine2.EngineStuff.Random;
 
@@ -51,25 +50,28 @@ namespace RPGConsole.InventoryBlock
             Generator generator = Reference.gen;
             bool connectedToWater = false;
             Vector2 newPosition = new Vector2(0, 0);
-            if(generator.returnBlock(position.X + 1, position.Y) == generator.getBlock("Water"))
+            if (generator.returnBlock(position.X + 1, position.Y) == generator.getBlock("Water"))
             {
                 newPosition = new Vector2((int)position.X + 1, position.Y);
                 connectedToWater = true;
-            }else if(generator.returnBlock(position.X, position.Y + 1) == generator.getBlock("Water"))
+            }
+            else if (generator.returnBlock(position.X, position.Y + 1) == generator.getBlock("Water"))
             {
                 newPosition = new Vector2(position.X, position.Y + 1);
                 connectedToWater = true;
-            }else if(generator.returnBlock(position.X - 1, position.Y) == generator.getBlock("Water"))
+            }
+            else if (generator.returnBlock(position.X - 1, position.Y) == generator.getBlock("Water"))
             {
                 newPosition = new Vector2(position.X - 1, position.Y);
                 connectedToWater = true;
-            }else if(generator.returnBlock(position.X, position.Y-1) == generator.getBlock("Water"))
+            }
+            else if (generator.returnBlock(position.X, position.Y - 1) == generator.getBlock("Water"))
             {
                 newPosition = new Vector2(position.X, position.Y - 1);
                 connectedToWater = true;
             }
 
-            if(connectedToWater == true)
+            if (connectedToWater == true)
             {
                 generator.setBlock((int)newPosition.X, (int)newPosition.Y, new Obsidian());
                 generator.setBlock((int)position.X, (int)position.Y, new Rock());

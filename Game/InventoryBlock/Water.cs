@@ -1,9 +1,4 @@
-﻿using Raylib_cs;
-using RPGConsole.Graphical;
-using RPGConsole.InventoryItems;
-using System;
-using System.IO;
-using System.Threading;
+﻿using RPGConsole.InventoryItems;
 
 namespace RPGConsole.InventoryBlock
 {

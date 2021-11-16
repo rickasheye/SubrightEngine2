@@ -32,6 +32,6 @@ namespace RPGConsole.InventoryItems
             this.mat = mat;
         }
 
-        public ItemUseable(string name, itemTYPE type, itemMaterial mat, string texturePath):base(name, type, texturePath) { }
+        public ItemUseable(string name, itemTYPE type, itemMaterial mat, string texturePath) : base(name, type, texturePath) { }
     }
 }

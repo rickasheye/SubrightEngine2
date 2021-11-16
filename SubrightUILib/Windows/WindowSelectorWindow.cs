@@ -1,6 +1,6 @@
-using System;
 using Raylib_cs;
 using SubrightEngine2.EngineStuff;
+using System;
 using Color = SubrightEngine2.EngineStuff.Color;
 
 namespace SubrightEngine2.UI.Windows
@@ -30,10 +30,10 @@ namespace SubrightEngine2.UI.Windows
                     Window m = SubContextMenuManager.windows[i];
                     if (m != null && m.name != name)
                     {
-                        int posY = (int) position.Y + 8 + i * 16;
-                        int posX = (int) position.X;
-                        int sizeX = (int) size.X;
-                        int sizeY = (int) 8;
+                        int posY = (int)position.Y + 8 + i * 16;
+                        int posX = (int)position.X;
+                        int sizeX = (int)size.X;
+                        int sizeY = (int)8;
                         DrawText(m.name, posX, posY, 8, Color.WHITE);
                         if (Raylib.GetMouseX() > posX && Raylib.GetMouseX() < posX + sizeX &&
                             Raylib.GetMouseY() > posY &&

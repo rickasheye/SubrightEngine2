@@ -5,70 +5,70 @@ namespace SubrightEngine2.EngineStuff
     public class Mathf
     {
         //Pulled and used from MonoGameFramework
-        public const float Deg2Rad = (float) Math.PI / 180f;
-        public const float Rad2Deg = 180f / (float) Math.PI;
-        public const float PI = (float) Math.PI;
-        public const float E = (float) Math.E;
+        public const float Deg2Rad = (float)Math.PI / 180f;
+        public const float Rad2Deg = 180f / (float)Math.PI;
+        public const float PI = (float)Math.PI;
+        public const float E = (float)Math.E;
         public const float Log10E = 0.4342945f;
         public const float Log2E = 1.442695f;
-        public const float PiOver2 = (float) (Math.PI / 2.0);
-        public const float PiOver4 = (float) (Math.PI / 4.0);
-        public const float TwoPi = (float) (Math.PI * 2.0);
+        public const float PiOver2 = (float)(Math.PI / 2.0);
+        public const float PiOver4 = (float)(Math.PI / 4.0);
+        public const float TwoPi = (float)(Math.PI * 2.0);
         public const float Tau = TwoPi;
 
         public static float Sqrt(float f)
         {
-            return (float) Math.Sqrt(f);
+            return (float)Math.Sqrt(f);
         }
 
         public static float Pow(float x, float y)
         {
-            return (float) Math.Pow(x, y);
+            return (float)Math.Pow(x, y);
         }
 
         public static float Sin(float f)
         {
-            return (float) Math.Sin(f);
+            return (float)Math.Sin(f);
         }
 
         public static float Cos(float f)
         {
-            return (float) Math.Cos(f);
+            return (float)Math.Cos(f);
         }
 
         public static float Tan(float f)
         {
-            return (float) Math.Tan(f);
+            return (float)Math.Tan(f);
         }
 
         public static float Asin(float f)
         {
-            return (float) Math.Asin(f);
+            return (float)Math.Asin(f);
         }
 
         public static float Acos(float f)
         {
-            return (float) Math.Acos(f);
+            return (float)Math.Acos(f);
         }
 
         public static float Atan(float f)
         {
-            return (float) Math.Atan(f);
+            return (float)Math.Atan(f);
         }
 
         public static float Round(float f)
         {
-            return (float) Math.Round(f);
+            return (float)Math.Round(f);
         }
 
         public static float Ceiling(float f)
         {
-            return (float) Math.Ceiling(f);
+            return (float)Math.Ceiling(f);
         }
 
         public static float Floor(float f)
         {
-            return (float) Math.Floor(f);
+            return (float)Math.Floor(f);
         }
 
         /// <summary>
@@ -107,7 +107,7 @@ namespace SubrightEngine2.EngineStuff
             // Internally using doubles not to lose precission
             double amountSquared = amount * amount;
             var amountCubed = amountSquared * amount;
-            return (float) (0.5 * (2.0 * value2 +
+            return (float)(0.5 * (2.0 * value2 +
                                    (value3 - value1) * amount +
                                    (2.0 * value1 - 5.0 * value2 + 4.0 * value3 - value4) * amountSquared +
                                    (3.0 * value2 - value1 - 3.0 * value3 + value4) * amountCubed));
@@ -183,7 +183,7 @@ namespace SubrightEngine2.EngineStuff
                          (3 * v2 - 3 * v1 - 2 * t1 - t2) * sSquared +
                          t1 * s +
                          v1;
-            return (float) result;
+            return (float)result;
         }
 
 
@@ -308,7 +308,7 @@ namespace SubrightEngine2.EngineStuff
         /// </remarks>
         public static float ToDegrees(float radians)
         {
-            return (float) (radians * 57.295779513082320876798154814105);
+            return (float)(radians * 57.295779513082320876798154814105);
         }
 
         /// <summary>
@@ -323,7 +323,7 @@ namespace SubrightEngine2.EngineStuff
         /// </remarks>
         public static float ToRadians(float degrees)
         {
-            return (float) (degrees * 0.017453292519943295769236907684886);
+            return (float)(degrees * 0.017453292519943295769236907684886);
         }
 
         /// <summary>

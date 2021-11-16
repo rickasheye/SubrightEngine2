@@ -1,5 +1,3 @@
-using System;
-
 namespace SubrightEngine2.EngineStuff
 {
     public class Random

@@ -1,14 +1,11 @@
 ﻿using RPGConsole.InventoryBlock;
 using SubrightEngine2.EngineStuff;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace RPGConsole.Commands.General
 {
     public class mineblock : EmptyCommand
     {
-        public mineblock():base("Mine the block under the player", "mb/break/breakblock/mineblock", CommandType.NORMAL) { }
+        public mineblock() : base("Mine the block under the player", "mb/break/breakblock/mineblock", CommandType.NORMAL) { }
 
         public override void RunCommand(string[] args)
         {

@@ -1,7 +1,7 @@
-﻿using System;
+﻿using SubrightEngine2.EngineStuff.InterpreterCode.InterpreterCommands;
+using System;
 using System.Collections.Generic;
 using System.IO;
-using SubrightEngine2.EngineStuff.InterpreterCode.InterpreterCommands;
 
 namespace SubrightEngine2.EngineStuff.InterpreterCode
 {

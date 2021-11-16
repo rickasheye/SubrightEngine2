@@ -64,7 +64,7 @@ namespace RPGConsole.InventoryItems
             this.typeMaterial = typeEntity;
         }
 
-        public InventoryItem(string name, itemTYPE type, int itemCount, entityType typeEntity, string texturePath) :base(name)
+        public InventoryItem(string name, itemTYPE type, int itemCount, entityType typeEntity, string texturePath) : base(name)
         {
             this.name = name;
             this.type = type;
@@ -75,7 +75,7 @@ namespace RPGConsole.InventoryItems
 
         public InventoryItem()
         {
-            if (Reference.debugMode == true) { Debug.Log("ITEM IS EMPTY and but called: " + name); }
+            if (SubrightEngine2.Program.debug) { Debug.Log("ITEM IS EMPTY and but called: " + name); }
         }
     }
 }

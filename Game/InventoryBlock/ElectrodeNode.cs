@@ -2,13 +2,13 @@
 using RPGConsole.Graphical.MenuItems.KeyboardOnlyItems;
 using RPGConsole.InventoryItems;
 using SubrightEngine2.EngineStuff;
-using System.Collections;
 
 namespace RPGConsole.InventoryBlock
 {
     public class ElectrodeNode : Block
     {
-        public ElectrodeNode() : base("ElectrodeNode", 0, 0, 8, Color.WHITESKINCOLOR, "Textures/blocks/powernode.png", 1) {
+        public ElectrodeNode() : base("ElectrodeNode", 0, 0, 8, Color.WHITESKINCOLOR, "Textures/blocks/powernode.png", 1)
+        {
             timeRefresh = timeRefresh * (int)Raylib.GetFrameTime();
         }
 
@@ -21,7 +21,7 @@ namespace RPGConsole.InventoryBlock
         {
             base.UpdateBlock();
             time++;
-            if(time > timeRefresh)
+            if (time > timeRefresh)
             {
                 bolts++;
             }
@@ -48,7 +48,8 @@ namespace RPGConsole.InventoryBlock
         ElectrodeNode node;
         Player player;
 
-        public collectElectrodesButton(Player player, ElectrodeNode node, Vector2 size, Vector2 position):base("Collect " + node.bolts + " Electrodes!", size, position) {
+        public collectElectrodesButton(Player player, ElectrodeNode node, Vector2 size, Vector2 position) : base("Collect " + node.bolts + " Electrodes!", size, position)
+        {
             this.node = node;
             this.player = player;
         }

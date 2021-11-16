@@ -1,16 +1,16 @@
-using System.Collections.Generic;
 using Raylib_cs;
 using SubrightEngine2.EngineStuff;
+using System.Collections.Generic;
 
 namespace SubrightEngine2.UI.Notifications
 {
     public class NotificationHandler : GameObject
     {
-        public NotificationHandler():base(Vector3.zero, Vector3.zero, "NotificationHandler"){}
+        public NotificationHandler() : base(Vector3.zero, Vector3.zero, "NotificationHandler") { }
 
         public static List<Notification> notifications = new List<Notification>();
         public int index = 0;
-        
+
         public override void Start()
         {
             base.Start();
@@ -49,7 +49,7 @@ namespace SubrightEngine2.UI.Notifications
                                 index++;
                             }
                         }
-                    } 
+                    }
                 }
             }
         }

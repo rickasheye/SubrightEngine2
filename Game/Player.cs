@@ -1,5 +1,4 @@
-﻿using Raylib_cs;
-using RPGConsole.Crafting;
+﻿using RPGConsole.Crafting;
 using RPGConsole.Graphical.MenuItems;
 using RPGConsole.Graphical.MenuItems.KeyboardOnlyItems;
 using RPGConsole.InventoryBlock;
@@ -7,7 +6,6 @@ using RPGConsole.InventoryItems;
 using SubrightEngine2.EngineStuff;
 using System;
 using System.Collections.Generic;
-using System.Reflection.PortableExecutable;
 using System.Threading;
 using Color = SubrightEngine2.EngineStuff.Color;
 
@@ -62,7 +60,7 @@ namespace RPGConsole
                                 {
                                     if (!enemiesNearby)
                                     {
-                                        Debug.Log("there maYbe enemies nearbY...");
+                                        Debug.Log("there maybe enemies nearby..");
                                         enemiesNearby = true;
                                     }
                                 }
@@ -74,7 +72,7 @@ namespace RPGConsole
                     if (getBlock != null)
                     {
                         position = newPos;
-                        Debug.Log("moved plaYer from " + originalPos.ToString() + " to " + position.ToString());
+                        Debug.Log("moved player from " + originalPos.ToPoint.ToString() + " to " + position.ToPoint.ToString());
                         getBlock.PlayerOnTop(this);
                         getBlock.PlayerOnTop();
 
@@ -85,7 +83,7 @@ namespace RPGConsole
                     else
                     {
                         Debug.Log("unable to move since that block doesnt eXist!");
-                    } 
+                    }
                 }
             }
         }
@@ -116,7 +114,7 @@ namespace RPGConsole
             {
                 //level up
                 level++;
-                Debug.Log("Congrats plaYer! You have levelled up!");
+                Debug.Log("Congrats player! You have leveled up!");
             }
             else
             {
@@ -209,7 +207,7 @@ namespace RPGConsole
                 }
                 bool unfortunate = true;
                 List<CraftingRecipe> allowedReceipes = recipesCalc();
-                if(allowedReceipes != null)
+                if (allowedReceipes != null)
                 {
                     unfortunate = false;
                 }
@@ -233,9 +231,9 @@ namespace RPGConsole
                     switch (craftingVariable)
                     {
                         case "quit":
-                        case "eXit":
-                        case "goodbYe":
-                        case "bYe":
+                        case "exit":
+                        case "goodbye":
+                        case "bye":
                         case "stop":
                             crafting = false;
                             Debug.Log("exited crafting...");
@@ -256,7 +254,7 @@ namespace RPGConsole
                     {
                         if (crafting == true)
                         {
-                            Debug.Log("UnfortunatelY that number is incorrect!");
+                            Debug.Log("Unfortunately that number is incorrect!");
                         }
                     }
                 }
@@ -308,7 +306,7 @@ namespace RPGConsole
                 if (Reference.cmdMode)
                 {
                     Console.Clear();
-                    Debug.Log("Welcome to furnacing select an argument to furnace an item..."); 
+                    Debug.Log("Welcome to furnacing select an argument to furnace an item...");
                 }
                 List<FurnaceRecipe> recipes = new List<FurnaceRecipe>();
                 for (int i = 0; i < furnaceRecipes.Count; i++)
@@ -355,7 +353,7 @@ namespace RPGConsole
                     else
                     {
                         Console.WriteLine("No furnace recipes to show!");
-                        Text teXt = new Text("No recipes to show use 'F' again to eXit!", new Vector2(10, 10), 5, Color.BLACK);
+                        Text teXt = new Text("No recipes to show use 'F' again to exit!", new Vector2(10, 10), 5, Color.BLACK);
                         Reference.loader.currentScene.guiOptions.Add(teXt);
                     }
                     EmptyContainer container = new EmptyContainer(new Vector2(10, 10), new Vector2(10, 10));
@@ -368,7 +366,7 @@ namespace RPGConsole
 
         public void FurnaceChoose(string furnaceVariable, ref bool furnaceBaking, List<FurnaceRecipe> recipes)
         {
-            Debug.Log("give command (eXit) to quit out of furnace prompt!");
+            Debug.Log("give command (exit) to quit out of furnace prompt!");
             switch (furnaceVariable)
             {
                 case "quit":
@@ -377,7 +375,7 @@ namespace RPGConsole
                 case "bYe":
                 case "stop":
                     furnaceBaking = false;
-                    Debug.Log("eXited furnacing...");
+                    Debug.Log("exited furnacing...");
                     break;
             }
             int finalConvertedInteger = 0;
@@ -394,7 +392,7 @@ namespace RPGConsole
             {
                 if (furnaceBaking == true)
                 {
-                    Debug.Log("UnfortunatelY that number is incorrect!");
+                    Debug.Log("Unfortunately that number is incorrect!");
                 }
             }
         }
@@ -422,7 +420,7 @@ namespace RPGConsole
                             }
                             InventorYGUIOption invOption = new InventorYGUIOption(modernName + " #" + inv.items[i].itemCount, new Vector2(10, (10 * i) + 25), new Vector2(50, 50), chest);
                             invOption.eqipItem = inv.items[i];
-                            Reference.loader.currentScene.guiOptions.Add(invOption); 
+                            Reference.loader.currentScene.guiOptions.Add(invOption);
                         }
                     }
                 }
@@ -439,7 +437,7 @@ namespace RPGConsole
             else
             {
                 Debug.Log("InventorY Items");
-                foreach(InventoryItem item in inv.items)
+                foreach (InventoryItem item in inv.items)
                 {
                     Debug.Log(item.name + " " + item.itemCount);
                 }
@@ -466,7 +464,7 @@ namespace RPGConsole
                 else
                 {
                     Debug.Log("No chest items to show!");
-                    Text teXt = new Text("No items to show in this chest! use the InventorY to put items in this chest!", new Vector2(10, 10), 5, Color.BLACK);
+                    Text teXt = new Text("No items to show in this chest! use the Inventory to put items in this chest!", new Vector2(10, 10), 5, Color.BLACK);
                     Reference.loader.currentScene.guiOptions.Add(teXt);
                 }
                 EmptyContainer container = new EmptyContainer(new Vector2(10, 10), new Vector2(10, 10));
@@ -477,7 +475,7 @@ namespace RPGConsole
             {
                 //just spawn the inventorY inside of this!
                 Debug.Log("Chest inventorY");
-                foreach(InventoryItem item in chest.storeInventoryItems)
+                foreach (InventoryItem item in chest.storeInventoryItems)
                 {
                     Debug.Log(item.name + " " + item.itemCount);
                 }
@@ -490,12 +488,12 @@ namespace RPGConsole
         public List<InventoryItem> removingItems;
         public InventoryItem giveItem;
 
-        public CraftingGUIOption(string title, Vector2 pos, Vector2 size):base(title, size, pos) { }
+        public CraftingGUIOption(string title, Vector2 pos, Vector2 size) : base(title, size, pos) { }
 
         public override void Triggerable()
         {
             base.Triggerable();
-            foreach(InventoryItem item in removingItems)
+            foreach (InventoryItem item in removingItems)
             {
                 Reference.player.inv.removeItem(item);
             }
@@ -509,7 +507,7 @@ namespace RPGConsole
     {
         public InventoryItem input;
         public InventoryItem output;
-        public FurnaceGUIOption(string title, Vector2 pos, Vector2 size):base(title, size, pos){}
+        public FurnaceGUIOption(string title, Vector2 pos, Vector2 size) : base(title, size, pos) { }
 
         public override void Triggerable()
         {
@@ -532,7 +530,7 @@ namespace RPGConsole
         public InventoryItem eqipItem;
         Chest chestInstance;
 
-        public InventorYGUIOption(string title, Vector2 pos, Vector2 size, Chest chestInstance):base(title, size, pos) { if (chestInstance == null) { this.chestInstance = chestInstance; justbenormal = true; } }
+        public InventorYGUIOption(string title, Vector2 pos, Vector2 size, Chest chestInstance) : base(title, size, pos) { if (chestInstance == null) { this.chestInstance = chestInstance; justbenormal = true; } }
 
         public override void Start()
         {
@@ -554,7 +552,7 @@ namespace RPGConsole
                 {
                     //nothing i guess
                     justbenormal = true;
-                } 
+                }
             }
         }
 
@@ -564,12 +562,12 @@ namespace RPGConsole
             {
                 if (eqipItem == null)
                 {
-                    Console.WriteLine("UnfortunatelY this item was unavaliable!");
+                    Console.WriteLine("Unfortunately this item was unavaliable!");
                 }
                 base.Triggerable();
                 Reference.player.equipInventoryItem(eqipItem.name);
                 Reference.loader.currentScene.guiOptions.Clear();
-                Reference.player.InitiateInventoryGUI(); 
+                Reference.player.InitiateInventoryGUI();
             }
         }
     }
@@ -578,13 +576,13 @@ namespace RPGConsole
     {
         public InventoryItem eqipItem;
 
-        public InventoryGUIEquip(string title, Vector2 pos, Vector2 size):base(title, size, pos) { }
+        public InventoryGUIEquip(string title, Vector2 pos, Vector2 size) : base(title, size, pos) { }
 
         public override void Triggerable()
         {
             if (eqipItem == null)
             {
-                Console.WriteLine("UnfortunatelY this item was unavaliable!");
+                Console.WriteLine("Unfortunately this item was unavaliable!");
             }
             base.Triggerable();
             Reference.player.equipInventoryItem(eqipItem.name);
@@ -615,7 +613,7 @@ namespace RPGConsole
         public InventoryItem eqipItem;
         public Chest chestInstance;
 
-        public InventorYChestGUIOption(string title, Vector2 pos, Vector2 size):base(title, size, pos) { }
+        public InventorYChestGUIOption(string title, Vector2 pos, Vector2 size) : base(title, size, pos) { }
 
         public override void Triggerable()
         {

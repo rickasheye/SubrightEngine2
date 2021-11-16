@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using Raylib_cs;
+﻿using Raylib_cs;
 using SubrightEngine2.EngineStuff;
 using SubrightEngine2.EngineStuff.BaseComponents;
 using SubrightEngine2.UI;
 using SubrightEngine2.UI.Windows;
+using System;
+using System.Collections.Generic;
+using System.IO;
 using Color = SubrightEngine2.EngineStuff.Color;
 
 namespace SubrightEngineEditor.Windows
@@ -51,9 +51,9 @@ namespace SubrightEngineEditor.Windows
                 for (var i = 0; i < titles.Count; i++)
                 {
                     DrawText(titles[i], position.X + 2, position.Y + 10 + i * 15, 8, Color.WHITE);
-                    if (Raylib.GetMouseX() > (int) position.X + 2 && Raylib.GetMouseX() < (int) position.X + size.X &&
-                        Raylib.GetMouseY() <= (int) position.Y + 18 + i * 15 &&
-                        Raylib.GetMouseY() >= (int) position.Y + 10 + i * 15)
+                    if (Raylib.GetMouseX() > (int)position.X + 2 && Raylib.GetMouseX() < (int)position.X + size.X &&
+                        Raylib.GetMouseY() <= (int)position.Y + 18 + i * 15 &&
+                        Raylib.GetMouseY() >= (int)position.Y + 10 + i * 15)
                         //put a selection field around the marked
                         if (SubContextMenuManager.focusedWindow == this)
                         {

@@ -1,5 +1,5 @@
-﻿using System;
-using Raylib_cs;
+﻿using Raylib_cs;
+using System;
 
 namespace SubrightEngine2.UI
 {
@@ -17,8 +17,8 @@ namespace SubrightEngine2.UI
             base.Draw2D(ref cam);
             //Draw a text box somewhere
             DrawRectangleLines(connectedObject.position.X, connectedObject.position.Y, connectedObject.size.X, connectedObject.size.Y, Program.foregroundColor);
-            Raylib.DrawLine((int) connectedObject.position.X + text.Length, (int) connectedObject.position.Y, (int) connectedObject.position.X + text.Length,
-                (int) connectedObject.position.Y + (int) connectedObject.size.Y, Raylib_cs.Color.BLACK);
+            Raylib.DrawLine((int)connectedObject.position.X + text.Length, (int)connectedObject.position.Y, (int)connectedObject.position.X + text.Length,
+                (int)connectedObject.position.Y + (int)connectedObject.size.Y, Raylib_cs.Color.BLACK);
             var key = Raylib.GetKeyPressed();
             switch (key)
             {

@@ -1,13 +1,10 @@
 ﻿using SubrightEngine2.EngineStuff;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace RPGConsole.Commands.General
 {
     public class equip : EmptyCommand
     {
-        public equip():base("What item to equip", "equip", CommandType.NORMAL) { }
+        public equip() : base("What item to equip", "equip", CommandType.NORMAL) { }
 
         public override void RunCommand(string[] args)
         {

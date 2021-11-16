@@ -1,8 +1,4 @@
-﻿using SubrightEditor.Nodes.Variables;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using String = SubrightEditor.Nodes.Variables.String;
+﻿using String = SubrightEditor.Nodes.Variables.String;
 
 namespace SubrightEditor.Nodes
 {
@@ -12,7 +8,7 @@ namespace SubrightEditor.Nodes
 
         public StringNode(string name) : base(name)
         {
-            if(name == string.Empty)
+            if (name == string.Empty)
             {
                 name = "Untitled String";
             }

@@ -1,9 +1,4 @@
-﻿using RPGConsole.Graphical;
-using RPGConsole.InventoryItems;
-using System;
-using System.IO;
-
-namespace RPGConsole.InventoryBlock
+﻿namespace RPGConsole.InventoryBlock
 {
     public class Obsidian : Block
     {
