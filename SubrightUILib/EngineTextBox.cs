@@ -6,12 +6,17 @@ namespace SubrightEngine2.UI
     [Serializable]
     public class EngineTextBox : UIElement
     {
+        //The text box used to write text to the screen.
         public string text = "Pog";
 
         public EngineTextBox(string name) : base(name)
         {
         }
 
+        /// <summary>
+        /// Used to draw a box on the screen where the user can use to type things into which can be used to extract text from.
+        /// </summary>
+        /// <param name="cam"></param>
         public override void Draw2D(ref Camera2D cam)
         {
             base.Draw2D(ref cam);

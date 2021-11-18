@@ -4,7 +4,10 @@ using SubrightEngine2.EngineStuff.InterpreterCode;
 using SubrightEngine2.EngineStuff.Scenes;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
+using System.IO.Compression;
+using System.Net;
 using System.Runtime.InteropServices;
 using Color = Raylib_cs.Color;
 using Vector3 = System.Numerics.Vector3;
@@ -38,12 +41,40 @@ namespace SubrightEngine2
         public static SubrightEngine2.EngineStuff.Color foregroundColor = EngineStuff.Color.LIGHTGRAY;
         public static SubrightEngine2.EngineStuff.Color backgroundColor = EngineStuff.Color.GRAY;
         public static SubrightEngine2.EngineStuff.Color textColor = EngineStuff.Color.White;
+        static bool finishedDownloading = false;
+
+        //temp fix
+        static string[] args;
+        static bool saveFile = false;
+        static bool overrideStart = false;
 
         public static void Initialise(string[] args, bool saveFile, bool overrideStart)
         {
             gameStart = overrideStart;
             //init cycle
             Debug.Log("Start init cycle");
+            //probably should make sure raylib is installed correctly before loading aswell... sometime i guess.
+            string raylibDest = Path.Combine(Environment.CurrentDirectory, "raylib.dll");
+            if (!File.Exists(raylibDest))
+            {
+                //Download raylib into that folder extract it to the dll and shed the other files.
+                Debug.Log("Downloading raylib zip file");
+                WebClient client = new WebClient();
+                client.DownloadFileAsync(new Uri("https://github.com/raysan5/raylib/releases/download/3.7.0/raylib-3.7.0_win64_msvc16.zip"), "raylib-3.7.0_win64_msvc16.zip");
+                client.DownloadProgressChanged += delegate { Debug.Log("Downloading..."); };
+                client.DownloadFileCompleted += new AsyncCompletedEventHandler(completedraylibdownload);
+                Program.args = args;
+                Program.saveFile = saveFile;
+                Program.overrideStart = overrideStart;
+                string line = Console.ReadLine();
+                //halt
+            }
+            else
+            {
+                Debug.Log("raylib found! no need to download!");
+                finishedDownloading = true;
+            }
+
             if(loader == null)
             {
                 loader = new SceneLoader();
@@ -234,8 +265,15 @@ namespace SubrightEngine2
                 if (bootcount <= 100)
                 {
                     Raylib.DrawRectangle(0, 0, Raylib.GetScreenWidth(), Raylib.GetScreenHeight(), backgroundColor.ToRaylibColor);
-                    Raylib.DrawTexture(image, Raylib.GetScreenWidth() / 2 - image.width / 2,
-                        Raylib.GetScreenHeight() / 2 - image.height / 2, Color.WHITE);
+                    if (image.width != 0 && image.height != 0)
+                    {
+                        Raylib.DrawTexture(image, Raylib.GetScreenWidth() / 2 - image.width / 2,
+                    Raylib.GetScreenHeight() / 2 - image.height / 2, Color.WHITE);
+                    }
+                    else
+                    {
+                        Raylib.DrawText("You are missing the cool splash screen texture :( Loading Subright Engine 2's Assets hold tight... next time add the texture! (PS its supposed to be under 'textures/titlescreen.png').", 10, 10, 10, Color.BLACK);
+                    }
                     //Raylib.DrawRectangle((Raylib.GetScreenWidth() / 2) - (image.width / 2), (Raylib.GetScreenHeight() / 2) - (image.height / 2) + image.height + 10, Raylib_cs.Color.WHITE);
                     if (debug)
                     {
@@ -259,6 +297,51 @@ namespace SubrightEngine2
 
             if (saveFile == false) { LevelLoader.WriteLevelByte(); }
             Raylib.CloseWindow();
+        }
+
+        private static void completedraylibdownload(object sender, AsyncCompletedEventArgs e)
+        {
+            Debug.Log("Finished downloading extracting files.");
+            ZipFile.ExtractToDirectory("raylib-3.7.0_win64_msvc16.zip", Environment.CurrentDirectory);
+            var directoryFiles = Directory.GetFiles(Path.Combine(Environment.CurrentDirectory, "raylib-3.7.0_win64_msvc16"), "*.dll", SearchOption.AllDirectories);
+            //find the raylib.dll
+            Debug.Log("Locating raylib dll");
+            string foundFile = "undefined";
+            for (int i = 0; i < directoryFiles.Length; i++)
+            {
+                if (directoryFiles[i].Contains("raylib.dll"))
+                {
+                    foundFile = directoryFiles[i];
+                    break;
+                }
+            }
+            Debug.Log("Located file moving");
+            if (File.Exists(foundFile))
+            {
+                File.Copy(foundFile, Path.Combine(Environment.CurrentDirectory, "raylib.dll"));
+                RecursiveDelete(new DirectoryInfo(Path.Combine(Environment.CurrentDirectory, "raylib-3.7.0_win64_msvc16")));
+                File.Delete(Path.Combine(Environment.CurrentDirectory, "raylib-3.7.0_win64_msvc16.zip"));
+                Debug.Log("Copied file and cleaned up! sucesfully!");
+            }
+            else
+            {
+                Debug.Log("Process was unable to find file quitting!!");
+                Environment.Exit(0);
+            }
+            Debug.Log("Finished process reloading...");
+            Initialise(args, saveFile, overrideStart);
+        }
+
+        public static void RecursiveDelete(DirectoryInfo baseDir)
+        {
+            if (!baseDir.Exists)
+                return;
+
+            foreach (var dir in baseDir.EnumerateDirectories())
+            {
+                RecursiveDelete(dir);
+            }
+            baseDir.Delete(true);
         }
 
         public static void SetWindowTitle(string name)

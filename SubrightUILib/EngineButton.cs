@@ -7,6 +7,7 @@ namespace SubrightEngine2.UI
     [Serializable]
     public class EngineButton : UIElement
     {
+        //A regular button.
         public EngineButton(string name) : base(name)
         {
         }

@@ -52,9 +52,9 @@ namespace SubrightEngine2.EngineStuff.InterpreterCode.InterpreterCommands
 
         public bool gameObjectExists(string name)
         {
-            for (var i = 0; i < Program.objects.Count; i++)
+            for (var i = 0; i < Program.loader.currentScene.GameObjects.Count; i++)
             {
-                var create = Program.objects[i];
+                var create = Program.loader.currentScene.GameObjects[i];
                 if (create.name == name) return true;
             }
 

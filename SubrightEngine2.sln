@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SubrightEngine2", "Subright
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SubrightTilemapCreator", "SubrightTilemapCreator\SubrightTilemapCreator.csproj", "{EFEC43FF-D3DB-4F34-B3FA-600E67C05EE2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SubrightEditor", "SubrightEditor\SubrightEditor.csproj", "{EC48F144-6693-42AE-A32F-82CF1C2FCF33}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SubrightEditor", "SubrightEditor\SubrightEditor.csproj", "{EC48F144-6693-42AE-A32F-82CF1C2FCF33}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SubrightUITest", "SubrightUITest\SubrightUITest.csproj", "{EE17BEFC-8594-4510-BA80-39E9CCC0F630}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -150,6 +152,26 @@ Global
 		{EC48F144-6693-42AE-A32F-82CF1C2FCF33}.Release|x64.Build.0 = Release|Any CPU
 		{EC48F144-6693-42AE-A32F-82CF1C2FCF33}.Release|x86.ActiveCfg = Release|Any CPU
 		{EC48F144-6693-42AE-A32F-82CF1C2FCF33}.Release|x86.Build.0 = Release|Any CPU
+		{EE17BEFC-8594-4510-BA80-39E9CCC0F630}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE17BEFC-8594-4510-BA80-39E9CCC0F630}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE17BEFC-8594-4510-BA80-39E9CCC0F630}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{EE17BEFC-8594-4510-BA80-39E9CCC0F630}.Debug|ARM.Build.0 = Debug|Any CPU
+		{EE17BEFC-8594-4510-BA80-39E9CCC0F630}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{EE17BEFC-8594-4510-BA80-39E9CCC0F630}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{EE17BEFC-8594-4510-BA80-39E9CCC0F630}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{EE17BEFC-8594-4510-BA80-39E9CCC0F630}.Debug|x64.Build.0 = Debug|Any CPU
+		{EE17BEFC-8594-4510-BA80-39E9CCC0F630}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{EE17BEFC-8594-4510-BA80-39E9CCC0F630}.Debug|x86.Build.0 = Debug|Any CPU
+		{EE17BEFC-8594-4510-BA80-39E9CCC0F630}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE17BEFC-8594-4510-BA80-39E9CCC0F630}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE17BEFC-8594-4510-BA80-39E9CCC0F630}.Release|ARM.ActiveCfg = Release|Any CPU
+		{EE17BEFC-8594-4510-BA80-39E9CCC0F630}.Release|ARM.Build.0 = Release|Any CPU
+		{EE17BEFC-8594-4510-BA80-39E9CCC0F630}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{EE17BEFC-8594-4510-BA80-39E9CCC0F630}.Release|ARM64.Build.0 = Release|Any CPU
+		{EE17BEFC-8594-4510-BA80-39E9CCC0F630}.Release|x64.ActiveCfg = Release|Any CPU
+		{EE17BEFC-8594-4510-BA80-39E9CCC0F630}.Release|x64.Build.0 = Release|Any CPU
+		{EE17BEFC-8594-4510-BA80-39E9CCC0F630}.Release|x86.ActiveCfg = Release|Any CPU
+		{EE17BEFC-8594-4510-BA80-39E9CCC0F630}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

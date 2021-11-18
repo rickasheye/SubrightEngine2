@@ -29,6 +29,10 @@ namespace SubrightEngine2.UI
             }
         }
 
+        /// <summary>
+        /// Create a dialog on the fly with a object.
+        /// </summary>
+        /// <param name="log">The object to automatically add into the list.</param>
         public static void CreateDialog(Dialog log)
         {
             if (dialogExists(log))
@@ -42,6 +46,10 @@ namespace SubrightEngine2.UI
             }
         }
 
+        /// <summary>
+        /// Remove the dialog object from the list inside this class.
+        /// </summary>
+        /// <param name="log">Given the exact dialog used to create a dialog in this class with.</param>
         public static void RemoveDialog(Dialog log)
         {
             if (!dialogExists(log))
@@ -55,6 +63,11 @@ namespace SubrightEngine2.UI
             }
         }
 
+        /// <summary>
+        /// Check if this dialog exists!
+        /// </summary>
+        /// <param name="dialog">What dialog you want to check exists in the list found in this class.</param>
+        /// <returns></returns>
         public static bool dialogExists(Dialog dialog)
         {
             for (int i = 0; i < dialogs.Count; i++)

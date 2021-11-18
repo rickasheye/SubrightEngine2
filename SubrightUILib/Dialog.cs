@@ -10,6 +10,7 @@ namespace SubrightEngine2.UI
     [Serializable]
     public class Dialog : GameObject
     {
+        //Base dialog to render.
         public bool hideRender;
         public Dialog(Vector2 position, Vector2 size, string name) : base(new Vector3(position.X, position.Y, 0), new Vector3(size.X, size.Y, 0), name) { }
 

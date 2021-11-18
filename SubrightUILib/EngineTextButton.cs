@@ -4,6 +4,7 @@ namespace SubrightEngine2.UI
 {
     public class EngineTextButton : EngineTextBox
     {
+        //A button with text.
         public string textContent;
 
         public EngineTextButton(string name, string textContent) : base(name)
@@ -17,6 +18,10 @@ namespace SubrightEngine2.UI
             Draw2D(ref cam2);
         }
 
+        /// <summary>
+        /// Used to draw the text onto the screen but alongside a button.
+        /// </summary>
+        /// <param name="cam"></param>
         public override void Draw2D(ref Camera2D cam)
         {
             base.Draw2D(ref cam);

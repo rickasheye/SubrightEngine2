@@ -19,7 +19,7 @@ namespace SubrightEngine2.EngineStuff.BaseComponents
             if (connectedObject == null)
             {
                 connectedObject = GameObject.getOwner(this);
-                Debug.Log("Unfortunately this object doesnt have any connected object", LogType.WARNING);
+                Debug.LogWarning("Unfortunately this object doesnt have any connected object");
             }
         }
 

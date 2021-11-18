@@ -34,7 +34,7 @@ namespace SubrightEngine2.EngineStuff
             else
             {
                 //Unfortunately this doesnt work
-                Debug.Log("Unfortunately this doesnt work as the file: " + path + " cannot be found!", LogType.MESSAGE);
+                Debug.LogError("Unfortunately this doesnt work as the file: " + path + " cannot be found!");
             }
         }
 

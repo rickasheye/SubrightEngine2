@@ -9,6 +9,7 @@ namespace SubrightEngine2.UI
     [Serializable]
     public class ContextMenu : GameObject
     {
+        //Context menu to give items and then to thenafter render.
         public bool hideRender = false;
         private readonly List<ContextItem> items = new List<ContextItem>();
 

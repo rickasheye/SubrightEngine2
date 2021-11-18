@@ -45,12 +45,20 @@ namespace SubrightEngine2.UI
             this.resizeable = resizeable;
         }
 
+        /// <summary>
+        /// When the window starts.
+        /// </summary>
         public override void Start()
         {
             base.Start();
             framebuffer = new Image();
         }
 
+        /// <summary>
+        /// Update method to update the width and height of the window.
+        /// </summary>
+        /// <param name="cam2"></param>
+        /// <param name="cam3"></param>
         public override void Update(ref Camera2D cam2, ref Camera3D cam3)
         {
             base.Update(ref cam2, ref cam3);
@@ -59,6 +67,10 @@ namespace SubrightEngine2.UI
             Draw2D(ref cam2);
         }
 
+        /// <summary>
+        /// Drawing Window method in 2D
+        /// </summary>
+        /// <param name="cam"></param>
         public override void Draw2D(ref Camera2D cam)
         {
             base.Draw2D(ref cam);
@@ -157,6 +169,10 @@ namespace SubrightEngine2.UI
             }
         }
 
+        /// <summary>
+        /// Check if this window is focused.
+        /// </summary>
+        /// <returns>if this window is focused.</returns>
         public bool isFocused()
         {
             if (SubContextMenuManager.focusedWindow == this)

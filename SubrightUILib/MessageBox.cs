@@ -20,18 +20,31 @@ namespace SubrightEngine2.UI
             position = new Vector3(Raylib.GetScreenWidth() / 2 - (size.X / 2), Raylib.GetScreenHeight() / 2 - (size.Y / 2), 0);
         }
 
+        /// <summary>
+        /// On the fly create method to create and display messagebox.
+        /// </summary>
+        /// <param name="message">What message do you want to show on the messagebox.</param>
         public static void CreateMessageBox(string message)
         {
             MessageBox box = new MessageBox(message);
             RallyDialog.dialogs.Add(box);
         }
 
+        /// <summary>
+        /// Update method used to draw the graphics, in this case the message boxes.
+        /// </summary>
+        /// <param name="cam2"></param>
+        /// <param name="cam3"></param>
         public override void Update(ref Camera2D cam2, ref Camera3D cam3)
         {
             base.Update(ref cam2, ref cam3);
             Draw2D(ref cam2);
         }
 
+        /// <summary>
+        /// The draw method used to actually draw those graphics, to display messageboxes.
+        /// </summary>
+        /// <param name="cam"></param>
         public override void Draw2D(ref Camera2D cam)
         {
             base.Draw2D(ref cam);
@@ -47,7 +60,7 @@ namespace SubrightEngine2.UI
                     if (SubrightEngine2.EngineStuff.Input.Input.GetMouseButtonPressed(MouseButton.MOUSE_LEFT_BUTTON))
                     {
                         hideRender = true;
-                        SubrightEngine2.Program.objects.Remove(this);
+                        SubrightEngine2.Program.loader.currentScene.GameObjects.Remove(this);
                     }
                 }
             }

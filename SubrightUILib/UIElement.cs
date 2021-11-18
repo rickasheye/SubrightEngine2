@@ -8,13 +8,16 @@ namespace SubrightEngine2.UI
     [Serializable]
     public class UIElement : Component
     {
-        public string name;
+        public new string name = "Untitled UI Element";
+        public Vector2 position = Vector2.zero;
+        public Vector2 size = Vector2.zero;
 
-        public UIElement(string name) : base(name)
+        public UIElement(string name) : base(name) {}
+
+        public UIElement(string name, Vector2 position, Vector2 size):base(name)
         {
-            this.connectedObject.position = connectedObject.position;
-            this.connectedObject.size = connectedObject.size;
-            this.name = name;
+            this.position = position;
+            this.size = size;
         }
 
         public static UIElement CreateElement(UIElement element, GameObject parentObject)

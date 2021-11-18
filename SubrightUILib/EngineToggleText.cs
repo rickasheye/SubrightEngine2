@@ -4,6 +4,8 @@ namespace SubrightEngine2.UI
 {
     public class EngineToggleText : EngineToggle
     {
+        //Toggle button with Text.
+
         public EngineToggleText(string name) : base(name)
         {
 
@@ -15,6 +17,10 @@ namespace SubrightEngine2.UI
             Draw2D(ref cam2);
         }
 
+        /// <summary>
+        /// Draw the text next to the toggle button.
+        /// </summary>
+        /// <param name="cam"></param>
         public override void Draw2D(ref Camera2D cam)
         {
             base.Draw2D(ref cam);
