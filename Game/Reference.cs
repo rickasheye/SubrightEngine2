@@ -11,7 +11,7 @@ namespace Game
         {
             base.Start();
             SubrightEngine2.Program.debug = true;
-            cycle = new InitCycle();
+            cycle = new InitCycle(false);
             //SubrightEngine2.Program.SetWindowTitle("Subright Engine Editor");
             cycle.Start();
         }
@@ -20,6 +20,7 @@ namespace Game
         {
             base.Update(ref cam2, ref cam3);
             cycle.Update(ref cam2, ref cam3);
+            Raylib.ClearBackground(Raylib_cs.Color.SKYBLUE);
         }
 
         public override void Dispose()
