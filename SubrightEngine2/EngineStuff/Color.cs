@@ -6,7 +6,7 @@
         // Summary:
         //     Represents a color that is null.
         public static readonly Color Empty;
-
+        public Raylib_cs.Color ToRaylibColor => new Raylib_cs.Color(R, G, B, A);
         public static readonly Color White = new Color(255, 255, 255);
         public static readonly Color Black = new Color(0, 0, 0);
         public static readonly Color CatalinaBlue = new Color(43, 51, 95);

@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using Raylib_cs;
+﻿using Raylib_cs;
+using System.Collections.Generic;
 
 namespace SubrightEngine2.UI.Tips
 {

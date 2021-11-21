@@ -1,5 +1,3 @@
-using System;
-
 namespace SubrightEngine2.EngineStuff
 {
     public class Random
@@ -8,6 +6,11 @@ namespace SubrightEngine2.EngineStuff
         {
             System.Random rand = new System.Random();
             return rand.Next(start, end);
+        }
+
+        public static int Range(int end)
+        {
+            return Range(0, end);
         }
     }
 }

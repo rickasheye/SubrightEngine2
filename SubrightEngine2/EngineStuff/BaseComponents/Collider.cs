@@ -1,6 +1,6 @@
+using Raylib_cs;
 using System;
 using System.Collections.Generic;
-using Raylib_cs;
 
 namespace SubrightEngine2.EngineStuff.BaseComponents
 {
@@ -17,10 +17,10 @@ namespace SubrightEngine2.EngineStuff.BaseComponents
             this.offset_size = offsetSize;
             //dispose of this once we are done with it
             var objectsWithCollision = new List<GameObject>();
-            for (var i = 0; i < Program.objects.Count; i++)
+            for (var i = 0; i < Program.loader.currentScene.GameObjects.Count; i++)
             {
                 var trueCollision = false;
-                var coms = Program.objects[i].components;
+                var coms = Program.loader.currentScene.GameObjects[i].components;
                 for (var m = 0; m < coms.Count; m++)
                     if (coms[m].Equals(typeof(BoxCollider)))
                     {
@@ -28,7 +28,7 @@ namespace SubrightEngine2.EngineStuff.BaseComponents
                         break;
                     }
 
-                if (trueCollision) objectsWithCollision.Add(Program.objects[i]);
+                if (trueCollision) objectsWithCollision.Add(Program.loader.currentScene.GameObjects[i]);
             }
 
             collisionObjects.AddRange(objectsWithCollision);

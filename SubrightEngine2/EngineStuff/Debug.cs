@@ -13,27 +13,45 @@ namespace SubrightEngine2.EngineStuff
     public class Debug
     {
         public static List<string> logFile = new List<string>();
-        
-        public static void Log(string debugLog, LogType type)
+
+        public static void Log(string debugLog, LogType type, bool debugOverride)
         {
-            string file = "[" + type + "] - " + debugLog;
-            logFile.Insert(0, file);
-            Console.WriteLine(file);
+            if (Program.debug || debugOverride)
+            {
+                string file = "[" + type + "] - " + debugLog;
+                logFile.Insert(0, file);
+                Console.WriteLine(file); 
+            }
+        }
+
+        public static void Log(string debugLog, bool debugOverride)
+        {
+            Log(debugLog, LogType.MESSAGE, debugOverride);
         }
 
         public static void Log(string debugLog)
         {
-            Log(debugLog, LogType.MESSAGE);
+            Log(debugLog, true);
+        }
+
+        public static void LogError(string debugLog, bool debugOverride)
+        {
+            Log(debugLog, LogType.ERROR, debugOverride);
         }
 
         public static void LogError(string debugLog)
         {
-            Log(debugLog, LogType.ERROR);
+            LogError(debugLog, true);
+        }
+
+        public static void LogWarning(string debugLog, bool debugOverride)
+        {
+            Log(debugLog, LogType.WARNING, debugOverride);
         }
 
         public static void LogWarning(string debugLog)
         {
-            Log(debugLog, LogType.WARNING);
+            LogWarning(debugLog, true);
         }
     }
 }

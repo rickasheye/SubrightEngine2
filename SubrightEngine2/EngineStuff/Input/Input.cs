@@ -1,5 +1,5 @@
-using System;
 using Raylib_cs;
+using System;
 
 namespace SubrightEngine2.EngineStuff.Input
 {
@@ -72,14 +72,14 @@ namespace SubrightEngine2.EngineStuff.Input
 
         public static bool GetMouseButtonPressed(string buttonname, bool pause)
         {
-            return GetMouseButtonPressed((MouseButton) Enum.Parse(typeof(MouseButton), buttonname), pause);
+            return GetMouseButtonPressed((MouseButton)Enum.Parse(typeof(MouseButton), buttonname), pause);
         }
 
         public static bool GetMouseButtonPressed(string buttonname)
         {
             return GetMouseButtonPressed(buttonname, false);
         }
-        
+
         public static bool GetMouseButtonDown(MouseButton button, bool pause)
         {
             if (Raylib.IsMouseButtonDown(button) && pause == false)
@@ -97,14 +97,14 @@ namespace SubrightEngine2.EngineStuff.Input
 
         public static bool GetMouseButtonDown(string buttonname, bool pause)
         {
-            return GetMouseButtonDown((MouseButton) Enum.Parse(typeof(MouseButton), buttonname), pause);
+            return GetMouseButtonDown((MouseButton)Enum.Parse(typeof(MouseButton), buttonname), pause);
         }
 
         public static bool GetMouseButtonDown(string buttonname)
         {
             return GetMouseButtonDown(buttonname, false);
         }
-        
+
         public static bool GetMouseButtonUp(MouseButton button, bool pause)
         {
             if (Raylib.IsMouseButtonUp(button) && pause == false)
@@ -122,7 +122,7 @@ namespace SubrightEngine2.EngineStuff.Input
 
         public static bool GetMouseButtonUp(string buttonname, bool pause)
         {
-            return GetMouseButtonUp((MouseButton) Enum.Parse(typeof(MouseButton), buttonname), pause);
+            return GetMouseButtonUp((MouseButton)Enum.Parse(typeof(MouseButton), buttonname), pause);
         }
 
         public static bool GetMouseButtonUp(string buttonname)

@@ -1,5 +1,5 @@
-﻿using System;
-using Raylib_cs;
+﻿using Raylib_cs;
+using System;
 
 namespace SubrightEngine2.EngineStuff
 {
@@ -21,7 +21,7 @@ namespace SubrightEngine2.EngineStuff
                 case Renderer.RAYLIB:
                 default:
                     //render with raylib?
-                    Raylib.DrawRectangle((int) position.X, (int) position.Y, (int) size.X, (int) size.Y,
+                    Raylib.DrawRectangle((int)position.X, (int)position.Y, (int)size.X, (int)size.Y,
                         new Raylib_cs.Color(color.R, color.G, color.B, 255));
                     break;
             }
@@ -66,7 +66,7 @@ namespace SubrightEngine2.EngineStuff
                 case Renderer.RAYLIB:
                 default:
                     //render with raylib?
-                    Raylib.DrawRectangleLines((int) position.X, (int) position.Y, (int) size.X, (int) size.Y,
+                    Raylib.DrawRectangleLines((int)position.X, (int)position.Y, (int)size.X, (int)size.Y,
                         new Raylib_cs.Color(color.R, color.G, color.B, 255));
                     break;
             }
@@ -111,7 +111,7 @@ namespace SubrightEngine2.EngineStuff
                 case Renderer.RAYLIB:
                 default:
                     //render with raylib?
-                    Raylib.DrawText(text, (int) position.X, (int) position.Y, size,
+                    Raylib.DrawText(text, (int)position.X, (int)position.Y, size,
                         new Raylib_cs.Color(color.R, color.G, color.B, 255));
                     break;
             }
@@ -138,15 +138,15 @@ namespace SubrightEngine2.EngineStuff
         //render with floats with a renderer
         public void DrawText(string text, float X, float Y, float Size, Color color, Renderer render)
         {
-            DrawText(text, new Vector2(X, Y), (int) Size, color, render);
+            DrawText(text, new Vector2(X, Y), (int)Size, color, render);
         }
 
         //render with floats without choosing a renderer
         public void DrawText(string text, float X, float Y, float Size, Color color)
         {
-            DrawText(text, new Vector2(X, Y), (int) Size, color, Renderer.RAYLIB);
+            DrawText(text, new Vector2(X, Y), (int)Size, color, Renderer.RAYLIB);
         }
-        
+
         //this part renders with on a image
         public void DrawRectangleImage(Vector2 position, Vector2 size, Color color, Renderer render, ref Image image)
         {
@@ -156,7 +156,7 @@ namespace SubrightEngine2.EngineStuff
                 case Renderer.RAYLIB:
                 default:
                     //render with raylib?
-                    Raylib.ImageDrawRectangle(ref image, (int) position.X, (int) position.Y, (int) size.X, (int) size.Y,
+                    Raylib.ImageDrawRectangle(ref image, (int)position.X, (int)position.Y, (int)size.X, (int)size.Y,
                         new Raylib_cs.Color(color.R, color.G, color.B, 255));
                     break;
             }
@@ -201,7 +201,7 @@ namespace SubrightEngine2.EngineStuff
                 case Renderer.RAYLIB:
                 default:
                     //render with raylib?
-                    Raylib.ImageDrawRectangleLines(ref image, new Raylib_cs.Rectangle((int) position.X, (int) position.Y, (int) size.X, (int) size.Y),
+                    Raylib.ImageDrawRectangleLines(ref image, new Raylib_cs.Rectangle((int)position.X, (int)position.Y, (int)size.X, (int)size.Y),
                         1, new Raylib_cs.Color(color.R, color.G, color.B, 255));
                     break;
             }
@@ -246,7 +246,7 @@ namespace SubrightEngine2.EngineStuff
                 case Renderer.RAYLIB:
                 default:
                     //render with raylib?
-                    Raylib.ImageDrawText(ref image, text, (int) position.X, (int) position.Y, size,
+                    Raylib.ImageDrawText(ref image, text, (int)position.X, (int)position.Y, size,
                         new Raylib_cs.Color(color.R, color.G, color.B, 255));
                     break;
             }
@@ -273,13 +273,13 @@ namespace SubrightEngine2.EngineStuff
         //render with floats with a renderer
         public void DrawTextImage(string text, float X, float Y, float Size, Color color, Renderer render, ref Image image)
         {
-            DrawTextImage(text, new Vector2(X, Y), (int) Size, color, render, ref image);
+            DrawTextImage(text, new Vector2(X, Y), (int)Size, color, render, ref image);
         }
 
         //render with floats without choosing a renderer
         public void DrawTextImage(string text, float X, float Y, float Size, Color color, ref Image image)
         {
-            DrawTextImage(text, new Vector2(X, Y), (int) Size, color, Renderer.RAYLIB, ref image);
+            DrawTextImage(text, new Vector2(X, Y), (int)Size, color, Renderer.RAYLIB, ref image);
         }
     }
 }

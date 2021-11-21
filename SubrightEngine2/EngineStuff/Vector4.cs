@@ -1,6 +1,3 @@
-using System.Dynamic;
-using System.IO.Compression;
-
 namespace SubrightEngine2.EngineStuff
 {
     public class Vector4
@@ -17,7 +14,7 @@ namespace SubrightEngine2.EngineStuff
         public float w, x, y, z;
         public float Magnitude { get; private set; } = 0;
         public float sqrMagnitude { get; private set; } = 0;
-        
+
         public Vector4(float w, float x, float y, float z)
         {
             Set(w, x, y, z);

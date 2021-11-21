@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-using System.Text;
-using Raylib_cs;
+﻿using Raylib_cs;
 using SubrightEngine2.EngineStuff;
-using SubrightEngine2.EngineStuff.BaseComponents;
-using SubrightEngine2.EngineStuff.Input;
 using SubrightEngine2.EngineStuff.InterpreterCode;
-using SubrightEngine2.EngineStuff.LevelLoading;
+using SubrightEngine2.EngineStuff.Scenes;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
+using System.IO.Compression;
+using System.Net;
+using System.Runtime.InteropServices;
 using Color = Raylib_cs.Color;
 using Vector3 = System.Numerics.Vector3;
 
@@ -18,10 +16,8 @@ namespace SubrightEngine2
 {
     public static class Program
     {
-        public static List<GameObject> objects = new List<GameObject>();
         public static bool debug = false;
         public static GameObject selectedObject;
-        public static string levelSaveBlankOpen = Path.Combine(Environment.CurrentDirectory, "levels/level01.scpb");
 
         public static Model arrowModel;
         public static bool console = false;
@@ -38,23 +34,76 @@ namespace SubrightEngine2
         public static bool ranonce = false;
 
         public static Extension extension;
+        public static SceneLoader loader;
 
         private static bool initExtension = false;
-        public static void Initialise(string[] args)
+
+        public static SubrightEngine2.EngineStuff.Color foregroundColor = EngineStuff.Color.LIGHTGRAY;
+        public static SubrightEngine2.EngineStuff.Color backgroundColor = EngineStuff.Color.GRAY;
+        public static SubrightEngine2.EngineStuff.Color textColor = EngineStuff.Color.White;
+        static bool finishedDownloading = false;
+
+        //temp fix
+        static string[] args;
+        static bool saveFile = false;
+        static bool overrideStart = false;
+
+        public static void Initialise(string[] args, bool saveFile, bool overrideStart)
         {
+            gameStart = overrideStart;
             //init cycle
-            Debug.Log("Start init cycle", LogType.MESSAGE);
+            Debug.Log("Start init cycle");
+            //probably should make sure raylib is installed correctly before loading aswell... sometime i guess.
+            string raylibDest = Path.Combine(Environment.CurrentDirectory, "raylib.dll");
+            if (!File.Exists(raylibDest))
+            {
+                //Download raylib into that folder extract it to the dll and shed the other files.
+                Debug.Log("Downloading raylib zip file");
+                WebClient client = new WebClient();
+                client.DownloadFileAsync(new Uri("https://github.com/raysan5/raylib/releases/download/3.7.0/raylib-3.7.0_win64_msvc16.zip"), "raylib-3.7.0_win64_msvc16.zip");
+                client.DownloadProgressChanged += delegate { Debug.Log("Downloading..."); };
+                client.DownloadFileCompleted += new AsyncCompletedEventHandler(completedraylibdownload);
+                Program.args = args;
+                Program.saveFile = saveFile;
+                Program.overrideStart = overrideStart;
+                string line = Console.ReadLine();
+                //halt
+            }
+            else
+            {
+                Debug.Log("raylib found! no need to download!");
+                finishedDownloading = true;
+            }
+
+            if(loader == null)
+            {
+                loader = new SceneLoader();
+                Debug.Log("Loaded scene loader");
+            }
+
+            if(loader.currentScene == null)
+            {
+                //load a blank scene.
+                loader.AddScene(new BlankScene());
+                loader.LoadScene("BlankScene");
+                Debug.Log("Loaded blank scene");
+            }
+
             string arguments = string.Join(" ", args);
             if (arguments.Contains("-debug"))
             {
                 Debug.Log("Found debug argument launching as debug mode...");
                 debug = true;
             }
+
             //make sure the level exists first of all
-            if (!LevelLoader.savedFileByte(levelSaveBlankOpen))
+            if (saveFile == true)
             {
-                LevelLoader.WriteLevelByte(levelSaveBlankOpen, ref objects);
-                firstRun = true;
+                if (!LevelLoader.savedFileByte())
+                {
+                    LevelLoader.WriteLevelByte();
+                    firstRun = true;
+                }
             }
 
             Debug.Log("Loading extensions");
@@ -68,6 +117,7 @@ namespace SubrightEngine2
             Raylib.InitWindow(1280, 720, "Subright Engine 2");
             Raylib.SetTargetFPS(30);
 
+            if (extension != null) { extension.Start(); }
             var cam2 = new Camera2D();
 
             var cam3 = new Camera3D();
@@ -87,34 +137,33 @@ namespace SubrightEngine2
             Ray ray;
 
             //load the level
-            if (!firstRun) LevelLoader.LoadLevelByte(levelSaveBlankOpen, ref objects);
-            
-            for (var i = 0; i < objects.Count; i++)
+            if (saveFile == true) { if (!firstRun) LevelLoader.LoadLevelByte(); }
+
+            for (var i = 0; i < loader.currentScene.GameObjects.Count; i++)
                 //objects
-                objects[i].Start();
-            
+                loader.currentScene.GameObjects[i].Start();
+
             bool test = false;
-            
-            if(extension != null && initExtension == false){extension.Start();}
+
             while (!Raylib.WindowShouldClose())
             {
                 ray = Raylib.GetMouseRay(Raylib.GetMousePosition(), cam3);
                 Raylib.BeginDrawing();
-                Raylib.ClearBackground(Color.BLUE);
-                if(extension != null){extension.Update(ref cam2, ref cam3);}
-                
+                //Raylib.ClearBackground(Color.BLUE);
+                if (extension != null) { extension.Update(ref cam2, ref cam3); }
+                if(loader.currentScene != null) { loader.currentScene.UpdateScene(ref cam2, ref cam3); }
                 //render a console
                 if (console)
                 {
                     //var myStreamReader = Environment.CommandLine;
                     Raylib.DrawRectangle(0, 0, Raylib.GetScreenWidth(), Raylib.GetScreenHeight(), Color.BLACK);
-                    for (int i = Debug.logFile.Count -1; i >= 0; i--)
+                    for (int i = Debug.logFile.Count - 1; i >= 0; i--)
                     {
                         string logFileCode = Debug.logFile[i];
                         if (logFileCode != "")
                         {
                             //render console output
-                            var positionY = (int) 10 + i * 15;
+                            var positionY = (int)10 + i * 15;
                             Raylib.DrawText(logFileCode, 10, positionY, 10, Color.WHITE);
                         }
                     }
@@ -122,7 +171,6 @@ namespace SubrightEngine2
                 }
 
                 //Raylib.DrawText("Hello, world!", 12, 12, 20, Raylib_cs.Color.BLACK);
-                for (var i = 0; i < objects.Count; i++) objects[i].Update(ref cam2, ref cam3);
 
                 Raylib.BeginMode3D(cam3);
                 if (selectedObject != null)
@@ -213,29 +261,86 @@ namespace SubrightEngine2
                 Raylib.DrawFPS(10, 10);
                 //Draw icon
 
-                if (bootcount <= 250)
+                if (bootcount <= 100)
                 {
-                    Raylib.DrawRectangle(0, 0, Raylib.GetScreenWidth(), Raylib.GetScreenHeight(), Color.GRAY);
-                    Raylib.DrawTexture(image, Raylib.GetScreenWidth() / 2 - image.width / 2,
-                        Raylib.GetScreenHeight() / 2 - image.height / 2, Color.WHITE);
+                    Raylib.DrawRectangle(0, 0, Raylib.GetScreenWidth(), Raylib.GetScreenHeight(), backgroundColor.ToRaylibColor);
+                    if (image.width != 0 && image.height != 0)
+                    {
+                        Raylib.DrawTexture(image, Raylib.GetScreenWidth() / 2 - image.width / 2,
+                    Raylib.GetScreenHeight() / 2 - image.height / 2, Color.WHITE);
+                    }
+                    else
+                    {
+                        Raylib.DrawText("You are missing the cool splash screen texture :( Loading Subright Engine 2's Assets hold tight... next time add the texture! (PS its supposed to be under 'textures/titlescreen.png').", 10, 10, 10, Color.BLACK);
+                    }
                     //Raylib.DrawRectangle((Raylib.GetScreenWidth() / 2) - (image.width / 2), (Raylib.GetScreenHeight() / 2) - (image.height / 2) + image.height + 10, Raylib_cs.Color.WHITE);
                     if (debug)
                     {
-                        Raylib.DrawText("Bootcount: " + bootcount, 10, 10, 8, Color.WHITE);
+                        Raylib.DrawText("Bootcount: " + bootcount, 10, 10, 8, textColor.ToRaylibColor);
                         if (Raylib.IsKeyDown(KeyboardKey.KEY_B)) /*skip*/ bootcount = 250;
+                    }
+
+                    if (Raylib.GetKeyPressed() != 0)
+                    {
+                        Debug.Log("" + bootcount);
                     }
 
                     bootcount++;
                 }
-                
+
                 Raylib.EndDrawing();
                 Raylib.UpdateCamera(ref cam3);
             }
-            
-            if(extension != null){extension.Dispose();}
-            
-            LevelLoader.WriteLevelByte(levelSaveBlankOpen, ref objects);
+
+            if (extension != null) { extension.Dispose(); }
+
+            if (saveFile == false) { LevelLoader.WriteLevelByte(); }
             Raylib.CloseWindow();
+        }
+
+        private static void completedraylibdownload(object sender, AsyncCompletedEventArgs e)
+        {
+            Debug.Log("Finished downloading extracting files.");
+            ZipFile.ExtractToDirectory("raylib-3.7.0_win64_msvc16.zip", Environment.CurrentDirectory);
+            var directoryFiles = Directory.GetFiles(Path.Combine(Environment.CurrentDirectory, "raylib-3.7.0_win64_msvc16"), "*.dll", SearchOption.AllDirectories);
+            //find the raylib.dll
+            Debug.Log("Locating raylib dll");
+            string foundFile = "undefined";
+            for (int i = 0; i < directoryFiles.Length; i++)
+            {
+                if (directoryFiles[i].Contains("raylib.dll"))
+                {
+                    foundFile = directoryFiles[i];
+                    break;
+                }
+            }
+            Debug.Log("Located file moving");
+            if (File.Exists(foundFile))
+            {
+                File.Copy(foundFile, Path.Combine(Environment.CurrentDirectory, "raylib.dll"));
+                RecursiveDelete(new DirectoryInfo(Path.Combine(Environment.CurrentDirectory, "raylib-3.7.0_win64_msvc16")));
+                File.Delete(Path.Combine(Environment.CurrentDirectory, "raylib-3.7.0_win64_msvc16.zip"));
+                Debug.Log("Copied file and cleaned up! sucesfully!");
+            }
+            else
+            {
+                Debug.Log("Process was unable to find file quitting!!");
+                Environment.Exit(0);
+            }
+            Debug.Log("Finished process reloading...");
+            Initialise(args, saveFile, overrideStart);
+        }
+
+        public static void RecursiveDelete(DirectoryInfo baseDir)
+        {
+            if (!baseDir.Exists)
+                return;
+
+            foreach (var dir in baseDir.EnumerateDirectories())
+            {
+                RecursiveDelete(dir);
+            }
+            baseDir.Delete(true);
         }
 
         public static void SetWindowTitle(string name)
@@ -243,12 +348,11 @@ namespace SubrightEngine2
             Raylib.SetWindowTitle(name);
         }
 
-        public static void SetExtension(Extension ext)
+        public static void SetExtension(Extension ext, bool start)
         {
             extension = ext;
-            ext.Start();
+            if (start) { ext.Start(); }
             Debug.Log("Swapped extension to another! and executed the start method!");
-            initExtension = true;
         }
 
         public static object pointerToObject(IntPtr pMapping, Type type)

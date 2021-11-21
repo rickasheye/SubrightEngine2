@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using Raylib_cs;
+﻿using Raylib_cs;
 using SubrightEngine2.EngineStuff;
+using System;
+using System.Collections.Generic;
 using Color = SubrightEngine2.EngineStuff.Color;
 
 namespace SubrightEngine2.UI
@@ -9,6 +9,7 @@ namespace SubrightEngine2.UI
     [Serializable]
     public class ContextMenu : GameObject
     {
+        //Context menu to give items and then to thenafter render.
         public bool hideRender = false;
         private readonly List<ContextItem> items = new List<ContextItem>();
 

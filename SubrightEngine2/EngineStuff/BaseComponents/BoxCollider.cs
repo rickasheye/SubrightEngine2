@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using Raylib_cs;
 
 namespace SubrightEngine2.EngineStuff.BaseComponents
 {

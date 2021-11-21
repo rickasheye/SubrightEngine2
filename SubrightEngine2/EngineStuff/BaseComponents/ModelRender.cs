@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Raylib_cs;
+using System;
 using System.IO;
-using Raylib_cs;
 
 namespace SubrightEngine2.EngineStuff.BaseComponents
 {
@@ -24,7 +24,7 @@ namespace SubrightEngine2.EngineStuff.BaseComponents
                 model = Raylib.LoadModel(path);
             else
                 //Unfortunately this doesnt work
-                Debug.Log("Unfortunately this doesnt work as the file: " + path + " cannot be found!", LogType.MESSAGE);
+                Debug.LogError("Unfortunately this doesnt work as the file: " + path + " cannot be found!");
         }
 
         public override void Update(ref Camera2D cam2, ref Camera3D cam3)

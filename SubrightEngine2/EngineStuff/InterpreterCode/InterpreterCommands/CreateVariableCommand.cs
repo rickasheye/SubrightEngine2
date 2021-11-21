@@ -5,7 +5,7 @@ namespace SubrightEngine2.EngineStuff.InterpreterCode.InterpreterCommands
     [Serializable]
     public class CreateVariableCommand : InterpreterCommand
     {
-        
+
         public CreateVariableCommand() : base("Create a Variable", "cvar")
         {
         }

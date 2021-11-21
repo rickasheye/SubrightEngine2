@@ -1,5 +1,5 @@
-﻿using System;
-using Raylib_cs;
+﻿using Raylib_cs;
+using System;
 using Color = SubrightEngine2.EngineStuff.Color;
 
 namespace SubrightEngine2.UI
@@ -7,11 +7,12 @@ namespace SubrightEngine2.UI
     [Serializable]
     public class EngineButton : UIElement
     {
+        //A regular button.
         public EngineButton(string name) : base(name)
         {
         }
 
-        public override void Update(ref Camera2D cam2, ref Camera3D cam3)
+        public virtual void Update(ref Camera2D cam2, ref Camera3D cam3)
         {
             base.Update(ref cam2, ref cam3);
             Draw2D(ref cam2);
@@ -37,6 +38,12 @@ namespace SubrightEngine2.UI
             }
 
             DrawText(name, connectedObject.position.X, (connectedObject.position.Y + connectedObject.size.X) / 2, 8, Color.WHITE);
+            OffhandDraw(ref cam);
+        }
+
+        public virtual void OffhandDraw(ref Camera2D cam2)
+        {
+
         }
 
         public virtual void ExecuteEvent()

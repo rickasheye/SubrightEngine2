@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.VisualBasic;
-using Raylib_cs;
+﻿using Raylib_cs;
 using SubrightEngine2.EngineStuff.BaseComponents;
+using System;
+using System.Collections.Generic;
 
 namespace SubrightEngine2.EngineStuff
 {
@@ -20,13 +19,14 @@ namespace SubrightEngine2.EngineStuff
         public Vector3 size;
 
         public bool voidStart = false;
-        
+
         public GameObject(Vector3 position, Vector3 size, string name, bool voidStart)
         {
             this.name = name;
             this.position = position;
             this.size = size;
             this.voidStart = voidStart;
+            Program.loader.currentScene.GameObjects.Add(this);
             Start();
         }
 
@@ -36,6 +36,37 @@ namespace SubrightEngine2.EngineStuff
             this.position = position;
             this.size = size;
             this.voidStart = false;
+            Program.loader.currentScene.GameObjects.Add(this);
+            Start();
+        }
+
+        public GameObject(Vector3 position, string name)
+        {
+            this.name = name;
+            this.position = position;
+            this.size = Vector3.zero;
+            this.voidStart = false;
+            Program.loader.currentScene.GameObjects.Add(this);
+            Start();
+        }
+
+        public GameObject(string name)
+        {
+            this.name = name;
+            this.position = Vector3.zero;
+            this.size = Vector3.zero;
+            this.voidStart = false;
+            Program.loader.currentScene.GameObjects.Add(this);
+            Start();
+        }
+
+        public GameObject()
+        {
+            this.name = "";
+            this.position = Vector3.zero;
+            this.size = Vector3.zero;
+            this.voidStart = false;
+            Program.loader.currentScene.GameObjects.Add(this);
             Start();
         }
 
@@ -86,6 +117,14 @@ namespace SubrightEngine2.EngineStuff
             }
         }
 
+        public static GameObject AssembleObject(Component com)
+        {
+            GameObject m = new GameObject();
+            m.name = com.name;
+            m.AddComponent(com);
+            return m;
+        }
+
         public virtual void Draw2D(ref Camera2D cam)
         {
             for (var i = 0; i < components.Count; i++)
@@ -113,7 +152,7 @@ namespace SubrightEngine2.EngineStuff
                 if (com.connectedObject != this) com.connectedObject = this;
                 com.Draw3D(ref cam);
             }
-            
+
             for (int m = 0; m < childrenObjects.Count; m++)
             {
                 GameObject p = childrenObjects[m];
@@ -127,9 +166,9 @@ namespace SubrightEngine2.EngineStuff
         //used to retrieve all of the components
         public static GameObject getOwner(Component com)
         {
-            for (var i = 0; i < Program.objects.Count; i++)
+            for (var i = 0; i < Program.loader.currentScene.GameObjects.Count; i++)
             {
-                var chosenObject = Program.objects[i];
+                var chosenObject = Program.loader.currentScene.GameObjects[i];
                 var assembledObjects = new List<GameObject>();
                 assembledObjects.Add(chosenObject);
                 assembledObjects.AddRange(chosenObject.childrenObjects);
@@ -202,13 +241,13 @@ namespace SubrightEngine2.EngineStuff
                 //child object exists
                 m.parent = this;
                 childrenObjects.Add(m);
-                for (var i = 0; i < Program.objects.Count; i++)
-                    if (Program.objects[i].name == m.name)
-                        Program.objects.RemoveAt(i);
+                for (var i = 0; i < Program.loader.currentScene.GameObjects.Count; i++)
+                    if (Program.loader.currentScene.GameObjects[i].name == m.name)
+                        Program.loader.currentScene.GameObjects.RemoveAt(i);
             }
             else
             {
-                Debug.Log("Child object already exists under that name in the parent!", LogType.WARNING);
+                Debug.LogWarning("Child object already exists under that name in the parent!");
             }
         }
 
@@ -220,12 +259,12 @@ namespace SubrightEngine2.EngineStuff
                     if (m.name == childrenObjects[i].name)
                     {
                         childrenObjects.RemoveAt(i);
-                        Debug.Log("Removed object at: " + i + " on " + name, LogType.MESSAGE);
+                        Debug.Log("Removed object at: " + i + " on " + name);
                     }
             }
             else
             {
-                Debug.Log("Object doesnt exist to be removed!", LogType.WARNING);
+                Debug.LogWarning("Object doesnt exist to be removed!");
             }
         }
 

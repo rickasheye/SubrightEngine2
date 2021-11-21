@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "SubrightUITest": {
+      "commandName": "Project",
+      "commandLineArgs": "-debug"
+    }
+  }
+}
