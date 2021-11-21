@@ -1,7 +1,9 @@
 ﻿using Raylib_cs;
+using System;
 
 namespace RPGConsole.InventoryBlock
 {
+    [Serializable]
     public class MachinePart_Power : BlankMachinePart
     {
         public int maxPower = 5;

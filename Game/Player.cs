@@ -194,11 +194,6 @@ namespace RPGConsole
             crafting = true;
             while (crafting)
             {
-                if (Reference.cmdMode)
-                {
-                    Console.Clear();
-                    Console.WriteLine("Welcome to crafting please pick a argument to do an action!");
-                }
 
                 //calculate things!
                 if (recipes.Count <= 0)
@@ -212,79 +207,30 @@ namespace RPGConsole
                     unfortunate = false;
                 }
 
-                if (Reference.cmdMode)
+                //DisplaY a graphical menu
+                Reference.loader.currentScene.guiOptions.Clear();
+                if (allowedReceipes.Count > 0)
                 {
-                    if (unfortunate == true)
+                    Reference.loader.currentScene.guiOptions.Add(new Text("Welcome to crafting use the following menu to craft!", new Vector2(10, 10), 5, Color.BLACK));
+                    for (int i = 0; i < allowedReceipes.Count; i++)
                     {
-                        Debug.Log("Unfortunately You do not have any valid materials to craft with!");
-                    }
-                    else
-                    {
-                        for (int i = 0; i < allowedReceipes.Count; i++)
-                        {
-                            Debug.Log("(" + i + ") - " + allowedReceipes[i].output.name);
-                        }
-                    }
-
-                    Debug.Log("give command (exit) to quit out of crafting prompt!");
-                    string craftingVariable = Console.ReadLine().ToLower();
-                    switch (craftingVariable)
-                    {
-                        case "quit":
-                        case "exit":
-                        case "goodbye":
-                        case "bye":
-                        case "stop":
-                            crafting = false;
-                            Debug.Log("exited crafting...");
-                            break;
-                    }
-                    int finalConvertedInteger = 0;
-                    bool check = int.TryParse(craftingVariable, out finalConvertedInteger);
-                    if (check == true)
-                    {
-                        List<InventoryItem> item = CraftingRecipe.convertToList(allowedReceipes[finalConvertedInteger]);
-                        foreach (InventoryItem itm in item)
-                        {
-                            inv.removeItem(itm);
-                        }
-                        inv.addItem(allowedReceipes[finalConvertedInteger].output);
-                    }
-                    else
-                    {
-                        if (crafting == true)
-                        {
-                            Debug.Log("Unfortunately that number is incorrect!");
-                        }
+                        CraftingGUIOption guiOption = new CraftingGUIOption(allowedReceipes[i].output.name, new Vector2(10, (10 * i) + 25), new Vector2(50, 50));
+                        guiOption.giveItem = allowedReceipes[i].output;
+                        guiOption.removingItems = CraftingRecipe.convertToList(allowedReceipes[i]);
+                        Reference.loader.currentScene.guiOptions.Add(guiOption);
                     }
                 }
                 else
                 {
-                    //DisplaY a graphical menu
-                    Reference.loader.currentScene.guiOptions.Clear();
-                    if (allowedReceipes.Count > 0)
-                    {
-                        Reference.loader.currentScene.guiOptions.Add(new Text("Welcome to crafting use the following menu to craft!", new Vector2(10, 10), 5, Color.BLACK));
-                        for (int i = 0; i < allowedReceipes.Count; i++)
-                        {
-                            CraftingGUIOption guiOption = new CraftingGUIOption(allowedReceipes[i].output.name, new Vector2(10, (10 * i) + 25), new Vector2(50, 50));
-                            guiOption.giveItem = allowedReceipes[i].output;
-                            guiOption.removingItems = CraftingRecipe.convertToList(allowedReceipes[i]);
-                            Reference.loader.currentScene.guiOptions.Add(guiOption);
-                        }
-                    }
-                    else
-                    {
-                        Console.WriteLine("No recipes to show!");
-                        Text text = new Text("No recipes to show use 'C' again to eXit!", new Vector2(10, 10), 5, Color.BLACK);
-                        Reference.loader.currentScene.guiOptions.Add(text);
-                    }
-
-                    EmptyContainer container = new EmptyContainer(new Vector2(10, 10), new Vector2(10, 10));
-                    container.children.AddRange(Reference.loader.currentScene.guiOptions);
-                    Reference.loader.currentScene.guiOptions.Add(container);
-                    crafting = false;
+                    Console.WriteLine("No recipes to show!");
+                    Text text = new Text("No recipes to show use 'C' again to eXit!", new Vector2(10, 10), 5, Color.BLACK);
+                    Reference.loader.currentScene.guiOptions.Add(text);
                 }
+
+                EmptyContainer container = new EmptyContainer(new Vector2(10, 10), new Vector2(10, 10));
+                container.children.AddRange(Reference.loader.currentScene.guiOptions);
+                Reference.loader.currentScene.guiOptions.Add(container);
+                crafting = false;
             }
         }
 
@@ -303,11 +249,6 @@ namespace RPGConsole
             }
             while (furnaceBaking)
             {
-                if (Reference.cmdMode)
-                {
-                    Console.Clear();
-                    Debug.Log("Welcome to furnacing select an argument to furnace an item...");
-                }
                 List<FurnaceRecipe> recipes = new List<FurnaceRecipe>();
                 for (int i = 0; i < furnaceRecipes.Count; i++)
                 {
@@ -319,47 +260,28 @@ namespace RPGConsole
                         recipes.Add(recipe);
                     }
                 }
-
-                if (Reference.cmdMode)
+                Reference.loader.currentScene.guiOptions.Clear();
+                if (recipes.Count > 0)
                 {
-                    if (recipes.Count > 0)
+                    Reference.loader.currentScene.guiOptions.Add(new Text("Welcome to the furnace use the following menu to furnace!", new Vector2(10, 10), 5, Color.BLACK));
+                    for (int i = 0; i < recipes.Count; i++)
                     {
-                        for (int i = 0; i < recipes.Count; i++)
-                        {
-                            Debug.Log("(" + i + ") - " + recipes[i].output);
-                        }
+                        FurnaceRecipe recipie = recipes[i];
+                        FurnaceGUIOption furnaceOption = new FurnaceGUIOption(recipie.input.name + " > " + recipie.output.name, new Vector2(10, (10 * i) + 25), new Vector2(50, 50));
+                        furnaceOption.input = recipie.input;
+                        furnaceOption.output = recipie.output;
+                        Reference.loader.currentScene.guiOptions.Add(furnaceOption);
                     }
-                    else
-                    {
-                        Debug.Log("You are unable to use the furnace due to no possible materials to use!");
-                    }
-                    FurnaceChoose(Console.ReadLine(), ref furnaceBaking, recipes);
                 }
                 else
                 {
-                    Reference.loader.currentScene.guiOptions.Clear();
-                    if (recipes.Count > 0)
-                    {
-                        Reference.loader.currentScene.guiOptions.Add(new Text("Welcome to the furnace use the following menu to furnace!", new Vector2(10, 10), 5, Color.BLACK));
-                        for (int i = 0; i < recipes.Count; i++)
-                        {
-                            FurnaceRecipe recipie = recipes[i];
-                            FurnaceGUIOption furnaceOption = new FurnaceGUIOption(recipie.input.name + " > " + recipie.output.name, new Vector2(10, (10 * i) + 25), new Vector2(50, 50));
-                            furnaceOption.input = recipie.input;
-                            furnaceOption.output = recipie.output;
-                            Reference.loader.currentScene.guiOptions.Add(furnaceOption);
-                        }
-                    }
-                    else
-                    {
-                        Console.WriteLine("No furnace recipes to show!");
-                        Text teXt = new Text("No recipes to show use 'F' again to exit!", new Vector2(10, 10), 5, Color.BLACK);
-                        Reference.loader.currentScene.guiOptions.Add(teXt);
-                    }
-                    EmptyContainer container = new EmptyContainer(new Vector2(10, 10), new Vector2(10, 10));
-                    container.children.AddRange(Reference.loader.currentScene.guiOptions);
-                    Reference.loader.currentScene.guiOptions.Add(container);
+                    Console.WriteLine("No furnace recipes to show!");
+                    Text teXt = new Text("No recipes to show use 'F' again to exit!", new Vector2(10, 10), 5, Color.BLACK);
+                    Reference.loader.currentScene.guiOptions.Add(teXt);
                 }
+                EmptyContainer container = new EmptyContainer(new Vector2(10, 10), new Vector2(10, 10));
+                container.children.AddRange(Reference.loader.currentScene.guiOptions);
+                Reference.loader.currentScene.guiOptions.Add(container);
                 furnaceBaking = false;
             }
         }
@@ -401,85 +323,62 @@ namespace RPGConsole
 
         public void InitiateInventoryGUI()
         {
-            if (!Reference.cmdMode)
+            Reference.loader.currentScene.guiOptions.Clear();
+            //displaY the inventorY
+            if (inv.items.Count > 0)
             {
-                Reference.loader.currentScene.guiOptions.Clear();
-                //displaY the inventorY
-                if (inv.items.Count > 0)
+                Reference.loader.currentScene.guiOptions.Add(new Text("INVENTORY", new Vector2(10, 10), 5, Color.BLACK));
+                //displaY the actual inventorY with a gui
+                for (int i = 0; i < inv.items.Count; i++)
                 {
-                    Reference.loader.currentScene.guiOptions.Add(new Text("INVENTORY", new Vector2(10, 10), 5, Color.BLACK));
-                    //displaY the actual inventorY with a gui
-                    for (int i = 0; i < inv.items.Count; i++)
+                    if (inv.items[i].itemCount > 0)
                     {
-                        if (inv.items[i].itemCount > 0)
+                        string modernName = inv.items[i].name;
+                        if (equipItem == inv.items[i])
                         {
-                            string modernName = inv.items[i].name;
-                            if (equipItem == inv.items[i])
-                            {
-                                modernName = modernName + " EQUIPPED!";
-                            }
-                            InventorYGUIOption invOption = new InventorYGUIOption(modernName + " #" + inv.items[i].itemCount, new Vector2(10, (10 * i) + 25), new Vector2(50, 50), chest);
-                            invOption.eqipItem = inv.items[i];
-                            Reference.loader.currentScene.guiOptions.Add(invOption);
+                            modernName = modernName + " EQUIPPED!";
                         }
+                        InventorYGUIOption invOption = new InventorYGUIOption(modernName + " #" + inv.items[i].itemCount, new Vector2(10, (10 * i) + 25), new Vector2(50, 50), chest);
+                        invOption.eqipItem = inv.items[i];
+                        Reference.loader.currentScene.guiOptions.Add(invOption);
                     }
                 }
-                else
-                {
-                    Debug.Log("No inventory items to show!");
-                    Text teXt = new Text("No items to show use 'I' again to eXit!", new Vector2(10, 10), 5, Color.BLACK);
-                    Reference.loader.currentScene.guiOptions.Add(teXt);
-                }
-                EmptyContainer container = new EmptyContainer(new Vector2(10, 10), new Vector2(10, 10));
-                container.children.AddRange(Reference.loader.currentScene.guiOptions);
-                Reference.loader.currentScene.guiOptions.Add(container);
             }
             else
             {
-                Debug.Log("InventorY Items");
-                foreach (InventoryItem item in inv.items)
-                {
-                    Debug.Log(item.name + " " + item.itemCount);
-                }
+                Debug.Log("No inventory items to show!");
+                Text teXt = new Text("No items to show use 'I' again to eXit!", new Vector2(10, 10), 5, Color.BLACK);
+                Reference.loader.currentScene.guiOptions.Add(teXt);
             }
+            EmptyContainer container = new EmptyContainer(new Vector2(10, 10), new Vector2(10, 10));
+            container.children.AddRange(Reference.loader.currentScene.guiOptions);
+            Reference.loader.currentScene.guiOptions.Add(container);
         }
 
         public void InitiateInventoryChest()
         {
-            if (!Reference.cmdMode)
+            Reference.loader.currentScene.guiOptions.Clear();
+            //displaY the inventorY
+            if (chest.storeInventoryItems.Count > 0)
             {
-                Reference.loader.currentScene.guiOptions.Clear();
-                //displaY the inventorY
-                if (chest.storeInventoryItems.Count > 0)
+                Reference.loader.currentScene.guiOptions.Add(new Text("CHEST", new Vector2(10, 10), 5, Color.BLACK));
+                //displaY the actual inventorY with a gui
+                for (int i = 0; i < chest.storeInventoryItems.Count; i++)
                 {
-                    Reference.loader.currentScene.guiOptions.Add(new Text("CHEST", new Vector2(10, 10), 5, Color.BLACK));
-                    //displaY the actual inventorY with a gui
-                    for (int i = 0; i < chest.storeInventoryItems.Count; i++)
-                    {
-                        InventorYChestGUIOption invOption = new InventorYChestGUIOption(chest.storeInventoryItems[i].name, new Vector2(10, (10 * i) + 25), new Vector2(50, 50));
-                        invOption.eqipItem = chest.storeInventoryItems[i];
-                        Reference.loader.currentScene.guiOptions.Add(invOption);
-                    }
+                    InventorYChestGUIOption invOption = new InventorYChestGUIOption(chest.storeInventoryItems[i].name, new Vector2(10, (10 * i) + 25), new Vector2(50, 50));
+                    invOption.eqipItem = chest.storeInventoryItems[i];
+                    Reference.loader.currentScene.guiOptions.Add(invOption);
                 }
-                else
-                {
-                    Debug.Log("No chest items to show!");
-                    Text teXt = new Text("No items to show in this chest! use the Inventory to put items in this chest!", new Vector2(10, 10), 5, Color.BLACK);
-                    Reference.loader.currentScene.guiOptions.Add(teXt);
-                }
-                EmptyContainer container = new EmptyContainer(new Vector2(10, 10), new Vector2(10, 10));
-                container.children.AddRange(Reference.loader.currentScene.guiOptions);
-                Reference.loader.currentScene.guiOptions.Add(container);
             }
             else
             {
-                //just spawn the inventorY inside of this!
-                Debug.Log("Chest inventorY");
-                foreach (InventoryItem item in chest.storeInventoryItems)
-                {
-                    Debug.Log(item.name + " " + item.itemCount);
-                }
+                Debug.Log("No chest items to show!");
+                Text teXt = new Text("No items to show in this chest! use the Inventory to put items in this chest!", new Vector2(10, 10), 5, Color.BLACK);
+                Reference.loader.currentScene.guiOptions.Add(teXt);
             }
+            EmptyContainer container = new EmptyContainer(new Vector2(10, 10), new Vector2(10, 10));
+            container.children.AddRange(Reference.loader.currentScene.guiOptions);
+            Reference.loader.currentScene.guiOptions.Add(container);
         }
     }
 

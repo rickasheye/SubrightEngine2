@@ -1,6 +1,8 @@
-﻿namespace RPGConsole.InventoryItems
-{
+﻿using System;
 
+namespace RPGConsole.InventoryItems
+{
+    [Serializable]
     public class InventoryItemWeapon : ItemUseable
     {
         public int damageLevel = 2;

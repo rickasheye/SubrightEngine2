@@ -3,6 +3,7 @@ using System.Drawing;
 
 namespace SubrightEngine2.EngineStuff
 {
+    [Serializable]
     public struct Vector2
     {
         public float X, Y;

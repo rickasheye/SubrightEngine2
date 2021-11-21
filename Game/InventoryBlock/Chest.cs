@@ -1,9 +1,11 @@
 ﻿using RPGConsole.InventoryItems;
 using SubrightEngine2.EngineStuff;
+using System;
 using System.Collections.Generic;
 
 namespace RPGConsole.InventoryBlock
 {
+    [Serializable]
     public class Chest : Block
     {
 

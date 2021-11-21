@@ -1,5 +1,8 @@
-﻿namespace RPGConsole.InventoryBlock
+﻿using System;
+
+namespace RPGConsole.InventoryBlock
 {
+    [Serializable]
     public class Wood : Block
     {
         public Wood() : base("Wood", 0, 0, 1, Color.PASTEBROWN, "Textures/blocks/wood.png", 1) { giveBlock = true; }

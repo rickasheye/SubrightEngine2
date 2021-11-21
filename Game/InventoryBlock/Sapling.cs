@@ -3,6 +3,7 @@ using System;
 
 namespace RPGConsole.InventoryBlock
 {
+    [Serializable]
     public class Sapling : Block
     {
         int section = 0;

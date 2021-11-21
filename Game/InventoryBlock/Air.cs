@@ -1,5 +1,8 @@
-﻿namespace RPGConsole.InventoryBlock
+﻿using System;
+
+namespace RPGConsole.InventoryBlock
 {
+    [Serializable]
     public class Air : Block
     {
         public Air() : base("Air", 0, 0, 1, Color.WHITESKINCOLOR, "Textures/blocks/air.png", 1)

@@ -151,7 +151,7 @@ namespace SubrightEngine2
                 Raylib.BeginDrawing();
                 //Raylib.ClearBackground(Color.BLUE);
                 if (extension != null) { extension.Update(ref cam2, ref cam3); }
-
+                if(loader.currentScene != null) { loader.currentScene.UpdateScene(ref cam2, ref cam3); }
                 //render a console
                 if (console)
                 {
@@ -171,7 +171,6 @@ namespace SubrightEngine2
                 }
 
                 //Raylib.DrawText("Hello, world!", 12, 12, 20, Raylib_cs.Color.BLACK);
-                for (var i = 0; i < loader.currentScene.GameObjects.Count; i++) loader.currentScene.GameObjects[i].Update(ref cam2, ref cam3);
 
                 Raylib.BeginMode3D(cam3);
                 if (selectedObject != null)

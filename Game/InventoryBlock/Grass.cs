@@ -4,6 +4,7 @@ using System;
 
 namespace RPGConsole.InventoryBlock
 {
+    [Serializable]
     public class Grass : Block
     {
         int randomINT = 0;

@@ -1,9 +1,12 @@
 ﻿using Raylib_cs;
 using RPGConsole.Graphical;
 using RPGConsole.Graphical.ScenesAvaliable;
+using SubrightEngine2.EngineStuff.Scenes;
+using System;
 
 namespace RPGConsole.InventoryBlock
 {
+    [Serializable]
     public class BlankMachinePart : Block
     {
         public string middleMachinePart = "Textures/blocks/machine_parts/blank_machine_part.png";

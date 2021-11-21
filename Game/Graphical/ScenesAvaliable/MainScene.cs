@@ -7,7 +7,7 @@ using Color = SubrightEngine2.EngineStuff.Color;
 
 namespace RPGConsole.Graphical.ScenesAvaliable
 {
-    public class MainScene : Scene
+    public class MainScene : SceneUI
     {
         public Texture2D overlay;
 
@@ -22,20 +22,20 @@ namespace RPGConsole.Graphical.ScenesAvaliable
         private bool inventoryMode = false;
         public bool freezePlayer = false;
 
-        public override void UpdateScene(Camera2D cam)
+        public override void UpdateScene(ref Camera2D cam2, ref Camera3D cam3)
         {
             //Debug.Log("eh");
             Raylib.SetExitKey(KeyboardKey.KEY_Q);
             if (Raylib.IsKeyPressed(KeyboardKey.KEY_ESCAPE))
             {
-                Reference.loader.LoadScene(Reference.loader.getScene("Main Menu"));
+                SubrightEngine2.Program.loader.LoadScene(SubrightEngine2.Program.loader.getScene("Main Menu"));
             }
-            if (Reference.player != null) { cam.target = new System.Numerics.Vector2(Reference.player.position.X * 64, Reference.player.position.Y * 64); }
-            Raylib.BeginMode2D(cam);
+            if (Reference.player != null) { cam2.target = new System.Numerics.Vector2(Reference.player.position.X * 64, Reference.player.position.Y * 64); }
+            Raylib.BeginMode2D(cam2);
             //draw the map!
             System.Numerics.Vector2 screen = new System.Numerics.Vector2(Raylib.GetScreenData().width, Raylib.GetScreenData().height);
-            System.Numerics.Vector2 translation = Raylib.GetScreenToWorld2D(screen, cam);
-            System.Numerics.Vector2 oppTrans = Raylib.GetScreenToWorld2D(System.Numerics.Vector2.Zero, cam);
+            System.Numerics.Vector2 translation = Raylib.GetScreenToWorld2D(screen, cam2);
+            System.Numerics.Vector2 oppTrans = Raylib.GetScreenToWorld2D(System.Numerics.Vector2.Zero, cam2);
             foreach (Block block in Reference.gen.blockMap)
             {
                 if (block != null)
@@ -107,7 +107,7 @@ namespace RPGConsole.Graphical.ScenesAvaliable
                         else
                         {
                             //draw the texture attached!
-                            Raylib.DrawTexture(block.textureInit(loaderAsset), (int)block.position.X * 64, (int)block.position.Y * 64, Color.WHITE.ToRaylibColor);
+                            Raylib.DrawTexture(block.textureInit(Reference.loader.currentScene.loaderAsset), (int)block.position.X * 64, (int)block.position.Y * 64, Color.WHITE.ToRaylibColor);
                         }
                         if (block.broken == true)
                         {
@@ -280,12 +280,12 @@ namespace RPGConsole.Graphical.ScenesAvaliable
 
                 if (Reference.player.equipItem.name != "Air")
                 {
-                    if (Reference.player.equipItem.textureInit(SubrightEngine2.Program.loader.currentScene.loaderAsset).width == 0)
+                    if (Reference.player.equipItem.textureInit(Reference.loader.currentScene.loaderAsset).width == 0)
                     {
-                        Reference.player.equipItem.textureInit(loaderAsset);
+                        Reference.player.equipItem.textureInit(Reference.loader.currentScene.loaderAsset);
                         Console.WriteLine(Reference.player.equipItem.texture);
                     }
-                    Raylib.DrawTexture(Reference.player.equipItem.textureInit(loaderAsset), (10 * Reference.player.health) + 85, 10, Color.WHITE.ToRaylibColor);
+                    Raylib.DrawTexture(Reference.player.equipItem.textureInit(Reference.loader.currentScene.loaderAsset), (10 * Reference.player.health) + 85, 10, Color.WHITE.ToRaylibColor);
                     Raylib.DrawText(Reference.player.equipItem.name, (10 * Reference.player.health) + 90 + 64, 10, 10, Color.WHITE.ToRaylibColor);
                 }
 
@@ -303,7 +303,7 @@ namespace RPGConsole.Graphical.ScenesAvaliable
                 Reference.loader.LoadScene(Reference.loader.getScene("Main Menu"));
             }
             Raylib.DrawRectangle(10, 5, 1 + loaderAsset.texturesCached.Count, 5, Color.BLACK.ToRaylibColor);
-            base.UpdateScene(cam);
+            base.UpdateScene(ref cam2, ref cam3);
             //Debug.Log("ah");
         }
     }

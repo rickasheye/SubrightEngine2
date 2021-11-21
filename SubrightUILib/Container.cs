@@ -7,6 +7,7 @@ using System.Text;
 
 namespace SubrightEngine2.UI
 {
+    [Serializable]
     public class Container : UIElement
     {
         //A Container to feed objects to therefore correctly sort.
@@ -36,7 +37,7 @@ namespace SubrightEngine2.UI
                     {
                         GameObject m = connectedObject.childrenObjects[i];
                         m.position = new Vector3(position.X + offset.X, (position.Y + offset.Y) * (i + offsetAfterY), 0);
-                        m.size = new Vector3(size.X, size.Y, 0);
+                        //m.size = new Vector3(size.X, size.Y, 0);
                     }
                 }
                 //Debug.Log("there is " + connectedObject.childrenObjects.Count);
@@ -47,6 +48,7 @@ namespace SubrightEngine2.UI
         {
             base.Update(ref cam2, ref cam3);
             Draw2D(ref cam2);
+            //Debug.Log("Hi!");
         }
 
         public override void Draw2D(ref Camera2D cam)

@@ -11,7 +11,7 @@ namespace SubrightEditor
         public override void Start()
         {
             base.Start();
-            cycle = new InitCycle();
+            cycle = new InitCycle(true);
             cycle.Start();
         }
 

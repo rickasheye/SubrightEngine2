@@ -2,11 +2,13 @@
 
 namespace RPGConsole.InventoryItems
 {
+    [Serializable]
     public enum itemMaterial
     {
         WOOD, STONE, METAL, DIAMOND
     }
 
+    [Serializable]
     public class ItemUseable : InventoryItem
     {
         public itemMaterial mat;

@@ -1,9 +1,11 @@
 ﻿using Raylib_cs;
 using RPGConsole.InventoryItems;
 using SubrightEngine2.EngineStuff;
+using System;
 
 namespace RPGConsole.InventoryBlock
 {
+    [Serializable]
     public class Block : InventoryItem
     {
         public enum Color

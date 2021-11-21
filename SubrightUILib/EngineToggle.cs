@@ -2,6 +2,7 @@ using Raylib_cs;
 
 namespace SubrightEngine2.UI
 {
+    [System.Serializable]
     public class EngineToggle : UIElement
     {
         //Toggle to use comes out to this boolean variable under.
@@ -39,6 +40,12 @@ namespace SubrightEngine2.UI
                     triggered = true;
                 }
             }
+            OffhandDraw(ref cam);
+        }
+
+        public virtual void OffhandDraw(ref Camera2D cam)
+        {
+
         }
     }
 }

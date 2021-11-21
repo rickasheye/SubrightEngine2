@@ -1,7 +1,9 @@
 ﻿using SubrightEngine2.EngineStuff;
+using System;
 
 namespace RPGConsole.InventoryBlock
 {
+    [Serializable]
     public class Furnace : Block
     {
         public Furnace() : base("Furnace", 0, 0, 10, Color.GRAY, "Textures/blocks/furnace.png", 1) { }

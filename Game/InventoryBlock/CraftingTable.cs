@@ -1,5 +1,8 @@
-﻿namespace RPGConsole.InventoryBlock
+﻿using System;
+
+namespace RPGConsole.InventoryBlock
 {
+    [Serializable]
     public class CraftingTable : Block
     {
         public CraftingTable() : base("CT", 0, 0, 1, Color.BROWN, "Textures/blocks/crafting.png", 1)

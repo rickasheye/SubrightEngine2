@@ -2,11 +2,12 @@
 using RPGConsole.Graphical.MenuItems;
 using RPGConsole.Graphical.MenuItems.KeyboardOnlyItems;
 using SubrightEngine2.EngineStuff;
+using SubrightEngine2.EngineStuff.Scenes;
 using Color = SubrightEngine2.EngineStuff.Color;
 
 namespace RPGConsole.Graphical.ScenesAvaliable
 {
-    public class MenuTest : Scene
+    public class MenuTest : SceneUI
     {
         public MenuTest() : base("Menu Test") { }
         Text text;
@@ -34,9 +35,9 @@ namespace RPGConsole.Graphical.ScenesAvaliable
             guiOptions.Add(container);
         }
 
-        public override void UpdateScene(Camera2D cam)
+        public override void UpdateScene(ref Camera2D cam2, ref Camera3D cam3)
         {
-            base.UpdateScene(cam);
+            base.UpdateScene(ref cam2, ref cam3);
         }
     }
 }

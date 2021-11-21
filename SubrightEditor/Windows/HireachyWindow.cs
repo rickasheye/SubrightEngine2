@@ -29,9 +29,9 @@ namespace SubrightEngineEditor.Windows
         {
             base.Draw2D(ref cam);
             if (hideRender == false)
-                for (var i = 0; i < SubrightEngine2.Program.objects.Count; i++)
+                for (var i = 0; i < SubrightEngine2.Program.loader.currentScene.GameObjects.Count; i++)
                 {
-                    var newObject = SubrightEngine2.Program.objects[i];
+                    var newObject = SubrightEngine2.Program.loader.currentScene.GameObjects[i];
                     DrawText(newObject.name + " - " + newObject.position.ToString + " - " + newObject.size.ToString,
                         position.X + 2, position.Y + 10 + i * 15, 8, Color.WHITE);
                     var positionX = (int)position.X + 2;
@@ -47,7 +47,7 @@ namespace SubrightEngineEditor.Windows
                             if (SubrightEngine2.EngineStuff.Input.Input.GetMouseButtonPressed(MouseButton.MOUSE_LEFT_BUTTON, isFocused()))
                                 SubrightEngine2.Program.selectedObject = newObject;
                             else if (SubrightEngine2.EngineStuff.Input.Input.GetMouseButtonPressed(MouseButton.MOUSE_RIGHT_BUTTON, isFocused()))
-                                SubrightEngine2.Program.objects.RemoveAt(i);
+                                SubrightEngine2.Program.loader.currentScene.GameObjects.RemoveAt(i);
                         }
 
                     for (var m = 0; m < newObject.childrenObjects.Count; m++)

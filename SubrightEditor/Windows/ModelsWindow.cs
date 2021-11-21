@@ -69,7 +69,7 @@ namespace SubrightEngineEditor.Windows
                                     returnSimmilaritiesModify(nameThis));
                                 var render = new ModelRender(titles[i]);
                                 gameObject.AddComponent(render);
-                                SubrightEngine2.Program.objects.Add(gameObject);
+                                SubrightEngine2.Program.loader.currentScene.GameObjects.Add(gameObject);
                             }
                         }
                 }
@@ -83,8 +83,8 @@ namespace SubrightEngineEditor.Windows
 
         public bool gameObjectExists(string name)
         {
-            for (var i = 0; i < SubrightEngine2.Program.objects.Count; i++)
-                if (SubrightEngine2.Program.objects[i].name == name)
+            for (var i = 0; i < SubrightEngine2.Program.loader.currentScene.GameObjects.Count; i++)
+                if (SubrightEngine2.Program.loader.currentScene.GameObjects[i].name == name)
                     return true;
             return false;
         }
@@ -93,9 +93,9 @@ namespace SubrightEngineEditor.Windows
         {
             int count = 0;
             string thisname = "";
-            for (int i = 0; i < SubrightEngine2.Program.objects.Count; i++)
+            for (int i = 0; i < SubrightEngine2.Program.loader.currentScene.GameObjects.Count; i++)
             {
-                GameObject gameObject = SubrightEngine2.Program.objects[i];
+                GameObject gameObject = SubrightEngine2.Program.loader.currentScene.GameObjects[i];
                 if (gameObject.name.Contains(name))
                 {
                     count++;

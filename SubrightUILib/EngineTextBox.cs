@@ -7,7 +7,7 @@ namespace SubrightEngine2.UI
     public class EngineTextBox : UIElement
     {
         //The text box used to write text to the screen.
-        public string text = "Pog";
+        public string text = "Hello World";
 
         public EngineTextBox(string name) : base(name)
         {

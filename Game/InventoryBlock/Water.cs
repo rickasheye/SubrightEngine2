@@ -1,7 +1,9 @@
 ﻿using RPGConsole.InventoryItems;
+using System;
 
 namespace RPGConsole.InventoryBlock
 {
+    [Serializable]
     public class Water : Block
     {
         public Water() : base("Water", 0, 1, -1, Color.LIGHTBLUE, "Textures/blocks/water.png", 1) { }

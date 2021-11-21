@@ -1,7 +1,9 @@
 ﻿using RPGConsole.InventoryItems;
+using System;
 
 namespace RPGConsole.InventoryBlock
 {
+    [Serializable]
     public class Dirt : Block
     {
         public Dirt() : base("Dirt", 0, 0, 1, Color.LIGHTBROWN, "Textures/blocks/dirt.png", 1) { giveBlock = false; }

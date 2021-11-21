@@ -2,6 +2,7 @@ using Raylib_cs;
 
 namespace SubrightEngine2.UI
 {
+    [System.Serializable]
     public class EngineToggleText : EngineToggle
     {
         //Toggle button with Text.
@@ -11,19 +12,9 @@ namespace SubrightEngine2.UI
 
         }
 
-        public override void Update(ref Camera2D cam2, ref Camera3D cam3)
+        public override void OffhandDraw(ref Camera2D cam)
         {
-            base.Update(ref cam2, ref cam3);
-            Draw2D(ref cam2);
-        }
-
-        /// <summary>
-        /// Draw the text next to the toggle button.
-        /// </summary>
-        /// <param name="cam"></param>
-        public override void Draw2D(ref Camera2D cam)
-        {
-            base.Draw2D(ref cam);
+            base.OffhandDraw(ref cam);
             DrawText(name, connectedObject.position.X + connectedObject.size.X + 5, connectedObject.position.Y, 10, Program.textColor);
         }
     }

@@ -1,19 +1,24 @@
 ﻿using Raylib_cs;
 using RPGConsole.Graphical;
 using SubrightEngine2.EngineStuff;
+using SubrightEngine2.EngineStuff.Scenes;
+using System;
 
 namespace RPGConsole.InventoryItems
 {
+    [Serializable]
     public enum itemTYPE
     {
         WEAPON, TOOL, GENERAL
     }
 
+    [Serializable]
     public enum entityType
     {
         BLOCK, ITEM
     }
 
+    [Serializable]
     public class InventoryItem : GameObject
     {
         public string name;

@@ -1,7 +1,9 @@
 ﻿using RPGConsole.InventoryItems;
+using System;
 
 namespace RPGConsole.InventoryBlock
 {
+    [Serializable]
     public class DiamondOre : Block
     {
         public DiamondOre() : base("Diamond Ore", 0, 0, 30, Color.LIGHTBLUE, "Textures/blocks/diamondore.png", 1) { giveBlock = true; }

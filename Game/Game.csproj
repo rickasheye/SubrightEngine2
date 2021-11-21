@@ -14,7 +14,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\SubrightUILib\SubrightUILib.csproj" />
+      <ProjectReference Include="..\OLDSubrightUILib\OLDSubrightUILib.csproj" />
+      <ProjectReference Include="..\SubrightEngine2\SubrightEngine2.csproj" />
     </ItemGroup>
 
     <ItemGroup>

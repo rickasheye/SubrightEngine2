@@ -26,8 +26,8 @@ namespace SubrightEngine2.EngineStuff
             this.position = position;
             this.size = size;
             this.voidStart = voidStart;
-            Start();
             Program.loader.currentScene.GameObjects.Add(this);
+            Start();
         }
 
         public GameObject(Vector3 position, Vector3 size, string name)
@@ -36,8 +36,8 @@ namespace SubrightEngine2.EngineStuff
             this.position = position;
             this.size = size;
             this.voidStart = false;
-            Start();
             Program.loader.currentScene.GameObjects.Add(this);
+            Start();
         }
 
         public GameObject(Vector3 position, string name)
@@ -46,8 +46,8 @@ namespace SubrightEngine2.EngineStuff
             this.position = position;
             this.size = Vector3.zero;
             this.voidStart = false;
-            Start();
             Program.loader.currentScene.GameObjects.Add(this);
+            Start();
         }
 
         public GameObject(string name)
@@ -57,6 +57,7 @@ namespace SubrightEngine2.EngineStuff
             this.size = Vector3.zero;
             this.voidStart = false;
             Program.loader.currentScene.GameObjects.Add(this);
+            Start();
         }
 
         public GameObject()
@@ -65,8 +66,8 @@ namespace SubrightEngine2.EngineStuff
             this.position = Vector3.zero;
             this.size = Vector3.zero;
             this.voidStart = false;
-            Start();
             Program.loader.currentScene.GameObjects.Add(this);
+            Start();
         }
 
         public virtual void Start()

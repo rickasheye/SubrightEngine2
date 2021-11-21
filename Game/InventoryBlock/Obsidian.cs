@@ -1,5 +1,8 @@
-﻿namespace RPGConsole.InventoryBlock
+﻿using System;
+
+namespace RPGConsole.InventoryBlock
 {
+    [Serializable]
     public class Obsidian : Block
     {
         public Obsidian() : base("Obsidian", 0, 0, 1, Color.BLACK, "Textures/blocks/obsidian.png", 1) { giveBlock = true; }

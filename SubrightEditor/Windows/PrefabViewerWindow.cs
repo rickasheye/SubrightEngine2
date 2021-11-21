@@ -1,8 +1,7 @@
 ﻿using Raylib_cs;
 using SubrightEngine2.EngineStuff;
 using SubrightEngine2.EngineStuff.BaseComponents;
-using SubrightEngine2.EngineStuff.LevelLoading;
-using SubrightEngine2.GameStuff;
+using SubrightEngine2.EngineStuff.Scenes;
 using SubrightEngine2.UI;
 using SubrightEngine2.UI.Windows;
 using System;
@@ -27,8 +26,6 @@ namespace SubrightEngineEditor.Windows
             base.Start();
             if (ran == false)
             {
-                AddPrefab(new Prefab(new Player(), new Vector3(0, 0, 0), new Vector3(1, 2, 1), "Player"));
-                AddPrefab(new Prefab(new Floor(), new Vector3(0, 0, 0), new Vector3(1, 1, 1), "Floor"));
                 AddPrefab(new Prefab(new ObjectRender(ObjectType.CUBE), new Vector3(0, 0, 0), Vector3.One, "Cube"));
                 AddPrefab(new Prefab(new ObjectRender(ObjectType.CYLINDER), new Vector3(0, 0, 0), Vector3.One,
                     "Cylinder"));
@@ -106,7 +103,7 @@ namespace SubrightEngineEditor.Windows
                     {
                         if (!doesGameObjectExist(prefToSpawn.name))
                         {
-                            SubrightEngine2.Program.objects.AddRange(prefToSpawn.gameObjects);
+                            SubrightEngine2.Program.loader.currentScene.GameObjects.AddRange(prefToSpawn.gameObjects);
                         }
                     }
                 }
@@ -120,8 +117,8 @@ namespace SubrightEngineEditor.Windows
 
         public bool doesGameObjectExist(string name)
         {
-            for (var i = 0; i < SubrightEngine2.Program.objects.Count; i++)
-                if (SubrightEngine2.Program.objects[i].name == name)
+            for (var i = 0; i < SubrightEngine2.Program.loader.currentScene.GameObjects.Count; i++)
+                if (SubrightEngine2.Program.loader.currentScene.GameObjects[i].name == name)
                     return true;
             return false;
         }

@@ -1,8 +1,10 @@
 ﻿using Raylib_cs;
 using SubrightEngine2.EngineStuff;
+using System;
 
 namespace RPGConsole.InventoryBlock
 {
+    [Serializable]
     public class Tree : Block
     {
         public Texture2D textureTreeBush;

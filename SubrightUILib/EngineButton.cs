@@ -12,7 +12,7 @@ namespace SubrightEngine2.UI
         {
         }
 
-        public override void Update(ref Camera2D cam2, ref Camera3D cam3)
+        public virtual void Update(ref Camera2D cam2, ref Camera3D cam3)
         {
             base.Update(ref cam2, ref cam3);
             Draw2D(ref cam2);
@@ -38,6 +38,12 @@ namespace SubrightEngine2.UI
             }
 
             DrawText(name, connectedObject.position.X, (connectedObject.position.Y + connectedObject.size.X) / 2, 8, Color.WHITE);
+            OffhandDraw(ref cam);
+        }
+
+        public virtual void OffhandDraw(ref Camera2D cam2)
+        {
+
         }
 
         public virtual void ExecuteEvent()

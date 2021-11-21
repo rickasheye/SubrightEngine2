@@ -2,9 +2,11 @@
 using RPGConsole.Graphical.MenuItems.KeyboardOnlyItems;
 using RPGConsole.InventoryItems;
 using SubrightEngine2.EngineStuff;
+using System;
 
 namespace RPGConsole.InventoryBlock
 {
+    [Serializable]
     public class ElectrodeNode : Block
     {
         public ElectrodeNode() : base("ElectrodeNode", 0, 0, 8, Color.WHITESKINCOLOR, "Textures/blocks/powernode.png", 1)

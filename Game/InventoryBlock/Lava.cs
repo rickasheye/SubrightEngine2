@@ -1,10 +1,12 @@
 ﻿using RPGConsole.InventoryItems;
 using SubrightEngine2.EngineStuff;
+using System;
 using System.Threading;
 using Random = SubrightEngine2.EngineStuff.Random;
 
 namespace RPGConsole.InventoryBlock
 {
+    [Serializable]
     public class Lava : Block
     {
         public Lava() : base("Lava", 2, 0, -1, Color.ORANGE, "Textures/blocks/lava.png", 1) { }
@@ -24,7 +26,6 @@ namespace RPGConsole.InventoryBlock
                 {
                     break;
                 }
-                if (Reference.cmdMode) { Thread.Sleep(800); }
                 int randomChance = Random.Range(2);
                 if (randomChance == 1)
                 {
