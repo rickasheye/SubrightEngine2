@@ -4,6 +4,12 @@ using System.Collections.Generic;
 
 namespace SubrightEngine2.EngineStuff.BaseComponents
 {
+
+    public enum ContainmentType
+    {
+        Disjoint, Contains, Intersects
+    }
+
     [Serializable]
     public class Collider : Component
     {
@@ -22,7 +28,7 @@ namespace SubrightEngine2.EngineStuff.BaseComponents
                 var trueCollision = false;
                 var coms = Program.loader.currentScene.GameObjects[i].components;
                 for (var m = 0; m < coms.Count; m++)
-                    if (coms[m].Equals(typeof(BoxCollider)))
+                    if (coms[m].Equals(typeof(Collider)))
                     {
                         trueCollision = true;
                         break;
@@ -51,7 +57,7 @@ namespace SubrightEngine2.EngineStuff.BaseComponents
             //check for collision amongst objects.
             for (var i = 0; i < collisionObjects.Count; i++)
             {
-                var previousCollision = Vector3.zero;
+                var previousCollision = Vector3.Zero;
                 var collision = collisionObjects[i];
                 var prevCol = new Vector3(connectedObject.position.X - 1, connectedObject.position.Y - 1,
                     connectedObject.position.Z - 1);

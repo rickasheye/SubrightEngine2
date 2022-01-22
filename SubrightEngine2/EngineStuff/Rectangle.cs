@@ -2,37 +2,27 @@ namespace SubrightEngine2.EngineStuff
 {
     public class Rectangle
     {
-        public float x, y;
-        public float width, height;
+        public int x, y;
+        public int width, height;
 
-        public Rectangle(float x, float y, float width, float height)
+        public int Left
         {
-            this.x = x;
-            this.y = y;
-            this.width = width;
-            this.height = height;
+            get { return this.x; }
         }
 
-        public Rectangle(int x, int y, float width, float height)
+        public int Right
         {
-            this.x = x;
-            this.y = y;
-            this.width = width;
-            this.height = height;
+            get { return (this.x + this.width); }
         }
 
-        public Rectangle(float x, float y, int width, int height)
+        public int Top
         {
-            this.x = x;
-            this.y = y;
-            this.width = width;
-            this.height = height;
+            get { return this.y; }
         }
 
-        public Rectangle(float x, float y)
+        public int Bottom
         {
-            this.x = x;
-            this.y = y;
+            get { return (this.y + this.height); }
         }
 
         public Rectangle(int x, int y, int width, int height)

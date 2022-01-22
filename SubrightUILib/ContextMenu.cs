@@ -13,7 +13,7 @@ namespace SubrightEngine2.UI
         public bool hideRender = false;
         private readonly List<ContextItem> items = new List<ContextItem>();
 
-        public ContextMenu(List<ContextItem> itemsOverride) : base(Vector3.zero, Vector3.zero, "Context Menu")
+        public ContextMenu(List<ContextItem> itemsOverride) : base(Vector3.Zero, Vector3.Zero, "Context Menu")
         {
             if (itemsOverride != null) items.AddRange(itemsOverride);
             SetupMenu();

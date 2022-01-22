@@ -134,7 +134,7 @@ namespace SubrightEngine2
             //Initialise Icon
             var image = Raylib.LoadTexture(Path.Combine(Directory.GetCurrentDirectory(), "textures/titlescreen.png"));
 
-            Ray ray;
+            Raylib_cs.Ray ray;
 
             //load the level
             if (saveFile == true) { if (!firstRun) LevelLoader.LoadLevelByte(); }
@@ -142,8 +142,6 @@ namespace SubrightEngine2
             for (var i = 0; i < loader.currentScene.GameObjects.Count; i++)
                 //objects
                 loader.currentScene.GameObjects[i].Start();
-
-            bool test = false;
 
             while (!Raylib.WindowShouldClose())
             {

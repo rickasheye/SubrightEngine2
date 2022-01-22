@@ -12,8 +12,8 @@ namespace SubrightEngine2.EngineStuff.InterpreterCode.InterpreterCommands
         public override void ExecuteCommand(string[] args)
         {
             base.ExecuteCommand(args);
-            var position = Vector3.zero;
-            var size = Vector3.zero;
+            var position = Vector3.Zero;
+            var size = Vector3.Zero;
             var name = "";
             if (args != null && args.Length >= 0 && !args[0].Contains(""))
             {

@@ -44,7 +44,7 @@ namespace SubrightEngine2.EngineStuff
         {
             this.name = name;
             this.position = position;
-            this.size = Vector3.zero;
+            this.size = Vector3.Zero;
             this.voidStart = false;
             Program.loader.currentScene.GameObjects.Add(this);
             Start();
@@ -53,8 +53,8 @@ namespace SubrightEngine2.EngineStuff
         public GameObject(string name)
         {
             this.name = name;
-            this.position = Vector3.zero;
-            this.size = Vector3.zero;
+            this.position = Vector3.Zero;
+            this.size = Vector3.Zero;
             this.voidStart = false;
             Program.loader.currentScene.GameObjects.Add(this);
             Start();
@@ -63,8 +63,8 @@ namespace SubrightEngine2.EngineStuff
         public GameObject()
         {
             this.name = "";
-            this.position = Vector3.zero;
-            this.size = Vector3.zero;
+            this.position = Vector3.Zero;
+            this.size = Vector3.Zero;
             this.voidStart = false;
             Program.loader.currentScene.GameObjects.Add(this);
             Start();

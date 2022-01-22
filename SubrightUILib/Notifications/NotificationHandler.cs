@@ -6,7 +6,7 @@ namespace SubrightEngine2.UI.Notifications
 {
     public class NotificationHandler : GameObject
     {
-        public NotificationHandler() : base(Vector3.zero, Vector3.zero, "NotificationHandler") { }
+        public NotificationHandler() : base(Vector3.Zero, Vector3.Zero, "NotificationHandler") { }
 
         public static List<Notification> notifications = new List<Notification>();
         public int index = 0;
