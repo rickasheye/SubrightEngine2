@@ -59,7 +59,7 @@ namespace SubrightEngine2.UI.Windows
             windows.Clear();
         }
 
-        public static void AddWindow(Window window)
+        public void AddWindow(Window window)
         {
             if (checkWindowExists(window.name))
             {

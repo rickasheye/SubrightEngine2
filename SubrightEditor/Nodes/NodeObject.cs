@@ -7,9 +7,12 @@ namespace SubrightEditor.Nodes
     {
         public NodeObject(string name) : base("Blank Node")
         {
-            if (connectedObject.size.X < 80 || connectedObject.size.Y < 40)
+            if (connectedObject != null)
             {
-                connectedObject.size = new SubrightEngine2.EngineStuff.Vector3(80, 40, 0);
+                if (connectedObject.size.X < 80 || connectedObject.size.Y < 40)
+                {
+                    connectedObject.size = new SubrightEngine2.EngineStuff.Vector3(80, 40, 0);
+                } 
             }
         }
 
@@ -17,8 +20,11 @@ namespace SubrightEditor.Nodes
         {
             base.Draw2D(ref cam);
             //custom draw object
-            Raylib.DrawRectangle((int)connectedObject.position.X, (int)connectedObject.position.Y, (int)connectedObject.size.X, (int)connectedObject.size.Y, Color.GRAY);
-            Raylib.DrawText(name, (int)connectedObject.position.X, (int)connectedObject.position.Y, 8, SubrightEngine2.Program.textColor.ToRaylibColor);
+            if (connectedObject != null)
+            {
+                Raylib.DrawRectangle((int)connectedObject.position.X, (int)connectedObject.position.Y, (int)connectedObject.size.X, (int)connectedObject.size.Y, Color.GRAY);
+                Raylib.DrawText(name, (int)connectedObject.position.X, (int)connectedObject.position.Y, 8, SubrightEngine2.Program.textColor.ToRaylibColor); 
+            }
         }
     }
 }

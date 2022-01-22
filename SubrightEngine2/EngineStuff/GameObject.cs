@@ -15,8 +15,8 @@ namespace SubrightEngine2.EngineStuff
 
         public GameObject parent;
 
-        public Vector3 position;
-        public Vector3 size;
+        public Vector3 position = Vector3.Zero;
+        public Vector3 size = Vector3.Zero;
 
         public bool voidStart = false;
 

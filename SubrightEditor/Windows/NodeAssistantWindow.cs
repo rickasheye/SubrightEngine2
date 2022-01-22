@@ -3,7 +3,7 @@ using SubrightEditor.Nodes;
 using SubrightEngine2.EngineStuff;
 using SubrightEngine2.UI;
 
-namespace SubrightEditor.Windows
+namespace SubrightEngineEditor.Windows
 {
     public class NodeAssistantWindow : Window
     {
