@@ -1,7 +1,5 @@
 ﻿using SubrightEngine2.EngineStuff;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace RPGConsole.Graphical.MenuItems
 {
@@ -31,7 +29,7 @@ namespace RPGConsole.Graphical.MenuItems
 
         public virtual void DrawObject()
         {
-            if(disabled == true)
+            if (disabled == true)
             {
                 return;
             }
@@ -39,7 +37,6 @@ namespace RPGConsole.Graphical.MenuItems
 
         public virtual void Start()
         {
-
         }
     }
 }

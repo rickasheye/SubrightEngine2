@@ -13,6 +13,7 @@ namespace SubrightEngine2.UI.Windows
     {
         //More of a window manager now
         public static List<Window> windows = new List<Window>();
+
         public static Window focusedWindow = null;
         public static bool lockedWindows = false;
 
@@ -81,12 +82,12 @@ namespace SubrightEngine2.UI.Windows
             return false;
         }
 
-        public override void Update(ref Camera2D cam2, ref Camera3D cam3)
+        public override void Draw2D(ref Camera2D cam2)
         {
-            base.Update(ref cam2, ref cam3);
+            base.Draw2D(ref cam2);
             for (var i = 0; i < windows.Count; i++)
             {
-                windows[i].Update(ref cam2, ref cam3);
+                windows[i].Draw2D(ref cam2);
             }
         }
     }

@@ -20,7 +20,7 @@ namespace SubrightEngine2.EngineStuff
             {
                 string file = "[" + type + "] - " + debugLog;
                 logFile.Insert(0, file);
-                Console.WriteLine(file); 
+                Console.WriteLine(file);
             }
         }
 
@@ -52,6 +52,11 @@ namespace SubrightEngine2.EngineStuff
         public static void LogWarning(string debugLog)
         {
             LogWarning(debugLog, true);
+        }
+
+        public static void WriteLine(string line)
+        {
+            Log(line);
         }
     }
 }

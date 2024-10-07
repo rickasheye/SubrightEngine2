@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SubrightEngine2.EngineStuff
+﻿namespace SubrightEngine2.EngineStuff
 {
     /// <summary>
     /// Defines the intersection between a <see cref="Plane"/> and a bounding volume.
@@ -13,10 +9,12 @@ namespace SubrightEngine2.EngineStuff
         /// There is no intersection, the bounding volume is in the negative half space of the plane.
         /// </summary>
         Front,
+
         /// <summary>
         /// There is no intersection, the bounding volume is in the positive half space of the plane.
         /// </summary>
         Back,
+
         /// <summary>
         /// The plane is intersected.
         /// </summary>

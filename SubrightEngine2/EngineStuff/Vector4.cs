@@ -6,6 +6,7 @@ namespace SubrightEngine2.EngineStuff
     {
         //why is this even here?
         public Vector4 negativeInfinity { get; private set; } = new Vector4(float.NegativeInfinity, float.NegativeInfinity, float.NegativeInfinity, float.NegativeInfinity);
+
         public Vector4 one = new Vector4(1, 1, 1, 1);
 
         public Vector4 postiveInfinity { get; private set; } =

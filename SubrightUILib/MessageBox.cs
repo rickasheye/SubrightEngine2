@@ -31,17 +31,6 @@ namespace SubrightEngine2.UI
         }
 
         /// <summary>
-        /// Update method used to draw the graphics, in this case the message boxes.
-        /// </summary>
-        /// <param name="cam2"></param>
-        /// <param name="cam3"></param>
-        public override void Update(ref Camera2D cam2, ref Camera3D cam3)
-        {
-            base.Update(ref cam2, ref cam3);
-            Draw2D(ref cam2);
-        }
-
-        /// <summary>
         /// The draw method used to actually draw those graphics, to display messageboxes.
         /// </summary>
         /// <param name="cam"></param>
@@ -53,11 +42,11 @@ namespace SubrightEngine2.UI
                 DrawText(text,
                     new Vector2(position.X + (size.X / 2) - ((text.Length * 5.25f) / 4), position.Y + (size.Y / 2.25f)), 8,
                     Program.textColor);
-                DrawText("X", new Vector2(position.X + size.X - 10, position.Y), 10, Color.RED);
+                DrawText("X", new Vector2(position.X + size.X - 10, position.Y), 10, Color.Red);
                 if (Raylib.GetMouseX() > position.X + size.X - 10 && Raylib.GetMouseX() < position.X + size.X &&
                     Raylib.GetMouseY() > position.Y && Raylib.GetMouseY() < position.Y + 10)
                 {
-                    if (SubrightEngine2.EngineStuff.Input.Input.GetMouseButtonPressed(MouseButton.MOUSE_LEFT_BUTTON))
+                    if (SubrightEngine2.EngineStuff.Input.Input.GetMouseButtonPressed(MouseButton.Left))
                     {
                         hideRender = true;
                         SubrightEngine2.Program.loader.currentScene.GameObjects.Remove(this);

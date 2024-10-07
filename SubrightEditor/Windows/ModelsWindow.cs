@@ -20,12 +20,6 @@ namespace SubrightEngineEditor.Windows
         {
         }
 
-        public override void Update(ref Camera2D cam2, ref Camera3D cam3)
-        {
-            base.Update(ref cam2, ref cam3);
-            Draw2D(ref cam2);
-        }
-
         public override void Draw2D(ref Camera2D cam)
         {
             base.Draw2D(ref cam);
@@ -44,13 +38,13 @@ namespace SubrightEngineEditor.Windows
                     indexEnd = directoryFiles.Length;
                 else if (indexEnd <= 8) indexEnd = 8;
 
-                indexBegin = indexEnd - 8;
+                indexBegin = indexEnd > 8 ? indexEnd - 8 : 0;
                 var titles = new List<string>();
                 for (var i = indexBegin; i < indexEnd; i++) titles.Add(directoryFiles[i]);
 
                 for (var i = 0; i < titles.Count; i++)
                 {
-                    DrawText(titles[i], position.X + 2, position.Y + 10 + i * 15, 8, Color.WHITE);
+                    DrawText(titles[i], position.X + 2, position.Y + 10 + i * 15, 8, Color.White);
                     if (Raylib.GetMouseX() > (int)position.X + 2 && Raylib.GetMouseX() < (int)position.X + size.X &&
                         Raylib.GetMouseY() <= (int)position.Y + 18 + i * 15 &&
                         Raylib.GetMouseY() >= (int)position.Y + 10 + i * 15)
@@ -59,7 +53,7 @@ namespace SubrightEngineEditor.Windows
                         {
                             DrawRectangleLines(position.X + 2, position.Y + 10 + i * 15, position.X + size.X, 10,
                                 Color.LIGHTGRAY);
-                            if (SubrightEngine2.EngineStuff.Input.Input.GetMouseButtonPressed(MouseButton.MOUSE_LEFT_BUTTON, isFocused()))
+                            if (SubrightEngine2.EngineStuff.Input.Input.GetMouseButtonPressed(MouseButton.Left, isFocused()))
                             {
                                 bool exists = gameObjectExists("Asset: " + titles[i]);
 
@@ -77,7 +71,7 @@ namespace SubrightEngineEditor.Windows
                 titles.Clear();
 
                 if (directoryFiles.Length == 0)
-                    DrawText("No Files Visible", position.X + 2, position.Y + 10, 8, Color.WHITE);
+                    DrawText("No Files Visible", position.X + 2, position.Y + 10, 8, Color.White);
             }
         }
 

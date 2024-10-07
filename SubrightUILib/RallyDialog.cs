@@ -25,7 +25,7 @@ namespace SubrightEngine2.UI
                     index++;
                     dialogs.Remove(dialogs[index - 1]);
                 }
-                dialogs[index].Update(ref cam, ref cam3);
+                dialogs[index].Draw2D(ref cam);
             }
         }
 

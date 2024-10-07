@@ -1,4 +1,4 @@
-﻿using SubrightEngine2.EngineStuff;
+﻿using Raylib_cs;
 using System;
 using System.Collections.Generic;
 
@@ -23,12 +23,54 @@ namespace SubrightEngine2.EngineStuff.Scenes
             }
         }
 
+        private bool toggleDebuginfo = false;
+
+        public void UpdateScene(ref Camera2D cam2, ref Camera3D cam3)
+        {
+            int currentCountLoadRender = 0;
+            for (int i = 0; i < currentScenes.Count; i++)
+            {
+                Scene currentScene_ = currentScenes[i];
+                if (currentScene_.loadRenderIfNotPriority == true || currentScene.name == currentScene_.name)
+                {
+                    currentScene_.UpdateScene(ref cam2, ref cam3);
+                    currentCountLoadRender++;
+                }
+
+                if (currentScene.name != currentScene_.name)
+                {
+                    currentScene_.notPriority = true;
+                }
+                else
+                {
+                    currentScene_.notPriority = false;
+                }
+            }
+
+            if (Program.debug && toggleDebuginfo == true)
+            {
+                //render the scene properties
+                Raylib.DrawText("Scene: " + currentScene.name + " Scenes in memory: " + currentScenes.Count + " Current scenes rendering: " + currentCountLoadRender, 10, 20, 20, Raylib_cs.Color.Black);
+                //render the names for the scenes loaded
+                for (int i = 0; i < currentScenes.Count; i++)
+                {
+                    Raylib.DrawText("Scene: " + currentScenes[i].name, 10, 40 + (i * 20), 20, Raylib_cs.Color.Black);
+                }
+            }
+
+            if (Program.debug && Raylib.IsKeyPressed(KeyboardKey.F1))
+            {
+                toggleDebuginfo = !toggleDebuginfo;
+            }
+            currentCountLoadRender = 0;
+        }
+
         public void LoadScene(string name)
         {
             bool defined = false;
-            for(int i = 0; i < currentScenes.Count; i++)
+            for (int i = 0; i < currentScenes.Count; i++)
             {
-                if(currentScenes[i].name == name)
+                if (currentScenes[i].name == name)
                 {
                     LoadScene(currentScenes[i]);
                     Debug.Log("Loading scene " + name);
@@ -36,11 +78,16 @@ namespace SubrightEngine2.EngineStuff.Scenes
                 }
             }
 
-            if(defined == false)
+            if (defined == false)
             {
                 //if defined please explain
                 Debug.Log("Unfortunately your scene you described doesnt exist!");
             }
+        }
+
+        public void LoadScene(int id)
+        {
+            LoadScene(currentScenes[id]);
         }
 
         public void AddScene(Scene scene)
@@ -87,12 +134,9 @@ namespace SubrightEngine2.EngineStuff.Scenes
 
         public bool sceneExists(string sceneName)
         {
-            foreach (Scene currentScene in this.currentScenes)
+            if (getScene(sceneName) != null)
             {
-                if (currentScene.name == sceneName)
-                {
-                    return true;
-                }
+                return true;
             }
             return false;
         }

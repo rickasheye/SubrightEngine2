@@ -6,10 +6,10 @@ using SubrightEngineEditor.Windows;
 
 namespace SubrightEditor
 {
-    class EditorReference : Extension
+    internal class EditorReference : Extension
     {
         public InitCycle cycle;
-        SubContextMenuManager man;
+        private SubContextMenuManager man;
 
         public override void Start()
         {
@@ -29,7 +29,7 @@ namespace SubrightEditor
 
         public override void Update(ref Camera2D cam2, ref Camera3D cam3)
         {
-            Raylib.ClearBackground(Raylib_cs.Color.BLUE);
+            Raylib.ClearBackground(Raylib_cs.Color.Blue);
             base.Update(ref cam2, ref cam3);
             cycle.Update(ref cam2, ref cam3);
         }

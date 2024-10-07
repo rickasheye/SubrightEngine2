@@ -1,26 +1,28 @@
-﻿using SubrightEngine2.EngineStuff.BaseComponents;
+﻿using Newtonsoft.Json;
+using SubrightEngine2.EngineStuff.BaseComponents;
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace SubrightEngine2.EngineStuff
 {
     [Serializable]
     public class Prefab
     {
-        public List<GameObject> gameObjects = new List<GameObject>();
+        public List<GameObject> childGameObjects = new List<GameObject>();
 
         //this is a prefab it stores certain information about other objects.
         public string name = "Untitled";
 
         public Prefab(List<GameObject> objectsAdd)
         {
-            gameObjects = objectsAdd;
-            name = gameObjects[0].name;
+            childGameObjects = objectsAdd;
+            name = childGameObjects[0].name;
         }
 
         public Prefab(GameObject objectAdd)
         {
-            gameObjects.Add(objectAdd);
+            childGameObjects.Add(objectAdd);
             name = objectAdd.name;
         }
 
@@ -30,7 +32,7 @@ namespace SubrightEngine2.EngineStuff
             com.connectedObject = m;
             m.AddComponent(com);
             this.name = name;
-            gameObjects.Add(m);
+            childGameObjects.Add(m);
         }
 
         public Prefab(Component com)
@@ -39,7 +41,7 @@ namespace SubrightEngine2.EngineStuff
             com.connectedObject = m;
             m.AddComponent(com);
             name = com.name;
-            gameObjects.Add(m);
+            childGameObjects.Add(m);
         }
 
         public Prefab()
@@ -47,9 +49,46 @@ namespace SubrightEngine2.EngineStuff
             //new instance
         }
 
-        public void loadPrefab(ref List<GameObject> objects)
+        public static Prefab LoadPrefab(string prefabLocation)
         {
-            objects.AddRange(gameObjects);
+            //load from file.
+            if (File.Exists(prefabLocation))
+            {
+                Prefab fab = JsonConvert.DeserializeObject<Prefab>(File.ReadAllText(prefabLocation));
+                return fab;
+            }
+            else
+            {
+                Debug.LogError("Unable to find prefab");
+                return null;
+            }
+        }
+
+        public void LoadPrefab()
+        {
+            //Prefab loadedPrefab = LoadPrefab(prefabLocation);
+        }
+
+        public static void SavePrefab(string prefabLocation, Prefab fab)
+        {
+            if (!File.Exists(prefabLocation))
+            {
+                File.Create(prefabLocation);
+                Debug.LogWarning("Prefab file isnt created. creating");
+                SavePrefab(prefabLocation, fab);
+            }
+            else
+            {
+                Debug.Log("Saving prefab to file");
+                string savedFile = JsonConvert.SerializeObject(fab);
+                File.WriteAllText(savedFile, prefabLocation);
+                Debug.Log("Saved prefab " + savedFile);
+            }
+        }
+
+        public void SavePrefab(string prefabLocation)
+        {
+            SavePrefab(prefabLocation, this);
         }
     }
 }

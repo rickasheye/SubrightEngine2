@@ -1,12 +1,16 @@
 using Raylib_cs;
 using SubrightEngine2.EngineStuff;
+using System;
 using System.Collections.Generic;
 
 namespace SubrightEngine2.UI.Notifications
 {
+    [Serializable]
     public class NotificationHandler : GameObject
     {
-        public NotificationHandler() : base(Vector3.Zero, Vector3.Zero, "NotificationHandler") { }
+        public NotificationHandler() : base(Vector3.Zero, Vector3.Zero, "NotificationHandler")
+        {
+        }
 
         public static List<Notification> notifications = new List<Notification>();
         public int index = 0;
@@ -16,13 +20,8 @@ namespace SubrightEngine2.UI.Notifications
             base.Start();
         }
 
-        public override void Update(ref Camera2D cam2, ref Camera3D cam3)
-        {
-            base.Update(ref cam2, ref cam3);
-            Draw2D(ref cam2);
-        }
-
         private int lastindex = 0;
+
         public override void Draw2D(ref Camera2D cam)
         {
             base.Draw2D(ref cam);

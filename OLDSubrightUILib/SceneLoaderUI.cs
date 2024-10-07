@@ -1,7 +1,5 @@
 ﻿using SubrightEngine2.EngineStuff;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace RPGConsole.Graphical
 {
@@ -66,9 +64,9 @@ namespace RPGConsole.Graphical
 
         public bool sceneExists(string sceneName)
         {
-            foreach(SceneUI currentScene in this.currentScenes)
+            foreach (SceneUI currentScene in this.currentScenes)
             {
-                if(currentScene.name == sceneName)
+                if (currentScene.name == sceneName)
                 {
                     return true;
                 }

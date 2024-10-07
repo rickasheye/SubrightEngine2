@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Runtime.Serialization;
 
 //Ported directly from MonoGameFramework with a few tweaks.
@@ -623,7 +622,6 @@ namespace SubrightEngine2.EngineStuff
             result.Y *= num3;
             result.Z *= num3;
             result.W *= num3;
-
         }
 
         /// <summary>
@@ -1055,7 +1053,6 @@ namespace SubrightEngine2.EngineStuff
             quaternion.Z = quaternion1.Z - quaternion2.Z;
             quaternion.W = quaternion1.W - quaternion2.W;
             return quaternion;
-
         }
 
         /// <summary>

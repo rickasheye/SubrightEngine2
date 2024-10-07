@@ -6,6 +6,7 @@ namespace SubrightEngine2.EngineStuff
     {
         //Pulled and used from MonoGameFramework
         public const float Deg2Rad = (float)Math.PI / 180f;
+
         public const float Rad2Deg = 180f / (float)Math.PI;
         public const float PI = (float)Math.PI;
         public const float E = (float)Math.E;
@@ -186,7 +187,6 @@ namespace SubrightEngine2.EngineStuff
             return (float)result;
         }
 
-
         /// <summary>
         ///     Linearly interpolates between two values.
         /// </summary>
@@ -204,7 +204,6 @@ namespace SubrightEngine2.EngineStuff
         {
             return value1 + (value2 - value1) * amount;
         }
-
 
         /// <summary>
         ///     Linearly interpolates between two values.

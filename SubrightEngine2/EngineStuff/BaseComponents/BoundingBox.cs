@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Text;
 
 namespace SubrightEngine2.EngineStuff.BaseComponents
 {
@@ -13,10 +11,10 @@ namespace SubrightEngine2.EngineStuff.BaseComponents
         public Vector3 Max;
 
         public const int CornerCount = 8;
- 
+
         //Constructors
 
-        public BoundingBox(Vector3 min, Vector3 max) : base ("Bounding Box")
+        public BoundingBox(Vector3 min, Vector3 max) : base("Bounding Box")
         {
             this.Min = min;
             this.Max = max;
@@ -33,7 +31,6 @@ namespace SubrightEngine2.EngineStuff.BaseComponents
                 || box.Max.Z < Min.Z
                 || box.Min.Z > Max.Z)
                 return ContainmentType.Disjoint;
-
 
             if (box.Min.X >= Min.X
                 && box.Max.X <= Max.X
@@ -53,7 +50,7 @@ namespace SubrightEngine2.EngineStuff.BaseComponents
 
         public ContainmentType Contains(BoundingFrustum frustum)
         {
-            //TODO: bad done here need a fix. 
+            //TODO: bad done here need a fix.
             //Because question is not frustum contain box but reverse and this is not the same
             int i;
             ContainmentType contained;
@@ -73,7 +70,6 @@ namespace SubrightEngine2.EngineStuff.BaseComponents
             if (i != 0)             // if i is not equal to zero, we can fastpath and say that this box intersects
                 return ContainmentType.Intersects;
 
-
             // If we get here, it means the first (and only) point we checked was actually contained in the frustum.
             // So we assume that all other points will also be contained. If one of the points is disjoint, we can
             // exit immediately saying that the result is Intersects
@@ -83,7 +79,6 @@ namespace SubrightEngine2.EngineStuff.BaseComponents
                 this.Contains(ref corners[i], out contained);
                 if (contained != ContainmentType.Contains)
                     return ContainmentType.Intersects;
-
             }
 
             // If we get here, then we know all the points were actually contained, therefore result is Contains

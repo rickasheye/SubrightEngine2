@@ -14,6 +14,7 @@ namespace SubrightEngine2.EngineStuff
             Y = _Y;
             Z = _Z;
         }
+
         public Vector3(float value)
         {
             this.X = value;

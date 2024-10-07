@@ -4,7 +4,8 @@ namespace SubrightEngine2.EngineStuff
 {
     public class Extension
     {
-        bool started = false;
+        private bool started = false;
+
         public virtual void Update(ref Camera2D cam2, ref Camera3D cam3)
         {
             if (!started)
@@ -20,7 +21,6 @@ namespace SubrightEngine2.EngineStuff
 
         public virtual void Dispose()
         {
-
         }
     }
 }

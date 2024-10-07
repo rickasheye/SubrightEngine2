@@ -1,8 +1,5 @@
 ﻿using Raylib_cs;
 using SubrightEngine2.EngineStuff;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Color = SubrightEngine2.EngineStuff.Color;
 
 namespace RPGConsole.Graphical.MenuItems
@@ -13,7 +10,7 @@ namespace RPGConsole.Graphical.MenuItems
         public int textSize;
         public Color textColor;
 
-        public Text(string text, Vector2 position, int textSize, Color textColor):base(new Vector2(0, 0), position)
+        public Text(string text, Vector2 position, int textSize, Color textColor) : base(new Vector2(0, 0), position)
         {
             this.text = text;
             this.textSize = textSize;

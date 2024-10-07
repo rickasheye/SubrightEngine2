@@ -13,9 +13,9 @@ namespace SubrightEngine2.EngineStuff.BaseComponents
                     Debug.Log("It seems that there is no BoxCollider on this object!");
         }
 
-        public override void Update(ref Camera2D cam2, ref Camera3D cam3)
+        public override void Draw3D(ref Camera3D cam3)
         {
-            base.Update(ref cam2, ref cam3);
+            base.Draw3D(ref cam3);
             connectedObject.position.Y--;
             //somehow connect the collision with something???
         }

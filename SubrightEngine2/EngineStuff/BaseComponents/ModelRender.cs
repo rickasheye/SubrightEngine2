@@ -7,7 +7,6 @@ namespace SubrightEngine2.EngineStuff.BaseComponents
     [Serializable]
     public class ModelRender : Component
     {
-
         [field: NonSerialized] public Model model;
 
         public string path = "";
@@ -27,24 +26,17 @@ namespace SubrightEngine2.EngineStuff.BaseComponents
                 Debug.LogError("Unfortunately this doesnt work as the file: " + path + " cannot be found!");
         }
 
-        public override void Update(ref Camera2D cam2, ref Camera3D cam3)
+        public override void Draw3D(ref Camera3D cam)
         {
-            base.Update(ref cam2, ref cam3);
-            if (model.meshCount <= 0)
+            base.Draw3D(ref cam);
+            if (model.MeshCount <= 0)
             {
                 Debug.Log("reviving model " + path);
                 StartRender(path);
             }
-
-            Draw3D(ref cam3);
-        }
-
-        public override void Draw3D(ref Camera3D cam)
-        {
-            base.Draw3D(ref cam);
-            if (model.meshCount > 0)
+            if (model.MeshCount > 0)
                 Raylib.DrawModel(model, connectedObject.position.ToNumericsVector,
-                    connectedObject.size.X * connectedObject.size.Y * connectedObject.size.Z, Raylib_cs.Color.WHITE);
+                    connectedObject.size.X * connectedObject.size.Y * connectedObject.size.Z, Raylib_cs.Color.White);
         }
     }
 }

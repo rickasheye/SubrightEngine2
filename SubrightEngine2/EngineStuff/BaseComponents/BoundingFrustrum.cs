@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 
 namespace SubrightEngine2.EngineStuff.BaseComponents
 {
@@ -11,7 +10,7 @@ namespace SubrightEngine2.EngineStuff.BaseComponents
         private readonly Vector3[] _corners = new Vector3[CornerCount];
         private readonly Plane[] _planes = new Plane[PlaneCount];
 
-        #endregion
+        #endregion Private Fields
 
         #region Public Fields
 
@@ -25,7 +24,7 @@ namespace SubrightEngine2.EngineStuff.BaseComponents
         /// </summary>
         public const int CornerCount = 8;
 
-        #endregion
+        #endregion Public Fields
 
         #region Properties
 
@@ -91,7 +90,7 @@ namespace SubrightEngine2.EngineStuff.BaseComponents
             get { return this._planes[5]; }
         }
 
-        #endregion
+        #endregion Properties
 
         #region Constructors
 
@@ -106,7 +105,7 @@ namespace SubrightEngine2.EngineStuff.BaseComponents
             this.CreateCorners();
         }
 
-        #endregion
+        #endregion Constructors
 
         #region Operators
 
@@ -138,7 +137,7 @@ namespace SubrightEngine2.EngineStuff.BaseComponents
             return !(a == b);
         }
 
-        #endregion
+        #endregion Operators
 
         #region Public Methods
 
@@ -173,6 +172,7 @@ namespace SubrightEngine2.EngineStuff.BaseComponents
                     case PlaneIntersectionType.Front:
                         result = ContainmentType.Disjoint;
                         return;
+
                     case PlaneIntersectionType.Intersecting:
                         intersects = true;
                         break;
@@ -200,6 +200,7 @@ namespace SubrightEngine2.EngineStuff.BaseComponents
                 {
                     case PlaneIntersectionType.Front:
                         return ContainmentType.Disjoint;
+
                     case PlaneIntersectionType.Intersecting:
                         intersects = true;
                         break;
@@ -239,6 +240,7 @@ namespace SubrightEngine2.EngineStuff.BaseComponents
                     case PlaneIntersectionType.Front:
                         result = ContainmentType.Disjoint;
                         return;
+
                     case PlaneIntersectionType.Intersecting:
                         intersects = true;
                         break;
@@ -278,7 +280,7 @@ namespace SubrightEngine2.EngineStuff.BaseComponents
             result = ContainmentType.Contains;
         }
 
-        #endregion
+        #endregion Contains
 
         /// <summary>
         /// Compares whether current instance is equal to specified <see cref="BoundingFrustum"/>.
@@ -440,9 +442,11 @@ namespace SubrightEngine2.EngineStuff.BaseComponents
                 case ContainmentType.Disjoint:
                     result = null;
                     return;
+
                 case ContainmentType.Contains:
                     result = 0.0f;
                     return;
+
                 case ContainmentType.Intersects:
                     throw new NotImplementedException();
                 default:
@@ -466,7 +470,7 @@ namespace SubrightEngine2.EngineStuff.BaseComponents
                    "}";
         }
 
-        #endregion
+        #endregion Public Methods
 
         #region Private Methods
 
@@ -521,11 +525,9 @@ namespace SubrightEngine2.EngineStuff.BaseComponents
             Vector3.Multiply(ref cross, a.D, out v1);
             //v1 = (a.D * (Vector3.Cross(b.Normal, c.Normal)));
 
-
             Vector3.Cross(ref c.Normal, ref a.Normal, out cross);
             Vector3.Multiply(ref cross, b.D, out v2);
             //v2 = (b.D * (Vector3.Cross(c.Normal, a.Normal)));
-
 
             Vector3.Cross(ref a.Normal, ref b.Normal, out cross);
             Vector3.Multiply(ref cross, c.D, out v3);
@@ -545,6 +547,6 @@ namespace SubrightEngine2.EngineStuff.BaseComponents
             p.D *= factor;
         }
 
-        #endregion
+        #endregion Private Methods
     }
 }

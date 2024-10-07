@@ -4,7 +4,7 @@ namespace SubrightEditor.Nodes
 {
     public class IntegerNode : NodeObject
     {
-        Integer objectContained;
+        private Integer objectContained;
 
         public IntegerNode(string name) : base(name)
         {

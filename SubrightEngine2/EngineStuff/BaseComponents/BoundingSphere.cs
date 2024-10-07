@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Runtime.Serialization;
 
 namespace SubrightEngine2.EngineStuff.BaseComponents
@@ -21,12 +20,12 @@ namespace SubrightEngine2.EngineStuff.BaseComponents
         [DataMember]
         public float Radius;
 
-        #endregion
+        #endregion Public Fields
 
         #region Constructors
 
         /// <summary>
-        /// Constructs a bounding sphere with the specified center and radius.  
+        /// Constructs a bounding sphere with the specified center and radius.
         /// </summary>
         /// <param name="center">The sphere center.</param>
         /// <param name="radius">The sphere radius.</param>
@@ -36,7 +35,7 @@ namespace SubrightEngine2.EngineStuff.BaseComponents
             this.Radius = radius;
         }
 
-        #endregion
+        #endregion Constructors
 
         #region Public Methods
 
@@ -68,19 +67,16 @@ namespace SubrightEngine2.EngineStuff.BaseComponents
 
             if (Center.X < box.Min.X)
                 dmin += (Center.X - box.Min.X) * (Center.X - box.Min.X);
-
             else if (Center.X > box.Max.X)
                 dmin += (Center.X - box.Max.X) * (Center.X - box.Max.X);
 
             if (Center.Y < box.Min.Y)
                 dmin += (Center.Y - box.Min.Y) * (Center.Y - box.Min.Y);
-
             else if (Center.Y > box.Max.Y)
                 dmin += (Center.Y - box.Max.Y) * (Center.Y - box.Max.Y);
 
             if (Center.Z < box.Min.Z)
                 dmin += (Center.Z - box.Min.Z) * (Center.Z - box.Min.Z);
-
             else if (Center.Z > box.Max.Z)
                 dmin += (Center.Z - box.Max.Z) * (Center.Z - box.Max.Z);
 
@@ -168,10 +164,8 @@ namespace SubrightEngine2.EngineStuff.BaseComponents
 
             if (sqDistance > (sphere.Radius + Radius) * (sphere.Radius + Radius))
                 result = ContainmentType.Disjoint;
-
             else if (sqDistance <= (Radius - sphere.Radius) * (Radius - sphere.Radius))
                 result = ContainmentType.Contains;
-
             else
                 result = ContainmentType.Intersects;
         }
@@ -201,15 +195,13 @@ namespace SubrightEngine2.EngineStuff.BaseComponents
 
             if (sqDistance > sqRadius)
                 result = ContainmentType.Disjoint;
-
             else if (sqDistance < sqRadius)
                 result = ContainmentType.Contains;
-
             else
                 result = ContainmentType.Intersects;
         }
 
-        #endregion
+        #endregion Contains
 
         #region CreateFromBoundingBox
 
@@ -243,7 +235,7 @@ namespace SubrightEngine2.EngineStuff.BaseComponents
             result = new BoundingSphere(center, radius);
         }
 
-        #endregion
+        #endregion CreateFromBoundingBox
 
         /// <summary>
         /// Creates the smallest <see cref="BoundingSphere"/> that can contain a specified <see cref="BoundingFrustum"/>.
@@ -256,7 +248,7 @@ namespace SubrightEngine2.EngineStuff.BaseComponents
         }
 
         /// <summary>
-        /// Creates the smallest <see cref="BoundingSphere"/> that can contain a specified list of points in 3D-space. 
+        /// Creates the smallest <see cref="BoundingSphere"/> that can contain a specified list of points in 3D-space.
         /// </summary>
         /// <param name="points">List of point to create the sphere from.</param>
         /// <returns>The new <see cref="BoundingSphere"/>.</returns>
@@ -319,7 +311,7 @@ namespace SubrightEngine2.EngineStuff.BaseComponents
             var radius = Vector3.Distance(max, center);
 
             // Test every point and expand the sphere.
-            // The current bounding sphere is just a good approximation and may not enclose all points.            
+            // The current bounding sphere is just a good approximation and may not enclose all points.
             // From: Mathematics for 3D Game Programming and Computer Graphics, Eric Lengyel, Third Edition.
             // Page 218
             float sqRadius = radius * radius;
@@ -534,7 +526,7 @@ namespace SubrightEngine2.EngineStuff.BaseComponents
             ray.Intersects(ref this, out result);
         }
 
-        #endregion
+        #endregion Intersects
 
         /// <summary>
         /// Returns a <see cref="String"/> representation of this <see cref="BoundingSphere"/> in the format:
@@ -572,7 +564,7 @@ namespace SubrightEngine2.EngineStuff.BaseComponents
             result.Radius = this.Radius * MathF.Sqrt(Math.Max(((matrix.M11 * matrix.M11) + (matrix.M12 * matrix.M12)) + (matrix.M13 * matrix.M13), Math.Max(((matrix.M21 * matrix.M21) + (matrix.M22 * matrix.M22)) + (matrix.M23 * matrix.M23), ((matrix.M31 * matrix.M31) + (matrix.M32 * matrix.M32)) + (matrix.M33 * matrix.M33))));
         }
 
-        #endregion
+        #endregion Transform
 
         /// <summary>
         /// Deconstruction method for <see cref="BoundingSphere"/>.
@@ -585,7 +577,7 @@ namespace SubrightEngine2.EngineStuff.BaseComponents
             radius = Radius;
         }
 
-        #endregion
+        #endregion Public Methods
 
         #region Operators
 
@@ -611,6 +603,6 @@ namespace SubrightEngine2.EngineStuff.BaseComponents
             return !a.Equals(b);
         }
 
-        #endregion
+        #endregion Operators
     }
 }

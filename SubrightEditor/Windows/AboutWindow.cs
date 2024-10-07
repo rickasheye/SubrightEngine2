@@ -14,20 +14,14 @@ namespace SubrightEngineEditor.Windows
         {
         }
 
-        public override void Update(ref Camera2D cam2, ref Camera3D cam3)
-        {
-            base.Update(ref cam2, ref cam3);
-            Draw2D(ref cam2);
-        }
-
         public override void Draw2D(ref Camera2D cam)
         {
             base.Draw2D(ref cam);
             if (hideRender == false)
             {
                 DrawRectangle((int)(position.X + size.X) / 4, (int)position.Y + 12,
-                    (int)(size.X - (position.X + size.X / 4)), 40, Color.WHITE);
-                DrawText("Subright Engine 2", position.X, position.Y + 55, 8, Color.WHITE);
+                    (int)(size.X - (position.X + size.X / 4)), 40, Color.White);
+                DrawText("Subright Engine 2", position.X, position.Y + 55, 8, Color.White);
             }
         }
     }

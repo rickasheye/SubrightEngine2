@@ -4,7 +4,7 @@ namespace SubrightEditor.Nodes
 {
     public class StringNode : NodeObject
     {
-        String objectContained;
+        private String objectContained;
 
         public StringNode(string name) : base(name)
         {

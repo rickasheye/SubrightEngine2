@@ -7,7 +7,9 @@ namespace SubrightTilemapCreator
 {
     public class TileSelector : GameObject
     {
-        public TileSelector() : base(Vector3.zero, Vector3.zero, "TileSelector") { }
+        public TileSelector() : base(Vector3.zero, Vector3.zero, "TileSelector")
+        {
+        }
 
         public List<GameObject> sprites = new List<GameObject>();
 
@@ -42,15 +44,16 @@ namespace SubrightTilemapCreator
             Draw2D(ref cam2);
         }
 
-        int offset = 0;
+        private int offset = 0;
+
         public void Draw2DGrid(int XOffset, int YOffset, int slices, int size)
         {
             for (int x = 0; x < slices; x++)
             {
-                Raylib.DrawLine((x + size), 0, (x + size) * slices, 0, Raylib_cs.Color.BLACK);
+                Raylib.DrawLine((x + size), 0, (x + size) * slices, 0, Raylib_cs.Color.Black);
                 for (int y = 0; y < slices; y++)
                 {
-                    Raylib.DrawLine(0, (y + size), 0, (y + size) + slices, Raylib_cs.Color.BLACK);
+                    Raylib.DrawLine(0, (y + size), 0, (y + size) + slices, Raylib_cs.Color.Black);
                 }
             }
         }
@@ -88,7 +91,7 @@ namespace SubrightTilemapCreator
                             spriteCalc.Draw2D(ref cam);
                             if (Raylib.GetMouseX() > 10 && Raylib.GetMouseX() < 26 && Raylib.GetMouseY() > offsetPosition.Y && Raylib.GetMouseY() < offsetPosition.Y + 16)
                             {
-                                Raylib.DrawText(spri.path, 30, (int)offsetPosition.Y, 8, Raylib_cs.Color.WHITE);
+                                Raylib.DrawText(spri.path, 30, (int)offsetPosition.Y, 8, Raylib_cs.Color.White);
                             }
                         }
                         else

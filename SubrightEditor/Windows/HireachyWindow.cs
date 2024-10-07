@@ -4,6 +4,7 @@ using SubrightEngine2.UI;
 using SubrightEngine2.UI.Tips;
 using SubrightEngine2.UI.Windows;
 using System;
+using System.Collections.Generic;
 using Color = SubrightEngine2.EngineStuff.Color;
 
 namespace SubrightEngineEditor.Windows
@@ -15,10 +16,10 @@ namespace SubrightEngineEditor.Windows
         {
         }
 
-        public override void Update(ref Camera2D cam2, ref Camera3D cam3)
+        private struct HireachyObject
         {
-            base.Update(ref cam2, ref cam3);
-            Draw2D(ref cam2);
+            public GameObject gameObject;
+            public int index;
         }
 
         /*public List<GameObject> multipleSelected = new List<GameObject>();
@@ -29,11 +30,26 @@ namespace SubrightEngineEditor.Windows
         {
             base.Draw2D(ref cam);
             if (hideRender == false)
+            {
+                List<HireachyObject> createdObjects = new List<HireachyObject>();
                 for (var i = 0; i < SubrightEngine2.Program.loader.currentScene.GameObjects.Count; i++)
                 {
                     var newObject = SubrightEngine2.Program.loader.currentScene.GameObjects[i];
+                    if (!newObject.hideableFromHireachy)
+                    {
+                        createdObjects.Add(new HireachyObject()
+                        {
+                            gameObject = newObject,
+                            index = i
+                        });
+                    }
+                }
+
+                for (var i = 0; i < createdObjects.Count; i++)
+                {
+                    var newObject = createdObjects[i].gameObject;
                     DrawText(newObject.name + " - " + newObject.position.ToString + " - " + newObject.size.ToString,
-                        position.X + 2, position.Y + 10 + i * 15, 8, Color.WHITE);
+                        position.X + 2, position.Y + 10 + i * 15, 8, Color.White);
                     var positionX = (int)position.X + 2;
                     var positionY = lastY + (int)position.Y + 10 + i * 15;
                     var sizeX = (int)size.X;
@@ -44,9 +60,9 @@ namespace SubrightEngineEditor.Windows
                         {
                             TipManager.RenderTip(4);
                             DrawRectangleLines(positionX, positionY, sizeX, sizeY, Color.LIGHTGRAY);
-                            if (SubrightEngine2.EngineStuff.Input.Input.GetMouseButtonPressed(MouseButton.MOUSE_LEFT_BUTTON, isFocused()))
+                            if (SubrightEngine2.EngineStuff.Input.Input.GetMouseButtonPressed(MouseButton.Left, isFocused()))
                                 SubrightEngine2.Program.selectedObject = newObject;
-                            else if (SubrightEngine2.EngineStuff.Input.Input.GetMouseButtonPressed(MouseButton.MOUSE_RIGHT_BUTTON, isFocused()))
+                            else if (SubrightEngine2.EngineStuff.Input.Input.GetMouseButtonPressed(MouseButton.Right, isFocused()))
                                 SubrightEngine2.Program.loader.currentScene.GameObjects.RemoveAt(i);
                         }
 
@@ -56,10 +72,11 @@ namespace SubrightEngineEditor.Windows
                         if (childObject != null)
                         {
                             var positionYM = positionY + (int)position.Y + 10 + m * 15;
-                            DrawText(childObject.name, positionX, positionYM, 8, Color.WHITE);
+                            DrawText(childObject.name, positionX, positionYM, 8, Color.White);
                         }
                     }
                 }
+            }
         }
     }
 }

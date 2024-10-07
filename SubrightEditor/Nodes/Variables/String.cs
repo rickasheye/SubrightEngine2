@@ -4,7 +4,9 @@
     {
         public string value;
 
-        public String() : base("String") { }
+        public String() : base("String")
+        {
+        }
 
         public void SetValue(string setvalue)
         {

@@ -4,7 +4,9 @@
     {
         public int value;
 
-        public Integer() : base("Integer") { }
+        public Integer() : base("Integer")
+        {
+        }
 
         public void SetValue(int setvalue)
         {

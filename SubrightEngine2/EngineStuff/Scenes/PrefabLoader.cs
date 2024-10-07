@@ -8,7 +8,7 @@ namespace SubrightEngine2.EngineStuff.Scenes
     {
         public static void LoadPrefab(Prefab pref)
         {
-            pref.loadPrefab(ref Program.loader.currentScene.GameObjects);
+            //pref.loadPrefab(ref Program.loader.currentScene.GameObjects);
         }
 
         //load all of the text prefabs!
@@ -17,7 +17,7 @@ namespace SubrightEngine2.EngineStuff.Scenes
             //create a prefab from the objects.
             var prefabNew = new Prefab();
             prefabNew.name = name;
-            prefabNew.gameObjects.AddRange(prefabs);
+            //prefabNew.gameObjects.AddRange(prefabs);
             //convert to text.
             var jsonConv = JsonConvert.SerializeObject(prefabNew);
             var directory = Path.Combine(Directory.GetCurrentDirectory(), "prefabs/");
@@ -42,9 +42,8 @@ namespace SubrightEngine2.EngineStuff.Scenes
 
             for (var i = 0; i < Directory.GetFiles(directory).Length; i++)
             {
-                var filename = Path.Combine(directory, Directory.GetFiles(directory)[i]);
-                var prefabsB = JsonConvert.DeserializeObject<List<Prefab>>(File.ReadAllText(filename));
-                prefabs.AddRange(prefabsB);
+                string file = Directory.GetFiles(directory)[i];
+                //Prefab prefab = Prefab.
             }
 
             return prefabs;

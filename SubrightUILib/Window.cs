@@ -1,5 +1,4 @@
 ﻿using Raylib_cs;
-using SubrightEngine2;
 using SubrightEngine2.EngineStuff;
 using SubrightEngine2.UI.Tips;
 using SubrightEngine2.UI.Windows;
@@ -21,6 +20,7 @@ namespace SubrightEngine2.UI
     {
         //classed as a window
         public Context context;
+
         public bool hideRender;
 
         private bool lockedWindow;
@@ -53,20 +53,10 @@ namespace SubrightEngine2.UI
         {
             base.Start();
             framebuffer = new Image();
+            hideableFromHireachy = true;
         }
 
-        /// <summary>
-        /// Update method to update the width and height of the window.
-        /// </summary>
-        /// <param name="cam2"></param>
-        /// <param name="cam3"></param>
-        public override void Update(ref Camera2D cam2, ref Camera3D cam3)
-        {
-            base.Update(ref cam2, ref cam3);
-            framebuffer.width = (int)size.X;
-            framebuffer.height = (int)size.Y;
-            Draw2D(ref cam2);
-        }
+        private bool seperateBuffer = false;
 
         /// <summary>
         /// Drawing Window method in 2D
@@ -77,8 +67,10 @@ namespace SubrightEngine2.UI
             base.Draw2D(ref cam);
             if (hideRender == false)
             {
+                framebuffer.Width = (int)size.X;
+                framebuffer.Height = (int)size.Y;
                 //Update this Window
-                //if(framebuffer.width != 0 && framebuffer.height != 0){Raylib.DrawTexture(Raylib.LoadTextureFromImage(framebuffer), (int)position.X, (int)position.Y, Raylib_cs.Color.WHITE);}
+                //if(framebuffer.width != 0 && framebuffer.height != 0){Raylib.DrawTexture(Raylib.LoadTextureFromImage(framebuffer), (int)position.X, (int)position.Y, Raylib_cs.Color.White);}
                 DrawRectangle((int)position.X, (int)position.Y, (int)size.X, (int)size.Y, Program.backgroundColor);
                 DrawRectangle((int)position.X, (int)position.Y, (int)size.X, 8, Program.foregroundColor);
                 DrawText(name, (int)position.X, (int)position.Y, 8, Program.textColor);
@@ -86,7 +78,7 @@ namespace SubrightEngine2.UI
                 if (Raylib.GetMouseX() > (int)position.X && Raylib.GetMouseX() < (int)position.X + (int)size.X &&
                     Raylib.GetMouseY() > (int)position.Y && Raylib.GetMouseY() < (int)position.Y + (int)size.Y)
                 {
-                    if (SubrightEngine2.EngineStuff.Input.Input.GetMouseButtonDown(MouseButton.MOUSE_LEFT_BUTTON))
+                    if (SubrightEngine2.EngineStuff.Input.Input.GetMouseButtonDown(MouseButton.Left))
                         if (SubContextMenuManager.lockedWindows == false)
                             if (SubContextMenuManager.focusedWindow != this)
                             {
@@ -100,7 +92,7 @@ namespace SubrightEngine2.UI
                 if (SubContextMenuManager.focusedWindow == this)
                     if (Raylib.GetMouseX() > (int)position.X && Raylib.GetMouseX() < position.X + size.X &&
                         Raylib.GetMouseY() > position.Y && Raylib.GetMouseY() < position.Y + 8)
-                        if (SubrightEngine2.EngineStuff.Input.Input.GetMouseButtonDown(MouseButton.MOUSE_LEFT_BUTTON))
+                        if (SubrightEngine2.EngineStuff.Input.Input.GetMouseButtonDown(MouseButton.Left))
                         {
                             lockedWindow = true;
                             SubContextMenuManager.lockedWindows = true;
@@ -120,7 +112,7 @@ namespace SubrightEngine2.UI
                     {
                         position.X = Raylib.GetMouseX();
                         position.Y = Raylib.GetMouseY();
-                        if (SubrightEngine2.EngineStuff.Input.Input.GetMouseButtonUp(MouseButton.MOUSE_LEFT_BUTTON))
+                        if (SubrightEngine2.EngineStuff.Input.Input.GetMouseButtonUp(MouseButton.Left))
                         {
                             lockedWindow = false;
                             SubContextMenuManager.lockedWindows = false;
@@ -131,12 +123,12 @@ namespace SubrightEngine2.UI
                 {
                     if (closeable == true)
                     {
-                        Raylib.DrawText("X", (int)position.X - 10, (int)position.Y, 8, Raylib_cs.Color.RED);
+                        Raylib.DrawText("X", (int)position.X - 10, (int)position.Y, 8, Raylib_cs.Color.Red);
                         if (Raylib.GetMouseX() > (int)position.X - 10 && Raylib.GetMouseX() < (int)position.X - 2 &&
                             Raylib.GetMouseY() > position.Y && Raylib.GetMouseY() < position.Y + 8)
                         {
                             TipManager.RenderTip(1);
-                            if (SubrightEngine2.EngineStuff.Input.Input.GetMouseButtonPressed(MouseButton.MOUSE_LEFT_BUTTON))
+                            if (SubrightEngine2.EngineStuff.Input.Input.GetMouseButtonPressed(MouseButton.Left))
                             {
                                 ownHide = true;
                                 hideRender = true;
@@ -156,7 +148,7 @@ namespace SubrightEngine2.UI
                             Raylib.GetMouseX() < (int)position.X + (int)size.X)
                             //Drag side ways
                             if (size.X >= 45 && size.Y >= 45)
-                                if (SubrightEngine2.EngineStuff.Input.Input.GetMouseButtonDown(MouseButton.MOUSE_LEFT_BUTTON, isFocused()))
+                                if (SubrightEngine2.EngineStuff.Input.Input.GetMouseButtonDown(MouseButton.Left, isFocused()))
                                 {
                                     size.X = position.X - Raylib.GetMouseX();
                                     size.Y = position.Y - Raylib.GetMouseY();

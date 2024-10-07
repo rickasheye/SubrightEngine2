@@ -1,16 +1,17 @@
 ﻿using Raylib_cs;
-using SubrightEngine2.EngineStuff;
 using System;
 using System.Collections.Generic;
 using System.IO;
 
 namespace SubrightEngine2.EngineStuff.Scenes
 {
+    //Appears to be obselete i do not remember writing this lmao.
     [Serializable]
     public class Asset
     {
         public string name;
         public string path;
+
         [NonSerialized]
         public Texture2D texture;
 

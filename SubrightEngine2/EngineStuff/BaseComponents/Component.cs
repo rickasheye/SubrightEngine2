@@ -8,6 +8,7 @@ namespace SubrightEngine2.EngineStuff.BaseComponents
     {
         public GameObject connectedObject;
         public string name;
+        public bool enabled = true;
 
         public Component(string name)
         {
@@ -23,24 +24,22 @@ namespace SubrightEngine2.EngineStuff.BaseComponents
             }
         }
 
-        public virtual void Update(ref Camera2D cam2, ref Camera3D cam3)
-        {
-            Raylib.BeginMode3D(cam3);
-            Draw3D(ref cam3);
-            Raylib.EndMode3D();
-
-            Raylib.BeginMode2D(cam2);
-            //execute around here.
-            Draw2D(ref cam2);
-            Raylib.EndMode2D();
-        }
-
         public virtual void Draw2D(ref Camera2D cam)
         {
+            if (enabled == false)
+            {
+                //do not execute this function
+                return;
+            }
         }
 
         public virtual void Draw3D(ref Camera3D cam)
         {
+            if (enabled == false)
+            {
+                //do not execute this function
+                return;
+            }
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using SubrightEngine2.EngineStuff.InterpreterCode.InterpreterCommands;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 
@@ -14,16 +13,25 @@ namespace SubrightEngine2.EngineStuff.InterpreterCode
 
         public Dictionary<string, object> storedVariables = new Dictionary<string, object>();
 
+        //find all commands and add them to commands list by grabbing InterpreterCommand classes
+        public void AddFind()
+        {
+            //find all classes that extend on InterpreterCommand
+            //add them to the commands list
+            foreach (var type in typeof(InterpreterCommand).Assembly.GetTypes())
+            {
+                if (type.IsSubclassOf(typeof(InterpreterCommand)))
+                {
+                    //add to list
+                    InterpreterCommand tower = (InterpreterCommand)Activator.CreateInstance(type);
+                    commands.Add(tower);
+                }
+            }
+        }
+
         public Interpreter()
         {
-            commands.Add(new CreateGameObjectCommand());
-            commands.Add(new CreateVariableCommand());
-            commands.Add(new ExitCommand());
-            commands.Add(new HelpCommand());
-            commands.Add(new RemoveVariableCommand());
-            commands.Add(new VariableExistsCommand());
-            commands.Add(new ClearConsoleCommand());
-            commands.Add(new SetTitle());
+            AddFind();
             //starting point load the commands through a seperate path
             LoadedCommandFiles = LoadCommands();
             //load the pre-determined files before this too
@@ -61,7 +69,7 @@ namespace SubrightEngine2.EngineStuff.InterpreterCode
                                             }
                                             else
                                             {
-                                                //the variable at line 
+                                                //the variable at line
                                                 if (Program.debug)
                                                     Debug.Log("At line " + i +
                                                               " there seems to be no object supported by the variable?");
@@ -190,42 +198,50 @@ namespace SubrightEngine2.EngineStuff.InterpreterCode
         {
             //load the interpreter commands from file
             var commandList = new Dictionary<string, List<InterpreterCommand>>();
-            var codeDir = Path.Combine(Environment.CurrentDirectory, "code/");
-            if (Directory.Exists(codeDir))
+            if (SubrightEngine2.Program.saveFile)
             {
-                //search for every code file in this directory
-                var directoryFiles = Directory.GetFiles(codeDir, "*.se", SearchOption.AllDirectories);
-                foreach (var m in directoryFiles)
+                var codeDir = Path.Combine(Environment.CurrentDirectory, "code/");
+                if (Directory.Exists(codeDir))
                 {
-                    //index everyfile
-                    var fileCode = File.ReadAllLines(m);
-                    var cmds = new List<InterpreterCommand>();
-                    for (var i = 0; i < fileCode.Length; i++)
+                    //search for every code file in this directory
+                    var directoryFiles = Directory.GetFiles(codeDir, "*.se", SearchOption.AllDirectories);
+                    foreach (var m in directoryFiles)
                     {
-                        var mCode = fileCode[i];
-                        InterpreterCommand command = null;
-                        for (var p = 0; p < commands.Count; p++)
+                        //index everyfile
+                        var fileCode = File.ReadAllLines(m);
+                        var cmds = new List<InterpreterCommand>();
+                        for (var i = 0; i < fileCode.Length; i++)
                         {
-                            var cmd = commands[p];
-                            if (cmd.commandName == mCode)
+                            var mCode = fileCode[i];
+                            InterpreterCommand command = null;
+                            for (var p = 0; p < commands.Count; p++)
                             {
-                                command = cmd;
-                                break;
+                                var cmd = commands[p];
+                                if (cmd.commandName == mCode)
+                                {
+                                    command = cmd;
+                                    break;
+                                }
                             }
+
+                            if (command != null) cmds.Add(command);
                         }
 
-                        if (command != null) cmds.Add(command);
+                        if (cmds != null)
+                            //add the code list.
+                            commandList.Add(m, cmds);
                     }
-
-                    if (cmds != null)
-                        //add the code list.
-                        commandList.Add(m, cmds);
+                }
+                else
+                {
+                    Directory.CreateDirectory(codeDir);
+                    LoadCommands();
                 }
             }
             else
             {
-                Directory.CreateDirectory(codeDir);
-                LoadCommands();
+                //unable to save save files is disabled
+                Debug.Log("Unable to load/create InterpreterCommand files as save files are disabled!");
             }
 
             return commandList;

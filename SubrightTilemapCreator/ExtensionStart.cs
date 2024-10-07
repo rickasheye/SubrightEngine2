@@ -3,10 +3,10 @@ using SubrightEngine2.EngineStuff;
 
 namespace SubrightTilemapCreator
 {
-    class ExtensionStart : Extension
+    internal class ExtensionStart : Extension
     {
-        Sprite spriteSelected;
-        TileSelector selector;
+        private Sprite spriteSelected;
+        private TileSelector selector;
 
         public override void Start()
         {

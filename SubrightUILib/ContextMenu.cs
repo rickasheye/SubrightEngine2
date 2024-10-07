@@ -11,6 +11,7 @@ namespace SubrightEngine2.UI
     {
         //Context menu to give items and then to thenafter render.
         public bool hideRender = false;
+
         private readonly List<ContextItem> items = new List<ContextItem>();
 
         public ContextMenu(List<ContextItem> itemsOverride) : base(Vector3.Zero, Vector3.Zero, "Context Menu")
@@ -22,7 +23,7 @@ namespace SubrightEngine2.UI
         public void SetupMenu()
         {
             var minMaxX = 0;
-            //Check if something is avaliable if not idk. 
+            //Check if something is avaliable if not idk.
             for (var i = 0; i < items.Count; i++)
             {
                 var window = items[i];
@@ -30,12 +31,6 @@ namespace SubrightEngine2.UI
             }
             size.X = minMaxX;
             size.Y = items.Count * 16 + 16;
-        }
-
-        public override void Update(ref Camera2D cam2, ref Camera3D cam3)
-        {
-            base.Update(ref cam2, ref cam3);
-            Draw2D(ref cam2);
         }
 
         public override void Draw2D(ref Camera2D cam)
@@ -55,14 +50,14 @@ namespace SubrightEngine2.UI
                     for (var i = 0; i < items.Count; i++)
                     {
                         var wind = items[i];
-                        DrawText(wind.name, position.X + 5, position.Y + 8 + i * 16, 8, Color.WHITE);
+                        DrawText(wind.name, position.X + 5, position.Y + 8 + i * 16, 8, Color.White);
                         if (Raylib.GetMouseX() >= position.X + 5 && Raylib.GetMouseX() <= position.X + size.X &&
                             Raylib.GetMouseY() >= position.Y + 8 + i * 16 &&
                             Raylib.GetMouseY() <= position.Y + 8 + i * 16 + 8)
                         {
                             DrawRectangleLines(position.X + 2, position.Y + 8 + i * 16 - 2, size.X - 5, 12,
                                 Color.LIGHTGRAY);
-                            if (Raylib.IsMouseButtonPressed(MouseButton.MOUSE_LEFT_BUTTON)) wind.Execute();
+                            if (Raylib.IsMouseButtonPressed(MouseButton.Left)) wind.Execute();
                         }
                     }
                 else

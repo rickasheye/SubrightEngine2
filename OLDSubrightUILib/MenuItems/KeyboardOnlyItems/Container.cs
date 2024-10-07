@@ -1,7 +1,5 @@
 ﻿using SubrightEngine2.EngineStuff;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace RPGConsole.Graphical.MenuItems.KeyboardOnlyItems
 {
@@ -10,12 +8,13 @@ namespace RPGConsole.Graphical.MenuItems.KeyboardOnlyItems
         //container class
         public enum Alignment
         {
-            LEFT,RIGHT,UP,DOWN,MIDDLE
+            LEFT, RIGHT, UP, DOWN, MIDDLE
         }
 
         public Alignment alignment;
 
-        public Container (Alignment alignment, Vector2 size, Vector2 position):base(size, position) {
+        public Container(Alignment alignment, Vector2 size, Vector2 position) : base(size, position)
+        {
             this.alignment = alignment;
         }
 
@@ -24,7 +23,7 @@ namespace RPGConsole.Graphical.MenuItems.KeyboardOnlyItems
             //scale well?
             Vector2 Lastposition = new Vector2(0, 0);
             Vector2 Lastsize = new Vector2(0, 0);
-            foreach(GUIOption option in children)
+            foreach (GUIOption option in children)
             {
                 if (Lastposition != new Vector2(0, 0))
                 {
@@ -35,15 +34,19 @@ namespace RPGConsole.Graphical.MenuItems.KeyboardOnlyItems
                         case Alignment.DOWN:
                             option.position = new Vector2(position.X + (size.X / 2), position.Y + size.Y);
                             break;
+
                         case Alignment.LEFT:
-                            option.position = new Vector2(position.X, position.Y + (size.Y / 2)) ;
+                            option.position = new Vector2(position.X, position.Y + (size.Y / 2));
                             break;
+
                         case Alignment.MIDDLE:
                             option.position = new Vector2(position.X + (size.X / 2), position.Y + (size.Y / 2));
                             break;
+
                         case Alignment.RIGHT:
                             option.position = new Vector2(position.X + size.X, position.Y + (size.Y / 2));
                             break;
+
                         case Alignment.UP:
                             option.position = new Vector2(position.X + (size.X / 2), position.Y);
                             break;

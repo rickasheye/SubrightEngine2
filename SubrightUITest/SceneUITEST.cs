@@ -1,10 +1,6 @@
 ﻿using Raylib_cs;
 using SubrightEngine2.EngineStuff;
 using SubrightEngine2.EngineStuff.Scenes;
-using SubrightEngine2.UI;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SubrightUITest
 {
@@ -12,7 +8,9 @@ namespace SubrightUITest
     {
         //Scene 01 UI Test
 
-        public SceneUITEST() : base("SceneUITest") { }
+        public SceneUITEST() : base("SceneUITest")
+        {
+        }
 
         public override void LoadScene()
         {

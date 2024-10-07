@@ -7,6 +7,7 @@ namespace Game
     public class Reference : Extension
     {
         private InitCycle cycle;
+
         public override void Start()
         {
             base.Start();
@@ -14,13 +15,14 @@ namespace Game
             cycle = new InitCycle(false);
             //SubrightEngine2.Program.SetWindowTitle("Subright Engine Editor");
             cycle.Start();
+            SubrightEngine2.Program.LoadScene(new CreateGameScene());
         }
 
         public override void Update(ref Camera2D cam2, ref Camera3D cam3)
         {
             base.Update(ref cam2, ref cam3);
             cycle.Update(ref cam2, ref cam3);
-            Raylib.ClearBackground(Raylib_cs.Color.SKYBLUE);
+            Raylib.ClearBackground(Raylib_cs.Color.SkyBlue);
         }
 
         public override void Dispose()

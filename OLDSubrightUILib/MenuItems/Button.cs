@@ -1,8 +1,5 @@
 ﻿using Raylib_cs;
 using SubrightEngine2.EngineStuff;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Color = SubrightEngine2.EngineStuff.Color;
 
 namespace RPGConsole.Graphical.MenuItems
@@ -15,7 +12,8 @@ namespace RPGConsole.Graphical.MenuItems
         public Color backColorPressed;
         public Color foregroundColor;
 
-        public Button(string text, Vector2 position, Vector2 size, int textSize, Color backColor, Color backColorPressed, Color foregroundColor):base(size, position) {
+        public Button(string text, Vector2 position, Vector2 size, int textSize, Color backColor, Color backColorPressed, Color foregroundColor) : base(size, position)
+        {
             this.text = text;
             this.textSize = textSize;
             this.backColor = backColor;
@@ -52,12 +50,10 @@ namespace RPGConsole.Graphical.MenuItems
 
         public virtual void MouseOverObject()
         {
-
         }
 
         public virtual void TriggerObject()
         {
-
         }
     }
 }

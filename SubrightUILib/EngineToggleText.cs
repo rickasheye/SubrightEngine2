@@ -9,7 +9,6 @@ namespace SubrightEngine2.UI
 
         public EngineToggleText(string name) : base(name)
         {
-
         }
 
         public override void OffhandDraw(ref Camera2D cam)

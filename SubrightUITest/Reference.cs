@@ -1,15 +1,12 @@
 ﻿using Raylib_cs;
 using SubrightEngine2.EngineStuff;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Color = Raylib_cs.Color;
 
 namespace SubrightUITest
 {
     public class Reference : Extension
     {
-        static SubrightEngine2.UI.InitCycle cycle;
+        private static SubrightEngine2.UI.InitCycle cycle;
 
         public override void Start()
         {

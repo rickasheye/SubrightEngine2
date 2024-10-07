@@ -6,6 +6,7 @@
         // Summary:
         //     Represents a color that is null.
         public static readonly Color Empty;
+
         public Raylib_cs.Color ToRaylibColor => new Raylib_cs.Color(R, G, B, A);
         public static readonly Color White = new Color(255, 255, 255);
         public static readonly Color Black = new Color(0, 0, 0);
@@ -27,13 +28,14 @@
 
         //raylib ported colors
         public static Color LIGHTGRAY = new Color(200, 200, 200, 255);
+
         public static Color GRAY = new Color(130, 130, 130, 255);
         public static Color DARKGRAY = new Color(80, 80, 80, 255);
         public static Color YELLOW = new Color(253, 249, 0, 255);
         public static Color GOLD = new Color(255, 203, 0, 255);
         public static Color ORANGE = new Color(255, 161, 0, 255);
         public static Color PINK = new Color(255, 109, 194, 255);
-        public static Color RED = new Color(230, 41, 55, 255);
+        public static Color Red = new Color(230, 41, 55, 255);
         public static Color MAROON = new Color(190, 33, 55, 255);
         public static Color GREEN = new Color(0, 228, 48, 255);
         public static Color LIME = new Color(0, 158, 47, 255);

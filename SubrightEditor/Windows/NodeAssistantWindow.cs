@@ -15,12 +15,6 @@ namespace SubrightEngineEditor.Windows
             nodeModule.objects.Add(new StringNode("string"));
         }
 
-        public override void Update(ref Camera2D cam2, ref Camera3D cam3)
-        {
-            base.Update(ref cam2, ref cam3);
-            Draw2D(ref cam2);
-        }
-
         public override void Draw2D(ref Camera2D cam)
         {
             base.Draw2D(ref cam);

@@ -27,8 +27,7 @@ namespace SubrightEngine2.EngineStuff
         [DataMember]
         public Vector3 Position;
 
-        #endregion
-
+        #endregion Public Fields
 
         #region Public Constructors
 
@@ -43,8 +42,7 @@ namespace SubrightEngine2.EngineStuff
             this.Direction = direction;
         }
 
-        #endregion
-
+        #endregion Public Constructors
 
         #region Public Methods
 
@@ -195,8 +193,8 @@ namespace SubrightEngine2.EngineStuff
 			{
 				throw new ArgumentNullException("frustum");
 			}
-			
-			return frustum.Intersects(this);			
+
+			return frustum.Intersects(this);
         }
         */
 
@@ -347,6 +345,6 @@ namespace SubrightEngine2.EngineStuff
             direction = Direction;
         }
 
-        #endregion
+        #endregion Public Methods
     }
 }

@@ -1,21 +1,18 @@
 ﻿using Raylib_cs;
 using SubrightEngine2.EngineStuff;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace RPGConsole.Graphical.MenuItems.KeyboardOnlyItems
 {
     public class Option : GUIOption
     {
-
         //an option to use to select
-        public Option(string titleName, Vector2 size, Vector2 position):base(titleName, size, position) {}
+        public Option(string titleName, Vector2 size, Vector2 position) : base(titleName, size, position) { }
 
         public override void Start()
         {
             base.Start();
-            if(parent == null)
+            if (parent == null)
             {
                 Console.WriteLine("Option missing a parent to manipulate!");
             }
@@ -26,7 +23,7 @@ namespace RPGConsole.Graphical.MenuItems.KeyboardOnlyItems
             base.DrawObject();
             //use as a kinda update method!
 
-            if(focused == true)
+            if (focused == true)
             {
                 if (Raylib.IsKeyPressed(KeyboardKey.KEY_ENTER) || Raylib.IsMouseButtonPressed(MouseButton.MOUSE_LEFT_BUTTON))
                 {
@@ -37,7 +34,6 @@ namespace RPGConsole.Graphical.MenuItems.KeyboardOnlyItems
 
         public virtual void Triggerable()
         {
-
         }
     }
 }

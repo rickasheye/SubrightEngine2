@@ -2,10 +2,7 @@
 using RPGConsole.Graphical.MenuItems;
 using RPGConsole.Graphical.MenuItems.KeyboardOnlyItems;
 using SubrightEngine2.EngineStuff.Scenes;
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Text;
 
 namespace RPGConsole.Graphical
 {
@@ -15,24 +12,26 @@ namespace RPGConsole.Graphical
         public int id;
         public List<GUIOption> guiOptions = new List<GUIOption>();
 
-        bool loadedScene = false;
+        private bool loadedScene = false;
 
-        public SceneUI(string name) : base(name) { }
+        public SceneUI(string name) : base(name)
+        {
+        }
 
         public virtual void LoadScene()
         {
-            foreach(GUIOption option in guiOptions)
+            foreach (GUIOption option in guiOptions)
             {
                 option.Start();
             }
         }
 
-        bool keyboardOnly = true;
+        private bool keyboardOnly = true;
 
         public override void UpdateScene(ref Camera2D cam2, ref Camera3D cam3)
         {
             base.UpdateScene(ref cam2, ref cam3);
-            if(loadedScene == false)
+            if (loadedScene == false)
             {
                 LoadScene();
                 loadedScene = true;
@@ -41,7 +40,7 @@ namespace RPGConsole.Graphical
             List<GUIOption> newOptions = new List<GUIOption>();
             newOptions.AddRange(guiOptions);
             GUIOption renderContainer = null;
-            if(renderContainer != null)
+            if (renderContainer != null)
             {
                 renderContainer.DrawObject();
             }
@@ -49,7 +48,7 @@ namespace RPGConsole.Graphical
             int i = 0;
             foreach (GUIOption option in newOptions)
             {
-                if(option is EmptyContainer && i <= 0)
+                if (option is EmptyContainer && i <= 0)
                 {
                     newOptions.Insert(0, option);
                 }
@@ -63,7 +62,7 @@ namespace RPGConsole.Graphical
                     else
                     {
                         option.focused = false;
-                    } 
+                    }
                 }
                 i++;
             }

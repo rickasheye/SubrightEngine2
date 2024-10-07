@@ -6,7 +6,9 @@ namespace SubrightEngine2.EngineStuff.InterpreterCode.InterpreterCommands
     [Serializable]
     public class SetTitle : InterpreterCommand
     {
-        public SetTitle() : base("Sets the title of the editor", "settitle") { }
+        public SetTitle() : base("Sets the title of the editor", "settitle")
+        {
+        }
 
         public override void ExecuteCommand(string[] args)
         {

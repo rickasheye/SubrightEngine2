@@ -15,6 +15,7 @@ namespace SubrightEngineEditor.Windows
     {
         //List<Prefab> prefabs = new List<Prefab>();
         public static List<Prefab> prefabs = new List<Prefab>();
+
         private bool ran;
 
         public PrefabViewerWindow(Vector3 position, Vector3 size) : base(position, size, "Prefab Viewer", Context.TOOLS)
@@ -60,13 +61,6 @@ namespace SubrightEngineEditor.Windows
             return false;
         }
 
-        public override void Update(ref Camera2D cam2, ref Camera3D cam3)
-        {
-            base.Update(ref cam2, ref cam3);
-            Draw2D(ref cam2);
-            Draw3D(ref cam3);
-        }
-
         public override void Draw3D(ref Camera3D cam)
         {
             base.Draw3D(ref cam);
@@ -85,7 +79,7 @@ namespace SubrightEngineEditor.Windows
                     for (var i = 0; i < prefabs.Count; i++)
                     {
                         var pref = prefabs[i];
-                        DrawText(pref.name, position.X + 2, position.Y + 10 + i * 15, 8, Color.WHITE);
+                        DrawText(pref.name, position.X + 2, position.Y + 10 + i * 15, 8, Color.White);
                         var positionX = (int)position.X + 2;
                         var positionY = (int)position.Y + 10 + i * 15;
                         var sizeX = (int)size.X;
@@ -95,7 +89,7 @@ namespace SubrightEngineEditor.Windows
                             if (SubContextMenuManager.focusedWindow == this)
                             {
                                 DrawRectangleLines(positionX, positionY, sizeX, sizeY, Color.LIGHTGRAY);
-                                if (SubrightEngine2.EngineStuff.Input.Input.GetMouseButtonPressed(MouseButton.MOUSE_LEFT_BUTTON, isFocused())) prefToSpawn = pref;
+                                if (SubrightEngine2.EngineStuff.Input.Input.GetMouseButtonPressed(MouseButton.Left, isFocused())) prefToSpawn = pref;
                             }
                     }
 
@@ -103,14 +97,14 @@ namespace SubrightEngineEditor.Windows
                     {
                         if (!doesGameObjectExist(prefToSpawn.name))
                         {
-                            SubrightEngine2.Program.loader.currentScene.GameObjects.AddRange(prefToSpawn.gameObjects);
+                            //SubrightEngine2.Program.loader.currentScene.GameObjects.AddRange(prefToSpawn.gameObjects);
                         }
                     }
                 }
                 else
                 {
                     DrawText("Unfortunately there is no prefabs loaded, or found in on file.", position.X + 2,
-                        position.Y + 10, 8, Color.WHITE);
+                        position.Y + 10, 8, Color.White);
                 }
             }
         }

@@ -35,7 +35,7 @@ namespace SubrightEngine2.UI
 
         private Toolbar bar;
         private SubContextMenuManager cxtMan;
-        
+
         /// <summary>
         /// Initialise the UI Library to actually help or display GUI graphics on the screen.
         /// </summary>
@@ -57,7 +57,7 @@ namespace SubrightEngine2.UI
                     if (!Program.debug) { File.Create(Path.Combine(Environment.CurrentDirectory, "lock")); }
                 }
 
-                handler = new NotificationHandler(); 
+                handler = new NotificationHandler();
             }
         }
 
@@ -83,11 +83,11 @@ namespace SubrightEngine2.UI
                 }
                 RallyDialog.RollDialogs(ref cam2, ref cam3);
 
-                cxtMan.Update(ref cam2, ref cam3);
+                cxtMan.Draw2D(ref cam2);
                 bar.Draw2D(ref cam2);
-                handler.Update(ref cam2, ref cam3);
+                handler.Draw2D(ref cam2);
 
-                if (Input.GetButtonPressed(KeyboardKey.KEY_C, !windowFocused()))
+                if (Input.GetButtonPressed(KeyboardKey.C, !windowFocused()))
                 {
                     if (console)
                     {
@@ -107,7 +107,7 @@ namespace SubrightEngine2.UI
                 if (Program.debug)
                     Raylib.DrawText(
                         "Game Object instances: " + Program.loader.currentScene.GameObjects.Count + " Window instances: " +
-                        SubContextMenuManager.windows.Count, 10, 10, 10, Program.textColor.ToRaylibColor); 
+                        SubContextMenuManager.windows.Count, 10, 10, 10, Program.textColor.ToRaylibColor);
             }
         }
 
@@ -118,7 +118,7 @@ namespace SubrightEngine2.UI
         {
             if (initWindowMan)
             {
-                cxtMan.DisposeWindows(); 
+                cxtMan.DisposeWindows();
             }
         }
     }

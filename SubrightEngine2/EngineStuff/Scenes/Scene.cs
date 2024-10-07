@@ -1,5 +1,4 @@
 ﻿using Raylib_cs;
-using SubrightEngine2.EngineStuff;
 using System;
 using System.Collections.Generic;
 
@@ -13,8 +12,14 @@ namespace SubrightEngine2.EngineStuff.Scenes
 
         public AssetLoader loaderAsset;
 
-        bool loadedScene = false;
+        //only used to say we init the scene.
+        private bool loadedScene = false;
+
+        //add methods to add these gameobjects in...
         public List<GameObject> GameObjects = new List<GameObject>();
+
+        public bool loadRenderIfNotPriority = false;
+        public bool notPriority = true;
 
         public Scene()
         {
@@ -42,11 +47,13 @@ namespace SubrightEngine2.EngineStuff.Scenes
 
         public virtual void LoadScene()
         {
-            foreach(GameObject m in GameObjects)
+            Debug.Log("Attempting to load scene : " + name);
+            foreach (GameObject m in GameObjects)
             {
                 m.Start();
             }
             loadedScene = true;
+            Debug.Log("Loaded scene : " + name);
         }
 
         public virtual void UpdateScene(ref Camera2D cam2, ref Camera3D cam3)
@@ -55,10 +62,52 @@ namespace SubrightEngine2.EngineStuff.Scenes
             {
                 LoadScene();
             }
-
-            foreach(GameObject m in GameObjects)
+            UpdateScene(ref cam2);
+            for (int i = 0; i < GameObjects.Count; i++)
             {
-                m.Update(ref cam2, ref cam3);
+                GameObject m = GameObjects[i];
+                m.Draw2D(ref cam2);
+                m.Draw3D(ref cam3);
+            }
+        }
+
+        public virtual void UpdateScene(ref Camera2D cam)
+        {
+            if (loadedScene == false)
+            {
+                LoadScene();
+            }
+
+            for (int i = 0; i < GameObjects.Count; i++)
+            {
+                GameObject m = GameObjects[i];
+                m.Update(ref cam);
+            }
+        }
+
+        public void AddGameObject(GameObject objectUsed)
+        {
+            //check or find if this gameobject has been added or not.
+            if (GameObjects.Contains(objectUsed))
+            {
+                Debug.LogWarning("This gameobject has already been added to the scene!");
+            }
+            else
+            {
+                GameObjects.Add(objectUsed);
+            }
+        }
+
+        public void RemoveGameObject(GameObject objectUsed)
+        {
+            //check or find if this gameobject has been added or not.
+            if (GameObjects.Contains(objectUsed))
+            {
+                GameObjects.Remove(objectUsed);
+            }
+            else
+            {
+                Debug.LogWarning("This gameobject has not been added to the scene!");
             }
         }
     }

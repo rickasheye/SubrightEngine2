@@ -66,6 +66,34 @@ namespace SubrightEngine2.EngineStuff
             return same;
         }
 
+        public static bool operator ==(Vector2 a, Vector3 b)
+        {
+            var same = false;
+            if (a.X == b.X && a.Y == b.Y) same = true;
+            return same;
+        }
+
+        public static bool operator !=(Vector2 a, Vector3 b)
+        {
+            var notsame = false;
+            if (a.X != b.X && a.Y != b.Y) notsame = true;
+            return notsame;
+        }
+
+        public static bool operator ==(Vector3 a, Vector2 b)
+        {
+            var same = false;
+            if (a.X == b.X && a.Y == b.Y) same = true;
+            return same;
+        }
+
+        public static bool operator !=(Vector3 a, Vector2 b)
+        {
+            var notsame = false;
+            if (a.X != b.X && a.Y != b.Y) notsame = true;
+            return notsame;
+        }
+
         public static bool operator !=(Vector2 a, Vector2 b)
         {
             var notsame = false;
@@ -117,6 +145,15 @@ namespace SubrightEngine2.EngineStuff
         {
             if (Magnitude(a) > l) a = Normalize(a) * l;
             return a;
+        }
+
+        //move towards
+        public static Vector2 MoveTowards(Vector2 a, Vector2 b, float speed)
+        {
+            var distance = Distance(a, b);
+            if (distance <= speed) return b;
+            var direction = Normalize(b - a);
+            return a + direction * speed;
         }
 
         public void Set(int Xset, int Yset)

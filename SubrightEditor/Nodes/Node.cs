@@ -7,7 +7,6 @@ namespace SubrightEditor.Nodes
     {
         public Node() : base("NodeContainer")
         {
-
         }
 
         public List<NodeObject> objects = new List<NodeObject>();

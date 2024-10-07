@@ -1,6 +1,5 @@
 ﻿using SubrightEngine2.EngineStuff.BaseComponents;
 using System;
-using System.Diagnostics;
 using System.Runtime.Serialization;
 
 namespace SubrightEngine2.EngineStuff
@@ -50,7 +49,6 @@ namespace SubrightEngine2.EngineStuff
 
         #endregion Public Fields
 
-
         #region Constructors
 
         /// <summary>
@@ -60,7 +58,6 @@ namespace SubrightEngine2.EngineStuff
         /// <param name="value">A vector holding the normal and distance to origin.</param>
         public Plane(Vector4 value) : this(new Vector3(value.x, value.y, value.z), value.w)
         {
-
         }
 
         /// <summary>
@@ -101,7 +98,6 @@ namespace SubrightEngine2.EngineStuff
         public Plane(float a, float b, float c, float d)
             : this(new Vector3(a, b, c), d)
         {
-
         }
 
         /// <summary>
@@ -120,7 +116,6 @@ namespace SubrightEngine2.EngineStuff
         }
 
         #endregion Constructors
-
 
         #region Public Methods
 
@@ -223,7 +218,7 @@ namespace SubrightEngine2.EngineStuff
         /// <param name="result">The transformed plane.</param>
         public static void Transform(ref Plane plane, ref Matrix matrix, out Plane result)
         {
-            // See "Transforming Normals" in http://www.glprogramming.com/red/appendixf.html
+            // See "Transforming Normals" in http://www.glprogramming.com/Red/appendixf.html
             // for an explanation of how this works.
 
             Matrix transformedMatrix;
@@ -356,7 +351,6 @@ namespace SubrightEngine2.EngineStuff
             return Normal.GetHashCode() ^ D.GetHashCode();
         }
 
-
         /// <summary>
         /// Check if this <see cref="Plane"/> intersects a <see cref="BoundingBox"/>.
         /// </summary>
@@ -459,6 +453,6 @@ namespace SubrightEngine2.EngineStuff
             return new System.Numerics.Plane(this.Normal.X, this.Normal.Y, this.Normal.Z, this.D);
         }
 
-        #endregion
+        #endregion Public Methods
     }
 }

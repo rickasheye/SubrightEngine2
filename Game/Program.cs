@@ -1,14 +1,11 @@
-﻿using System;
-using SubrightEngine2.EngineStuff;
-
-namespace Game
+﻿namespace Game
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             SubrightEngine2.Program.SetExtension(new Reference(), false);
-            SubrightEngine2.Program.Initialise(args, false, true);
+            SubrightEngine2.Program.Initialise(args, false, false);
         }
     }
 }

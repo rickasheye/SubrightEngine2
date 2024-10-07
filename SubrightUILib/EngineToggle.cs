@@ -7,12 +7,9 @@ namespace SubrightEngine2.UI
     {
         //Toggle to use comes out to this boolean variable under.
         public bool triggered = false;
-        public EngineToggle(string name) : base(name) { }
 
-        public override void Update(ref Camera2D cam2, ref Camera3D cam3)
+        public EngineToggle(string name) : base(name)
         {
-            base.Update(ref cam2, ref cam3);
-            Draw2D(ref cam2);
         }
 
         /// <summary>
@@ -45,7 +42,6 @@ namespace SubrightEngine2.UI
 
         public virtual void OffhandDraw(ref Camera2D cam)
         {
-
         }
     }
 }

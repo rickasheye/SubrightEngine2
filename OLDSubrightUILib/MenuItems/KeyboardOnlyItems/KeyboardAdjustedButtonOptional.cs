@@ -1,15 +1,16 @@
 ﻿using Raylib_cs;
 using SubrightEngine2.EngineStuff;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace RPGConsole.Graphical.MenuItems.KeyboardOnlyItems
 {
     public class KeyboardAdjustedButtonOptional : KeyboardAdjustedButton
     {
         public string originalName = "";
-        public KeyboardAdjustedButtonOptional(string name, Vector2 size, Vector2 position):base(name, size, position) { }
+
+        public KeyboardAdjustedButtonOptional(string name, Vector2 size, Vector2 position) : base(name, size, position)
+        {
+        }
+
         public bool justbenormal = false;
 
         public override void Start()
@@ -19,12 +20,12 @@ namespace RPGConsole.Graphical.MenuItems.KeyboardOnlyItems
             {
                 //Try to get all of the children to count themselves
                 this.originalName = name;
-                name = name + " Other Options +" + children.Count; 
+                name = name + " Other Options +" + children.Count;
             }
         }
 
         public int index = 0;
-        KeyboardAdjustedButton buttonAdjustSelected;
+        private KeyboardAdjustedButton buttonAdjustSelected;
 
         public override void DrawObject()
         {
@@ -70,7 +71,7 @@ namespace RPGConsole.Graphical.MenuItems.KeyboardOnlyItems
                 {
                     index = 0;
                     name = originalName + " Other Options +" + children.Count;
-                } 
+                }
             }
         }
 
@@ -83,7 +84,7 @@ namespace RPGConsole.Graphical.MenuItems.KeyboardOnlyItems
                 {
                     Debug.Log("Triggered!");
                     buttonAdjustSelected.Triggerable();
-                } 
+                }
             }
         }
     }

@@ -1,8 +1,6 @@
 ﻿using Raylib_cs;
 using SubrightEngine2.EngineStuff;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using Color = SubrightEngine2.EngineStuff.Color;
 
 namespace RPGConsole.Graphical.MenuItems.KeyboardOnlyItems
@@ -12,34 +10,35 @@ namespace RPGConsole.Graphical.MenuItems.KeyboardOnlyItems
         //just a empty object
         public int indexSelect;
 
-        public EmptyContainer(Vector2 size, Vector2 position):base(size, position) {
+        public EmptyContainer(Vector2 size, Vector2 position) : base(size, position)
+        {
         }
 
-        bool warning = false;
+        private bool warning = false;
 
         public override void Start()
         {
             base.Start();
             Console.WriteLine("There is " + children.Count + " elements");
-            foreach(GUIOption option in children)
+            foreach (GUIOption option in children)
             {
-                if(option is Text)
+                if (option is Text)
                 {
                     children.Remove(option);
                 }
             }
         }
 
-        bool mouse = false;
+        private bool mouse = false;
 
-        bool resize = false;
+        private bool resize = false;
 
         public override void DrawObject()
         {
             base.DrawObject();
-            //Raylib.DrawRectangle((int)position.x, (int)position.y, (int)size.x, (int)size.y, Color.WHITE);
-            Raylib.DrawRectangleLines((int)position.X, (int)position.Y, (int)size.X, (int)size.Y, Raylib_cs.Color.BLACK);
-            
+            //Raylib.DrawRectangle((int)position.x, (int)position.y, (int)size.x, (int)size.y, Color.White);
+            Raylib.DrawRectangleLines((int)position.X, (int)position.Y, (int)size.X, (int)size.Y, Raylib_cs.Color.Black);
+
             if (children.Count > 0)
             {
                 if (mouse == false)
@@ -77,7 +76,7 @@ namespace RPGConsole.Graphical.MenuItems.KeyboardOnlyItems
                         mouse = false;
                     }
 
-                    for(int i = 0; i <= children.Count - 1; i++)
+                    for (int i = 0; i <= children.Count - 1; i++)
                     {
                         GUIOption blankOption = children[i];
                         if (Raylib.GetMouseX() > blankOption.position.X && Raylib.GetMouseX() < blankOption.position.X + blankOption.size.X && Raylib.GetMouseY() > blankOption.position.Y && Raylib.GetMouseY() < blankOption.position.Y + blankOption.size.Y)
@@ -95,7 +94,7 @@ namespace RPGConsole.Graphical.MenuItems.KeyboardOnlyItems
             }
             else
             {
-                Raylib.DrawText("No children found!", (int) position.X, (int) position.Y, (int)size.X - (int)size.Y, Color.BLACK.ToRaylibColor);
+                Raylib.DrawText("No children found!", (int)position.X, (int)position.Y, (int)size.X - (int)size.Y, Color.Black.ToRaylibColor);
                 if (warning == false)
                 {
                     Console.WriteLine("No children found!");
@@ -104,9 +103,9 @@ namespace RPGConsole.Graphical.MenuItems.KeyboardOnlyItems
             }
 
             //resize
-            if(resize == false)
+            if (resize == false)
             {
-                if(children.Count > 0)
+                if (children.Count > 0)
                 {
                     //children avaliable draw around
                     Vector2 start = children[0].position;

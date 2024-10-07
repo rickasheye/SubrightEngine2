@@ -12,12 +12,6 @@ namespace SubrightEngine2.UI
         {
         }
 
-        public virtual void Update(ref Camera2D cam2, ref Camera3D cam3)
-        {
-            base.Update(ref cam2, ref cam3);
-            Draw2D(ref cam2);
-        }
-
         public override void Draw2D(ref Camera2D cam)
         {
             base.Draw2D(ref cam);
@@ -28,7 +22,7 @@ namespace SubrightEngine2.UI
             {
                 //trigger the event or hover first
                 DrawRectangleLines(connectedObject.position.X, connectedObject.position.Y, connectedObject.size.X, connectedObject.size.Y, Color.LIGHTGRAY);
-                if (Raylib.IsMouseButtonPressed(MouseButton.MOUSE_LEFT_BUTTON))
+                if (Raylib.IsMouseButtonPressed(MouseButton.Left))
                 {
                     //when clicked
                     DrawRectangle(connectedObject.position.X, connectedObject.position.Y, connectedObject.size.X, connectedObject.size.Y, Color.DARKGRAY);
@@ -37,13 +31,12 @@ namespace SubrightEngine2.UI
                 }
             }
 
-            DrawText(name, connectedObject.position.X, (connectedObject.position.Y + connectedObject.size.X) / 2, 8, Color.WHITE);
+            DrawText(name, connectedObject.position.X, (connectedObject.position.Y + connectedObject.size.X) / 2, 8, Color.White);
             OffhandDraw(ref cam);
         }
 
         public virtual void OffhandDraw(ref Camera2D cam2)
         {
-
         }
 
         public virtual void ExecuteEvent()
